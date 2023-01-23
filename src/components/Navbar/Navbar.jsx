@@ -64,10 +64,10 @@ const navbar = () => {
 
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a href="/" className="nav-link">Sign In</a>
+              <a href="/signup" className="nav-link">Sign Up</a>
             </li>
             <li className="nav-item">
-              <a href="/" className="nav-link">Log In</a>
+              <a href="/signin" className="nav-link">Log In</a>
             </li>
           </ul>
         </nav>
