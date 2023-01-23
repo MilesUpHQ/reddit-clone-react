@@ -7,6 +7,9 @@
         "signin": {
             "title": "Log In",
             "description": "By continuing, you agree are setting up a Reddit account and agree to our User Agreement and Privacy Policy."
-        }
+        },
+        "edit": {
+            "title": "Account Edit"
+        }  
     }
 }
