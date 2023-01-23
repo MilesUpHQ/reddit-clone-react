@@ -15,6 +15,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Form data = {JsonData.form.signup} />} />
           <Route path="/signin" element={<Form data = {JsonData.form.signin} />} />
+          <Route path="/edit" element={<Form data = {JsonData.form.edit} />} />
         </Routes>
       </Router>
     </div>
