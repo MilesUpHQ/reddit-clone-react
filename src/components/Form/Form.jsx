@@ -1,6 +1,7 @@
 import React from 'react'
 import Signin from './Signin'
 import Signup from './Signup'
+
 import { FaApple, FaFacebook, FaGoogle } from 'react-icons/fa'
 
 const Form = (props) => {
@@ -20,7 +21,9 @@ const Form = (props) => {
                     <a href="#" className="text-dark"><i className="fa-lg"><FaGoogle /></i></a>
                   </div>
                   <p className="or-line mt-4">OR</p>
-                  {props.data.title == "Log In" ? (<Signin />) : (<Signup />)}
+                  
+                     {props.data.title === "Log In" ? <Signin /> : <Signup />}
+
                 </div>
               </div>
             </div>
@@ -32,3 +35,4 @@ const Form = (props) => {
 }
 
 export default Form
+

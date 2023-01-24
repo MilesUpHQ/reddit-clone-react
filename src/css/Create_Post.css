@@ -1,0 +1,42 @@
+.create-post-img {
+    margin-top: 3px;
+    padding-top: 12px;
+}
+
+.profile-img-1 {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  top: 10px;
+  left: 10px;
+}
+
+.profile-img img {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+ .create-post button{
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(99, 108, 114, 0.1);
+    border-radius: 4px;
+    background: #f6f7f8;;
+    color: #636c72;
+    font-size: 0.9em;
+    text-align: left;
+  }
+  
+  .create-post button:hover {
+    cursor: text;
+    text-decoration: none;
+  }
+
+  
