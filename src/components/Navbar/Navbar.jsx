@@ -56,9 +56,9 @@ const navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Profile</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Settings</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Sign Out</Dropdown.Item>
+              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+              <Dropdown.Item href="/settings">Settings</Dropdown.Item>
+              <Dropdown.Item href="/sign-out">Sign Out</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
