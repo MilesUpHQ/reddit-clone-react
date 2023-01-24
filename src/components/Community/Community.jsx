@@ -77,7 +77,7 @@ const Community = () => {
         <div className="create-post m-3">
           <div className="form-group">
             <label htmlFor="rules"> Rules </label>
-            <textarea name="rules" onChange={onChange} className
+            <textarea name="rules" onChange={onChange} 
             className={`form-control ${community.errors.rules && 'is-invalid'}`} value={community.rules} />
             {community.errors.rules && <p className="text-danger">{community.errors.rules}</p>}
           </div>
