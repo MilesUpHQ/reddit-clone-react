@@ -8,7 +8,7 @@ const Create_Post = () => {
  <div className="card p-2 pl-4 pr-3">
   <div className="row">
     <div className="col-1">
-      <img src={profile_image} alt="" className="profile-img" />
+      <img src={profile_image} alt="" className="profile-img-1" />
     </div>
     <div className="col-9">
       <div className="create-post m-1">
