@@ -16,8 +16,7 @@ const Create_Post = () => {
       </div>
     </div>
     <div className="col-2 create-post-img">
-      <FaImage /> 
-      <FaLink />
+      <div className="d-flex gap-3"><FaImage /><FaLink /></div>
     </div>
   </div>
 </div>   
