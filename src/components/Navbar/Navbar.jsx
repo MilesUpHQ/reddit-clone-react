@@ -26,10 +26,10 @@ const navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">All Communities</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Top Trending</Dropdown.Item>
+              <Dropdown.Item href="/r">All Communities</Dropdown.Item>
+              <Dropdown.Item href="/r/">Top Trending</Dropdown.Item>
               <Dropdown.Item href="#/action-3"><img src={profile_image} alt="" className="profile-img" /> My Communities</Dropdown.Item>
-              <Dropdown.Item href="/community">Create a Community</Dropdown.Item>
+              <Dropdown.Item href="/r/new">Create a Community</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
@@ -51,8 +51,8 @@ const navbar = () => {
           </div>
           <Dropdown>
             <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                <img src={profile_image} alt="" className="profile-img" />
-                Username
+              <img src={profile_image} alt="" className="profile-img" />
+              Username
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
