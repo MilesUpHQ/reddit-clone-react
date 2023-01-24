@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaRocket, FaFire, FaTag, FaPoll, FaBookmark } from 'react-icons/fa'
+import { FaRocket, FaFire, FaBookmark } from 'react-icons/fa'
 import Posts from './posts';
 import Comments from './Comments';
 import Saved from './Saved';

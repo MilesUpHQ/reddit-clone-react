@@ -1,5 +1,14 @@
 .community_post {
   background: #dae0e6;
+  height: 10000px;
+  padding-top: 20px;
+  padding-left: 200px;
+  padding-right: 200px;
+}
+
+.community_post1 {
+  background: #ffffff;
+  height: 10000px;
   padding-top: 20px;
   padding-left: 200px;
   padding-right: 200px;

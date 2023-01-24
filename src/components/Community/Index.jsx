@@ -2,11 +2,10 @@ import React from 'react'
 import List from './List'
 import MyComponent from './Categorylist'
 import MyButton from "./create";
-
-import Mybutton from './joinButton'
+//import Mybutton from './joinButton'
 const Index = () => {
   return (
-    <div className='community_post'>
+    <div className='community_post1'>
       <div className="container mb-4">
         <h3 className="text-dark">Today's Top Growing Communities</h3>
         <div className="float-right">
