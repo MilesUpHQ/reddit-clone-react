@@ -16,12 +16,13 @@ button {
   background-color: #3e8e41;
 }
 
-.profile-img {
+.profile-img-navbar{
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   overflow: hidden;
+  right: 10px;
 }
 
 .profile-img img {
@@ -76,4 +77,8 @@ button {
 
 .show {
   display: block;
+}
+
+.karma{
+  padding-right: 15px;
 }

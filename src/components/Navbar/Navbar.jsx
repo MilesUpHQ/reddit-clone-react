@@ -45,13 +45,13 @@ const navbar = () => {
             </ul>
           </div>
 
-          <div className="karma float-left mt-2 mr-1">
+          <div className="karma">
             2
-            <FaStar className='  text-warning' />
+            <FaStar className= '  text-warning' />
           </div>
           <Dropdown>
             <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                <img src={profile_image} alt="" className="profile-img" />
+                <img src={profile_image} alt="" className="profile-img-navbar" />
                 Username
             </Dropdown.Toggle>
 
