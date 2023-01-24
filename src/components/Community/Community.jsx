@@ -22,7 +22,7 @@ const Community = () => {
     // Perform form validation and submit the form data to the API
   }
 
-  const CATEGORIES = ['Category 1', 'Category 2', 'Category 3'];
+  const CATEGORIES = ['SPORTS', 'TV', 'EDUCATONAL'];
 
   return (
 
