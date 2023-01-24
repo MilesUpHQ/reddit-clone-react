@@ -30,10 +30,10 @@ const navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">All Communities</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Top Trending</Dropdown.Item>
+              <Dropdown.Item href="/r">All Communities</Dropdown.Item>
+              <Dropdown.Item href="/r/">Top Trending</Dropdown.Item>
               <Dropdown.Item href="#/action-3"><img src={profile_image} alt="" className="profile-img" /> My Communities</Dropdown.Item>
-              <Dropdown.Item href="/community">Create a Community</Dropdown.Item>
+              <Dropdown.Item href="/r/new">Create a Community</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
 
