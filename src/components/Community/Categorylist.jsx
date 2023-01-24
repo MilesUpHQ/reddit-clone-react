@@ -5,12 +5,10 @@ function MyComponent() {
 
   return (
     <div className="card border-light" >
-    <div className="card-body border">
       {data.map((data) => (
-        <h5 className="card-title mb-3" key={data}>{data}</h5>
+        <h5 className="card-body border card-title mb-3" key={data}>{data}</h5>
       ))}
       </div>
-    </div>
   );
 }
 

@@ -1,9 +1,10 @@
 import React from 'react'
+import Index from './Index';
 
 
 const Profile = () => {
   return (
-<h1>PROFILE PAGE</h1>
+<Index/>
 );
 }
 

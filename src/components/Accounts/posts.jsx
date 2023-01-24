@@ -1,14 +1,15 @@
 import React from 'react'
 
-const List = () => {
+const Posts = () => {
   return (
+    
     <div className="card border-light" >
       <div className="card-body border">
-        <h4 className="card-title">Title</h4>
-        <p className="card-text">Body</p>
+        <h4  className="card-title">Post Title</h4>
+        <p className="card-text">Post Body</p>
       </div>
     </div>
   )
 }
 
-export default List
+export default Posts
