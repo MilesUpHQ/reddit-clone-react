@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState} from 'react'
 import reddit_logo from '../../images/reddit-logo.png'
 import profile_image from '../../images/profile-img.jpeg'
 import '../../css/Navbar.css';
 import { FaStar } from "react-icons/fa";
-
+//import { Multiselect } from 'multiselect-react-dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const navbar = () => {
+  const data=[
+    {Title: "First" , id: 1},
+    {Title: "Second" , id: 2}
+  ]
   return (
     <div className=''>
       <div className="p-1 bg-light mr-auto">
@@ -45,14 +49,14 @@ const navbar = () => {
             </ul>
           </div>
 
-          <div className="karma float-left mt-2 mr-1">
+          <div className="karma">
             2
-            <FaStar className='  text-warning' />
+            <FaStar className= '  text-warning' />
           </div>
           <Dropdown>
             <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-              <img src={profile_image} alt="" className="profile-img" />
-              Username
+                <img src={profile_image} alt="" className="profile-img-navbar" />
+                Username
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
