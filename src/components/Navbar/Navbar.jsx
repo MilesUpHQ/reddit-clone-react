@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useState} from 'react'
 import reddit_logo from '../../images/reddit-logo.png'
 import profile_image from '../../images/profile-img.jpeg'
 import '../../css/Navbar.css';
 import { FaStar } from "react-icons/fa";
-
+//import { Multiselect } from 'multiselect-react-dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const navbar = () => {
+  const data=[
+    {Title: "First" , id: 1},
+    {Title: "Second" , id: 2}
+  ]
   return (
     <div className=''>
       <div className="p-1 bg-light mr-auto">
