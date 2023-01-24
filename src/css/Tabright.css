@@ -1,20 +1,24 @@
-.premium-join button {
+.premium-join {
    background-color: orangered;
+   border: none;
+   font-size: 1.0em;
+   font-weight: 700;
  }
-  
-.premium-join a:hover {
+
+.premium-join:hover {
+  background-color: rgb(255, 42, 0);
     text-decoration: none;
 }
-  
+
   .premium-des {
     font-size: 1.0em;
   }
-  
+
   .premium-head {
     font-size: 1.2em;
     font-weight: 600;
   }
-  
+
   .premium-logo {
     color: #ff4500;
     padding-right: 10px;
@@ -23,15 +27,15 @@
 
   .home-small-profile {
     position: relative;
-    top: 5px;
-    width: 50px;
+    top: -5px;
+    width: 40px;
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
     background: #fff;
     border: 1px solid #fff;
   }
-  
+
   .home-small-profile img {
     position: relative;
     top: 0;
@@ -40,7 +44,7 @@
     height: 100%;
     object-fit: cover;
   }
-  
+
   .home-small-cover {
     height: 50px;
   }
@@ -53,4 +57,3 @@
   .home{
     padding-left: 10px;
   }
-  

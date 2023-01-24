@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import {FaShieldAlt} from 'react-icons/fa'
 import '../../css/Tabright.css'
 import cover_image from '../../images/Cover-Image.jpg'
@@ -7,25 +8,25 @@ import profile_image from '../../images/profile-img.jpeg'
 
 const Right_Tab = () => {
   return (
-    <div className="col-8">
+    <div className="">
       <div className="card p-3">
         <div className="row">
           <div className="col-2">
-            <p className="premium-logo"><FaShieldAlt /></p>
+            <i className="premium-logo"><FaShieldAlt /></i>
           </div>
           <div className="col-10">
             <p className="premium-head mb-1">Reddit Premium</p>
             <p className="premium-des">The best Reddit experience, with monthly Coins</p>
           </div>
         </div>
-        <div className="premium-join">
-          <button className="join-btn text-center mb-3 text-white">Try Now</button>
-        </div>
+        <Button className="w-100 premium-join text-center mb-3 text-white">Try Now</Button>
       </div>
       <div className="card mt-3">
         <img src={cover_image} className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
-          <img src={profile_image} className="ml-3 home-small-profile" alt="profile" />
+        <div className="ml-3 home-small-profile">
+          <img src={profile_image} className="" alt="profile" />
+        </div>
           <p className="mt-3 home"><b>Home</b></p>
         </div>
         <div className="ml-3 mt-0">
