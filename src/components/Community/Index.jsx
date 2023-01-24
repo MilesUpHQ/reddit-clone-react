@@ -1,7 +1,7 @@
 import React from 'react'
 import List from './List'
 import MyComponent from './Categorylist'
-import MyButton from "./create";
+import MyButton from "./create_community";
 //import Mybutton from './joinButton'
 const Index = () => {
   return (
