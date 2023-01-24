@@ -4,8 +4,8 @@ const List = () => {
   return (
     <div className="card border-light" >
       <div className="card-body border">
-        <h4 className="card-title">Title</h4>
-        <p className="card-text">Body</p>
+        <h4 className="card-title">Community Name</h4>
+        <p className="card-text">Summary</p>
       </div>
     </div>
   )
