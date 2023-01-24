@@ -1,18 +1,19 @@
 import React from 'react'
 import Create_Post from './Create_Post';
 import Tab_List from './Tab_List';
-
+import Right_Tab from './Right_Tab';
 
 const Home = () => {
   return (
     <div>
-      <h1>Reddit Clone</h1>
-     <div class="community_post">
-      <div class="row">
-        <div class="col-sm-8">
+     
+    <div className="community_post">
+      <div className="row">
+        <div className="col-7 mr-auto">
           < Create_Post />
           < Tab_List />
         </div>
+          <div className='col-5 mr-auto'> <Right_Tab /> </div>
       </div>
     </div>
     </div>

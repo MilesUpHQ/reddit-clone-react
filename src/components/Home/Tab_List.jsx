@@ -1,5 +1,6 @@
 import React from 'react'
 import {FaRocket, FaFire, FaTag , FaPoll } from 'react-icons/fa'
+import '../../css/Tab.css'
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
@@ -22,7 +23,7 @@ const Tab_List= () => {
         <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="post-tab-nav-link"></Tab>
        </Tabs>
 
-        </div>
+      </div>
       </div>
     </div>
   </div>
