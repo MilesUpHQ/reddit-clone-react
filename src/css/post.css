@@ -34,31 +34,18 @@
   display: inline-block;
   border: 0.8px solid rgba(99, 108, 114, 0.2);
   justify-content: center;
+  color: #8c8f91;
+  font-size: 1em;
+  font-weight: 700;
 }
 
-.post-tab-nav-link.active {
+.post-tab-nav-link .active {
   border-bottom: 2px solid #0079d3;
+  color: #0079d3;
 }
 
 .post-tab-nav-link:hover {
   background-color: rgba(0, 121, 211, 0.07);
-}
-
-.post-tab-nav-link a {
-  margin: 15px;
-  color: #8c8f91;
-  font-size: 1em;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-}
-
-.post-tab-nav-link.active a {
-  color: #0079d3;
-}
-
-.post-tab-nav-link a:hover {
-  text-decoration: none;
 }
 
 .create-post a {
