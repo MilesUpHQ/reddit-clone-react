@@ -53,7 +53,6 @@ const NewCommunity = () => {
 
   return (
     <div className="card rounded mb-3">
-      <h1>vasa</h1>
       {/* {errors} */}
       <div className="row">
         <div className="col-sm-12">
