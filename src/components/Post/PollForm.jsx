@@ -9,18 +9,18 @@ const PollForm = () => {
         <div>
             <form>
                 <CommunityTitle />
-                <div class="create-post m-3">
-                    <div class="form-group">
-                        <input type="text" id="body" class="form-control" placeholder="Enter Poll question" />
+                <div className="create-post m-3">
+                    <div className="form-group">
+                        <input type="text" id="body" className="form-control" placeholder="Enter Poll question" />
                     </div>
                 </div>
                 <ContentWarning />
                 <div>
-                    <div class="float-right">
-                        <div class="join-btn  create-post-btn mb-4">
+                    <div className="float-right">
+                        <div className="join-btn  create-post-btn mb-4">
                             <input type="submit" value="Save as draft" className="text-white" />
                         </div>
-                        <div class="join-btn create-post-btn mb-4">
+                        <div className="join-btn create-post-btn mb-4">
                             <input type="submit" value="Publish" className="text-white" />
                         </div>
                     </div>
