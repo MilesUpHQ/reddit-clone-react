@@ -14,6 +14,7 @@ import Signout from './components/Accounts/Signout';
 import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Index from './components/Community/Index';
+import EditCommunity from './components/Community/Form/EditCommunity';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/r/new" element={<NewCommunity />} />
           <Route path="/r" element={<Index />} />
           <Route path="/r/:id" element={<Show />} />
+          <Route path="/r/:id/edit" element={<EditCommunity />} />
           <Route path="/r/create" element={<create />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Setting />} />
