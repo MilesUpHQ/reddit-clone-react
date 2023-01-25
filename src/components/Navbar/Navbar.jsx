@@ -3,7 +3,7 @@ import reddit_logo from '../../images/reddit-logo.png'
 import profile_image from '../../images/profile-img.jpeg'
 import '../../css/Navbar.css';
 import { FaStar } from "react-icons/fa";
-//import { Multiselect } from 'multiselect-react-dropdown';
+import Autocomplete from './Select';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
@@ -41,9 +41,9 @@ const navbar = () => {
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
                 <form action="get">
-                  <div className="nav-item dropdown">
-                    <input type="text" className="search-input-navbar form-control myInput_mycommunities navbar-redirection" placeholder="Search" />
-                  </div>
+                  <div className="">
+                    < Autocomplete/>
+                   </div>
                 </form>
               </li>
             </ul>
