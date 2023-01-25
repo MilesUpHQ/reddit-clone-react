@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { confirmAlert } from 'react-confirm-alert';
 
@@ -56,7 +56,7 @@ const Show = () => {
           <h4 className="card-title">Community Name : {community.name}</h4>
           <p className="card-text">URL : {community.url}</p>
           <p className="card-text">Rules : {community.rules}</p>
-          <Button className='m-2'>Edit</Button>
+          <Link to={`/r/${id}/edit`} className='btn btn-primary mr-2'>Edit</Link>
           <Button className='m-2' onClick={deleteCommunityHandler}>Delete</Button>
         </div>
       </div>
