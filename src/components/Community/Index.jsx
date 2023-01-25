@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import List from './List'
 import MyComponent from './Categorylist'
 import MyButton from "./create";
+import axios from 'axios';
 //import Mybutton from './joinButton'
+
+const Community_URL = 'http://localhost:3000/api/v1/communities/'
+
+function get_communities_data() {
+  return axios.get(Community_URL).then((response) => response.data)
+}
+
 const Index = () => {
+  const [communities, setCommunities] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    get_communities_data().then((items) => {
+      if (mounted) {
+        setCommunities(items);
+      }
+    });
+    return () => (mounted = false);
+  }, []);
+
   return (
-    <div className='community_post1'>
-      <div className="container mb-4">
+    <div className='community_post'>
+      <div className="mb-4">
         <h3 className="text-dark">Today's Top Growing Communities</h3>
         <div className="float-right">
         </div>
@@ -37,10 +57,13 @@ const Index = () => {
                   <div className="infinite-scrolling">
                   </div>
                 </div>
-                <List />
-                <div>
-                  <h3 className="m-4">No communities to display.</h3>
-                </div>
+                {communities ? [
+                  <List communities={communities} />
+                ] : [
+                  <div>
+                    <h3 className="m-4">No communities to display.</h3>
+                  </div>
+                ]}
               </div>
             </div>
           </div>
