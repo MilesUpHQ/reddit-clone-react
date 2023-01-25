@@ -39,20 +39,29 @@ const DiscussionForm = () => {
     setPost({ ...post, [event.target.name]: event.target.value });
   }
 
+  const quillRef = React.useRef(null);
+
+  const handleChange = (value) => {
+    setPost({ ...post, body: value });
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
-    let response = set_new_post(post)
-    console.log(response)
+    if (!post.body) {
+      toast.error("Post body can't be blank");
+      return;
+    }
+    set_new_post(post);
   }
 
 
   return (
     <div>
       <form action="">
-        <CommunityTitle />
+        <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
-          <ReactQuill name='body' value={post.body} onChange={onChange} className="form-control" placeholder="Enter the Text 1" style={{ height: '300px' }} />
+            <ReactQuill placeholder="Enter the Text 1" modules={{ clipboard: { matchVisual: false } }} style={{ height: '300px' }} value={post.body} onChange={handleChange} />
           </div>
         </div>
         <ContentWarning />
@@ -70,5 +79,4 @@ const DiscussionForm = () => {
     </div>
   )
 }
-
 export default DiscussionForm
