@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 import profile_image from '../../images/profile-img.jpeg'
 import {FaImage, FaLink} from 'react-icons/fa'
 import '../../css/Create_Post.css'
@@ -13,7 +12,7 @@ const Create_Post = () => {
     </div>
     <div className="col-9">
       <div className="create-post m-1">
-       <Link to="/new" className="form-control">Create post</Link>
+        <button className="form-control">Create Post</button>
       </div>
     </div>
     <div className="col-2 create-post-img">
