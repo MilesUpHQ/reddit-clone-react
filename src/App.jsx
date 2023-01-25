@@ -13,6 +13,7 @@ import Setting from './components/Accounts/Settings';
 import Signout from './components/Accounts/Signout';
 import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import Index from './components/Community/Index';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
           <Route path="/signin" element={<Form data={JsonData.form.signin} />} />
           <Route path="/new" element={<NewPost />} />
           <Route path="/r/new" element={<NewCommunity />} />
-          <Route path="/r" element={<Show />} />
+          <Route path="/r" element={<Index />} />
+          <Route path="/r/:id" element={<Show />} />
           <Route path="/r/create" element={<create />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Setting />} />
