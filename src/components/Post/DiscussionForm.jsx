@@ -8,7 +8,6 @@ import '../../css/post.css'
 import '../../css/warning.css'
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { post } from 'jquery';
 
 const Post_URL = 'http://localhost:3000/api/v1/posts/'
 
@@ -39,11 +38,11 @@ const DiscussionForm = () => {
     setPost({ ...post, [event.target.name]: event.target.value });
   }
 
-  const quillRef = React.useRef(null);
 
-  const handleChange = (value) => {
-    setPost({ ...post, body: value });
+  const handleChange = (content, delta, source, editor) => {
+    setPost({ ...post, body: editor.getText().trim() });
   }
+
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -61,7 +60,7 @@ const DiscussionForm = () => {
         <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
-            <ReactQuill placeholder="Enter the Text 1" modules={{ clipboard: { matchVisual: false } }} style={{ height: '300px' }} value={post.body} onChange={handleChange} />
+            <ReactQuill placeholder="Enter the Text" modules={{ clipboard: { matchVisual: false } }} style={{ height: '300px' }} onChange={handleChange} />
           </div>
         </div>
         <ContentWarning />
