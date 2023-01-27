@@ -53,6 +53,7 @@ const Show = () => {
     <div>
       <div className="card border-light" key={community.id}>
         <div className="card-body border">
+        <h4 className="card-text">Community id : {community.id}</h4>
           <h4 className="card-title">Community Name : {community.name}</h4>
           <p className="card-text">URL : {community.url}</p>
           <p className="card-text">Rules : {community.rules}</p>
