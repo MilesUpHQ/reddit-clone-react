@@ -2,31 +2,44 @@ import React,{useState,useEffect} from 'react'
 import Select from 'react-select'
 
 function Autocomplete() {
-//   const options = [
-//     { value: 'chocolate', label: 'Chocolate' },
-//     { value: 'strawberry', label: 'Strawberry' },
-//     { value: 'vanilla', label: 'Vanilla' }
-//   ]
-   const [options, setOptions] = useState([])
+    const [options, setOptions] = useState([])
+    const [searchString, setSearchString] = useState('')
 
-   useEffect(() => {
-    fetch('http://localhost:3000/api/v1/search_suggestions')
-      .then(response => response.json())
-      .then(data => {
-        setOptions(data.options.map(option => {
-            return {value: option.id, label: option.name}
-        }))
-      })
-      .catch(error => {
-        console.log(error)
-      })
-   }, [])
+     const handleInputChange = (inputValue) => {
+      setSearchString(inputValue);
+        if(inputValue.length >= 2){
+          fetch(`http://localhost:3000/api/v1/navbar_search?q=${inputValue}`)
+            .then(response => response.json())
+            .then(data => {
+              let options = []
+                if(data.posts){
+                  options = options.concat(data.posts.options.map(option => 
+                    ({ value: option.id, label: `p/${option.title}`, type: data.posts.type })))
+                }
+                if(data.communities){
+                  options = options.concat(data.communities.options.map(option => 
+                    ({ value: option.id, label: `r/${option.name}`, type: data.communities.type })))
+                }
+                if(data.accounts){
+                  options = options.concat(data.accounts.options.map(option => 
+                    ({ value: option.id, label: `u/${option.username}`, type: data.accounts.type })))
+                }
+                setOptions(options);
+             })
+            .catch(error => {
+                console.log(error)
+            });
+        }
+        else{
+          setOptions([])
+        }
+    }
 
-  return (
-  <div>
-    <Select options={options} />
-  </div>
-  )
+    return (
+    <div>
+      <Select options={options} onInputChange={handleInputChange} />
+    </div>
+    )
 }
 
 export default Autocomplete 
