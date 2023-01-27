@@ -14,7 +14,7 @@ const NewPost = () => {
                     <h5 className = "">Create Post</h5>
                   </div>
                   <div className = "col-2 p-0">
-                    <button type="button" className = "draft-btn" data-toggle="modal" data-target="#myModal">Drafts</button>
+                    <Draft />
                   </div>
                 </div>
                 <div className = "row mt-3">
@@ -25,7 +25,7 @@ const NewPost = () => {
                </div>
              </div>
             </div>
-            <Draft />
+            
         </div>
     )
 }
