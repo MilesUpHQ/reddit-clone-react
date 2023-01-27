@@ -1,23 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../../../css/Community.css';
 import Form from './Form';
 import CommunityApi from '../CommunityApi';
 
-const EditCommunity = () => {
+const NewCommunity = () => {
 
-  const { get_community, edit_community, community ,setCommunity } = CommunityApi();
-
-  // const [errors, setErrors] = useState('');
-
-  useEffect(() => {
-    let mounted = true;
-    get_community().then((items) => {
-      if(mounted) {
-        setCommunity(items);
-      }
-    });
-    return () => (mounted = false);
-  }, []);
+  const { set_new_community, community ,setCommunity } = CommunityApi();
 
   // const handleErrors = (error) => {
   //   const { name, value } = error.target;
@@ -34,7 +22,7 @@ const EditCommunity = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    edit_community(community)
+    set_new_community(community)
   }
 
   return (
@@ -43,7 +31,7 @@ const EditCommunity = () => {
         <div className="col-10">
           <div className="row new_post_head pb-1">
             <div className="col-10 p-0">
-              <h5 className="">Edit Community</h5>
+              <h5 className="">Create Community</h5>
             </div>
           </div>
           <div className="row mt-3">
@@ -57,4 +45,4 @@ const EditCommunity = () => {
   );
 }
 
-export default EditCommunity
+export default NewCommunity
