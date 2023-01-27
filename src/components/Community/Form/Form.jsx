@@ -1,58 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
-import '../../css/Community.css';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React from 'react'
 
-const Community_URL = 'http://localhost:3000/api/v1/communities/'
+const CATEGORIES = ['SPORTS', 'TV', 'EDUCATONAL'];
 
-const NewCommunity = () => {
-
-  const navigate = useNavigate();
-  // const [errors, setErrors] = useState('');
-  const [community, setCommunity] = useState({
-    account_id: 1,
-    name: '',
-    url: '',
-    rules: ''
-  });
-
-  // const handleErrors = (error) => {
-  //   const { name, value } = error.target;
-  //   setErrors({
-  //     ...errors,
-  //     [name]: value
-  //   });
-  //   console.log(errors)
-  // }
-
-  const set_new_community = async (community) => {
-    await axios.post(Community_URL, { community }).then((response) => {
-      if (response.status === 201) {
-        toast.success("Community Created successfully!");
-        navigate('/')
-      }
-    }).catch((error) => {
-      console.log(error.response.data);
-      toast.error("An error occured while submitting the form");
-      // handleErrors(error.response.data)
-    })
-  }
-
-  const onChange = (event) => {
-    setCommunity({ ...community, [event.target.name]: event.target.value });
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    let response = set_new_community(community)
-    console.log(response)
-  }
-
-  const CATEGORIES = ['SPORTS', 'TV', 'EDUCATONAL'];
-
+const Form = ({ community, onChange, onSubmit }) => {
   return (
-    <div className="card rounded mb-3">
+    <div>
+      <div className="card rounded mb-3">
       {/* {errors} */}
       <div className="row">
         <div className="col-sm-12">
@@ -112,11 +65,12 @@ const NewCommunity = () => {
       </div>
       <div className="create-post m-3">
         <div className="join-btn create-post-btn mb-3 float-right">
-          <button type="submit" className="text" onClick={onSubmit}>Submit</button>
+          <input type="submit" className='text-white' value="Submit" onClick={onSubmit} />
         </div>
       </div>
     </div>
-  );
+    </div>
+  )
 }
 
-export default NewCommunity
+export default Form
