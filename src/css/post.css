@@ -39,6 +39,7 @@
   font-weight: 700;
 }
 
+
 .post-tab-nav-link .active {
   border-bottom: 2px solid #0079d3;
   color: #0079d3;
@@ -224,4 +225,14 @@ form input[type=submit] {
 .create-post-btn a {
   color: #fff;
 }
+
+.tab-nav-link {
+  background-color: #fff;
+  padding: 5px 20px;
+  display: inline-block;
+  border-radius: 25px;
+}
+
+
+
 

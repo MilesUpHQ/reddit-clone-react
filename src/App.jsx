@@ -16,6 +16,8 @@ import { ToastContainer } from 'react-toastify';
 import Index from './components/Community/Index';
 import EditCommunity from './components/Community/Form/EditCommunity';
 
+import NavbarSearch from './components/Post/NavbarSearch'
+
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Setting />} />
           <Route path="/signout" element={<Signout />} />
+
+          <Route path="/navsearch" element={<NavbarSearch />} />
         </Routes>
       </Router>
     </div>
