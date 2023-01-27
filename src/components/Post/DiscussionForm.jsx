@@ -19,7 +19,8 @@ const DiscussionForm = () => {
     account_id: 1,
     community_id: 1,
     title: '',
-    body: ''
+    body: '',
+    is_drafted: false 
   });
 
   const set_new_post = async (post) => {
@@ -67,7 +68,12 @@ const DiscussionForm = () => {
         <div>
           <div className="float-right">
             <div className="join-btn  create-post-btn mb-4">
-              <input type="submit" value="Save as draft" className="text-white" />
+            <input type="submit" value="Save as draft" className="text-white" 
+             onClick={() => {
+              set_new_post({...post, is_drafted: true});
+              }
+            }
+          />
             </div>
             <div className="join-btn create-post-btn mb-4">
               <input type="submit" value="Publish" className="text-white" onClick={onSubmit} />
