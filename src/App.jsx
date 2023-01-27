@@ -12,7 +12,10 @@ import Setting from './components/Accounts/Settings';
 import Signout from './components/Accounts/Signout';
 import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+
 import Index from './components/Community/Index';
+import Show from './components/Community/Show';
+import NewCommunity from './components/Community/Form/NewCommunity';
 import EditCommunity from './components/Community/Form/EditCommunity';
 import EditPost from './components/Post/Form/EditPost';
 
