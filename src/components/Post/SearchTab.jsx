@@ -11,10 +11,10 @@ import { BsFillPeopleFill } from 'react-icons/bs'
 function SearchTab() {
   return (
     <div>
-      <div class="card">
-        <div class="card p-2 pl-3 pr-3">
-          <div class="row">
-            <div class="col-8 p-2">
+      <div className="card">
+        <div classname="card p-2 pl-3 pr-3">
+          <div className="row">
+            <div className="col-8 p-2">
               <Tabs
                 id="justify-tab-example"
                 className="mb-3"

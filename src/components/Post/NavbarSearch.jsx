@@ -5,7 +5,7 @@ import SearchTab from './SearchTab'
 function NavbarSearch() {
   return (
     <div>
-      <div class="margin-search">
+      <div className="margin-search">
           <SearchTab />
       </div>
     </div>
