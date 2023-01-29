@@ -31,7 +31,7 @@ const UseForm = () => {
       if (response.status == 201) {
         localStorage.setItem('jwt', response.data.jwt);
         localStorage.setItem('account', JSON.stringify(response.data.account));
-        navigate('/')
+        window.location.href = '/';
       }
     }).catch((error) => {
       setError(error.response.data.error);
@@ -43,7 +43,7 @@ const UseForm = () => {
       if (response.status == 201) {
         localStorage.setItem('jwt', response.data.jwt);
         localStorage.setItem('account', JSON.stringify(response.data.account));
-        navigate('/')
+        window.location.href = '/';
       }
     }).catch((error) => {
       setError(error.response.data.error);
