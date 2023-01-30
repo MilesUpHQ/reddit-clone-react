@@ -7,7 +7,7 @@ function get_community_posts(community_id) {
   return axios.get(Community_URL + community_id + '/posts').then((response) => response.data)
 }
 
-const ShowPost = ({community_id}) => {
+const ShowPost = ({ community_id }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {

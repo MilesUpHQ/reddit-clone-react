@@ -7,9 +7,10 @@ const CommunityApi = () => {
   const Community_URL = 'http://localhost:3000/api/v1/communities/'
 
   let { id } = useParams();
+  const account = JSON.parse(localStorage.getItem('account'))
   const navigate = useNavigate();
   const [community, setCommunity] = useState({
-    account_id: 1,
+    account_id: account.id,
     name: '',
     url: '',
     rules: ''
