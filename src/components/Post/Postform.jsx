@@ -1,4 +1,5 @@
 import React from 'react'
+import JsonData from '../../data/data.json'
 import DiscussionForm from './DiscussionForm'
 import ImageForm from './ImageForm'
 import LinkForm from './LinkForm'
@@ -10,10 +11,18 @@ import { BiPoll } from 'react-icons/bi'
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
+import Signup from '../Form/Signup'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Postform = () => {
+  const navigate = useNavigate();
+  const account = JSON.parse(localStorage.getItem('account'))
+
   return (
+    
     <div>
+      {account ? [
       <div className="card rounded mb-3">
         <div className="row">
           <div className="col-12">
@@ -41,6 +50,10 @@ const Postform = () => {
           </div>
         </div>
       </div>
+      ]:[
+        toast.error("You must Login!"),
+        window.location.href = '/signin'
+    ]}
     </div>
   )
 }

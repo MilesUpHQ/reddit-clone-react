@@ -1,10 +1,12 @@
 import React from 'react'
-
+import { toast } from 'react-toastify';
 const CATEGORIES = ['SPORTS', 'TV', 'EDUCATONAL'];
 
 const Form = ({ community, onChange, onSubmit }) => {
+  const account = JSON.parse(localStorage.getItem('account'))
   return (
     <div>
+      { account ?[
       <div className="card rounded mb-3">
       {/* {errors} */}
       <div className="row">
@@ -69,6 +71,10 @@ const Form = ({ community, onChange, onSubmit }) => {
         </div>
       </div>
     </div>
+  ]:[
+        toast.error("You must Login!"),
+        window.location.href = '/signin'
+    ]}
     </div>
   )
 }
