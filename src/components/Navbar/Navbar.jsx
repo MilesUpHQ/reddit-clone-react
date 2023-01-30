@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import reddit_logo from '../../images/reddit-logo.png'
 import profile_image from '../../images/profile-img.jpeg'
 import '../../css/Navbar.css';
@@ -8,10 +8,17 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const navbar = () => {
-  const data=[
-    {Title: "First" , id: 1},
-    {Title: "Second" , id: 2}
+  const data = [
+    { Title: "First", id: 1 },
+    { Title: "Second", id: 2 }
   ]
+  const account = JSON.parse(localStorage.getItem('account'))
+
+  const Signout = () => {
+    localStorage.clear();
+    window.location.reload();
+  }
+
   return (
     <div className=''>
       <div className="p-1 bg-light mr-auto">
@@ -42,31 +49,35 @@ const navbar = () => {
               <li className="nav-item dropdown">
                 <form action="get">
                   <div className="">
-                    < Autocomplete/>
-                   </div>
+                    < Autocomplete />
+                  </div>
                 </form>
               </li>
             </ul>
           </div>
 
-          <div className="karma">
-            2
-            <FaStar className= '  text-warning' />
-          </div>
-          <Dropdown>
-            <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                <img src={profile_image} alt="" className="profile-img-navbar" />
-                Username
-            </Dropdown.Toggle>
+          {account ? [
+            <div className="d-flex gap-2">
+              <div className="karma">
+                2
+                <FaStar className='  text-warning' />
+              </div>
+              <Dropdown>
+                <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
+                  <img src={profile_image} alt="" className="profile-img-navbar" />
+                  {account.username}
+                </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-              <Dropdown.Item href="/settings">Settings</Dropdown.Item>
-              <Dropdown.Item href="/sign-out">Sign Out</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-
-          <ul className="navbar-nav">
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                  <Dropdown.Item href="/settings">Settings</Dropdown.Item>
+                  <Dropdown.Item onClick={Signout}>Sign Out</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          ] : [
+            <div className="">
+              <ul className="navbar-nav">
             <li className="nav-item">
               <a href="/signup" className="nav-link">Sign Up</a>
             </li>
@@ -74,6 +85,9 @@ const navbar = () => {
               <a href="/signin" className="nav-link">Log In</a>
             </li>
           </ul>
+            </div>
+          ]}
+
         </nav>
       </div >
     </div >
