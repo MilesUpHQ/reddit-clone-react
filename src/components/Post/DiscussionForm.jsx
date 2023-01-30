@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -9,18 +9,26 @@ import '../../css/warning.css'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const Post_URL = 'http://localhost:3000/api/v1/posts/'
+const Post_URL = 'http://localhost:3000/api/v1/communities/1/posts/'
 
 const DiscussionForm = () => {
+  const [communities, setCommunities] = useState([])
+  const Community_URL = 'http://localhost:3000/api/v1/communities/'
+  useEffect(() => {
+    fetch(Community_URL)
+      .then(response => response.json())
+      .then(data => setCommunities(data))
+  }, [])
+
+  const account = JSON.parse(localStorage.getItem('account'))
 
   const navigate = useNavigate();
   // const [errors, setErrors] = useState('');
   const [post, setPost] = useState({
-    account_id: 1,
-    community_id: 1,
+    account_id: account.id,
+    community_id: '' || 1,
     title: '',
-    body: '',
-    is_drafted: false 
+    body: ''
   });
 
   const set_new_post = async (post) => {
@@ -37,13 +45,13 @@ const DiscussionForm = () => {
 
   const onChange = (event) => {
     setPost({ ...post, [event.target.name]: event.target.value });
+    console.log(event.target.value)
   }
 
 
   const handleChange = (content, delta, source, editor) => {
     setPost({ ...post, body: editor.getText().trim() });
   }
-
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -58,6 +66,19 @@ const DiscussionForm = () => {
   return (
     <div>
       <form action="">
+        <div className="row mt-3">
+          <div className="col-sm-12">
+            <div className="card rounded mb-3">
+              <div className="form-group">
+                <select id="community_id" className="form-select search-input-navbar community_select" placeholder='Choose a community' name="community_id" value={post.community_id} onChange={onChange}>
+                  {communities.map(community => (
+                    <option key={community.id} value={community.id}>{community.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
         <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
@@ -68,12 +89,7 @@ const DiscussionForm = () => {
         <div>
           <div className="float-right">
             <div className="join-btn  create-post-btn mb-4">
-            <input type="submit" value="Save as draft" className="text-white" 
-             onClick={() => {
-              set_new_post({...post, is_drafted: true});
-              }
-            }
-          />
+              <input type="submit" value="Save as draft" className="text-white" />
             </div>
             <div className="join-btn create-post-btn mb-4">
               <input type="submit" value="Publish" className="text-white" onClick={onSubmit} />
