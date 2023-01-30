@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import Reactions from './Reactions';
+import CommunityDetails from './CommunityDetails';
+import Form from '../Comment/Form';
 import { FaArrowUp, FaArrowDown} from 'react-icons/fa';
 import '../../css/post.css'
 import ReactQuill from 'react-quill';
@@ -56,21 +58,12 @@ const PostShow = () => {
                     <p>{post.body}</p>
                     <Reactions Post_URL ={Post_URL} get_post_data={get_post_data}/>
                   </div>
-                  <form action="">
-                    <div className="create-post m-5">
-                      <div className="form-group mb-3">
-                        <h6>Comment as</h6>
-                        <ReactQuill placeholder="Your Comment goes here" value = {""} style={{ height: '200px' }} />
-                      </div>
-                    </div>
-                    <div className="m-3">
-                      <input type="submit" value="Submit comment" />
-                    </div>
-                  </form>
+                  <Form postId={post.id} />
                 </div>
               </div>
             </div>
             <div className="col-sm-4">
+              <CommunityDetails post={post} />
             </div>
           </div>
         </div>

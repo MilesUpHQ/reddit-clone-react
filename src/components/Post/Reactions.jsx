@@ -4,6 +4,7 @@ import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import '../../css/Post_btn.css'
 import { FaEdit, FaTrash, FaTimes, FaComment, FaFlag } from 'react-icons/fa';
+
 function delete_post(Post_URL, post_id) {
   return axios.delete(Post_URL + post_id).then((response) => response.data)
 }
