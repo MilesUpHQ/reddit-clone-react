@@ -35,9 +35,19 @@ function Autocomplete() {
         }
     }
 
-    return (
+    const handleSelection = (selectedOption) => {
+      window.location.assign(`http://localhost:3001/navsearch?q=${searchString}`)
+  }
+  
+  const handleKeyDown = (event) => {
+      if(event.key === 'Enter') {
+          handleSelection(event.target.value)
+      }
+  }
+
+  return (
     <div>
-      <Select options={options} onInputChange={handleInputChange} />
+      <Select options={options} onInputChange={handleInputChange} onChange={handleSelection} onKeyDown={handleKeyDown} />
     </div>
     )
 }
