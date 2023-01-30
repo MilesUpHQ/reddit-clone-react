@@ -7,18 +7,7 @@ function get_community_posts(community_id) {
   return axios.get(Community_URL + community_id + '/posts').then((response) => response.data)
 }
 
-const ShowPost = ({ community_id }) => {
-  const [posts, setPosts] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
-    get_community_posts(community_id).then((items) => {
-      if (mounted) {
-        setPosts(items);
-      }
-    });
-    return () => (mounted = false);
-  }, []);
+const ShowPost = ({ posts, community_id }) => {
 
   return (
     <div>
