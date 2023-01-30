@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function MyButton() {
+function JoinButton() {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
-    <button
+    <button className="create-post join-btn"
       onMouseEnter={() => setIsClicked(false)}
       onMouseLeave={() => setIsClicked(false)}
       onClick={() => setIsClicked(!isClicked)}
@@ -14,4 +14,4 @@ function MyButton() {
   );
 }
 
-export default MyButton
+export default JoinButton

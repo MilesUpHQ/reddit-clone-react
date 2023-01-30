@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { FaBirthdayCake, FaRegStickyNote } from 'react-icons/fa'
 import { Button } from 'react-bootstrap';
+import '../../css/Community.css'
+import JoinButton from './joinButton';
+import cover_image from '../../images/Cover-Image.jpg'
+import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
+import ShowPost from '../Post/ShowPost';
+import Create_Post from '../Home/Create_Post';
 
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 
@@ -51,16 +58,77 @@ const Show = () => {
 
   return (
     <div>
-      <div className="card border-light" key={community.id}>
-        <div className="card-body border">
-          <h4 className="card-title">Community Name : {community.name}</h4>
-          <p className="card-text">URL : {community.url}</p>
-          <p className="card-text">Rules : {community.rules}</p>
-          <Button className='m-2'>Edit</Button>
-          <Button className='m-2' onClick={deleteCommunityHandler}>Delete</Button>
+      <img src={cover_image} className="cover-image"></img>
+      <div classNameName="row">
+        <div className="col-sm-1 mr-3">
+        </div>
+        <div className="col-sm-10">
+          <div className="d-flex">
+            <span className="ml-4">
+              <h3 classNameName="card-title">Community Name : {community.name}</h3>
+            </span>
+            <div className="ml-3 pl-2">
+              <JoinButton />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="community-nav-tab">
+        <ul className="nav">
+          <li className="community-nav-link active"><a data-toggle="tab" href="#post">Posts</a></li>
+        </ul>
+      </div>
+      <div className="community_post">
+        <div className="row">
+          <div className="col-sm-8">
+            <Create_Post />
+            <div className="tab-content">
+              <div id="post" className="tab-pane fade-in active">
+                <div>
+                  <ShowPost />
+                </div>
+              </div>
+              <div id="menu1" className="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Some content in menu 1.</p>
+              </div>
+              <div id="menu2" className="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-4">
+            <div className="card p-2 bg-primary">
+              <p className="h6 pt-2 text-light">About this community</p>
+
+            </div>
+            <div className="card p-3">
+              <div className="row-5">
+                <Button classNameName='col-2 m-2' onClick={""}>Mod Tools</Button>
+                <Button classNameName='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
+              </div>
+              <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
+              <div className="member">
+                <p>
+                  MEMBERS : {community.members} count
+                </p>
+                <Link to={`/r/${id}/edit`} classNameName='btn btn-primary mr-2'>Edit</Link>
+
+              </div>
+            </div>
+            <div className="card mt-3 p-2 bg-primary">
+              <p className="h6 pt-2 text-light"> {community.name}'s Rules</p>
+            </div>
+            <div className="card p-3">
+              <p classNameName="card-text"><FaRegStickyNote /> {community.rules}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+
   )
 }
 export default Show
