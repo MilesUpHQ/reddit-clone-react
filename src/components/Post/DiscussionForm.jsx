@@ -18,7 +18,9 @@ const DiscussionForm = () => {
       .then(response => response.json())
       .then(data => setCommunities(data))
   }, [])
+
   const account = JSON.parse(localStorage.getItem('account'))
+
   const navigate = useNavigate();
   // const [errors, setErrors] = useState('');
   const [post, setPost] = useState({
@@ -56,6 +58,19 @@ const DiscussionForm = () => {
   return (
     <div>
       <form action="">
+        <div className="row mt-3">
+          <div className="col-sm-12">
+            <div className="card rounded mb-3">
+              <div className="form-group">
+                <select id="community_id" className="form-select search-input-navbar community_select" placeholder='Choose a community' name="community_id" value={post.community_id} onChange={onChange}>
+                  {communities.map(community => (
+                    <option key={community.id} value={community.id}>{community.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="row mt-3">
           <div className="col-sm-12">
             <div className="card rounded mb-3">
