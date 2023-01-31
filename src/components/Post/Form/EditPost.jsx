@@ -6,7 +6,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ContentWarning from './../ContentWarning'
 import CommunityTitle from './../CommunityTitle'
-const Post_URL = 'http://localhost:3000/api/v1/posts/'
+const Post_URL = 'http://localhost:3000/api/v1/communities/1/posts/1'
 
 const EditPost = () => {
 
@@ -16,19 +16,18 @@ const EditPost = () => {
   const [post, setPost] = useState({
     account_id: 1,
     community_id: 1,
-    name: '',
-    url: '',
-    rules: ''
+    title: '',
+    body: ''
   });
 
   function get_post() {
-    return axios.get(Post_URL+id).then((response) => response.data)
+    return axios.get(Post_URL + id).then((response) => response.data)
   }
 
   useEffect(() => {
     let mounted = true;
     get_post().then((items) => {
-      if(mounted) {
+      if (mounted) {
         setPost(items);
       }
     });
@@ -45,10 +44,10 @@ const EditPost = () => {
   // }
 
   const edit_post = async (post) => {
-    await axios.put(Post_URL+id, { post }).then((response) => {
+    await axios.put(Post_URL + id, { post }).then((response) => {
       if (response.status === 200) {
         toast.success("Post Edited successfully!");
-        navigate('/r/'+id)
+        navigate('/r/' + id)
       }
     }).catch((error) => {
       console.log(error.response.data);
@@ -60,15 +59,15 @@ const EditPost = () => {
   const onChange = (event) => {
     setPost({ ...post, [event.target.name]: event.target.value });
   }
-  
+
   const handleChange = (content, delta, source, editor) => {
     setPost({ ...post, body: editor.getText().trim() });
   }
-  
-    const onSubmit = (event) => {
-      event.preventDefault();
-      edit_post(post)
-    }
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    edit_post(post)
+  }
 
   return (
     <div>

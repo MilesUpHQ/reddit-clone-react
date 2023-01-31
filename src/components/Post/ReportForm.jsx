@@ -57,11 +57,6 @@ function ReportForm({ onSubmit }) {
           )}
         </div>
       ))}
-      <div className="form-group">
-        <button type="submit" className="btn btn-primary">
-          Report Post
-        </button>
-      </div>
     </form>
   );
 }
