@@ -26,7 +26,8 @@ function PeopleResults() {
               <div className="col-2">
                 <div className="card-body">
                   <h5 className="card-title">
-                    <Link to={`/communities/${person.id}`}>{person.username}</Link>
+                    {/* <Link to={`/profile/${person.id}`}>{person.username}</Link> */}
+                    <Link to={`/profile`}>{person.username}</Link>
                   </h5>
                 </div>
               </div>
