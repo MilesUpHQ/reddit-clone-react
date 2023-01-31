@@ -7,7 +7,7 @@ import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 
 import '../../css/post.css'
 
-const PostList = ({ posts, community }) => {
+const PostList = ({ account, posts, community }) => {
   return (
     <div>
       {posts && posts.map((post) => (
@@ -31,7 +31,7 @@ const PostList = ({ posts, community }) => {
                     <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
                     <strong><Link to={`/r/${post.community_id}`} className='text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>
                     <p className="ml-3 text-muted">Posted by
-                      <Link to='/' className="text-muted"> u/Vasi </Link>
+                      <Link to='/' className="text-muted"> u/{account?[account.username]:[post.account&&post.account.username]} </Link>
                       {moment(post.created_at).fromNow()}</p>
                   </div>
                 </div>
