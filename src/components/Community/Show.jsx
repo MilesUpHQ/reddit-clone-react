@@ -8,7 +8,7 @@ import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg'
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
-import ShowPost from '../Post/ShowPost';
+import PostLists  from '../Post/PostLists';
 import Create_Post from '../Home/Create_Post';
 
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
@@ -85,7 +85,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <ShowPost />
+                  <PostLists />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">
