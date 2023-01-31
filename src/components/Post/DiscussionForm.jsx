@@ -22,7 +22,6 @@ const DiscussionForm = () => {
   const account = JSON.parse(localStorage.getItem('account'))
 
   const navigate = useNavigate();
-  // const [errors, setErrors] = useState('');
   const [post, setPost] = useState({
     account_id: account.id,
     community_id: '' || 1,
