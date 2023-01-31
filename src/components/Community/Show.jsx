@@ -36,8 +36,8 @@ const Show = () => {
         setCommunity(items);
         setPosts(items.posts);
         setAccount(items.account);
-        console.log(posts)
       }
+      console.log(items)
     });
     return () => (mounted = false);
   }, []);
@@ -93,7 +93,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <PostList account={account} community={community} posts={posts} />
+                  <PostList account={account} community={community} posts={''} />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">
@@ -113,15 +113,15 @@ const Show = () => {
             </div>
             <div className="card p-3">
               <div className="row-5">
-                <Button classNameName='col-2 m-2' onClick={""}>Mod Tools</Button>
-                <Button classNameName='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
+                <Button className='col-2 m-2' onClick={""}>Mod Tools</Button>
+                <Button className='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
               </div>
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
               <div className="member">
                 <p>
                   MEMBERS : {community.members} count
                 </p>
-                <Link to={`/r/${id}/edit`} classNameName='btn btn-primary mr-2'>Edit</Link>
+                <Link to={`/r/${id}/edit`} className='btn btn-primary mr-2'>Edit</Link>
 
               </div>
             </div>
@@ -129,14 +129,12 @@ const Show = () => {
               <p className="h6 pt-2 text-light"> {community.name}'s Rules</p>
             </div>
             <div className="card p-3">
-              <p classNameName="card-text"><FaRegStickyNote /> {community.rules}</p>
+              <p className="card-text"><FaRegStickyNote /> {community.rules}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
   )
 }
 export default Show
