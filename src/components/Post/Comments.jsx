@@ -1,9 +1,9 @@
 
-
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+import { post } from 'jquery';
 
-const Post_URL = 'http://localhost:3000/api/v1/posts/'
+const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
 
 function get_post_comments(post_id) {
   return axios.get(Post_URL + post_id + '/comments').then((response) => response.data)

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import { post } from 'jquery';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom'
+
 
 function Form({ postId }) {
   const [text, setText] = useState('');
@@ -12,7 +13,7 @@ function Form({ postId }) {
     console.log(event);
     event.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3000/api/v1/posts/${postId}/comments`, {
+      const response = await axios.post(`http://localhost:3000/api/v1/communities/${post.community_id}/posts/${postId}/comments`, {
         comment: { message: text },
         account_id: JSON.parse(localStorage.getItem('account')).id
       }, {
