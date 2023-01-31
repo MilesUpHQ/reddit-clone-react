@@ -23,6 +23,7 @@ function delete_community(community_id) {
 
 const Show = () => {
   const [community, setCommunity] = useState([]);
+  const [posts, setPosts] = useState([]);
   const navigate = useNavigate()
   let { id } = useParams();
 
@@ -30,7 +31,8 @@ const Show = () => {
     let mounted = true;
     get_community_data(id).then((items) => {
       if (mounted) {
-        setCommunity(items);
+        setCommunity(items.community);
+        setPosts(items.posts);
       }
     });
     return () => (mounted = false);
@@ -85,7 +87,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <PostLists />
+                  <PostLists posts={posts} />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">
