@@ -232,3 +232,10 @@ form input[type=submit] {
   color: #fff;
 }
 
+.commentssection{
+  margin-top: 10px;
+}
+
+.sub-comment {
+  padding-left: 20px;
+}

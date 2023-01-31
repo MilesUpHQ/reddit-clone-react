@@ -6,7 +6,7 @@ import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
 import { FaArrowUp, FaArrowDown} from 'react-icons/fa';
 import '../../css/post.css'
-import ReactQuill from 'react-quill';
+import Comments from './Comments';
 import 'react-quill/dist/quill.snow.css';
 
 
@@ -60,6 +60,7 @@ const PostShow = () => {
                   </div>
                   <Form postId={post.id} />
                 </div>
+                <Comments post_id={post.id}/>
               </div>
             </div>
             <div className="col-sm-4">
