@@ -8,7 +8,7 @@ import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg'
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
-import PostLists  from '../Post/PostLists';
+import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
@@ -31,8 +31,9 @@ const Show = () => {
     let mounted = true;
     get_community_data(id).then((items) => {
       if (mounted) {
-        setCommunity(items.community);
+        setCommunity(items);
         setPosts(items.posts);
+        console.log(posts)
       }
     });
     return () => (mounted = false);
@@ -87,7 +88,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <PostLists posts={posts} />
+                  <PostList posts={posts} />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">
