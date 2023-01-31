@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -7,6 +8,7 @@ import CommunityTitle from './CommunityTitle'
 import '../../css/post.css'
 import '../../css/warning.css'
 import axios from 'axios';
+import { post } from 'jquery';
 import { post } from 'jquery';
 import { toast } from 'react-toastify';
 const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
@@ -26,6 +28,8 @@ const DiscussionForm = () => {
   const [post, setPost] = useState({
     account_id: account.id,
     community_id: '' || 1,
+    account_id: account.id,
+    community_id: '' || 1,
     title: '',
     body: ''
   });
@@ -42,6 +46,7 @@ const DiscussionForm = () => {
   }
   const onChange = (event) => {
     setPost({ ...post, [event.target.name]: event.target.value });
+    console.log(event.target.value)
     console.log(event.target.value)
   }
   const handleChange = (content, delta, source, editor) => {
@@ -82,6 +87,13 @@ const DiscussionForm = () => {
         <div>
           <div className="float-right">
             <div className="join-btn  create-post-btn mb-4">
+             
+              <input type="submit" value="Save as draft" className="text-white" 
+             onClick={() => {
+              set_new_post({...post, is_drafted: true});
+              }
+            }
+          />
              
               <input type="submit" value="Save as draft" className="text-white" 
              onClick={() => {
