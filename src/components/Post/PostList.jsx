@@ -28,7 +28,7 @@ const PostList = ({ posts }) => {
                 <div className="col-10">
                   <div className="d-flex post-list-head mt-2">
                     <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
-                    <strong><Link to={`/r/${post.community_id}`} >r/{post.community_id}</Link></strong>
+                    <strong><Link to={`/r/${post.community_id}`} >r/{post.community_name}</Link></strong>
                     <p className="ml-1 text-muted">Posted by
                       <Link to='/' className="text-muted"> u/Vasi </Link>
                       2 Hours ago</p>
