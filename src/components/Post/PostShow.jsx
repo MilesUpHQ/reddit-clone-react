@@ -10,16 +10,14 @@ import Comments from './Comments';
 import 'react-quill/dist/quill.snow.css';
 
 
-const Post_URL = 'http://localhost:3000/api/v1/posts/'
-
-function get_post_data(post_id) {
-    return axios.get(Post_URL + post_id).then((response) => response.data)
-  }
-
 const PostShow = () => {
   const [post, setPost] = useState([]);
-  let { id } = useParams();
-
+  let { id, community_id } = useParams();
+  const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
+  function get_post_data(post_id) {
+    return axios.get(Post_URL + post_id).then((response) => response.data)
+  }
+  
   useEffect(() => {
     let mounted = true;
     get_post_data(id).then((items) => {
