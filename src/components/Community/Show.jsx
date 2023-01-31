@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg'
+import reddit_logo from '../../images/reddit-logo.png'
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
@@ -24,6 +25,7 @@ function delete_community(community_id) {
 const Show = () => {
   const [community, setCommunity] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [account, setAccount] = useState([]);
   const navigate = useNavigate()
   let { id } = useParams();
 
@@ -33,6 +35,7 @@ const Show = () => {
       if (mounted) {
         setCommunity(items);
         setPosts(items.posts);
+        setAccount(items.account);
         console.log(posts)
       }
     });
@@ -62,15 +65,16 @@ const Show = () => {
   return (
     <div>
       <img src={cover_image} className="cover-image"></img>
-      <div classNameName="row">
-        <div className="col-sm-1 mr-3">
+      <div className="row gap-3">
+        <div className="col-1">
+          <img src={reddit_logo} className='profile-pic' alt="" />
         </div>
-        <div className="col-sm-10">
+        <div className="col-10">
           <div className="d-flex">
             <span className="ml-4">
-              <h3 classNameName="card-title">Community Name : {community.name}</h3>
+              <h3>/r/{community.name} : Sports</h3>
             </span>
-            <div className="ml-3 pl-2">
+            <div className="pl-2">
               <JoinButton />
             </div>
           </div>
@@ -78,7 +82,8 @@ const Show = () => {
       </div>
       <div className="community-nav-tab">
         <ul className="nav">
-          <li className="community-nav-link active"><a data-toggle="tab" href="#post">Posts</a></li>
+          <li className="community-nav-link m-0 active">
+            <a data-toggle="tab" className='text-decoration-none' href="#post">Posts</a></li>
         </ul>
       </div>
       <div className="community_post">
@@ -88,7 +93,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <PostList posts={posts} />
+                  <PostList account={account} community={community} posts={posts} />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">

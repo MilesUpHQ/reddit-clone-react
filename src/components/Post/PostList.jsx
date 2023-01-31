@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
 import { FaRegBookmark, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 
 import '../../css/post.css'
 
-const PostList = ({ posts }) => {
+const PostList = ({ account, posts, community }) => {
   return (
     <div>
       {posts && posts.map((post) => (
@@ -26,18 +27,18 @@ const PostList = ({ posts }) => {
             <div className="col-11">
               <div className="row bg-white">
                 <div className="col-10">
-                  <div className="d-flex post-list-head mt-2">
+                  <div className="d-flex gap-1 post-list-head mt-2">
                     <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
-                    <strong><Link to={`/r/${post.community_id}`} >r/{post.community_name}</Link></strong>
-                    <p className="ml-1 text-muted">Posted by
-                      <Link to='/' className="text-muted"> u/Vasi </Link>
-                      2 Hours ago</p>
+                    <strong><Link to={`/r/${post.community_id}`} className='text-dark' >r/{community?[community.name]:[post.community&&post.community.name]}</Link></strong>
+                    <p className="ml-3 text-muted">Posted by
+                      <Link to='/' className="text-muted"> u/{account?[account.username]:[post.account&&post.account.username]} </Link>
+                      {moment(post.created_at).fromNow()}</p>
                   </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-12 d-flex post-title">
-                  <h5><Link to='/' className="text-muted">{post.title}</Link></h5>
+                  <h5><Link to={`/r/${post.community_id}/p/${post.id}`} className="text-muted text-decoration-none">{post.title}</Link></h5>
                   <p className="flair-badge">Flair</p>
                   <p className="flair-badge bg-success">OC</p>
                   <p className="flair-badge bg-warning">Spoiler</p>
@@ -51,7 +52,7 @@ const PostList = ({ posts }) => {
               </div>
               <div className="row mt-1 mb-1">
                 <div className="col-12 d-flex gap-3">
-                  <Link to='/' className="list-post-tab">
+                  <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                     <FaRegCommentAlt /> 0 Comments
                   </Link>
                   <Link className="list-post-tab">
@@ -60,7 +61,7 @@ const PostList = ({ posts }) => {
                   <Link className="list-post-tab saved">
                     <FaRegBookmark /> Save
                   </Link>
-                  <Link to='/' className="list-post-tab">
+                  <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                     <FaRegFlag /> Report
                   </Link>
                 </div>
