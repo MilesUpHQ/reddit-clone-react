@@ -43,8 +43,8 @@ const PostShow = () => {
                     <div className = "post-head">
                       <div className = "col-5 ms-5">
                         <p>
-                          <strong><Link to={`/r/${post.id}`} className="text-dark">r/{post.id}</Link></strong>
-                          <small> Posted by{' '}<Link to={`/u/${post.id}`}>u/{post.id}</Link>{' '}</small>
+                          <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
+                          <small> Posted by{' '}<Link to={`/u/`}>u/</Link>{' '}</small>
                         </p>
                       </div> 
                     </div>
