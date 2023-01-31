@@ -42,13 +42,30 @@ function Autocomplete() {
   }
   
   const handleKeyDown = (event) => {
-      if(event.key === 'Enter') {
-          handleSelection(event.target.value)
+    if (event.key === 'Enter') {
+      handleSelection(event.target.value);
+    } else if (selectedOption) {
+      const prefix = selectedOption.label.slice(0, 2);
+      const suffix = selectedOption.label.slice(2);
+      if (prefix === 'r/') {
+        fetch('http://localhost:3000/api/v1/navbar_search')
+          .then((response) => response.json())
+          .then((data) => {
+            const community = data.communities.options.find(
+              (option) => option.name === suffix
+            );
+            if (community) {
+              window.location.assign(
+                `http://localhost:3001/r/${community.id}`
+              );
+            }
+          });
       }
-      else if(selectedOption) {
-        window.location.assign(`http://localhost:3001/${selectedOption.label}`)
-      }
-  }
+    }
+  };
+  
+  
+  
 
   return (
     <div>
