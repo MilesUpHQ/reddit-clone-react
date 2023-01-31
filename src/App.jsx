@@ -5,8 +5,6 @@ import Navbar from './components/Navbar/Navbar';
 import JsonData from './data/data.json'
 import NewPost from './components/Post/NewPost';
 import PostShow from './components/Post/PostShow';
-import NewCommunity from './components/Form/NewCommunity';
-import Show from './components/Community/Show';
 import create from './components/Community/create';
 import Profile from './components/Accounts/Profile';
 import Setting from './components/Accounts/Settings';

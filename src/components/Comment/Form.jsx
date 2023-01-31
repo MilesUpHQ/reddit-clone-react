@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
 
 function Form({ postId }) {
   const [text, setText] = useState('');
@@ -9,14 +12,17 @@ function Form({ postId }) {
     console.log(event);
     event.preventDefault();
     try {
-      const response = await fetch(`/api/v1/posts/${postId}/comments`, {
-        method: 'POST',
+      const response = await axios.post(`http://localhost:3000/api/v1/posts/${postId}/comments`, {
+        comment: { message: text },
+        account_id: JSON.parse(localStorage.getItem('account')).id
+      }, {
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ comment: { text } })
       });
-      console.log(text);
       setText('');
-    } catch (error) {
+      if (response.status === 201) {
+        toast.success("Comment Created successfully!");
+      }
+    }catch (error) {
       console.error(error);
     }
   };
