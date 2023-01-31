@@ -61,6 +61,23 @@ function Autocomplete() {
             }
           });
       }
+      else if (prefix === 'u/') {
+        window.location.assign(`http://localhost:3001/profile`);
+      }
+      else if(prefix === 'p/' ){
+        fetch('http://localhost:3000/api/v1/navbar_search')
+        .then((response) => response.json())
+        .then((data) => {
+          const post = data.posts.options.find(
+            (option) => option.title === suffix
+          );
+          if (post) {
+            window.location.assign(
+              `http://localhost:3001/r/1/p/${post.id}`
+            );
+          }
+        });
+      }
     }
   };
   
