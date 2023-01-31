@@ -29,7 +29,7 @@ const PostList = ({ posts, community }) => {
                 <div className="col-10">
                   <div className="d-flex gap-1 post-list-head mt-2">
                     <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
-                    <strong><Link to={`/r/${post.community_id}`} className='text-dark' >r/{community?[community.name]:[post.community&&post.community.name]}</Link></strong>
+                    <strong><Link to={`/r/${post.community_id}`} className='text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>
                     <p className="ml-3 text-muted">Posted by
                       <Link to='/' className="text-muted"> u/Vasi </Link>
                       {moment(post.created_at).fromNow()}</p>
