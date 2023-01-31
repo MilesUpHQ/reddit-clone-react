@@ -25,6 +25,8 @@ const DiscussionForm = () => {
   const [post, setPost] = useState({
     account_id: account.id,
     community_id: '' || 1,
+    account_id: account.id,
+    community_id: '' || 1,
     title: '',
     body: ''
   });
@@ -70,19 +72,7 @@ const DiscussionForm = () => {
             </div>
           </div>
         </div>
-        <div className="row mt-3">
-          <div className="col-sm-12">
-            <div className="card rounded mb-3">
-              <div className="form-group">
-                <select id="community_id" className="form-select search-input-navbar community_select" placeholder='Choose a community' name="community_id" value={post.community_id} onChange={onChange}>
-                  {communities.map(community => (
-                    <option key={community.id} value={community.id}>{community.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
+       
         <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
@@ -93,6 +83,7 @@ const DiscussionForm = () => {
         <div>
           <div className="float-right">
             <div className="join-btn  create-post-btn mb-4">
+             
              
               <input type="submit" value="Save as draft" className="text-white" 
              onClick={() => {
@@ -111,17 +102,6 @@ const DiscussionForm = () => {
   )
 }
 export default DiscussionForm
-
-
-
-
-
-
-
-
-
-
-
 
 
 
