@@ -4,6 +4,7 @@ import Select from 'react-select'
 function Autocomplete() {
     const [options, setOptions] = useState([])
     const [searchString, setSearchString] = useState('')
+    const [selectedOption, setSelectedOption] = useState(null)
 
      const handleInputChange = (inputValue) => {
       setSearchString(inputValue);
@@ -36,6 +37,7 @@ function Autocomplete() {
     }
 
     const handleSelection = (selectedOption) => {
+      setSelectedOption(selectedOption)
       window.location.assign(`http://localhost:3001/navsearch?q=${searchString}`)
   }
   
@@ -43,11 +45,14 @@ function Autocomplete() {
       if(event.key === 'Enter') {
           handleSelection(event.target.value)
       }
+      else if(selectedOption) {
+        window.location.assign(`http://localhost:3001/${selectedOption.label}`)
+      }
   }
 
   return (
     <div>
-      <Select options={options} onInputChange={handleInputChange} onChange={handleSelection} onKeyDown={handleKeyDown} />
+      <Select options={options} value = {selectedOption} onInputChange={handleInputChange} onChange={setSelectedOption} onKeyDown={handleKeyDown} />
     </div>
     )
 }

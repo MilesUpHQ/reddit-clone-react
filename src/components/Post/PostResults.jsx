@@ -10,7 +10,7 @@ function PostResults() {
   const query = new URLSearchParams(location.search).get('q')
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/posts')
+    axios.get('http://localhost:3000/api/v1/communities/1/posts')
       .then(res => {
         setPosts(res.data.filter(post => post.title.toLowerCase().includes(query.toLowerCase())))
       })
