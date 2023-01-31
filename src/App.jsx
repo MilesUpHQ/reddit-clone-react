@@ -4,8 +4,6 @@ import Form from './components/Form/Form';
 import Navbar from './components/Navbar/Navbar';
 import JsonData from './data/data.json'
 import NewPost from './components/Post/NewPost';
-import PostShow from './components/Post/PostShow';
-import create from './components/Community/create';
 import Profile from './components/Accounts/Profile';
 import Setting from './components/Accounts/Settings';
 import Signout from './components/Accounts/Signout';
@@ -34,7 +32,6 @@ function App() {
           <Route path="/r/new" element={<NewCommunity />} />
           <Route path="/r" element={<Index />} />
           <Route path="/r/:id" element={<Show />} />
-          <Route path="/p/:id" element={<PostShow />} />
           <Route path="/r/:id/edit" element={<EditCommunity />} />
           <Route path="/r/create" element={<create />} />
           <Route path="/profile" element={<Profile />} />
