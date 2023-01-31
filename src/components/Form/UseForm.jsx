@@ -26,7 +26,7 @@ const UseForm = () => {
     password: ''
   });
 
-  const Signup_Api_data = async(account) => {
+  const Signup_Api_data = async (account) => {
     await axios.post(Signup_Api_Url, { account }).then((response) => {
       if (response.status == 201) {
         localStorage.setItem('jwt', response.data.jwt);
@@ -38,7 +38,7 @@ const UseForm = () => {
     });
   }
 
-  const Signin_Api_data = async(account) => {
+  const Signin_Api_data = async (account) => {
     await axios.post(Signin_Api_Url, { account }).then((response) => {
       if (response.status == 201) {
         localStorage.setItem('jwt', response.data.jwt);
