@@ -7,7 +7,7 @@ function DraftList() {
   const [drafts, setDrafts] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/communities/1/posts/')
+    axios.get('http://localhost:3000/api/v1/posts/')
       .then(response => {
         const draftedPosts = response.data.filter(post => post.is_drafted === true);
         setDrafts(draftedPosts);
@@ -54,7 +54,7 @@ function DraftList() {
 
 function deletePost(id) {
   if (window.confirm('Are you sure?')) {
-    axios.delete(`http://localhost:3000/api/v1/communities/1/posts/${id}`)
+    axios.delete(`http://localhost:3000/api/v1/posts/${id}`)
       .then(response => {
         console.log(response);
       })
