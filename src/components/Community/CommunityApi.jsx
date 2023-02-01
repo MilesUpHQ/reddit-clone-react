@@ -20,6 +20,10 @@ const CommunityApi = () => {
     return axios.get(Community_URL + id).then((response) => response.data)
   }
 
+  const delete_community = () => {
+    return axios.delete(Community_URL + id).then((response) => response.data)
+  }
+
   const set_new_community = async (community) => {
     await axios.post(Community_URL, { community }).then((response) => {
       if (response.status === 201) {
