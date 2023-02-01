@@ -104,7 +104,25 @@ function Autocomplete() {
 
   return (
     <div>
-      <Select options={options} value = {selectedOption} onInputChange={handleInputChange} onChange={setSelectedOption} onKeyDown={handleKeyDown} />
+      <Select
+     options={options}
+     value={selectedOption}
+     onInputChange={handleInputChange}
+     onChange={setSelectedOption}
+     onKeyDown={handleKeyDown}
+     placeholder = "Search Reddit"
+     styles={{
+       control: (base, state) => ({
+       ...base,
+       width: "300px",
+       borderRadius: "20px",
+       borderColor: state.isFocused ? "#3f51b5" : "#ccc",
+       "&:hover": {
+        borderColor: "#3f51b5",
+      },
+    }),
+  }}
+/>
     </div>
     )
 }
