@@ -93,7 +93,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <PostList account={account} community={community} posts={''} />
+                  <PostList account={account} community={community} posts={posts} />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">
