@@ -25,8 +25,6 @@ const DiscussionForm = () => {
   const [post, setPost] = useState({
     account_id: account.id,
     community_id: '' || 1,
-    account_id: account.id,
-    community_id: '' || 1,
     title: '',
     body: ''
   });

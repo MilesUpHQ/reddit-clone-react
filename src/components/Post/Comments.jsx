@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import reddit_logo from '../../images/reddit-logo.png'
@@ -47,6 +46,7 @@ const Comments = ({}) => {
             .filter(c => c.parent_id === comment.id)
             .map(reply => renderComment(reply, comments))}
           </div>
+          <Form postId={id} parent={comment.id} comment_id={comment.id} />
         </div>
       </div>
     );
@@ -58,5 +58,4 @@ const Comments = ({}) => {
     </div>
   )
 }
-
 export default Comments;

@@ -20,7 +20,7 @@ const PostShow = () => {
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
   }
-  
+
   useEffect(() => {
     let mounted = true;
     get_post_data(id).then((items) => {
@@ -58,12 +58,14 @@ const PostShow = () => {
                 <div className="" key={post.id}>
                   <div className='mt-4 ms-5'>
                     <p>{post.body}</p>
-                    <Reactions Post_URL ={Post_URL} get_post_data={get_post_data}/>
+                    {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                   </div>
-                  <Form parent={null} comment_id={null} />
+                  {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
+                    Post Closed By Admin.For further Details Contact Admin</p>
+                    : <Form parent={null} comment_id={null} />
                 </div>
                 <div className = "commentssection">
-                  <Comments post={post} parent={null}/>
+                  <Comments post={post} parent={null}/>}
                 </div>
               </div>
             </div>
@@ -73,7 +75,7 @@ const PostShow = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 export default PostShow

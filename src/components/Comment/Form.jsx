@@ -12,6 +12,7 @@ function Form({ parent, comment_id }) {
   const account = JSON.parse(localStorage.getItem('account'));
   let { id, community_id } = useParams();
   const commentId = (comment_id) ? comment_id : '';
+  const [post, setPost] = useState({});
 
   const handleSubmit = async event => {
     console.log(event);
@@ -21,17 +22,20 @@ function Form({ parent, comment_id }) {
         comment: { message: text, parent_id: parent },
         account_id: JSON.parse(localStorage.getItem('account')).id
       }, {
-        headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' }
       });
+
       setText('');
       if (response.status === 201) {
         toast.success("Comment Created successfully!"); 
       }
-    }catch (error) {
+    } catch (error) {
       console.error(error);
     }
   };
- 
+  if (post.isclosed) {
+    return null;
+  }
   return (
     <div>
     <form onSubmit={handleSubmit}>
@@ -41,7 +45,16 @@ function Form({ parent, comment_id }) {
           { !parent ? null : 
             <input type="hidden" name="comment[parent_id]" value={parent} />
           }
-          <ReactQuill placeholder="Your Comment goes here" value={text} style={{ height: '200px' }} onChange={setText} id={`comment-${commentId}`}/>
+          <ReactQuill 
+  placeholder="Your Comment goes here" 
+  modules={{ clipboard: { matchVisual: false } }}  
+  style={{ height: '200px' }} 
+  onChange={(content, delta, source, editor) => {
+    const contents = editor.getText().trim();
+    setText(contents);
+  }}
+  id={`comment-${commentId}`}
+/>
         </div>
       </div>
       <div className="m-3 btn btn-secondary">
@@ -51,5 +64,5 @@ function Form({ parent, comment_id }) {
     </div>
   );
 }
- 
+
 export default Form;
