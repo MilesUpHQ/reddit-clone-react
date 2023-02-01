@@ -7,7 +7,7 @@ const Hot = ({ posts }) => {
       {posts ? [
         <PostList posts={posts} />
       ] : [
-        <h4 className="card-title">Best posts will be displayed here</h4>
+        <h4 className="card-title">Hot posts will be displayed here</h4>
       ]}
     </div>
   )

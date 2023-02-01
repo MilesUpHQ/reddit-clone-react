@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 function Form({ postId }) {
   const [text, setText] = useState('');
+  const [post, setPost] = useState({});
 
   const handleSubmit = async event => {
     console.log(event);
@@ -28,13 +29,14 @@ function Form({ postId }) {
       console.error(error);
     }
   };
- 
+  if (post.isclosed) {
+    return null;
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div className="create-post m-5">
         <div className="form-group mb-3">
           <h6>Comment as</h6>
-   
           <ReactQuill placeholder="Your Comment goes here" modules={{ clipboard: { matchVisual: false } }}  style={{ height: '200px' }} onChange={(content, delta, source, editor) => {
            const contents = editor.getText().trim();
           setText(contents);
@@ -48,5 +50,5 @@ function Form({ postId }) {
     </form>
   );
 }
- 
+
 export default Form;
