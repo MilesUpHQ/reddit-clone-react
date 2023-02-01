@@ -77,7 +77,21 @@ function Autocomplete() {
           );
           if (post) {
             window.location.assign(
-              `http://localhost:3001/r/1/p/${post.id}`
+              `http://localhost:3001/r/${post.community_id}/p/${post.id}`
+            );
+          }
+        });
+      }
+      else if(prefix === 'c/' ){
+        fetch('http://localhost:3000/api/v1/navbar_search')
+        .then((response) => response.json())
+        .then((data) => {
+          const comment = data.comments.options.find(
+            (option) => option.message === suffix
+          );
+          if (comment) {
+            window.location.assign(
+              `http://localhost:3001/r/${comment.community_id}/p/${comment.post_id}`
             );
           }
         });
