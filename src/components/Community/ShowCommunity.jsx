@@ -16,9 +16,7 @@ const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
 
 function get_community_data(community_id) {
-  return axios.get(Community_URL + community_id,  {
-    account_id: my_account.id
-  }).then((response) => response.data)
+  return axios.get(Community_URL + community_id).then((response) => response.data)
 }
 
 function delete_community(community_id) {
@@ -29,6 +27,7 @@ const ShowCommunity = () => {
   const [community, setCommunity] = useState([]);
   const [posts, setPosts] = useState([]);
   const [account, setAccount] = useState([]);
+  const [subscribeId, setSubscribeId] = useState(0);
   const [isSubribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate()
   let { id } = useParams();
@@ -41,17 +40,17 @@ const ShowCommunity = () => {
         setPosts(items.posts);
         setAccount(items.account);
         checkIsSubscribed(items.subscriptions)
-        console.log(posts)
       }
     });
     return () => (mounted = false);
   }, []);
 
   const checkIsSubscribed = (subscriptions) => {
-    console.log(subscriptions[0].account_id === my_account.id)
-    {subscriptions[0].account_id === my_account.id ?
-      setIsSubscribed(true) : setIsSubscribed(false) }
-  }
+    setSubscribeId(subscriptions[0].id)
+    {subscriptions.map((sub) => (
+      sub.account_id == my_account.id && setIsSubscribed(true)
+    ))}
+    }
 
   const deleteCommunityHandler = () => {
     confirmAlert({
@@ -86,7 +85,7 @@ const ShowCommunity = () => {
               <h3>/r/{community.name} : Sports</h3>
             </span>
             <div className="pl-2">
-              <JoinButton isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
+              <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
             </div>
           </div>
         </div>
