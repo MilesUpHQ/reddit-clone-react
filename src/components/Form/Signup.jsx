@@ -1,5 +1,6 @@
 import '../../css/signup.css'
 import UseForm from './UseForm';
+import Dropzone from 'react-dropzone';
 
 const Signup = () => {
   const { error, handleChange, signupValues, handleSubmit } = UseForm();
@@ -34,7 +35,7 @@ const Signup = () => {
         </div>
         <div className="form-group">
           <label htmlFor="profile_image" className="form-label"></label>
-          <input type="file" id="profile_image" className="form-control" placeholder='Profile Image' /><br></br>
+          <input type="file" id="profile_image" className="form-control" placeholder='Profile Image' name = "profile_image"  onChange= {handleChange} /><br></br>
         </div>
         <div className="form-group">
           <input type="submit" value="Sign up" className="btn btn-login" /><br></br>

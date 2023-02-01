@@ -13,7 +13,8 @@ const navbar = () => {
     { Title: "Second", id: 2 }
   ]
   const account = JSON.parse(localStorage.getItem('account'))
-
+  const account_url = "http://localhost:3000"
+  //console.log(account.profile_image)
   const Signout = () => {
     localStorage.clear();
     window.location.reload();
@@ -64,10 +65,9 @@ const navbar = () => {
               </div>
               <Dropdown>
                 <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                  <img src={profile_image} alt="" className="profile-img-navbar" />
+                  <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
                   {account.username}
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                   <Dropdown.Item href="/settings">Settings</Dropdown.Item>
