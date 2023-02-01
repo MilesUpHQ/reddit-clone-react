@@ -13,6 +13,7 @@ import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
+const my_account = JSON.parse(localStorage.getItem('account'))
 
 function get_community_data(community_id) {
   return axios.get(Community_URL + community_id).then((response) => response.data)
@@ -22,10 +23,12 @@ function delete_community(community_id) {
   return axios.delete(Community_URL + community_id).then((response) => response.data)
 }
 
-const Show = () => {
+const ShowCommunity = () => {
   const [community, setCommunity] = useState([]);
   const [posts, setPosts] = useState([]);
   const [account, setAccount] = useState([]);
+  const [subscribeId, setSubscribeId] = useState(0);
+  const [isSubribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate()
   let { id } = useParams();
 
@@ -36,11 +39,18 @@ const Show = () => {
         setCommunity(items);
         setPosts(items.posts);
         setAccount(items.account);
+        checkIsSubscribed(items.subscriptions)
       }
-      console.log(items)
     });
     return () => (mounted = false);
   }, []);
+
+  const checkIsSubscribed = (subscriptions) => {
+    setSubscribeId(subscriptions[0].id)
+    {subscriptions.map((sub) => (
+      sub.account_id == my_account.id && setIsSubscribed(true)
+    ))}
+    }
 
   const deleteCommunityHandler = () => {
     confirmAlert({
@@ -75,7 +85,7 @@ const Show = () => {
               <h3>/r/{community.name} : Sports</h3>
             </span>
             <div className="pl-2">
-              <JoinButton />
+              <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
             </div>
           </div>
         </div>
@@ -113,15 +123,15 @@ const Show = () => {
             </div>
             <div className="card p-3">
               <div className="row-5">
-                <Button className='col-2 m-2' onClick={""}>Mod Tools</Button>
-                <Button className='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
+                <Button classNameName='col-2 m-2' onClick={""}>Mod Tools</Button>
+                <Button classNameName='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
               </div>
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
               <div className="member">
                 <p>
                   MEMBERS : {community.members} count
                 </p>
-                <Link to={`/r/${id}/edit`} className='btn btn-primary mr-2'>Edit</Link>
+                <Link to={`/r/${id}/edit`} classNameName='btn btn-primary mr-2'>Edit</Link>
 
               </div>
             </div>
@@ -129,12 +139,14 @@ const Show = () => {
               <p className="h6 pt-2 text-light"> {community.name}'s Rules</p>
             </div>
             <div className="card p-3">
-              <p className="card-text"><FaRegStickyNote /> {community.rules}</p>
+              <p classNameName="card-text"><FaRegStickyNote /> {community.rules}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+
   )
 }
-export default Show
+export default ShowCommunity

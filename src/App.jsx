@@ -13,7 +13,7 @@ import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import Index from './components/Community/Index';
-import Show from './components/Community/Show';
+import ShowCommunity from './components/Community/ShowCommunity';
 import NewCommunity from './components/Community/Form/NewCommunity';
 import EditCommunity from './components/Community/Form/EditCommunity';
 import EditPost from './components/Post/Form/EditPost';
@@ -35,7 +35,7 @@ function App() {
           <Route path="/new" element={<NewPost />} />
           <Route path="/r/new" element={<NewCommunity />} />
           <Route path="/r" element={<Index />} />
-          <Route path="/r/:id" element={<Show />} />
+          <Route path="/r/:id" element={<ShowCommunity />} />
           <Route path="/r/:community_id/p/:id" element={<PostShow />} />
           <Route path="/r/:community_id/edit" element={<EditCommunity />} />
           <Route path="/r/:community_id/p/:id/edit" element={<EditPost />} />
