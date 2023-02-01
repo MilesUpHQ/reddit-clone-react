@@ -19,6 +19,8 @@ import EditCommunity from './components/Community/Form/EditCommunity';
 import EditPost from './components/Post/Form/EditPost';
 
 
+import NavbarSearch from './components/Post/NavbarSearch'
+
 
 function App() {
   return (
@@ -42,6 +44,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Setting />} />
           <Route path="/signout" element={<Signout />} />
+
+          <Route path="/navsearch" element={<NavbarSearch />} />
         </Routes>
       </Router>
     </div>

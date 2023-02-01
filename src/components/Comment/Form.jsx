@@ -17,13 +17,14 @@ function Form({ postId }) {
         comment: { message: text },
         account_id: JSON.parse(localStorage.getItem('account')).id
       }, {
-        headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' }
       });
+
       setText('');
       if (response.status === 201) {
         toast.success("Comment Created successfully!");
       }
-    }catch (error) {
+    } catch (error) {
       console.error(error);
     }
   };
@@ -33,7 +34,12 @@ function Form({ postId }) {
       <div className="create-post m-5">
         <div className="form-group mb-3">
           <h6>Comment as</h6>
-          <ReactQuill placeholder="Your Comment goes here" value={text} style={{ height: '200px' }} onChange={setText}/>
+   
+          <ReactQuill placeholder="Your Comment goes here" modules={{ clipboard: { matchVisual: false } }}  style={{ height: '200px' }} onChange={(content, delta, source, editor) => {
+           const contents = editor.getText().trim();
+          setText(contents);
+       }}
+/>
         </div>
       </div>
       <div className="m-3 btn btn-secondary">

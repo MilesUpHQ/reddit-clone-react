@@ -23,9 +23,7 @@ const DiscussionForm = () => {
 
   const navigate = useNavigate();
   const [post, setPost] = useState({
-    account_id: account.id,
-    community_id: '' || 1,
-    account_id: account.id,
+   account_id: account.id,
     community_id: '' || 1,
     title: '',
     body: ''
