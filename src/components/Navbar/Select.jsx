@@ -77,7 +77,21 @@ function Autocomplete() {
           );
           if (post) {
             window.location.assign(
-              `http://localhost:3001/r/1/p/${post.id}`
+              `http://localhost:3001/r/${post.community_id}/p/${post.id}`
+            );
+          }
+        });
+      }
+      else if(prefix === 'c/' ){
+        fetch('http://localhost:3000/api/v1/navbar_search')
+        .then((response) => response.json())
+        .then((data) => {
+          const comment = data.comments.options.find(
+            (option) => option.message === suffix
+          );
+          if (comment) {
+            window.location.assign(
+              `http://localhost:3001/r/${comment.community_id}/p/${comment.post_id}`
             );
           }
         });
@@ -90,7 +104,25 @@ function Autocomplete() {
 
   return (
     <div>
-      <Select options={options} value = {selectedOption} onInputChange={handleInputChange} onChange={setSelectedOption} onKeyDown={handleKeyDown} />
+      <Select
+     options={options}
+     value={selectedOption}
+     onInputChange={handleInputChange}
+     onChange={setSelectedOption}
+     onKeyDown={handleKeyDown}
+     placeholder = "Search Reddit"
+     styles={{
+       control: (base, state) => ({
+       ...base,
+       width: "300px",
+       borderRadius: "20px",
+       borderColor: state.isFocused ? "#3f51b5" : "#ccc",
+       "&:hover": {
+        borderColor: "#3f51b5",
+      },
+    }),
+  }}
+/>
     </div>
     )
 }
