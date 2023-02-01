@@ -10,9 +10,9 @@ function CommentResults() {
   const query = new URLSearchParams(location.search).get('q')
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/communities/1/posts/1/comments')
+    axios.get('http://localhost:3000/api/v1/navbar_search')
       .then(res => {
-        setComments(res.data.filter(comment=> comment.message.toLowerCase().includes(query.toLowerCase())))
+        setComments(res.data.comments.options.filter(comment=> comment.message.toLowerCase().includes(query.toLowerCase())))
       })
   }, [query])
 
@@ -26,9 +26,8 @@ function CommentResults() {
               <div className="col-2">
                 <div className="card-body">
                 <h5 className="card-title" style={{'white-space': 'nowrap' }}>
-                    <Link to={`/r/1/p/1/comments/${comment.id}`}>{comment.message}</Link>
+                    <Link to={`/r/${comment.community_id}/p/${comment.post_id}`}>{comment.message}</Link>
                   </h5>
-                  <p className="card-text">{comment.post.title}</p>
                 </div>
               </div>
             </div>

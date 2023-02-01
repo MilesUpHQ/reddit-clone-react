@@ -10,11 +10,12 @@ function PostResults() {
   const query = new URLSearchParams(location.search).get('q')
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/communities/1/posts')
+    axios.get('http://localhost:3000/api/v1/navbar_search')
       .then(res => {
-        setPosts(res.data.filter(post => post.title.toLowerCase().includes(query.toLowerCase())))
+        setPosts(res.data.posts.options.filter(post => post.title.toLowerCase().includes(query.toLowerCase())))
       })
   }, [query])
+
 
   return (
     <>
@@ -26,7 +27,7 @@ function PostResults() {
               <div className="col-2">
                 <div className="card-body">
                   <h5 className="card-title">
-                    <Link to={`/communities/${post.id}`}>{post.title}</Link>
+                    <Link to={`/r/${post.community_id}/p/${post.id}`}>{post.title}</Link>
                   </h5>
                   <p className="card-text">{post.body}</p>
                 </div>
