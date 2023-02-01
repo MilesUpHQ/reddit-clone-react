@@ -40,11 +40,18 @@ const ShowCommunity = () => {
         setCommunity(items);
         setPosts(items.posts);
         setAccount(items.account);
+        checkIsSubscribed(items.subscriptions)
         console.log(posts)
       }
     });
     return () => (mounted = false);
   }, []);
+
+  const checkIsSubscribed = (subscriptions) => {
+    console.log(subscriptions[0].account_id === my_account.id)
+    {subscriptions[0].account_id === my_account.id ?
+      setIsSubscribed(true) : setIsSubscribed(false) }
+  }
 
   const deleteCommunityHandler = () => {
     confirmAlert({
