@@ -11,7 +11,7 @@ import Tabs from 'react-bootstrap/Tabs';
 const Tab_List = ({ posts }) => {
   return (
     <div>
-      <div className=" pl-3 pr-3 mb-3">
+      <div className="pl-3 pr-3 mb-3">
         <div className="row">
           <div className="col-12">
             <Tabs
