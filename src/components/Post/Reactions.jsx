@@ -11,16 +11,27 @@ function delete_post(Post_URL, post_id) {
   return axios.delete(Post_URL + post_id).then((response) => response.data)
 }
 
-
-const Reactions = (Post_URL) => {
+const Reactions = () => {
   const [post, setPost] = useState([]);
   const navigate = useNavigate()
-  let { id } = useParams();
+  let { community_id, id } = useParams();
+  const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/`;
 
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
+
+  const set_post = async (post) => {
+    await axios.patch(Post_URL, { post }).then((response) => {
+      if (response.status === 201) {
+        toast.success("Post Closed successfully!");
+      }
+    }).catch((error) => {
+      console.log(error.response.data);
+      toast.error("An error occured while Closing the Post");
+    })
+  }
 
   useEffect(() => {
     let mounted = true;
@@ -49,8 +60,25 @@ const Reactions = (Post_URL) => {
   }
 
   const closePostHandler = () => {
-    console.log("close");
-  };
+    confirmAlert({
+      title: 'Confirm',
+      message: 'Are you sure you want to delete this post?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            set_post({ ...post, isclosed: true });
+            toast.success("Post Closed successfully!");
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+    console.log("Delete")
+  }
+
   const ReportHandler = () => {
     console.log("report")
   }
@@ -60,11 +88,9 @@ const Reactions = (Post_URL) => {
         <div className="d-flex gap-2">
           <Link to='/r/1/p/1/edit' className='btn btn-light' ><FaEdit />  Edit</Link>
           <Link to='' onClick={deletePostHandler} className='btn btn-light' ><FaTrash /> Destroy</Link>
-          <Link to='#' onclick={closePostHandler} className='btn btn-light' ><FaTimes /> Close</Link>
+          <Link to='#' onClick={closePostHandler} className='btn btn-light' ><FaTimes /> Close</Link>
           <Link to='' className='btn btn-light' ><FaComment /> Comments</Link>
-
           <Link to="#" className='btn btn-light' onClick={openModal}> <FaFlag /> Report</Link>
-
           <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">
               <div className="modal-content">
