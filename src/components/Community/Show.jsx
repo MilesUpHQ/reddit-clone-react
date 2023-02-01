@@ -5,7 +5,7 @@ import { FaBirthdayCake, FaRegStickyNote } from 'react-icons/fa'
 import { Button } from 'react-bootstrap';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
-import cover_image from '../../images/Cover-Image.jpg'
+import cover_image from '../../images/Cover-Image.jpg';
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
