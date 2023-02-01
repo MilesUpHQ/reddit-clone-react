@@ -62,7 +62,7 @@ const Reactions = () => {
   const closePostHandler = () => {
     confirmAlert({
       title: 'Confirm',
-      message: 'Are you sure you want to delete this post?',
+      message: 'Are you sure you want to close delete this post.Further Changes cannot be done?',
       buttons: [
         {
           label: 'Yes',
@@ -88,8 +88,12 @@ const Reactions = () => {
         <div className="d-flex gap-2">
           <Link to='/r/1/p/1/edit' className='btn btn-light' ><FaEdit />  Edit</Link>
           <Link to='' onClick={deletePostHandler} className='btn btn-light' ><FaTrash /> Destroy</Link>
-          <Link to='#' onClick={closePostHandler} className='btn btn-light' ><FaTimes /> Close</Link>
-          <Link to='' className='btn btn-light' ><FaComment /> Comments</Link>
+
+
+          <Link to='#' onClick={closePostHandler} className='btn btn-light'><FaTimes /> Close</Link>
+
+
+          <Link to='#' className='btn btn-light' ><FaComment /> Comments</Link>
           <Link to="#" className='btn btn-light' onClick={openModal}> <FaFlag /> Report</Link>
           <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
             <div className="modal-dialog" role="document">

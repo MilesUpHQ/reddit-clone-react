@@ -20,10 +20,10 @@ const Tab_List = ({ posts }) => {
               className="card d-flex flex-row mb-3"
               justify
             >
-              <Tab eventKey="best" title={<span>{<FaRocket />} Best</span>} tabClassName="post-tab-nav-link"> <Best posts={''} /> </Tab>
-              <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="post-tab-nav-link"> <Hot posts={''} /> </Tab>
-              <Tab eventKey="new" title={<span>{<FaTag />} New</span>} tabClassName="post-tab-nav-link"> <New posts={''} /></Tab>
-              <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="post-tab-nav-link"> <Top posts={''} /> </Tab>
+              <Tab eventKey="best" title={<span>{<FaRocket />} Best</span>} tabClassName="post-tab-nav-link"> <Best posts={posts} /> </Tab>
+              <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="post-tab-nav-link"> <Hot posts={posts} /> </Tab>
+              <Tab eventKey="new" title={<span>{<FaTag />} New</span>} tabClassName="post-tab-nav-link"> <New posts={posts} /></Tab>
+              <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="post-tab-nav-link"> <Top posts={posts} /> </Tab>
             </Tabs>
           </div>
         </div>

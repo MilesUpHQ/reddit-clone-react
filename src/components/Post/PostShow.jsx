@@ -54,9 +54,11 @@ const PostShow = () => {
                   <div className='mt-0 ms-5'>
                     <h4>Post title : {post.title}</h4>
                     <p>{post.body}</p>
-                    <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />
+                    {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                   </div>
-                  {post.isclosed ? <p className="card">Closed Post Commmenting Due to Admin</p> : <Form postId={post.id} />}
+                  {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
+                    Post Closed By Admin.For further Details Contact Admin</p>
+                    : <Form postId={post.id} />}
                 </div>
                 <Comments post_id={post.id} />
               </div>
@@ -67,7 +69,7 @@ const PostShow = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 export default PostShow
