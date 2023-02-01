@@ -35,7 +35,9 @@ function App() {
           <Route path="/r" element={<Index />} />
           <Route path="/r/:id" element={<Show />} />
           <Route path="/r/:community_id/p/:id" element={<PostShow />} />
-          <Route path="/r/:id/edit" element={<EditCommunity />} />
+          <Route path="/r/:community_id/edit" element={<EditCommunity />} />
+          <Route path="/r/:community_id/p/:id/edit" element={<EditPost />} />
+
           <Route path="/r/create" element={<create />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Setting />} />
