@@ -56,9 +56,11 @@ const PostShow = () => {
                     <p>{post.body}</p>
                     <Reactions Post_URL ={Post_URL} get_post_data={get_post_data}/>
                   </div>
-                  <Form postId={post.id} />
+                  <Form postId={post.id} parent={null} comment_id={null} />
                 </div>
-                <Comments post_id={post.id}/>
+                <div className = "commentssection">
+                  <Comments post={post} parent={null}/>
+                </div>
               </div>
             </div>
             <div className="col-sm-4">

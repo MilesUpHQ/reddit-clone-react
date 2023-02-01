@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { post } from 'jquery';
 import { toast } from 'react-toastify';
 
 
-function Form({ postId }) {
+function Form({ postId, parent, comment_id }) {
+  console.log(parent);
   const [text, setText] = useState('');
+  const account = JSON.parse(localStorage.getItem('account'));
+  const commentId = (comment_id) ? comment_id : '';
 
   const handleSubmit = async event => {
     console.log(event);
     event.preventDefault();
     try {
       const response = await axios.post(`http://localhost:3000/api/v1/communities/${post.community_id}/posts/${postId}/comments`, {
-        comment: { message: text },
+        comment: { message: text, parent_id: parent },
         account_id: JSON.parse(localStorage.getItem('account')).id
       }, {
         headers: { 'Content-Type': 'application/json' },
@@ -31,9 +35,12 @@ function Form({ postId }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="create-post m-5">
+      <h6>Comment as <Link to={`/u/${account.username}`} >{account.username}</Link></h6>
         <div className="form-group mb-3">
-          <h6>Comment as</h6>
-          <ReactQuill placeholder="Your Comment goes here" value={text} style={{ height: '200px' }} onChange={setText}/>
+          { !parent ? null : 
+            <input type="hidden" name="comment[parent_id]" value={parent} />
+          }
+          <ReactQuill placeholder="Your Comment goes here" value={text} style={{ height: '200px' }} onChange={setText} id={`comment-${commentId}`}/>
         </div>
       </div>
       <div className="m-3 btn btn-secondary">
