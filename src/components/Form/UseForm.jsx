@@ -18,23 +18,35 @@ const UseForm = () => {
     last_name: '',
     email: '',
     password: '',
-    password_confirmation: ''
+    password_confirmation: '',
+    profile_image: null
   });
 
   const [loginValues, setLoginValues] = useState({
     email: '',
     password: ''
   });
-
+ 
   const Signup_Api_data = async (account) => {
-    await axios.post(Signup_Api_Url, { account }).then((response) => {
-      if (response.status == 201) {
-        localStorage.setItem('jwt', response.data.jwt);
-        localStorage.setItem('account', JSON.stringify(response.data.account));
-        window.location.href = '/';
+    let data = new FormData()
+    data.append('username',signupValues.username)
+    data.append('first_name',signupValues.first_name)
+    data.append('last_name',signupValues.last_name)
+    data.append('email',signupValues.email)
+    data.append('password',signupValues.password)
+    data.append('password_confirmation',signupValues.password_confirmation)
+    data.append('profile_image',signupValues.profile_image)
+    console.log("data");
+    console.log(data);
+    fetch(Signup_Api_Url,{
+      method: 'POST',
+      body: data,
+    }).then((response) => {
+      if (response.ok) {
+        Signin_Api_data(signupValues)
       }
     }).catch((error) => {
-      setError(error.response.data.error);
+      setError(error.response);
     });
   }
 
@@ -51,10 +63,10 @@ const UseForm = () => {
   }
 
   const handleLoginChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setLoginValues({
       ...loginValues,
-      [name]: value
+      [name]: files? files[0] : value 
     });
     console.log(loginValues)
   };
@@ -65,10 +77,10 @@ const UseForm = () => {
   }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     setSignupValues({
       ...signupValues,
-      [name]: value
+      [name] : files ? files[0] : value 
     });
     console.log(signupValues)
   };

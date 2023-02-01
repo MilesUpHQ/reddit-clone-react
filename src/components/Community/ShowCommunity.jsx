@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { FaBirthdayCake, FaRegStickyNote } from 'react-icons/fa'
 import { Button } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg'
@@ -61,6 +62,7 @@ const ShowCommunity = () => {
           label: 'Yes',
           onClick: () => {
             delete_community(community.id)
+            toast.success("Community Deleted! 🥺");
             navigate('/')
           }
         },
@@ -123,15 +125,15 @@ const ShowCommunity = () => {
             </div>
             <div className="card p-3">
               <div className="row-5">
-                <Button classNameName='col-2 m-2' onClick={""}>Mod Tools</Button>
-                <Button classNameName='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
+                <Button className='col-2 m-2' onClick={""}>Mod Tools</Button>
+                <Button className='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
               </div>
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
               <div className="member">
                 <p>
                   MEMBERS : {community.members} count
                 </p>
-                <Link to={`/r/${id}/edit`} classNameName='btn btn-primary mr-2'>Edit</Link>
+                <Link to={`/r/${id}/edit`} className='btn btn-primary mr-2'>Edit</Link>
 
               </div>
             </div>
@@ -139,7 +141,7 @@ const ShowCommunity = () => {
               <p className="h6 pt-2 text-light"> {community.name}'s Rules</p>
             </div>
             <div className="card p-3">
-              <p classNameName="card-text"><FaRegStickyNote /> {community.rules}</p>
+              <p className="card-text"><FaRegStickyNote /> {community.rules}</p>
             </div>
           </div>
         </div>
