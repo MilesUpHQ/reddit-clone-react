@@ -6,27 +6,19 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ContentWarning from './../ContentWarning'
 import CommunityTitle from './../CommunityTitle'
-const Post_URL = 'http://localhost:3000/api/v1/communities/1/posts/1'
-
-const EditPost = () => {
-
+const EditPost = ({get_post_data} ) => {
+  const [post, setPost] = useState('');
+  let { id, community_id } = useParams();
+  const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   const navigate = useNavigate();
-  let { id } = useParams();
-  // const [errors, setErrors] = useState('');
-  const [post, setPost] = useState({
-    account_id: 1,
-    community_id: 1,
-    title: '',
-    body: ''
-  });
 
-  function get_post() {
+  function get_post_data(id) {
     return axios.get(Post_URL + id).then((response) => response.data)
   }
 
   useEffect(() => {
     let mounted = true;
-    get_post().then((items) => {
+    get_post_data(id).then((items) => {
       if (mounted) {
         setPost(items);
       }
@@ -34,25 +26,15 @@ const EditPost = () => {
     return () => (mounted = false);
   }, []);
 
-  // const handleErrors = (error) => {
-  //   const { name, value } = error.target;
-  //   setErrors({
-  //     ...errors,
-  //     [name]: value
-  //   });
-  //   console.log(errors)
-  // }
-
   const edit_post = async (post) => {
     await axios.put(Post_URL + id, { post }).then((response) => {
       if (response.status === 200) {
         toast.success("Post Edited successfully!");
-        navigate('/r/' + id)
+        navigate('/r/community_id/p' + id)
       }
     }).catch((error) => {
       console.log(error.response.data);
       toast.error("An error occured while submitting the form");
-      // handleErrors(error.response.data)
     })
   }
 
@@ -66,26 +48,24 @@ const EditPost = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    console.log(post)
     edit_post(post)
   }
 
   return (
     <div>
       <form action="">
-        <CommunityTitle onChange={onChange} />
+        <CommunityTitle postTitle={post.title} onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
-            <ReactQuill placeholder="Enter the Text" modules={{ clipboard: { matchVisual: false } }} style={{ height: '300px' }} onChange={handleChange} />
+            <ReactQuill placeholder="Enter the Text" modules={{ clipboard: { matchVisual: false } }} style={{ height: '300px' }} onChange={handleChange} defaultValue={post.title}/>
           </div>
         </div>
         <ContentWarning />
         <div>
           <div className="float-right">
-            <div className="join-btn  create-post-btn mb-4">
-              <input type="submit" value="Save as draft" className="text-white" />
-            </div>
             <div className="join-btn create-post-btn mb-4">
-              <input type="submit" value="Publish" className="text-white" onClick={onSubmit} />
+              <input type="submit" value="Edit & Publish" className="text-white" onClick={onSubmit} />
             </div>
           </div>
         </div>

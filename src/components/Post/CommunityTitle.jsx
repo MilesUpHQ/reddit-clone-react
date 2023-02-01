@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../css/post.css'
 
-const CommunityTitle = ({ onChange }) => {
+const CommunityTitle = ({ postTitle, onChange }) => {
   return (
     <div>
       <form>
@@ -9,7 +9,7 @@ const CommunityTitle = ({ onChange }) => {
         <div className="rounded mb-3">
           <div className="create-post m-3">
             <div className="form-group">
-              <input type="text" id="title" className="form-control" placeholder='Title' name='title' onChange={onChange} />
+              <input type="text" id="title" className="form-control" placeholder='Title' name='title' onChange={onChange} defaultValue={postTitle} />
             </div>
           </div>
         </div>

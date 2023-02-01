@@ -55,10 +55,10 @@ const PostList = ({ account, posts, community }) => {
                   <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                     <FaRegCommentAlt /> 0 Comments
                   </Link>
-                  <Link className="list-post-tab">
+                  <Link to='' className="list-post-tab">
                     <FaShare /> Share
                   </Link>
-                  <Link className="list-post-tab saved">
+                  <Link to='' className="list-post-tab saved">
                     <FaRegBookmark /> Save
                   </Link>
                   <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
