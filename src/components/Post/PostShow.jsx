@@ -62,10 +62,10 @@ const PostShow = () => {
                   </div>
                   {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
                     Post Closed By Admin.For further Details Contact Admin</p>
-                    : <Form parent={null} comment_id={null} />
+                    : <Form parent={null} comment_id={null} />}
                 </div>
                 <div className = "commentssection">
-                  <Comments post={post} parent={null}/>}
+                  <Comments post={post} parent={null}/>
                 </div>
               </div>
             </div>

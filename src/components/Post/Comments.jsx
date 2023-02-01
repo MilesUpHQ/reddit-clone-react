@@ -46,7 +46,6 @@ const Comments = ({}) => {
             .filter(c => c.parent_id === comment.id)
             .map(reply => renderComment(reply, comments))}
           </div>
-          <Form postId={id} parent={comment.id} comment_id={comment.id} />
         </div>
       </div>
     );
