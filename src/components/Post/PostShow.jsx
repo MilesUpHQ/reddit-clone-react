@@ -5,8 +5,10 @@ import Reactions from './Reactions';
 import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
 import { FaArrowUp, FaArrowDown} from 'react-icons/fa';
+import reddit_logo from '../../images/reddit-logo.png'
 import '../../css/post.css'
 import Comments from './Comments';
+import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
 
 
@@ -36,23 +38,24 @@ const PostShow = () => {
           <div className="row">
             <div className="col-sm-8">
               <div className="card mb-3 ">
-                <div className = "mt-1">
-                  <div className="col-10 m-0" >
+                <div className = "show-content mt-1">
+                  <div className="col-1 m-0" >
                     <div><FaArrowUp /></div>
                     <div><FaArrowDown /></div>
-                    <div className = "post-head">
-                      <div className = "col-5 ms-5">
-                        <p>
-                          <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
-                          <small> Posted by{' '}<Link to={`/u/`}>u/</Link>{' '}</small>
-                        </p>
-                      </div> 
+                  </div>
+                  <div className = "post-head">
+                    <div className = "row" key={post.id}>
+                      <p>
+                        <img src={reddit_logo} alt="" className="community-icon" />
+                        <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
+                        <small> Posted by{' '}<Link to={`/u/`}>u/</Link>{' '}{moment(post.created_at).fromNow()}</small>  
+                      </p>
                     </div>
+                    <strong><h2>{post.title}</h2> </strong>
                   </div>
                 </div>
                 <div className="" key={post.id}>
                   <div className='mt-0 ms-5'>
-                    <h4>Post title : {post.title}</h4>
                     <p>{post.body}</p>
                     <Reactions Post_URL ={Post_URL} get_post_data={get_post_data}/>
                   </div>

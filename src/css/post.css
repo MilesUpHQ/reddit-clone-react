@@ -260,3 +260,13 @@
 .warnings {
   margin-left: 40px;
 }
+
+.community-icon{
+  height: 25px;
+  width: 25px;
+  border-radius: 50px;
+}
+
+.sub-comment {
+  padding-left: 20px;
+}
