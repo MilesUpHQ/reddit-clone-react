@@ -24,7 +24,7 @@ const Draft = (props) => {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" onClick={closeModal}>Close</button>
-            </div>
+            </div>  
           </div>
         </div>
       </div>

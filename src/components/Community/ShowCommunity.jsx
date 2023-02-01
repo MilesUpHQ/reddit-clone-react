@@ -6,12 +6,14 @@ import { Button } from 'react-bootstrap';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg'
+import reddit_logo from '../../images/reddit-logo.png'
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
-import ShowPost from '../Post/ShowPost';
+import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
+const my_account = JSON.parse(localStorage.getItem('account'))
 
 function get_community_data(community_id) {
   return axios.get(Community_URL + community_id).then((response) => response.data)
@@ -21,9 +23,12 @@ function delete_community(community_id) {
   return axios.delete(Community_URL + community_id).then((response) => response.data)
 }
 
-const Show = () => {
+const ShowCommunity = () => {
   const [community, setCommunity] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [account, setAccount] = useState([]);
+  const [subscribeId, setSubscribeId] = useState(0);
+  const [isSubribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate()
   let { id } = useParams();
 
@@ -31,12 +36,21 @@ const Show = () => {
     let mounted = true;
     get_community_data(id).then((items) => {
       if (mounted) {
-        setCommunity(items.community);
+        setCommunity(items);
         setPosts(items.posts);
+        setAccount(items.account);
+        checkIsSubscribed(items.subscriptions)
       }
     });
     return () => (mounted = false);
   }, []);
+
+  const checkIsSubscribed = (subscriptions) => {
+    setSubscribeId(subscriptions[0].id)
+    {subscriptions.map((sub) => (
+      sub.account_id == my_account.id && setIsSubscribed(true)
+    ))}
+    }
 
   const deleteCommunityHandler = () => {
     confirmAlert({
@@ -61,23 +75,25 @@ const Show = () => {
   return (
     <div>
       <img src={cover_image} className="cover-image"></img>
-      <div classNameName="row">
-        <div className="col-sm-1 mr-3">
+      <div className="row gap-3">
+        <div className="col-1">
+          <img src={reddit_logo} className='profile-pic' alt="" />
         </div>
-        <div className="col-sm-10">
+        <div className="col-10">
           <div className="d-flex">
             <span className="ml-4">
-              <h3 classNameName="card-title">Community Name : {community.name}</h3>
+              <h3>/r/{community.name} : Sports</h3>
             </span>
-            <div className="ml-3 pl-2">
-              <JoinButton />
+            <div className="pl-2">
+              <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
             </div>
           </div>
         </div>
       </div>
       <div className="community-nav-tab">
         <ul className="nav">
-          <li className="community-nav-link active"><a data-toggle="tab" href="#post">Posts</a></li>
+          <li className="community-nav-link m-0 active">
+            <a data-toggle="tab" className='text-decoration-none' href="#post">Posts</a></li>
         </ul>
       </div>
       <div className="community_post">
@@ -87,7 +103,7 @@ const Show = () => {
             <div className="tab-content">
               <div id="post" className="tab-pane fade-in active">
                 <div>
-                  <ShowPost posts={posts} />
+                  <PostList account={account} community={community} posts={posts} />
                 </div>
               </div>
               <div id="menu1" className="tab-pane fade">
@@ -133,4 +149,4 @@ const Show = () => {
 
   )
 }
-export default Show
+export default ShowCommunity
