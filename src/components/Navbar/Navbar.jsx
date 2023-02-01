@@ -64,7 +64,11 @@ const navbar = () => {
               </div>
               <Dropdown>
                 <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                  <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
+                  {account.profile_image.url ? [
+                    <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
+                  ] : [
+                    <img src={profile_image} alt="" className="profile-img-navbar" />
+                  ]}
                   {account.username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>

@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const CommunityApi = () => {
+  const [errorJson, setErrorJson] = useState('')
   const Community_URL = 'http://localhost:3000/api/v1/communities/'
 
   let { id } = useParams();
@@ -32,6 +33,7 @@ const CommunityApi = () => {
       }
     }).catch((error) => {
       console.log(error.response.data);
+      setErrorJson(error.response.data)
       toast.error("An error occured while submitting the form");
       // handleErrors(error.response.data)
     })
@@ -45,12 +47,13 @@ const CommunityApi = () => {
       }
     }).catch((error) => {
       console.log(error.response.data);
+      setErrorJson(error.response.data)
       toast.error("An error occured while submitting the form");
       // handleErrors(error.response.data)
     })
   }
 
-  return { community, setCommunity, edit_community, set_new_community, get_community }
+  return { community, setCommunity, edit_community, set_new_community, get_community, errorJson }
 }
 
 export default CommunityApi
