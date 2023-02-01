@@ -91,6 +91,11 @@
   padding-right: 100px;
 }
 
+.small-pic{
+  height: 30px;
+  width: 30px;
+}
+
 .post-tab-nav-link {
   background-color: #fff;
   color: #8c8f91;

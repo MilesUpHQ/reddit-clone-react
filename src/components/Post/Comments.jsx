@@ -1,21 +1,24 @@
 
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
-import { post } from 'jquery';
+import { useParams } from 'react-router-dom';
+import reddit_logo from '../../images/reddit-logo.png'
+import axios from 'axios'; 
+import '../../css/post.css' 
+import moment from 'moment';
+import Form from '../Comment/Form';
 
-const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
-
-function get_post_comments(post_id) {
-  return axios.get(Post_URL + post_id + '/comments').then((response) => response.data)
-}
-
-const Comments = ({post_id}) => {
-  console.log(post_id)  
+const Comments = ({}) => { 
   const [comments, setComments] = useState([]);
+  let { id, community_id } = useParams();
+  const account = JSON.parse(localStorage.getItem('account'))
+  const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
+  function get_post_comments(post_id) {
+    return axios.get(Post_URL + post_id + '/comments').then((response) => response.data)
+  }
 
   useEffect(() => {
     let mounted = true;
-    get_post_comments(post_id).then((items) => {
+    get_post_comments(id).then((items) => {
       if (mounted) {
         setComments(items);
       }
@@ -26,12 +29,14 @@ const Comments = ({post_id}) => {
   return (
     <div>
       {comments.map((comment) => (
-        <div className="card border-light" key={comment.id}>
-          <div className="card-body border">
-            <h4 className="card-text">Post id : {comment.id}</h4>
-            <h4 className="card-title">Post Title : {comment.message}</h4>
-           
+        <div className="comment" key={comment.id}>
+          <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
+          <strong>{account.username}</strong>
+          <div>{comment.message}</div> 
+          <div class = "fl">
+            <p className = "text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
           </div>
+          <Form postId={id} parent={comment.id} comment_id={comment.id} />
         </div>
       ))}
     </div>
