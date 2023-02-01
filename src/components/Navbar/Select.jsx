@@ -25,6 +25,10 @@ function Autocomplete() {
                   options = options.concat(data.accounts.options.map(option => 
                     ({ value: option.id, label: `u/${option.username}`, type: data.accounts.type })))
                 }
+                if(data.comments){
+                  options = options.concat(data.comments.options.map(option => 
+                    ({ value: option.id, label: `c/${option.message}`, type: data.comments.type })))
+                }
                 setOptions(options);
              })
             .catch(error => {
