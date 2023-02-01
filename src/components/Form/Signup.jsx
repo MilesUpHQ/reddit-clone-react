@@ -1,6 +1,5 @@
 import '../../css/signup.css'
 import UseForm from './UseForm';
-import Dropzone from 'react-dropzone';
 
 const Signup = () => {
   const { error, handleChange, signupValues, handleSubmit } = UseForm();

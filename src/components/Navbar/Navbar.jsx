@@ -14,7 +14,6 @@ const navbar = () => {
   ]
   const account = JSON.parse(localStorage.getItem('account'))
   const account_url = "http://localhost:3000"
-  //console.log(account.profile_image)
   const Signout = () => {
     localStorage.clear();
     window.location.reload();
