@@ -35,16 +35,18 @@ const Comments = ({}) => {
     return (
       <div className="comment" key={comment.id}>
         <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
-        <strong>{account.username}</strong>
-        <div>{comment.message}</div> 
+        <strong>{account.first_name}</strong>
+        <div className='ms-4'>{comment.message}</div> 
         <div class = "fl">
           <p className = "text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
           <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>
-          {selectedComment === comment.id && <Form postId={id} parent={comment.id} comment_id={comment.id} />}
+          {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
+          <hr />
           <div className='sub-comment'>
           {comments
             .filter(c => c.parent_id === comment.id)
-            .map(reply => renderComment(reply, comments))}</div>
+            .map(reply => renderComment(reply, comments))}
+          </div>
         </div>
       </div>
     );

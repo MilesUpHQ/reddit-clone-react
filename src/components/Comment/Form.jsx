@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { post } from 'jquery';
+import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 
-function Form({ postId, parent, comment_id }) {
+function Form({ parent, comment_id }) {
   console.log(parent);
   const [text, setText] = useState('');
   const account = JSON.parse(localStorage.getItem('account'));
+  let { id, community_id } = useParams();
   const commentId = (comment_id) ? comment_id : '';
 
   const handleSubmit = async event => {
     console.log(event);
     event.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:3000/api/v1/communities/${post.community_id}/posts/${postId}/comments`, {
+      const response = await axios.post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`, {
         comment: { message: text, parent_id: parent },
         account_id: JSON.parse(localStorage.getItem('account')).id
       }, {
@@ -25,7 +25,7 @@ function Form({ postId, parent, comment_id }) {
       });
       setText('');
       if (response.status === 201) {
-        toast.success("Comment Created successfully!");
+        toast.success("Comment Created successfully!"); 
       }
     }catch (error) {
       console.error(error);
@@ -33,9 +33,10 @@ function Form({ postId, parent, comment_id }) {
   };
  
   return (
+    <div>
     <form onSubmit={handleSubmit}>
-      <div className="create-post m-5">
-      <h6>Comment as <Link to={`/u/${account.username}`} >{account.username}</Link></h6>
+      <div className="m-5">
+      <small>Comment as <Link to={`/u/${account.username}`} >{account.username}</Link></small>
         <div className="form-group mb-3">
           { !parent ? null : 
             <input type="hidden" name="comment[parent_id]" value={parent} />
@@ -47,6 +48,7 @@ function Form({ postId, parent, comment_id }) {
         <input type="submit" value="Submit comment" />
       </div>
     </form>
+    </div>
   );
 }
  
