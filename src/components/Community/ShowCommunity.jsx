@@ -133,7 +133,7 @@ const ShowCommunity = () => {
             </div>
             <div className="card p-3">
               <div className="row-5">
-                <Button className='col-2 m-2' onClick={""}>Mod Tools</Button>
+                <Link to={`/r/${id}/mod`} className='btn btn-primary col-2 m-2'>Mod Tools</Link>
                 <Button className='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
               </div>
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
@@ -141,8 +141,6 @@ const ShowCommunity = () => {
                 <p>
                   MEMBERS : {community.members} count
                 </p>
-                <Link to={`/r/${id}/edit`} className='btn btn-primary mr-2'>Edit</Link>
-
               </div>
             </div>
             <div className="card mt-3 p-2 bg-primary">
