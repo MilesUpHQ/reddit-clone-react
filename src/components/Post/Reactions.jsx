@@ -7,8 +7,8 @@ import EditPost from '../../components/Post/Form/EditPost';
 import ReportForm from './ReportForm'
 import { toast } from 'react-toastify';
 
-function delete_post(Post_URL, post_id) {
-  return axios.delete(Post_URL + post_id).then((response) => response.data)
+function delete_post(Post_URL) {
+  return axios.delete(Post_URL).then((response) => response.data)
 }
 
 const Reactions = () => {
@@ -48,7 +48,8 @@ const Reactions = () => {
           label: 'Yes',
           onClick: () => {
             delete_post(Post_URL, post.id)
-            navigate('/')
+            toast.success("Post Deleted successfully!");
+            navigate(`/r/${community_id}`)
           }
         },
         {
