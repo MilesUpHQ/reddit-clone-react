@@ -64,12 +64,11 @@ const navbar = () => {
               </div>
               <Dropdown>
                 <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                  {account.profile_image && account.profile_image.url ? [
+                  {account && account.profile_image && account.profile_image.url ? [
                     <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
                   ] : [
                     <img src={profile_image} alt="" className="profile-img-navbar" />
                   ]}
-                  {account.username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
@@ -81,13 +80,13 @@ const navbar = () => {
           ] : [
             <div className="">
               <ul className="navbar-nav">
-            <li className="nav-item">
-              <a href="/signup" className="nav-link">Sign Up</a>
-            </li>
-            <li className="nav-item">
-              <a href="/signin" className="nav-link">Log In</a>
-            </li>
-          </ul>
+                <li className="nav-item">
+                  <a href="/signup" className="nav-link">Sign Up</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/signin" className="nav-link">Log In</a>
+                </li>
+              </ul>
             </div>
           ]}
 
