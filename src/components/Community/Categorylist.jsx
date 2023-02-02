@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function MyComponent() {
   const data = ["All", "Sports", "Gaming", "Technology", "News", "TV", "Music", "Crypto", "Fashion", "Food", "Health", "Science", "Finance"];
@@ -6,7 +7,9 @@ function MyComponent() {
   return (
     <div className="card" >
       {data.map((data) => (
-        <h5 className="list-group-item" key={data}>{data}</h5>
+        <Link to={`/r/?category=${data}`} className="list-group-item text-primary">
+         {data}
+       </Link>
       ))}
       </div>
   );

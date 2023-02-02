@@ -2,7 +2,6 @@ import React from 'react'
 
 const Posts = () => {
   return (
-    
     <div className="card border-light" >
       <div className="card-body border">
         <h4  className="card-title">Post Title</h4>
