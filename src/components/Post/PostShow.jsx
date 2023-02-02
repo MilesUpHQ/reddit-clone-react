@@ -1,22 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link,useLocation } from 'react-router-dom';
 import Reactions from './Reactions';
 import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import '../../css/post.css'
+
 import Comments from './Comments';
 import 'react-quill/dist/quill.snow.css';
 
 
 const PostShow = () => {
   const [post, setPost] = useState([]);
-  let { id, community_id } = useParams();
+  const [highlight, setHighlight] = useState("");
+  const location = useLocation();
+
+  let { id, community_id} = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
   }
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    setHighlight(queryParams.get("highlight") || "");
+  }, [location.search]);
 
   useEffect(() => {
     let mounted = true;
@@ -60,7 +69,7 @@ const PostShow = () => {
                     Post Closed By Admin.For further Details Contact Admin</p>
                     : <Form postId={post.id} />}
                 </div>
-                <Comments post_id={post.id} />
+                <Comments post_id={post.id} highlight={highlight} />
               </div>
             </div>
             <div className="col-sm-4">
