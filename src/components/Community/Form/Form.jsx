@@ -1,6 +1,6 @@
 import React from 'react'
 import { toast } from 'react-toastify';
-const CATEGORIES = ['SPORTS', 'TV', 'EDUCATONAL'];
+const CATEGORIES = ["Sports", "Gaming", "Technology", "News", "TV", "Music", "Crypto", "Fashion", "Food", "Health", "Science", "Finance"];
 
 const Form = ({ community, onChange, onSubmit, errorJson }) => {
   const account = JSON.parse(localStorage.getItem('account'))
@@ -48,9 +48,10 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
           <div className="create-post m-3">
             <div className="form-group">
               <label htmlFor="category"> Category </label>
-              <select name="category" className='form-control' value={community.category}>
+              <select id="category" name="category" className='form-select search-input-navbar community_select' value={community.category} onChange={onChange}>
                 <option value="" disabled>Select Category</option>
                 {CATEGORIES.map((category, index) => <option key={index} value={category}>{category}</option>)}
+                <input type="text" id="category" className="form-control" placeholder='' name='Category' onChange={onChange} />
               </select>
               {/* {errors.category && <p className="text-danger">{errors.category}</p>} */}
             </div>
