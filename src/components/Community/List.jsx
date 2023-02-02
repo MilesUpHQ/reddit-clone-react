@@ -5,13 +5,12 @@ const List = ({ communities }) => {
   return (
     <div>
       {communities.map(community => (
-        <div className="card border-light" key={community.id}>
-          <div className="card-body border">
-            <Link to={`/r/${community.id}`} >
-            <h4 className="card-title">Community Name : {community.name}</h4>
+        <div className="card border-light" style={{maxwidth: "57rem"}} key={community.id}>
+          <div className="card-body">
+            <Link to={`/r/${community.id}`} className="nav-link" >
+              <h4 className="card-title text-primary">{community.name}</h4>
             </Link>
-            <p className="card-text">URL : {community.url}</p>
-            <p className="card-text">Rules : {community.rules}</p>
+            <p className="card-text">{community.rules}</p>
           </div>
         </div>
       ))}
