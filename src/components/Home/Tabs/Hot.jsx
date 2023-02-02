@@ -5,9 +5,9 @@ const Hot = ({ posts }) => {
   return (
     <div>
       {posts ? (
-        <PostList key={1} posts={posts} />
+        <PostList key={'hot'} posts={posts} />
       ) : (
-        <h4 key={1} className="card-title">Hot posts will be displayed here</h4>
+        <h4 key={'hot'} className="card-title">Hot posts will be displayed here</h4>
       )}
     </div>
   )
