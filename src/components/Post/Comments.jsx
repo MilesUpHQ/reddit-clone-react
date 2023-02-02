@@ -48,7 +48,6 @@ const Comments = ({ highlight }) => {
           <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
           <strong>{account.username}</strong>
           <div>
-            <div dangerouslySetInnerHTML={{ __html: comment.message }} />
             <Markup content={comment.message} />
             {comment.message.split(highlight).map((part, index) => (
               <React.Fragment key={index}>
@@ -58,6 +57,7 @@ const Comments = ({ highlight }) => {
                 )}
               </React.Fragment>
             ))}
+
           </div>
           <div className="fl">
             <p className="text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
