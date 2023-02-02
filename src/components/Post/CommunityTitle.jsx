@@ -4,8 +4,6 @@ import '../../css/post.css'
 const CommunityTitle = ({ postTitle, onChange }) => {
   return (
     <div>
-      <form>
-
         <div className="rounded mb-3">
           <div className="create-post m-3">
             <div className="form-group">
@@ -13,7 +11,6 @@ const CommunityTitle = ({ postTitle, onChange }) => {
             </div>
           </div>
         </div>
-      </form>
     </div>
   )
 }
