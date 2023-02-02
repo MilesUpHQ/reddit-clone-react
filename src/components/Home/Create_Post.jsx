@@ -12,7 +12,7 @@ const Create_Post = () => {
       <div className="row">
         <div className="col-1">
           <div className="profile-img">
-          {account && account.profile_image.url ? [
+          {account && account.profile_image && account.profile_image.url ? [
             <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img" />
           ] : [
             <img src={profile_image} alt="" className="profile-img" />

@@ -28,7 +28,7 @@ const Right_Tab = () => {
         <img src={cover_image} className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
         <div className="ml-3 home-small-profile">
-          {account && account.profile_image.url ? [
+          {account && account.profile_image && account.profile_image.url ? [
             <img src={`${account_url}${account.profile_image.url}`} alt="" className="home-small-profile" />
           ] : [
             <img src={profile_image} alt="" className="" />
