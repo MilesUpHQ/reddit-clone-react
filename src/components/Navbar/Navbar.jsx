@@ -5,8 +5,6 @@ import '../../css/Navbar.css';
 import { FaStar } from "react-icons/fa";
 import Autocomplete from './Select';
 import Dropdown from 'react-bootstrap/Dropdown';
-
-
 const navbar = () => {
   const data = [
     { Title: "First", id: 1 },
@@ -18,7 +16,6 @@ const navbar = () => {
     localStorage.clear();
     window.location.reload();
   }
-
   return (
     <div className=''>
       <div className="p-1 bg-light mr-auto">
@@ -30,12 +27,10 @@ const navbar = () => {
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
-
           <Dropdown>
             <Dropdown.Toggle variant="transparent" id="dropdown-basic">
               Home
             </Dropdown.Toggle>
-
             <Dropdown.Menu>
               <Dropdown.Item href="/r">All Communities</Dropdown.Item>
               <Dropdown.Item href="/r/">Top Trending</Dropdown.Item>
@@ -43,7 +38,6 @@ const navbar = () => {
               <Dropdown.Item href="/r/new">Create a Community</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav">
               <li className="nav-item dropdown">
@@ -55,7 +49,6 @@ const navbar = () => {
               </li>
             </ul>
           </div>
-
           {account ? [
             <div className="d-flex gap-2">
               <div className="karma">
@@ -64,12 +57,11 @@ const navbar = () => {
               </div>
               <Dropdown>
                 <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                  {account.profile_image.url ? [
+                  {account.profile_image && account.profile_image.url ? [
                     <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
                   ] : [
                     <img src={profile_image} alt="" className="profile-img-navbar" />
                   ]}
-                  {account.username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
@@ -81,20 +73,18 @@ const navbar = () => {
           ] : [
             <div className="">
               <ul className="navbar-nav">
-            <li className="nav-item">
-              <a href="/signup" className="nav-link">Sign Up</a>
-            </li>
-            <li className="nav-item">
-              <a href="/signin" className="nav-link">Log In</a>
-            </li>
-          </ul>
+                <li className="nav-item">
+                  <a href="/signup" className="nav-link">Sign Up</a>
+                </li>
+                <li className="nav-item">
+                  <a href="/signin" className="nav-link">Log In</a>
+                </li>
+              </ul>
             </div>
           ]}
-
         </nav>
       </div >
     </div >
   )
 }
-
 export default navbar
