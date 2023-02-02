@@ -5,19 +5,13 @@ import CommunityApi from '../CommunityApi';
 
 const NewCommunity = () => {
 
-  const { set_new_community, community ,setCommunity } = CommunityApi();
-
-  // const handleErrors = (error) => {
-  //   const { name, value } = error.target;
-  //   setErrors({
-  //     ...errors,
-  //     [name]: value
-  //   });
-  //   console.log(errors)
-  // }
+  const { set_new_community, community ,setCommunity, errorJson } = CommunityApi();
 
   const onChange = (event) => {
-    setCommunity({ ...community, [event.target.name]: event.target.value });
+    setCommunity({
+      ...community,
+      [event.target.name]: event.target.files ? event.target.files[0] : event.target.value
+    });
   }
 
   const onSubmit = (event) => {
@@ -36,7 +30,7 @@ const NewCommunity = () => {
           </div>
           <div className="row mt-3">
             <div className="col-12 p-0">
-              <Form community={community} onChange={onChange} onSubmit={onSubmit} />
+              <Form community={community} onChange={onChange} onSubmit={onSubmit} errorJson={errorJson} />
             </div>
           </div>
         </div>

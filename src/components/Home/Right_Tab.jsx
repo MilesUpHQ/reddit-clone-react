@@ -6,6 +6,9 @@ import '../../css/Tabright.css'
 import cover_image from '../../images/Cover-Image.jpg'
 import profile_image from '../../images/profile-img.jpeg'
 
+const account = JSON.parse(localStorage.getItem('account'))
+const account_url = "http://localhost:3000"
+
 const Right_Tab = () => {
   return (
     <div className="">
@@ -25,7 +28,12 @@ const Right_Tab = () => {
         <img src={cover_image} className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
         <div className="ml-3 home-small-profile">
-          <img src={profile_image} className="" alt="profile" />
+          {account && account.profile_image.url ? [
+            <img src={`${account_url}${account.profile_image.url}`} alt="" className="home-small-profile" />
+          ] : [
+            <img src={profile_image} alt="" className="" />
+          ]}
+          
         </div>
           <p className="mt-3 home"><b>Home</b></p>
         </div>

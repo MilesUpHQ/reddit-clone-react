@@ -5,9 +5,7 @@ import CommunityApi from '../CommunityApi';
 
 const EditCommunity = () => {
 
-  const { get_community, edit_community, community ,setCommunity } = CommunityApi();
-
-  // const [errors, setErrors] = useState('');
+  const { get_community, edit_community, community ,setCommunity, errorJson } = CommunityApi();
 
   useEffect(() => {
     let mounted = true;
@@ -19,17 +17,11 @@ const EditCommunity = () => {
     return () => (mounted = false);
   }, []);
 
-  // const handleErrors = (error) => {
-  //   const { name, value } = error.target;
-  //   setErrors({
-  //     ...errors,
-  //     [name]: value
-  //   });
-  //   console.log(errors)
-  // }
-
   const onChange = (event) => {
-    setCommunity({ ...community, [event.target.name]: event.target.value });
+    setCommunity({
+      ...community,
+      [event.target.name]: event.target.files ? event.target.files[0] : event.target.value
+    });
   }
 
   const onSubmit = (event) => {
@@ -48,7 +40,7 @@ const EditCommunity = () => {
           </div>
           <div className="row mt-3">
             <div className="col-12 p-0">
-              <Form community={community} onChange={onChange} onSubmit={onSubmit} />
+              <Form community={community} onChange={onChange} onSubmit={onSubmit} errorJson={errorJson} />
             </div>
           </div>
         </div>
