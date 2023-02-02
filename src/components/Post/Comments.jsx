@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams, useLocation } from 'react-router-dom';
-import reddit_logo from '../../images/reddit-logo.png'
+import profile_image from '../../images/profile-img.jpeg'
 import axios from 'axios';
 import '../../css/post.css'
 import moment from 'moment';
@@ -45,7 +45,11 @@ const Comments = ({ highlight }) => {
     <div ref={commentRef}>
       {comments.map((comment) => (
         <div className="comment" key={comment.id} data-comment-id={comment.id}>
-          <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
+          {account && account.profile_image && account.profile_image.url ? [
+              <img src={`http://localhost:3000${account.profile_image.url}`} alt="" className="profile-img-navbar" />
+            ] : [
+              <img src={profile_image} alt="" className="profile-img-navbar" />
+          ]}
           <strong>{account.username}</strong>
           <div>
             <Markup content={comment.message} />
