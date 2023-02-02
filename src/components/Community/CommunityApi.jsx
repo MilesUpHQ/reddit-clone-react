@@ -14,7 +14,9 @@ const CommunityApi = () => {
     account_id: account.id,
     name: '',
     url: '',
-    rules: ''
+    rules: '',
+    profile_image: null,
+    cover_image: null
   });
 
   const get_community = () => {
@@ -25,8 +27,22 @@ const CommunityApi = () => {
     return axios.delete(Community_URL + id).then((response) => response.data)
   }
 
+  const setFormData = (community) => {
+    let data = new FormData()
+    data.append('account_id', account.id)
+    data.append('name', community.name)
+    data.append('url', community.url)
+    data.append('rules', community.rules)
+    data.append('profile_image', community.profile_image)
+    data.append('cover_image', community.cover_image)
+    return data
+  }
+
   const set_new_community = async (community) => {
-    await axios.post(Community_URL, { community }).then((response) => {
+
+    let CommunityFormData = setFormData(community)
+
+    axios.post(Community_URL, CommunityFormData).then((response) => {
       if (response.status === 201) {
         toast.success("Community Created successfully!");
         navigate('/r')
@@ -35,12 +51,13 @@ const CommunityApi = () => {
       console.log(error.response.data);
       setErrorJson(error.response.data)
       toast.error("An error occured while submitting the form");
-      // handleErrors(error.response.data)
     })
   }
 
   const edit_community = async (community) => {
-    await axios.put(Community_URL + id, { community }).then((response) => {
+    let CommunityFormData = setFormData(community)
+
+    await axios.put(Community_URL + id, CommunityFormData ).then((response) => {
       if (response.status === 200) {
         toast.success("Community Edited successfully!");
         navigate('/r/' + id)
@@ -49,7 +66,6 @@ const CommunityApi = () => {
       console.log(error.response.data);
       setErrorJson(error.response.data)
       toast.error("An error occured while submitting the form");
-      // handleErrors(error.response.data)
     })
   }
 
