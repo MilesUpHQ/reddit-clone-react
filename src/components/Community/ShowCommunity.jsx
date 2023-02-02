@@ -76,10 +76,18 @@ const ShowCommunity = () => {
 
   return (
     <div>
-      <img src={cover_image} className="cover-image"></img>
+      {community.cover_image && community.cover_image.url ? [
+        <img src={`http://localhost:3000${community.cover_image.url}`} className="cover-image"></img>
+      ] : [
+        <img src={cover_image} className="cover-image"></img>
+      ]}
       <div className="row gap-3">
         <div className="col-1">
+        {community.profile_image && community.profile_image.url ? [
+          <img src={`http://localhost:3000${community.profile_image.url}`} className='profile-pic' alt="" />
+        ] : [
           <img src={reddit_logo} className='profile-pic' alt="" />
+        ]}
         </div>
         <div className="col-10">
           <div className="d-flex">
