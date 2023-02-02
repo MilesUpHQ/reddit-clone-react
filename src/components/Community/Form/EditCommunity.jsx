@@ -18,7 +18,10 @@ const EditCommunity = () => {
   }, []);
 
   const onChange = (event) => {
-    setCommunity({ ...community, [event.target.name]: event.target.value });
+    setCommunity({
+      ...community,
+      [event.target.name]: event.target.files ? event.target.files[0] : event.target.value
+    });
   }
 
   const onSubmit = (event) => {

@@ -8,7 +8,11 @@ import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 import '../../css/post.css'
 
 const PostList = ({ account, posts, community }) => {
-  return (
+
+  if (!Array.isArray(posts)) {
+    return null;
+  }
+ return (
     <div>
       {posts && posts.map((post) => {
         return (
