@@ -35,6 +35,8 @@ const CommunityApi = () => {
     data.append('name', community.name)
     data.append('url', community.url)
     data.append('rules', community.rules)
+    data.append('summary', community.summary)
+    data.append('category', community.category)
     data.append('profile_image', community.profile_image)
     data.append('cover_image', community.cover_image)
     return data
