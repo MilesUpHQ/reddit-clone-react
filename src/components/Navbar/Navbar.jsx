@@ -69,6 +69,7 @@ const navbar = () => {
                   ] : [
                     <img src={profile_image} alt="" className="profile-img-navbar" />
                   ]}
+                  {account.username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
