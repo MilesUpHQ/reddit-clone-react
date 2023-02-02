@@ -52,8 +52,8 @@ const PostShow = () => {
                 </div>
                 <div className="" key={post.id}>
                   <div className='mt-0 ms-5'>
-                    <h4>Post title : {post.title}</h4>
-                    <p>{post.body}</p>
+                    <h4>Post-Tittle : {post.title}</h4>
+                    <p><div dangerouslySetInnerHTML={{ __html: post.body }} /></p>
                     {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                   </div>
                   {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>

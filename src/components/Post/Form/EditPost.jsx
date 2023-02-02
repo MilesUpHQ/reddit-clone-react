@@ -47,7 +47,7 @@ const EditPost = ({ get_post_data }) => {
 
   const [body, setBody] = useState(post.body);
   const handleChange = (content, delta, source, editor) => {
-    setPost({ ...post, body: editor.getContents() });
+    setPost({ ...post, body: content });
   }
 
   const onSubmit = (event) => {

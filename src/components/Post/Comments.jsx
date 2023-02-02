@@ -28,7 +28,7 @@ const Comments = ({ }) => {
         <div className="comment" key={comment.id}>
           <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
           <strong>{account.username}</strong>
-          <div>{comment.message}</div>
+          <p><div dangerouslySetInnerHTML={{ __html: comment.message }} /></p>
           <div className="fl">
             <p className="text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
           </div>

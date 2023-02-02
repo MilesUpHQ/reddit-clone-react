@@ -48,7 +48,7 @@ const PostList = ({ account, posts, community }) => {
                 </div>
                 <div className="row">
                   <div className="list-post-img">
-                    <p className="col-12 ">{post.body}</p>
+                    <p className="col-12 "><div dangerouslySetInnerHTML={{ __html: post.body }} /></p>
                   </div>
                 </div>
                 <div className="row mt-1 mb-1">
