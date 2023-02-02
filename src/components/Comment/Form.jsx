@@ -1,66 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import PostApi from '../Home/PostApi';
+
 
 
 function Form({ parent, comment_id }) {
-  console.log(parent);
-  const [text, setText] = useState('');
+  let currentText = '';
   const account = JSON.parse(localStorage.getItem('account'));
-  let { id, community_id } = useParams();
   const commentId = (comment_id) ? comment_id : '';
   const [post, setPost] = useState({});
 
-  const handleSubmit = async event => {
-    console.log(event);
-    event.preventDefault();
-    try {
-      const response = await axios.post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`, {
-        comment: { message: text, parent_id: parent },
-        account_id: JSON.parse(localStorage.getItem('account')).id
-      }, {
-          headers: { 'Content-Type': 'application/json' }
-      });
+  const { set_comments, text, setText } = PostApi();
 
-      setText('');
-      if (response.status === 201) {
-        toast.success("Comment Created successfully!"); 
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setText(currentText);
+    set_comments(currentText, parent)   
   };
   if (post.isclosed) {
     return null;
   }
   return (
     <div>
-    <form onSubmit={handleSubmit}>
-      <div className="m-5">
-      <small>Comment as <Link to={`/u/${account.username}`} >{account.username}</Link></small>
-        <div className="form-group mb-3">
-          { !parent ? null : 
-            <input type="hidden" name="comment[parent_id]" value={parent} />
-          }
-          <ReactQuill 
-  placeholder="Your Comment goes here" 
-  modules={{ clipboard: { matchVisual: false } }}  
-  style={{ height: '200px' }} 
-  onChange={(content, delta, source, editor) => {
-    const contents = editor.getText().trim();
-    setText(contents);
-  }}
-  id={`comment-${commentId}`}
-/>
+      <form onSubmit={handleSubmit}>
+        <div className="m-5">
+          <small>Comment as <Link to={`/u/${account.username}`} >{account.username}</Link></small>
+          <div className="form-group mb-3">
+            {!parent ? null :
+              <input type="hidden" name="comment[parent_id]" value={parent} />
+            }
+            <ReactQuill value={text} placeholder="Your Comment goes here" modules={{ clipboard: { matchVisual: false } }} style={{ height: '200px' }} onChange={(content, delta, source, editor) => {
+              currentText = editor.getText().trim();
+            }}
+              id={`comment-${commentId}`} />
+          </div>
         </div>
-      </div>
-      <div className="m-3 btn btn-secondary">
-        <input type="submit" value="Submit comment" />
-      </div>
-    </form>
+        <div className="m-3 btn btn-secondary">
+          <input type="submit" value="Submit comment" />
+        </div>
+      </form>
     </div>
   );
 }

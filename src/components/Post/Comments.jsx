@@ -5,13 +5,16 @@ import axios from 'axios';
 import '../../css/post.css' 
 import moment from 'moment';
 import Form from '../Comment/Form';
+import PostApi from '../Home/PostApi';
 
 const Comments = ({}) => {
-  const [comments, setComments] = useState([]);
+  const { comments, setComments } = PostApi();
   const [selectedComment, setSelectedComment] = useState(null);
+  
   let { id, community_id } = useParams();
   const account = JSON.parse(localStorage.getItem('account'))
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
+
   function get_post_comments(post_id) {
     return axios.get(Post_URL + post_id + '/comments').then((response) => response.data)
   }
@@ -43,7 +46,7 @@ const Comments = ({}) => {
           <hr />
           <div className='sub-comment'>
           {comments
-            .filter(c => c.parent_id === comment.id)
+            .filter(sub_comment => sub_comment.parent_id === comment.id)
             .map(reply => renderComment(reply, comments))}
           </div>
         </div>
@@ -53,7 +56,7 @@ const Comments = ({}) => {
 
   return (
     <div>
-      {comments.filter(c => !c.parent_id).map(comment => renderComment(comment, comments))}
+      {comments.filter(parent_comment => !parent_comment.parent_id).map(comment => renderComment(comment, comments))}
     </div>
   )
 }
