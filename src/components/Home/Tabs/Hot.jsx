@@ -4,11 +4,11 @@ import PostList from '../../Post/PostList'
 const Hot = ({ posts }) => {
   return (
     <div>
-      {posts ? [
-        <PostList posts={posts} />
-      ] : [
-        <h4 className="card-title">Hot posts will be displayed here</h4>
-      ]}
+      {posts ? (
+        <PostList key={1} posts={posts} />
+      ) : (
+        <h4 key={1} className="card-title">Hot posts will be displayed here</h4>
+      )}
     </div>
   )
 }
