@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../../css/post.css'
 import moment from 'moment';
 import Form from '../Comment/Form';
+import { Markup } from 'interweave';
 const Comments = ({ }) => {
   const [comments, setComments] = useState([]);
   let { id, community_id } = useParams();
@@ -28,7 +29,7 @@ const Comments = ({ }) => {
         <div className="comment" key={comment.id}>
           <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
           <strong>{account.username}</strong>
-          <p><div dangerouslySetInnerHTML={{ __html: comment.message }} /></p>
+          <Markup content={comment.message} />
           <div className="fl">
             <p className="text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
           </div>
