@@ -5,11 +5,9 @@ import reddit_logo from '../../images/reddit-logo.png'
 import { FaRegBookmark, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 import PostList from '../Post/PostList';
-
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   const account = JSON.parse(localStorage.getItem('account'))
-  
   useEffect(() => {
     axios.get('http://localhost:3000/api/v1/communities/1/posts')
       .then(response => {
@@ -19,7 +17,6 @@ const Posts = () => {
         console.error(error);
       });
   }, []);
-
   return (
     <div>
       {posts.length  ? (
@@ -29,7 +26,5 @@ const Posts = () => {
       )}
     </div>
   )
-
 };
-
 export default Posts;

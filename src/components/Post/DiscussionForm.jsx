@@ -44,7 +44,7 @@ const DiscussionForm = () => {
     console.log(event.target.value)
   }
   const handleChange = (content, delta, source, editor) => {
-    setPost({ ...post, body: editor.getText().trim() });
+    setPost({ ...post, body: content });
   }
   const onSubmit = (event) => {
     event.preventDefault();
@@ -70,7 +70,7 @@ const DiscussionForm = () => {
             </div>
           </div>
         </div>
-       
+
         <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
@@ -81,14 +81,14 @@ const DiscussionForm = () => {
         <div>
           <div className="float-right">
             <div className="join-btn  create-post-btn mb-4">
-             
-             
-              <input type="submit" value="Save as draft" className="text-white" 
-             onClick={() => {
-              set_new_post({...post, is_drafted: true});
-              }
-            }
-          />
+
+
+              <input type="submit" value="Save as draft" className="text-white"
+                onClick={() => {
+                  set_new_post({ ...post, is_drafted: true });
+                }
+                }
+              />
             </div>
             <div className="join-btn create-post-btn mb-4">
               <input type="submit" value="Publish" className="text-white" onClick={onSubmit} />
