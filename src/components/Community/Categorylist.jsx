@@ -1,12 +1,12 @@
 import React from 'react'
 
 function MyComponent() {
-  const data = ["Sports", "Tv", "Education","Science"];
-
+  const data = ["All", "Sports", "Gaming", "Technology", "News", "TV", "Music", "Crypto", "Fashion", "Food", "Health", "Science", "Finance"];
+  
   return (
-    <div className="card border" >
+    <div className="card" >
       {data.map((data) => (
-        <h5 className=" card-title  mb-3" key={data}>{data}</h5>
+        <h5 className="list-group-item" key={data}>{data}</h5>
       ))}
       </div>
   );
