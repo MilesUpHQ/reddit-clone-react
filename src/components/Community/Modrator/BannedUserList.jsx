@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, ListGroup } from 'react-bootstrap'
+import BannedUserApi from './BannedUserApi'
 
 const BannedUserList = () => {
+  const [bannedUsersList, setBannedUsersList] = useState('')
+  const { get_banned_users_list_data } = BannedUserApi()
+
+  useEffect(() => {
+    let mounted = true;
+    get_banned_users_list_data().then((items) => {
+      if (mounted) {
+        setBannedUsersList(items);
+      }
+    });
+    return () => (mounted = false);
+  }, [bannedUsersList]);
+
   return (
     <div>
       <Card>
@@ -11,11 +25,11 @@ const BannedUserList = () => {
         <Card.Body>
           <Card.Subtitle className="mb-2 text-muted">Banned Usernames :</Card.Subtitle>
           <ListGroup variant="numbered">
-            <ListGroup.Item>Username 1 banned</ListGroup.Item>
-            <ListGroup.Item>Username 2 banned</ListGroup.Item>
-            <ListGroup.Item>Username 3 banned</ListGroup.Item>
-            <ListGroup.Item>Username 4 banned</ListGroup.Item>
-            <ListGroup.Item>Username 5 banned</ListGroup.Item>
+            {bannedUsersList && bannedUsersList.map((bannedUser) => {
+              return(
+                <ListGroup.Item key={bannedUser.id}>{bannedUser.username}</ListGroup.Item>
+              )
+            })}
           </ListGroup>
         </Card.Body>
       </Card>
