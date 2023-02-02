@@ -16,7 +16,9 @@ const CommunityApi = () => {
     url: '',
     rules: '',
     profile_image: null,
-    cover_image: null
+    cover_image: null,
+    summary: '',
+    category: ''
   });
 
   const get_community = () => {
