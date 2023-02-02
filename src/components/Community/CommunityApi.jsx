@@ -14,7 +14,9 @@ const CommunityApi = () => {
     account_id: account.id,
     name: '',
     url: '',
-    rules: ''
+    rules: '',
+    summary: '',
+    category: ''
   });
 
   const get_community = () => {
