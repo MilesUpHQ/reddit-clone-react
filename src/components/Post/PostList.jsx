@@ -1,4 +1,4 @@
-import React ,{useState}from 'react'
+import React ,{useState, useEffect}from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
@@ -12,6 +12,18 @@ const PostList = ({ account, posts, community }) => {
 
 const [isSaved, setIsSaved] = useState(false);
 const current_account = JSON.parse(localStorage.getItem('account'))
+
+
+useEffect(() => {
+  const fetchSavedPosts = async () => {
+    // make an API call to fetch the saved posts
+    const response = await fetch(`http://localhost:3000/api/v1/accounts/${account_id}/saved_posts`);
+    const data = await response.json();
+    setIsSaved(data);
+  };
+
+  fetchSavedPosts();
+}, []);
 
 const handleSave = async (postId) => {
   try {
