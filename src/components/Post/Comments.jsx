@@ -12,7 +12,7 @@ const Comments = ({highlight}) => {
   const [selectedComment, setSelectedComment] = useState(null);
   
   let { id, community_id } = useParams();
-  const account = JSON.parse(localStorage.getItem('account'))
+  
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
 
   const highlight_style = { backgroundColor: "lightgrey" };
@@ -55,7 +55,7 @@ const Comments = ({highlight}) => {
       <div ref={commentRef}>
       <div className="comment" key={comment.id}>
         <img src={reddit_logo} alt="" className="small-pic float-left m-r-15" />
-        <strong>{account.first_name}</strong>
+        <strong>{comment.account.first_name}</strong>
         <div className='ms-4'>{comment.message.split(highlight).map((part, index) => (
           <React.Fragment key={index}>
             {part}

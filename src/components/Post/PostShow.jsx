@@ -58,7 +58,7 @@ const PostShow = () => {
                       <p key={post.id}>
                         <img src={reddit_logo} alt="" className="community-icon" />
                         <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
-                        <small> Posted by{' '}<Link to='/'> u/{account?[account.username]:[post.account&&post.account.username]} </Link>{moment(post.created_at).fromNow()}</small>
+                        <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
                       </p>
                     </div>
                     <strong><h2 className = "ms-2">{post.title}</h2> </strong>
