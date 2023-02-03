@@ -10,8 +10,11 @@ function Form({ postId }) {
   const [post, setPost] = useState({});
 
   const handleSubmit = async event => {
-    console.log(event);
     event.preventDefault();
+    if (!text) {
+      toast.error("Comment cannot be empty!");
+      return;
+    }
     try {
       const response = await axios.post(`http://localhost:3000/api/v1/communities/${post.community_id}/posts/${postId}/comments`, {
         comment: { message: text },
@@ -28,6 +31,7 @@ function Form({ postId }) {
       console.error(error);
     }
   };
+
   if (post.isclosed) {
     return null;
   }
