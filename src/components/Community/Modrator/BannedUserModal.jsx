@@ -1,9 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import BannedUserApi from './BannedUserApi'
+import ModratorApi from './ModratorApi'
 
 const BannedUserModal = (props) => {
   const { bannedUser, setBannedUser, setNewBannedUser } = BannedUserApi()
+  const { joinedAccounts, setJoinedAccounts, GetJoinedAccounts } = ModratorApi()
+
+  useEffect(() => {
+    let mounted = true;
+    GetJoinedAccounts().then((items) => {
+      if (mounted) {
+        setJoinedAccounts(items)
+      }
+    });
+    return () => (mounted = false);
+  }, []);
 
   const onChange = (event) => {
     console.log(bannedUser)
@@ -35,19 +47,20 @@ const BannedUserModal = (props) => {
           <form onSubmit={onSubmit}>
             <div class="form-group">
               <label for="username">Enter User Name</label>
-              <Form.Select aria-label="username" name="username" onChange={onChange}>
+              <Form.Select aria-label="username" name="account_id" onChange={onChange}>
                 <option key='blankChoice' hidden value>Select Username</option>
-                <option value="vasanth">vasanth</option>
-                <option value="iamtusharxo">Tushar</option>
-                <option value="sowndar">Sowndar</option>
-                <option value="mithun">Mithun</option>
+                {joinedAccounts && joinedAccounts.map((account) => {
+                  return (
+                    <option value={account.account.id}>{account.account.username}</option>
+                  )
+                })}
               </Form.Select>
             </div><br />
             <div class="form-group">
               <label for="reason">Reason For Ban</label>
             </div>
             <div>
-            <Form.Select aria-label="reason" name="reason" onChange={onChange}>
+              <Form.Select aria-label="reason" name="reason" onChange={onChange}>
                 <option key='blankChoice' hidden value>Select Reason</option>
                 <option value="Spam">Spam</option>
                 <option value="Personal Confidential Information">Personal Confidential Information</option>
