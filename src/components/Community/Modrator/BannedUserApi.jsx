@@ -11,7 +11,7 @@ const BannedUserApi = () => {
 
   const navigate = useNavigate()
   const [bannedUser, setBannedUser] = useState({
-    account_id: account.id,
+    account_id: '',
     subscription_id: '',
     username: '',
     reason: '',
