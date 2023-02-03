@@ -29,13 +29,13 @@ const Index = () => {
       <div className="container mb-4">
         <div className="d-flex">
           <h3 className="text-dark">Today's Top Growing Communities</h3><br></br>
-          <div className="float-right" style={{marginLeft: '400px'}}>
+          <div className="float-right" style={{ marginLeft: '600px' }}>
             <Link to="/r/new" className="btn btn-outline-primary">Create New Community</Link>
           </div>
-        </div>  
+        </div>
         <p className="text-muted">Browse Reddit's top growing communities. Find the top communities in your favorite category.</p>
       </div>
-      
+
       <div className="container">
         <div className="row">
           <div className="col-2">
@@ -66,7 +66,7 @@ const Index = () => {
                 <li className="list-group-item text-white bg-secondary">Top Communities</li>
                 {communities.length > 0 ? (
                   communities.map((community) => (
-                    <Link to={`/r/${community.id}`} className="list-group-item text-primary">
+                    <Link to={`/r/${community.id}`} className="list-group-item text-primary mb-1">
                       {community.name}
                     </Link>
                   ))
