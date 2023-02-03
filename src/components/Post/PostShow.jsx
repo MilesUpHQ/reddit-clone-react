@@ -62,24 +62,23 @@ const PostShow = () => {
                     <strong><h2 className="ms-2">{post.title}</h2> </strong>
                   </div>
                 </div>
-              </div>
-              <div className="" key={post.id}>
-                <div className='mt-4 ms-5'>
-                  <Markup content={post.body}></Markup>
-                  {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
+                <div className="" key={post.id}>
+                  <div className='mt-4 ms-5'>
+                    <Markup content={post.body}></Markup>
+                    {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
+                  </div>
+                  {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
+                    Post Closed By Admin.For further Details Contact Admin</p>
+                    : <Form parent={null} comment_id={null} />}
                 </div>
-                {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
-                  Post Closed By Admin.For further Details Contact Admin</p>
-                  : <Form parent={null} comment_id={null} />}
+                <div className="commentssection">
+                  <Comments post={post} parent={null} highlight={highlight} />
+                </div>
               </div>
-              <div className="commentssection">
-                <Comments post={post} parent={null} highlight={highlight} />
-              </div>
-
             </div>
-          </div>
-          <div className="col-sm-4">
-            <CommunityDetails post={post} />
+            <div className="col-sm-4">
+              <CommunityDetails post={post} />
+            </div>
           </div>
         </div>
       </div>
