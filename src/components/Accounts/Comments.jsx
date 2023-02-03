@@ -25,9 +25,9 @@ const Comments = () => {
     <>
       {comments.length ? (
         comments.map(comment => (
-          <div style={{ height: '168px' }} className="card post-card mb-3 shadow">
-            <div className="row m-0">
-              <div className="ml-3 text-muted">
+          <div style={{ height: '165px' }} className="card post-card mb-3 shadow">
+            <div className="row m-0 bg-white">
+              <div className="ml-3">
                 <img src={reddit_logo} alt="" className="post-list-profile-img" />
                 <div className="d-flex gap-1 post-list-head mt-2">
                   <a href={`/profile`}><b> u/{comment.username}</b></a>
