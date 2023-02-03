@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import cover_image from '../../images/Cover-Image.jpg';
+import reddit_logo from '../../images/reddit-logo.png'
 
 const CommunityDetails = (post) => {
   
@@ -16,6 +18,8 @@ const CommunityDetails = (post) => {
       <div className="card" key={post.id}>
         <div className="card-body">
           <div className="text-center">
+          <img src={cover_image} className="card-img-top home-small-cover"></img>
+          <img src={reddit_logo} alt="" className="ml-3 home-small-profile"/>
           <h5 className="card-title">Community</h5>
           </div>
         </div>
