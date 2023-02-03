@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams, Link,useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import Reactions from './Reactions';
 import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
@@ -9,11 +9,12 @@ import { Markup } from 'interweave';
 import '../../css/post.css'
 import Comments from './Comments';
 import 'react-quill/dist/quill.snow.css';
+import reddit_logo from '../../images/reddit-logo.png';
 const PostShow = () => {
   const [post, setPost] = useState([]);
   const [highlight, setHighlight] = useState("");
   const location = useLocation();
-  let { id, community_id} = useParams();
+  let { id, community_id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
@@ -45,6 +46,11 @@ const PostShow = () => {
                     <div className="post-head">
                       <div className="col-5 ms-5">
                         <p>
+                          {post.community && post.community.profile_image && post.community.profile_image.url ? [
+                            <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" className="post-list-profile-img mr-1" />
+                          ] : [
+                            <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
+                          ]}
                           <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
                           <small> Posted by{' '}<Link to={`/u/`}>u/</Link>{' '}</small>
                         </p>
