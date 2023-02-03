@@ -32,7 +32,7 @@ function Form({ parent, comment_id }) {
               <input type="hidden" name="comment[parent_id]" value={parent} />
             }
             <ReactQuill value={text} placeholder="Your Comment goes here" modules={{ clipboard: { matchVisual: false } }} style={{ height: '200px' }} onChange={(content, delta, source, editor) => {
-              currentText = editor.getText().trim();
+              currentText = content;
             }}
               id={`comment-${commentId}`} />
           </div>

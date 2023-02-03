@@ -63,15 +63,8 @@ const Comments = ({ highlight }) => {
           ]}
           <strong>{comment.account.first_name}</strong>
           <div className='ms-4'>
-            <Markup content={comment.message.split(highlight).map((part, index) => (
-              <React.Fragment key={index}>
-                {part}
-                {index !== comment.message.split(highlight).length - 1 && (
-                  <span style={highlight_style}>{highlight}</span>
-                )}
-              </React.Fragment>
-            ))}
-            />
+            <Markup content={comment.message} />
+            
           </div>
         </div>
         <div class="fl">
