@@ -92,7 +92,7 @@ const ShowCommunity = () => {
         <div className="col-10">
           <div className="d-flex">
             <span className="ml-4">
-              <h3>/r/{community.name} : Sports</h3>
+              <h3>/r/{community.name} : {community.category}</h3>
             </span>
             <div className="pl-2">
               <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
