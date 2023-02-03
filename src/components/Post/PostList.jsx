@@ -1,4 +1,4 @@
-import React ,{useState, useEffect}from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
@@ -10,52 +10,52 @@ import { toast } from 'react-toastify';
 
 const PostList = ({ account, posts, community }) => {
 
-const [isSaved, setIsSaved] = useState(false);
-const current_account = JSON.parse(localStorage.getItem('account'))
+  const [isSaved, setIsSaved] = useState(false);
+  const current_account = JSON.parse(localStorage.getItem('account'))
 
 
-useEffect(() => {
-  const fetchSavedPosts = async () => {
-    // make an API call to fetch the saved posts
-    const response = await fetch(`http://localhost:3000/api/v1/accounts/${account_id}/saved_posts`);
-    const data = await response.json();
-    setIsSaved(data);
-  };
+  useEffect(() => {
+    const fetchSavedPosts = async () => {
+      // make an API call to fetch the saved posts
+      const response = await fetch(`http://localhost:3000/api/v1/accounts/${current_account.id}/saved_posts`);
+      const data = await response.json();
+      setIsSaved(data);
+    };
 
-  fetchSavedPosts();
-}, []);
+    fetchSavedPosts();
+  }, []);
 
-const handleSave = async (postId) => {
-  try {
-    if (isSaved) {
-      await axios.delete(`http://localhost:3000/api/v1/accounts/${current_account.id}/save_posts/${postId}`);
-      console.log("Delete");
-    } else {
-      const response = await fetch(`http://localhost:3000/api/v1/accounts/${current_account.id}/save_posts/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        
-        body: JSON.stringify({post_id: postId, account_id: current_account.id })
-      });
-      const data =await response.json();
-      if (response.status === 201) {
-        toast.success("Post Saved successfully!");
+  const handleSave = async (postId) => {
+    try {
+      if (isSaved) {
+        await axios.delete(`http://localhost:3000/api/v1/accounts/${current_account.id}/save_posts/${postId}`);
+        console.log("Delete");
+      } else {
+        const response = await fetch(`http://localhost:3000/api/v1/accounts/${current_account.id}/save_posts/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+
+          body: JSON.stringify({ post_id: postId, account_id: current_account.id })
+        });
+        const data = await response.json();
+        if (response.status === 201) {
+          toast.success("Post Saved successfully!");
+        }
       }
+      setIsSaved(!isSaved);
+    } catch (error) {
+      console.error(error);
     }
-    setIsSaved(!isSaved);
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
 
   if (!Array.isArray(posts)) {
     return null;
   }
   return (
     <div>
-        {posts && posts.map((post) => {
+      {posts && posts.map((post) => {
         return (
           <div key={post.id} className="card post-card mb-3 shadow">
             <div className="row m-0">
@@ -108,14 +108,14 @@ const handleSave = async (postId) => {
                     <Link to='' className="list-post-tab">
                       <FaShare /> Share
                     </Link>
-                    <Link to='' className={`list-post-tab ${isSaved ? 'saved' : ''}`} 
+                    <Link to='' className={`list-post-tab ${isSaved ? 'saved' : ''}`}
                       onClick={() => handleSave(post.id)}>
-                        {isSaved ? (
-                          <FaRegBookmark style={{ fill: 'grey' }} />
-                         ) : (
-                           <FaRegBookmark />
-                        )}
-                        Save
+                      {isSaved ? (
+                        <FaRegBookmark style={{ fill: 'grey' }} />
+                      ) : (
+                        <FaRegBookmark />
+                      )}
+                      Save
                     </Link>
                     <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                       <FaRegFlag /> Report
