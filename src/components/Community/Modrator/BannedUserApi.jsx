@@ -10,6 +10,7 @@ const BannedUserApi = () => {
   const Ban_User_URL = `http://localhost:3000/api/v1/communities/${id}/banned_users/`
 
   const navigate = useNavigate()
+  const [bannedUserErrors, setBannedUserErrors] = useState();
   const [bannedUser, setBannedUser] = useState({
     account_id: '',
     subscription_id: '',
@@ -32,11 +33,10 @@ const BannedUserApi = () => {
         toast.warning("User Already Banned!");
       }
     }).catch((error) => {
-      console.log(error.response);
-      toast.error("An error occured while submitting the form");
+      setBannedUserErrors(error.response.data)
     })
   }
-  return { bannedUser, setBannedUser, setNewBannedUser,get_banned_users_list_data }
+  return { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser,get_banned_users_list_data }
 }
 
 export default BannedUserApi
