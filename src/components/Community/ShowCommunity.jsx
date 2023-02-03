@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
-import cover_image from '../../images/Cover-Image.jpg'
+import cover_image from '../../images/Cover-Image.jpg';
 import reddit_logo from '../../images/reddit-logo.png'
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
