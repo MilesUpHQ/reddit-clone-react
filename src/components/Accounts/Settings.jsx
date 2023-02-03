@@ -3,7 +3,7 @@ import '../../css/signup.css'
 import UseForm from '../Form/UseForm';
 
 const Settings = () => {
-  const { error, handleChange, signupValues, handleSubmit } = UseForm();
+ const { error, handleChange, signupValues, handleSubmit } = UseForm();
 
   return (
     <div>
@@ -38,10 +38,9 @@ const Settings = () => {
           <input type="file" id="profile_image" className="form-control" placeholder='Profile Image' name = "profile_image"  onChange= {handleChange} /><br></br>
         </div>
         <div className="form-group">
-          <input type="submit" value="Edit" className="btn btn-login" /><br></br>
+          <input type="submit" value="Sign up" className="btn btn-login" /><br></br>
         </div>
       </form>
- 
     </div>
 
   )

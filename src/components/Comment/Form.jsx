@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import PostApi from '../Home/PostApi';
-
-
 function Form({ parent, comment_id }) {
   let currentText = '';
   const account = JSON.parse(localStorage.getItem('account'));
   const commentId = (comment_id) ? comment_id : '';
   const [post, setPost] = useState({});
-
   const { set_comments, text, setText } = PostApi();
-
   const handleSubmit = async event => {
     event.preventDefault();
+   
     setText(currentText);
-    set_comments(currentText, parent)   
+    set_comments(currentText, parent)
   };
   if (post.isclosed) {
     return null;
@@ -44,5 +42,4 @@ function Form({ parent, comment_id }) {
     </div>
   );
 }
-
 export default Form;
