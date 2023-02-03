@@ -15,7 +15,10 @@ const PostApi = () => {
   }
 
   const set_comments = async(currentText, parent) => {
-    
+    if (!currentText) {
+      toast.error("Comment cannot be empty!");
+      return;
+    }
     await axios.post(Comments_URL, {
       comment: { message: currentText, parent_id: parent },
       account_id: JSON.parse(localStorage.getItem('account')).id
