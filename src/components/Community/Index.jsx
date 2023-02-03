@@ -33,7 +33,7 @@ const Index = () => {
             <Link to="/r/new" className="btn btn-outline-primary">Create New Community</Link>
           </div>
         </div>
-        <p className="text-muted">Browse Reddit's top growing communities. Find the top communities in your favorite category.</p>
+        <p className="text-muted">Browse Top growing communities. Find the top communities in your favorite category.</p>
       </div>
 
       <div className="container">
