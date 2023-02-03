@@ -25,11 +25,14 @@ const BannedUserApi = () => {
   const setNewBannedUser = async (banUser) => {
     axios.post(Ban_User_URL, {banned_user: banUser}).then((response) => {
       if (response.status === 201) {
-        toast.success("User : "+banUser.username+" Banned Successfully!");
+        toast.success("User Banned Successfully!");
         navigate('/r/'+id+'/mod/')
       }
+      else if(response.status === 200) {
+        toast.warning("User Already Banned!");
+      }
     }).catch((error) => {
-      console.log(error.response.data);
+      console.log(error.response);
       toast.error("An error occured while submitting the form");
     })
   }
