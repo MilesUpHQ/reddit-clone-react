@@ -13,7 +13,6 @@ function Form({ parent, comment_id }) {
   const { set_comments, text, setText } = PostApi();
   const handleSubmit = async event => {
     event.preventDefault();
-   
     setText(currentText);
     set_comments(currentText, parent)
   };
@@ -24,7 +23,13 @@ function Form({ parent, comment_id }) {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="m-5">
-          <small>Comment as <Link to={`/u/${account.username}`} >{account.username}</Link></small>
+          {!account ? (
+            window.location.replace("/signin")
+          ) : (
+            <small>
+              Comment as <Link to={`/u/${account.username}`}>{account.username}</Link>
+            </small>
+          )}
           <div className="form-group mb-3">
             {!parent ? null :
               <input type="hidden" name="comment[parent_id]" value={parent} />
