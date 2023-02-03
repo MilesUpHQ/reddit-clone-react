@@ -8,7 +8,6 @@ import PostShow from './components/Post/PostShow';
 import create from './components/Community/create';
 import Profile from './components/Accounts/Profile';
 import Setting from './components/Accounts/Settings';
-import Signout from './components/Accounts/Signout';
 import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
@@ -44,7 +43,6 @@ function App() {
           <Route path="/r/create" element={<create />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Setting />} />
-          <Route path="/signout" element={<Signout />} />
 
           <Route path="/navsearch" element={<NavbarSearch />} />
         </Routes>
