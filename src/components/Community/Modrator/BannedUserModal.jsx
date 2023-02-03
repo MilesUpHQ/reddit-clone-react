@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 import BannedUserApi from './BannedUserApi'
 import ModratorApi from './ModratorApi'
 
 const BannedUserModal = (props) => {
   const { bannedUser, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { joinedAccounts, setJoinedAccounts, GetJoinedAccounts } = ModratorApi()
+  const current_account = JSON.parse(localStorage.getItem('account'))
 
   useEffect(() => {
     let mounted = true;
@@ -27,7 +29,12 @@ const BannedUserModal = (props) => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    setNewBannedUser(bannedUser)
+    if(bannedUser.account_id == current_account.id) {
+      toast.warning(`The user ${current_account.username} is Moderator`);
+    }
+    else {
+      setNewBannedUser(bannedUser)
+    }
   }
 
   return (
