@@ -12,7 +12,7 @@ const PostList = ({ account, posts, community }) => {
   if (!Array.isArray(posts)) {
     return null;
   }
- return (
+  return (
     <div>
       {posts && posts.map((post) => {
         return (
@@ -33,7 +33,11 @@ const PostList = ({ account, posts, community }) => {
                 <div className="row bg-white">
                   <div className="col-10">
                     <div className="d-flex gap-1 post-list-head mt-2">
-                      <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
+                      {post.community && post.community.profile_image && post.community.profile_image.url ? [
+                        <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" className="post-list-profile-img mr-1" />
+                      ] : [
+                        <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
+                      ]}
                       <strong><Link to={`/r/${post.community_id}`} className='text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>
                       <p className="ml-3 text-muted">Posted by
                         <Link to='/' className="text-muted"> u/{account ? [account.username] : [post.account && post.account.username]} </Link>
@@ -52,7 +56,7 @@ const PostList = ({ account, posts, community }) => {
                 </div>
                 <div className="row">
                   <div className="list-post-img">
-                    <p className="col-12 ">{post.body}</p>
+                    <p className="col-12 "><div dangerouslySetInnerHTML={{ __html: post.body }} /></p>
                   </div>
                 </div>
                 <div className="row mt-1 mb-1">

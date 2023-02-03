@@ -1,35 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { useParams, Link,useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import Reactions from './Reactions';
 import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
 import { FaArrowUp, FaArrowDown} from 'react-icons/fa';
 import reddit_logo from '../../images/reddit-logo.png'
+import { Markup } from 'interweave';
 import '../../css/post.css'
-
 import Comments from './Comments';
 import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
-
 
 const PostShow = () => {
   const [post, setPost] = useState([]);
   const [highlight, setHighlight] = useState("");
   const location = useLocation();
-
-  let { id, community_id} = useParams();
+  let { id, community_id } = useParams();
   const account = JSON.parse(localStorage.getItem('account'))
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
   }
-
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     setHighlight(queryParams.get("highlight") || "");
   }, [location.search]);
-
   useEffect(() => {
     let mounted = true;
     get_post_data(id).then((items) => {
@@ -39,8 +35,6 @@ const PostShow = () => {
     });
     return () => (mounted = false);
   }, []);
-
-
   return (
     <div>
       <div className="show_post">
@@ -56,17 +50,22 @@ const PostShow = () => {
                   <div className = "post-head ms-3">
                     <div className = "row">
                       <p key={post.id}>
-                        <img src={reddit_logo} alt="" className="community-icon" />
+                          {post.community && post.community.profile_image && post.community.profile_image.url ? [
+                            <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" className="post-list-profile-img mr-1" />
+                          ] : [
+                            <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
+                          ]}
                         <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
                         <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
                       </p>
                     </div>
                     <strong><h2 className = "ms-2">{post.title}</h2> </strong>
                   </div>
+                  </div>
                 </div>
                 <div className="" key={post.id}>
-                  <div className='mt-4 ms-5'>
-                    <p>{post.body}</p>
+                <div className='mt-4 ms-5'>
+                <Markup content={post.body}></Markup>
                     {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                   </div>
                   {post.isclosed ? <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
@@ -85,7 +84,7 @@ const PostShow = () => {
           </div>
         </div>
       </div>
-    </div >
+    
   )
 }
 export default PostShow

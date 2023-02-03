@@ -7,8 +7,8 @@ import EditPost from '../../components/Post/Form/EditPost';
 import ReportForm from './ReportForm'
 import { toast } from 'react-toastify';
 
-function delete_post(Post_URL, post_id) {
-  return axios.delete(Post_URL + post_id).then((response) => response.data)
+function delete_post(Post_URL) {
+  return axios.delete(Post_URL).then((response) => response.data)
 }
 
 const Reactions = () => {
@@ -48,7 +48,8 @@ const Reactions = () => {
           label: 'Yes',
           onClick: () => {
             delete_post(Post_URL, post.id)
-            navigate('/')
+            toast.success("Post Deleted successfully!");
+            navigate(`/r/${community_id}`)
           }
         },
         {
@@ -86,13 +87,9 @@ const Reactions = () => {
     <div className='col-10'>
       <div className="border-light" key={post.id}>
         <div className="d-flex gap-2">
-          <Link to='/r/1/p/1/edit' className='btn btn-light' ><FaEdit />  Edit</Link>
+          <Link to={`/r/${community_id}/p/${id}/edit`} className='btn btn-light' ><FaEdit />  Edit</Link>
           <Link to='' onClick={deletePostHandler} className='btn btn-light' ><FaTrash /> Destroy</Link>
-
-
           <Link to='#' onClick={closePostHandler} className='btn btn-light'><FaTimes /> Close</Link>
-
-
           <Link to='#' className='btn btn-light' ><FaComment /> Comments</Link>
           <Link to="#" className='btn btn-light' onClick={openModal}> <FaFlag /> Report</Link>
           <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">

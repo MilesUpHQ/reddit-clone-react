@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import moment from 'moment';
-
+import { Markup } from 'interweave';
 const Comments = () => {
   const [comments, setComments] = useState([]);
   const account = JSON.parse(localStorage.getItem('account'))
-
   useEffect(() => {
     axios.get('http://localhost:3000/api/v1/navbar_search')
       .then(response => {
@@ -30,7 +29,7 @@ const Comments = () => {
             </b>
             <b>
               <p className="m-0">Message: <a href={`/r/1/p/${comment.post_id}?highlight=${comment.message}`}>
-              {comment.message}</a></p>
+              <Markup content={comment.message}></Markup></a></p>
             </b>
             <p>
               <b>Commented:</b>{" "}
@@ -42,9 +41,7 @@ const Comments = () => {
       ) : (
         <h4 className="card-title">No Comments posted till now</h4>
       )}
-   
     </>
   )
 }
-
 export default Comments
