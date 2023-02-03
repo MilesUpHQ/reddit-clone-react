@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import moment from 'moment';
+import reddit_logo from '../../images/reddit-logo.png'
 import { Markup } from 'interweave';
+import '../../css/post.css'
+
+function truncateString(str, num) {
+  return str.length > num ? str.substring(0, num) + '...' : str;
+}
+
 const Comments = () => {
   const [comments, setComments] = useState([]);
   const account = JSON.parse(localStorage.getItem('account'))
@@ -16,27 +23,24 @@ const Comments = () => {
   }, []);
   return (
     <>
-       {comments.length  ? (
+      {comments.length ? (
         comments.map(comment => (
-          <div className="card post-card mb-3 shadow">
-          <div className="row m-0">
-            <b>
-            <p className="ml-3 text-muted">
-               <span className="text-primary"> <a href={`/profile`}> u/{comment.username} </a>
-                commented on  <a href={`/r/1/p/${comment.post_id}`}>
-                {comment.post_title} </a>{" "}</span>
-              </p>
-            </b>
-            <b>
-              <p className="m-0">Message: <a href={`/r/1/p/${comment.post_id}?highlight=${comment.message}`}>
-              <Markup content={comment.message}></Markup></a></p>
-            </b>
-            <p>
-              <b>Commented:</b>{" "}
-                {moment(comment.created_at).fromNow()}
-            </p>
+          <div style={{ height: '168px' }} className="card post-card mb-3 shadow">
+            <div className="row m-0">
+              <div className="ml-3 text-muted">
+                <img src={reddit_logo} alt="" className="post-list-profile-img" />
+                <div className="d-flex gap-1 post-list-head mt-2">
+                  <a href={`/profile`}><b> u/{comment.username}</b></a>
+                  commented on  <a href={`/r/1/p/${comment.post_id}`}>
+                    {comment.post_title} </a><b>{moment(comment.created_at).fromNow()}</b>
+                </div>
+              </div>
+              <b>
+                <p className="m-0">Comment : <a style={{ textDecoration: 'none' }} href={`/r/1/p/${comment.post_id}?highlight=${comment.message}`}>
+                  <Markup content={truncateString(comment.message, 50)}></Markup></a></p>
+              </b>
+            </div>
           </div>
-        </div>
         ))
       ) : (
         <h4 className="card-title">No Comments posted till now</h4>
