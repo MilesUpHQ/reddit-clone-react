@@ -3,9 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import PostApi from '../Home/PostApi';
-
 
 
 function Form({ parent, comment_id }) {

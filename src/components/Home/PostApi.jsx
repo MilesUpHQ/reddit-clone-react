@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const PostApi = () => {
@@ -15,6 +15,7 @@ const PostApi = () => {
   }
 
   const set_comments = async(currentText, parent) => {
+    
     await axios.post(Comments_URL, {
       comment: { message: currentText, parent_id: parent },
       account_id: JSON.parse(localStorage.getItem('account')).id
@@ -22,11 +23,6 @@ const PostApi = () => {
       headers: { 'Content-Type': 'application/json' }
     }).then((response) => {
       if (response.status === 201) {
-        const newComment = response.data;
-        setComments({
-          ...comments,
-          newComment
-        }); 
         setText('');
         toast.success("Comment Created successfully!");
       }
