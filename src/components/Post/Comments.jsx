@@ -56,6 +56,7 @@ const Comments = ({ highlight }) => {
     if (highlight && !comment.message.includes(highlight) && (!comment.parent_id || !comments.find(c => c.id === comment.parent_id && c.message.includes(highlight)))) {
       return null;
     }
+  
     return (
       <div ref={commentRef}>
         <div className="comment" key={comment.id}>
@@ -73,7 +74,7 @@ const Comments = ({ highlight }) => {
           <p className="text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
           <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>
           {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
-          {!comment.parent_id && <hr />}
+          <hr />
           <div className='sub-comment'>
             {comments
               .filter(sub_comment => sub_comment.parent_id === comment.id)
@@ -86,8 +87,13 @@ const Comments = ({ highlight }) => {
   
   return (
     <div>
-      {comments.map(comment => renderComment(comment, comments))}
+      {comments.map(comment => {
+        if (!comment.parent_id) {
+          return renderComment(comment, comments);
+        }
+      })}
     </div>
   );
-}  
+}
+
 export default Comments;
