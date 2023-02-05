@@ -20,6 +20,7 @@ const PostList = ({ account, posts, community }) => {
               <div className="col-1 m-0 vote-col text-center">
                 <div id="vote-actions-1" className="d-block vote" data-id="1">
                   <VotesHandler 
+                    post={post}
                     communityId={post.community_id}
                     postId={post.id}
                     voteCount={post.vote_count}
