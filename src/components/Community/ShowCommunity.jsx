@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
-import cover_image from '../../images/Cover-Image.jpg'
+import cover_image from '../../images/Cover-Image.jpg';
 import reddit_logo from '../../images/reddit-logo.png'
 import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
@@ -62,7 +62,7 @@ const ShowCommunity = () => {
           label: 'Yes',
           onClick: () => {
             delete_community(community.id)
-            toast.success("Community Deleted! 🥺");
+            toast.success("Community Deleted!");
             navigate('/')
           }
         },
@@ -129,11 +129,10 @@ const ShowCommunity = () => {
           <div className="col-sm-4">
             <div className="card p-2 bg-primary">
               <p className="h6 pt-2 text-light">About this community</p>
-
             </div>
             <div className="card p-3">
               <div className="row-5">
-                <Button className='col-2 m-2' onClick={""}>Mod Tools</Button>
+                <Link to={`/r/${id}/mod`} className='btn btn-primary col-2 m-2'>Mod Tools</Link>
                 <Button className='col-2 m-2' onClick={deleteCommunityHandler}>Delete</Button>
               </div>
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
@@ -141,8 +140,6 @@ const ShowCommunity = () => {
                 <p>
                   MEMBERS : {community.members} count
                 </p>
-                <Link to={`/r/${id}/edit`} className='btn btn-primary mr-2'>Edit</Link>
-
               </div>
             </div>
             <div className="card mt-3 p-2 bg-primary">

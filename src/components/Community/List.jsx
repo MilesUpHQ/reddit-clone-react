@@ -16,7 +16,7 @@ const List = ({ communities }) => {
             </div>
           </div> :
           communities.filter((community) => category === 'All' || community.category === category).map(community => (
-            <div className="card border-light" style={{ maxwidth: "57rem" }} key={community.id}>
+            <div className="card border-light mb-2" style={{ maxwidth: "57rem" }} key={community.id}>
               <div className="card-body">
                 <Link to={`/r/${community.id}`} className="nav-link" >
                   <h5 className="card-title text-primary">{community.name}</h5>
@@ -27,8 +27,8 @@ const List = ({ communities }) => {
           ))
         :
         communities.map(community => (
-          <div className="card border-light" style={{ maxwidth: "57rem" }} key={community.id}>
-            <div className="card-body">
+          <div className="card border-light mb-2" style={{ maxwidth: "57rem" }} key={community.id}>
+            <div className="card-body mb-2">
               <Link to={`/r/${community.id}`} className="nav-link" >
                 <h5 className="card-title text-primary">{community.name}</h5>
               </Link>
