@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import profile_image from '../../images/profile-img.jpeg'
 import axios from 'axios';
 import '../../css/post.css'
@@ -58,8 +58,14 @@ const Comments = ({ highlight }) => {
     }
   
     return (
-      <div ref={commentRef}>
+      
+      <div ref={commentRef}>    
         <div className="comment" key={comment.id}>
+          {highlight &&
+            <Link to={`/r/${community_id}/p/${comment.post_id}`}>View all comments</Link>
+          }
+        </div>    
+         <div className="comment" key={comment.id}>
           {account && account.profile_image && account.profile_image.url ? [
             <img src={`http://localhost:3000${account.profile_image.url}`} alt="" className="profile-img-navbar" />
           ] : [
