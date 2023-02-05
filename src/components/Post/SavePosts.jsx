@@ -7,7 +7,9 @@ import { toast } from 'react-toastify';
 
 
 function SavePosts({ post }) {
-    const [isSaved, setIsSaved] = useState('false');
+    const [isSaved, setIsSaved] = useState(
+        localStorage.getItem(`savedPost-${post.id}`) === 'true'
+    );
 
     const current_account = JSON.parse(localStorage.getItem('account'))
     const savedStyle = { color: 'blue' };
