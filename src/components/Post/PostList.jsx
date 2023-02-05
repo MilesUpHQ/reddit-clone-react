@@ -17,7 +17,7 @@ const current_account = JSON.parse(localStorage.getItem('account'))
 useEffect(() => {
   const fetchSavedPosts = async () => {
     // make an API call to fetch the saved posts
-    const response = await fetch(`http://localhost:3000/api/v1/accounts/${account_id}/saved_posts`);
+    const response = await fetch(`http://localhost:3000/api/v1/accounts/${current_account_id}/saved_posts`);
     const data = await response.json();
     setIsSaved(data);
   };
