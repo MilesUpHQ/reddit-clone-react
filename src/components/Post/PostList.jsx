@@ -1,4 +1,4 @@
-import React ,{useState, useEffect}from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
@@ -14,7 +14,7 @@ if (!Array.isArray(posts)) {
   }
   return (
     <div>
-        {posts && posts.map((post) => {
+      {posts && posts.map((post) => {
         return (
           <div key={post.id} className="card post-card mb-3 shadow">
             <div className="row m-0">
