@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
-
+import axios from 'axios'
 
 const VotesHandler = ({ communityId, postId, voteCount }) => {
     const account = JSON.parse(localStorage.getItem('account'))
