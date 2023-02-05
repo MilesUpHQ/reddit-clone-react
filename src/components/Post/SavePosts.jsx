@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaRegBookmark } from 'react-icons/fa'
+import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
 import axios from 'axios';
 import '../../css/post.css';
 import { toast } from 'react-toastify';
@@ -12,9 +12,6 @@ function SavePosts({ post }) {
     );
 
     const current_account = JSON.parse(localStorage.getItem('account'))
-    const savedStyle = { color: 'blue' };
-
-
     const handleSave = async (postId) => {
         try {
             if (isSaved) {
@@ -47,7 +44,9 @@ function SavePosts({ post }) {
         <div>
             <Link to='' className={`list-post-tab ${isSaved ? 'saved' : ''}`}
                 onClick={() => handleSave(post.id)}>
-                <FaRegBookmark style={isSaved ? savedStyle : {}} />
+                {isSaved ? 
+                  <FaBookmark /> : 
+                  <FaRegBookmark />}
                 Save
             </Link>
         </div>
