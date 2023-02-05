@@ -1,14 +1,13 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
 import { FaRegBookmark, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
-import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
-
 import '../../css/post.css'
+import VotesHandler from './VotesHandler';
 
 const PostList = ({ account, posts, community }) => {
-
+  
   if (!Array.isArray(posts)) {
     return null;
   }
@@ -20,13 +19,11 @@ const PostList = ({ account, posts, community }) => {
             <div className="row m-0">
               <div className="col-1 m-0 vote-col text-center">
                 <div id="vote-actions-1" className="d-block vote" data-id="1">
-                  <div className="upvote">
-                    <TbArrowBigTop />
-                  </div>
-                  <span className="font-weight-bold score">2</span>
-                  <div className="downvote">
-                    <TbArrowBigDown />
-                  </div>
+                  <VotesHandler 
+                    communityId={post.community_id}
+                    postId={post.id}
+                    voteCount={post.vote_count}
+                  />
                 </div>
               </div>
               <div className="col-11">
