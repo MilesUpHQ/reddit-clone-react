@@ -14,12 +14,10 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
         await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
         .then(response => {
             let vote = response.data.find(vote => vote.post_id === postId && vote.account_id === account.id)
-            console.log(vote)
             if (vote) {
                 axios
                     .delete(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes/${vote.id}`)
                     .then((response) => {
-                        console.log(voteCount);
                         setCount(voteCount--);
                         setupvoteClass("")
                         setdownvoteClass("")
@@ -33,8 +31,6 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
                         },
                     })
                     .then((response) => {
-                        console.log(response);
-                        console.log(voteCount);
                         setCount(response.data);
                         setupvoteClass("voted")
                         setdownvoteClass("")
@@ -47,12 +43,10 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
         await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
         .then(response => {
             let vote = response.data.find(vote => vote.post_id === postId && vote.account_id === account.id)
-            console.log(vote)
             if (vote) {
                 axios
                     .delete(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes/${vote.id}`)
                     .then((response) => {
-                        console.log(voteCount);
                         setCount(voteCount--);
                         setupvoteClass("")
                         setdownvoteClass("")
@@ -66,7 +60,6 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
                         },
                     })
                     .then((response) => {
-                        console.log(voteCount);
                         setCount(response.data);
                         setdownvoteClass("voted")
                         setupvoteClass("")
@@ -74,7 +67,6 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
             }
         });
     };
-    console.log(upvoteClass)
     return (
         <div>
             <div className={`upvote ${upvoteClass}`}>
