@@ -1,10 +1,15 @@
-import { React, useState } from 'react'
+import {React, useState } from 'react'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 import axios from 'axios'
 
-const VotesHandler = ({ communityId, postId, voteCount }) => {
+
+const VotesHandler = ({ post, communityId, postId, voteCount }) => {
     const account = JSON.parse(localStorage.getItem('account'))
+    let postvote = account ? post.votes.find(vote => vote.account_id === account.id) : "";
     const [count, setCount] = useState(voteCount);
+    const [upvoteClass, setupvoteClass] = useState(postvote && postvote.value === 1 ? "voted" : "");
+    const [downvoteClass, setdownvoteClass] = useState(postvote && postvote.value === -1 ? "voted" : "");
+
     const handleUpvote = async() => {
         await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
         .then(response => {
@@ -33,7 +38,7 @@ const VotesHandler = ({ communityId, postId, voteCount }) => {
             }
         });
     };
-
+    
     const handleDownvote = async() => {
         await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
         .then(response => {
@@ -61,14 +66,14 @@ const VotesHandler = ({ communityId, postId, voteCount }) => {
             }
         });
     };
-
+    console.log(upvoteClass)
     return (
         <div>
-            <div className={`upvote`}>
+            <div className={`upvote ${upvoteClass}`}>
                 <TbArrowBigTop onClick={handleUpvote} />
             </div>
             <span className="font-weight-bold score">{count}</span>
-            <div className={`downvote`}>
+            <div className={`downvote ${downvoteClass}`}>
                 <TbArrowBigDown onClick={handleDownvote} />
             </div>
         </div>
