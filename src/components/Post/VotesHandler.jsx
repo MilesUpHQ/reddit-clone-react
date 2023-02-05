@@ -2,7 +2,8 @@ import {React, useState } from 'react'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 
 
-const VotesHandler = ({ post, communityId, postId, voteCount }) => {
+const VotesHandler = ({ communityId, postId, voteCount }) => {
+    const [count, setCount] = useState(voteCount);
        return (
         <div>
             <div className={`upvote`}>
