@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import reddit_logo from '../../images/reddit-logo.png';
+import '../../css/post.css';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 const SubscriptionsList = ({ accountId }) => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -17,7 +20,11 @@ const SubscriptionsList = ({ accountId }) => {
     <div>
       <ul>
         {subscriptions.map((subscription) => (
-          <div key={subscription.id}>{subscription.community && subscription.community.name}</div>
+          <div key={subscription.id}>
+            <Dropdown.Item href={`http://localhost:3001/r/${subscription.community_id}`} className="text-dark">
+              r/{subscription.community && subscription.community.name}
+            </Dropdown.Item>
+          </div>
         ))}
       </ul>
     </div>
