@@ -7,10 +7,13 @@ const Nocommunity = () => {
             <div className="text-center">
                 <img src={`${no_community}`} height="100px" width="100px" alt="error" style={{ borderRadius: "50%" }} />
                 <p className="fs-3">
-                    <span className="text-danger">Sorry </span> There aren’t any communities on Reddit with that name.
+                    Sorry, There aren’t any communities on Reddit with that name.
                 </p>
                 <p className="lead">This community may have been banned or the community name is incorrect.</p>
-                <Link to="/" className="btn btn-primary">
+                <Link to="/r/new" className="join-btn">
+                   Create Community
+                </Link>
+                <Link to="/" className="join-btn">
                     Go Home
                 </Link>
                 <div style={{ fontSize: "12px", textAlign: "center", marginTop: "20px" }}>
