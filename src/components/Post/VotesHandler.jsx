@@ -18,7 +18,6 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
                 axios
                     .delete(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes/${vote.id}`)
                     .then((response) => {
-                        console.log(voteCount)
                         setCount(postvote ? --voteCount : voteCount--);
                         setupvoteClass("")
                         setdownvoteClass("")
