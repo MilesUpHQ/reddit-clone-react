@@ -4,17 +4,15 @@ import axios from 'axios'
 
 const VotesHandler = ({ post, communityId, postId, voteCount }) => {
     const account = JSON.parse(localStorage.getItem('account'))
-    const [count, setCount] = useState(voteCount);
-    const postvote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : "";
-    const [upvoteClass, setupvoteClass] = useState(postvote && postvote.value === 1 ? "voted" : "");
-    const [downvoteClass, setdownvoteClass] = useState(postvote && postvote.value === -1 ? "voted" : "");
+    const [count, setCount] = useState();
+    const [upvoteClass, setupvoteClass] = useState("");
+    const [downvoteClass, setdownvoteClass] = useState("");
+    const postvote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : null;
 
     useEffect(() => {
-        const account = JSON.parse(localStorage.getItem('account'));
-        const postVote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : null;
         setCount(voteCount);
-        setupvoteClass(postVote && postVote.value === 1 ? 'voted' : '');
-        setdownvoteClass(postVote && postVote.value === -1 ? 'voted' : '');
+        setupvoteClass(postvote && postvote.value === 1 ? 'voted' : '');
+        setdownvoteClass(postvote && postvote.value === -1 ? 'voted' : '');
     },[post]);
 
     const handleUpvote = async() => {
