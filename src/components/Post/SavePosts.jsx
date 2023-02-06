@@ -45,9 +45,8 @@ function SavePosts({ post, isSavedPosts }) {
             <Link to='' className={`list-post-tab ${isSaved ? 'saved' : ''}`}
                 onClick={() => handleSave(post.id)}>
                 {isSaved || isSavedPosts ? 
-                  <FaBookmark /> : 
-                  <FaRegBookmark />}
-                Save
+                <><FaBookmark /> Unsave</> : 
+                <><FaRegBookmark /> Save</>}
             </Link>
         </div>
     )
