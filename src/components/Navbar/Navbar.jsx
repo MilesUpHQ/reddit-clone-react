@@ -42,7 +42,7 @@ const navbar = () => {
               <Dropdown.Item href="/r/">Top Trending</Dropdown.Item>
               <div className="mt-2 ms-2 mb-2 text-muted"> My Communities</div>
               <Dropdown.Item href="/r/new">Create a Community</Dropdown.Item>
-              <SubscriptionsList accountId = {account.id} />
+              { account && <SubscriptionsList accountId = {account.id} />}
             </Dropdown.Menu>
           </Dropdown>
 
