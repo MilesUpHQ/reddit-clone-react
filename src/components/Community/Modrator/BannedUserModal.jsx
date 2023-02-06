@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import Select from 'react-select'
 import { toast } from 'react-toastify'
 import BannedUserApi from './BannedUserApi'
-import ModratorApi from './ModratorApi'
+import SelectUsers from './SelectUsers'
 
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
-  const { joinedAccounts, setJoinedAccounts, GetJoinedAccounts } = ModratorApi()
+  const { options, handleInputChange } = SelectUsers()
+  const [selectedUsername, setSelectedUsername] = useState(null)
   const current_account = JSON.parse(localStorage.getItem('account'))
 
-  useEffect(() => {
-    let mounted = true;
-    GetJoinedAccounts().then((items) => {
-      if (mounted) {
-        setJoinedAccounts(items)
-      }
-    });
-    return () => (mounted = false);
-  }, []);
+  const reasons = [
+    { value: 'Spam', label: 'Spam' },
+    { value: 'Personal Confidential Information', label: 'Personal Confidential Information' },
+    { value: 'Threatening Harassing or inciting violence', label: 'Threatening Harassing or inciting violence' },
+    { value: 'Others', label: 'Others' }
+  ]
 
   const onChange = (event) => {
     console.log(bannedUser)
@@ -27,9 +26,19 @@ const BannedUserModal = (props) => {
     });
   }
 
+  const onSelectChange = (event) => {
+    console.log(event.value)
+    setSelectedUsername(event)
+    setBannedUser({
+      ...bannedUser,
+      'account_id': event.value
+    });
+    console.log(bannedUser)
+  }
+
   const onSubmit = (event) => {
     event.preventDefault();
-    if(bannedUser.account_id == current_account.id) {
+    if (bannedUser.account_id == current_account.id) {
       toast.warning(`The user ${current_account.username} is Moderator`);
     }
     else {
@@ -54,20 +63,26 @@ const BannedUserModal = (props) => {
           <form onSubmit={onSubmit}>
             <div class="form-group">
               <label for="username">Enter User Name</label>
-              <Form.Select aria-label="username" className={bannedUserErrors && bannedUserErrors.account ? 'border-danger' : ''} name="account_id" onChange={onChange}>
-                <option key='blankChoice' hidden value>Select Username</option>
-                {joinedAccounts && joinedAccounts.map((account) => {
-                  return (
-                    <option value={account.account.id}>{account.account.username}</option>
-                  )
-                })}
-              </Form.Select>
-              { bannedUserErrors && bannedUserErrors.account ? <p className='text-danger'>Username {bannedUserErrors.account}</p> : <br /> }
+              <Select
+                options={options}
+                value={selectedUsername}
+                onInputChange={handleInputChange}
+                onChange={onSelectChange}
+                placeholder="Search Username"
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    borderColor: bannedUserErrors && bannedUserErrors.account ? "#dc3545" : "#ccc"
+                  })
+                }}
+              />
+              {bannedUserErrors && bannedUserErrors.account ? <p className='text-danger'>Username {bannedUserErrors.account}</p> : <br />}
             </div>
             <div class="form-group">
               <label for="reason">Reason For Ban</label>
             </div>
             <div>
+              {/* <Select options={reasons} name="reason" className={bannedUserErrors && bannedUserErrors.reason ? 'border-danger' : ''} /> */}
               <Form.Select aria-label="reason" name="reason" className={bannedUserErrors && bannedUserErrors.reason ? 'border-danger' : ''} onChange={onChange}>
                 <option key='blankChoice' hidden value>Select Reason</option>
                 <option value="Spam">Spam</option>
@@ -75,12 +90,12 @@ const BannedUserModal = (props) => {
                 <option value="Threatening Harassing or inciting violence">Threatening Harassing or inciting violence</option>
                 <option value="Others">Others</option>
               </Form.Select>
-              { bannedUserErrors && bannedUserErrors.reason ? <p className='text-danger'>Reason {bannedUserErrors.reason}</p> : <br /> }
+              {bannedUserErrors && bannedUserErrors.reason ? <p className='text-danger'>Reason {bannedUserErrors.reason}</p> : <br />}
             </div>
             <div class="form-group">
               <label for="explanation">Note to include in ban message</label>
-              <textarea name="explanation" placeholder="Reason they were Banned"  className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
-              { bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br/>}
+              <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
+              {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
             </div><br />
             <div class="form-group d-flex gap-3">
               <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
