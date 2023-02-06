@@ -27,7 +27,6 @@ const BannedUserList = () => {
           <Card.Subtitle className="mb-2 text-muted">Banned Usernames :</Card.Subtitle>
           <ListGroup variant="numbered">
             {bannedUsersList && bannedUsersList.map((bannedUser) => {
-              console.log(bannedUser)
               return(
                 <ListGroup.Item key={bannedUser.id}>{bannedUser.account.username}</ListGroup.Item>
               )
