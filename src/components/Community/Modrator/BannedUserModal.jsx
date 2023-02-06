@@ -9,6 +9,7 @@ const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { options, handleInputChange } = SelectUsers()
   const [selectedUsername, setSelectedUsername] = useState(null)
+  const [selectedReason, setSelectedReason] = useState(null)
   const current_account = JSON.parse(localStorage.getItem('account'))
 
   const reasons = [
@@ -26,7 +27,7 @@ const BannedUserModal = (props) => {
     });
   }
 
-  const onSelectChange = (event) => {
+  const onSelectUsername = (event) => {
     console.log(event.value)
     setSelectedUsername(event)
     setBannedUser({
@@ -34,6 +35,15 @@ const BannedUserModal = (props) => {
       'account_id': event.value
     });
     console.log(bannedUser)
+  }
+
+  const onSelectReason = (event) => {
+    console.log(event.value)
+    setSelectedReason(event)
+    setBannedUser({
+      ...bannedUser,
+      'reason': event.value
+    });
   }
 
   const onSubmit = (event) => {
@@ -67,7 +77,7 @@ const BannedUserModal = (props) => {
                 options={options}
                 value={selectedUsername}
                 onInputChange={handleInputChange}
-                onChange={onSelectChange}
+                onChange={onSelectUsername}
                 placeholder="Search Username"
                 styles={{
                   control: (base) => ({
@@ -80,16 +90,19 @@ const BannedUserModal = (props) => {
             </div>
             <div className="form-group">
               <label>Reason For Ban</label>
-            </div>
-            <div>
-              {/* <Select options={reasons} name="reason" className={bannedUserErrors && bannedUserErrors.reason ? 'border-danger' : ''} /> */}
-              <Form.Select aria-label="reason" name="reason" className={bannedUserErrors && bannedUserErrors.reason ? 'border-danger' : ''} onChange={onChange}>
-                <option key='blankChoice' hidden value>Select Reason</option>
-                <option value="Spam">Spam</option>
-                <option value="Personal Confidential Information">Personal Confidential Information</option>
-                <option value="Threatening Harassing or inciting violence">Threatening Harassing or inciting violence</option>
-                <option value="Others">Others</option>
-              </Form.Select>
+              <Select
+                options={reasons}
+                value={selectedReason}
+                isSearchable={false}
+                onChange={onSelectReason}
+                placeholder="Search Reason"
+                styles={{
+                  control: (base) => ({
+                    ...base,
+                    borderColor: bannedUserErrors && bannedUserErrors.reason ? "#dc3545" : "#ccc"
+                  })
+                }}
+              />
               {bannedUserErrors && bannedUserErrors.reason ? <p className='text-danger'>Reason {bannedUserErrors.reason}</p> : <br />}
             </div>
             <div className="form-group">
@@ -98,7 +111,7 @@ const BannedUserModal = (props) => {
               {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
             </div><br />
             <div className="form-group d-flex gap-3">
-              <button type="button" className="btn btn-primary" data-dismiss="modal">Cancel</button>
+              <button type="button" onClick={props.onHide} className="btn btn-transparent" data-dismiss="modal">Cancel</button>
               <input type="submit" value="Ban user" className="btn btn-primary" />
             </div>
           </form>
