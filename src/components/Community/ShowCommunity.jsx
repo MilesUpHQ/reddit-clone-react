@@ -48,10 +48,12 @@ const ShowCommunity = () => {
 
   const checkIsSubscribed = (subscriptions) => {
     setSubscribeId(subscriptions[0].id)
-    {subscriptions.map((sub) => (
-      sub.account_id == my_account.id && setIsSubscribed(true)
-    ))}
+    {
+      subscriptions.map((sub) => (
+        sub.account_id == my_account.id && setIsSubscribed(true)
+      ))
     }
+  }
 
   const deleteCommunityHandler = () => {
     confirmAlert({
@@ -83,11 +85,11 @@ const ShowCommunity = () => {
       ]}
       <div className="row gap-3">
         <div className="col-1">
-        {community.profile_image && community.profile_image.url ? [
-          <img src={`http://localhost:3000${community.profile_image.url}`} className='profile-pic' alt="" />
-        ] : [
-          <img src={reddit_logo} className='profile-pic' alt="" />
-        ]}
+          {community.profile_image && community.profile_image.url ? [
+            <img src={`http://localhost:3000${community.profile_image.url}`} className='profile-pic' alt="" />
+          ] : [
+            <img src={reddit_logo} className='profile-pic' alt="" />
+          ]}
         </div>
         <div className="col-10">
           <div className="d-flex">
@@ -95,7 +97,7 @@ const ShowCommunity = () => {
               <h3>/r/{community.name} : {community.category}</h3>
             </span>
             <div className="pl-2">
-              <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
+              <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed} />
             </div>
           </div>
         </div>
@@ -138,7 +140,7 @@ const ShowCommunity = () => {
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
               <div className="member">
                 <p>
-                  MEMBERS : {community.members} count
+                  MEMBERS : {community.total_members} 0 count
                 </p>
               </div>
             </div>
