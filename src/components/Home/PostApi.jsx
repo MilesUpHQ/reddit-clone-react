@@ -20,7 +20,7 @@ const PostApi = () => {
       return;
     }
     await axios.post(Comments_URL, {
-      comment: { message: currentText, parent_id: parent },
+      comment: { message: currentText.replace(/<[^>]+>/g, ''), parent_id: parent },
       account_id: JSON.parse(localStorage.getItem('account')).id
     }, {
       headers: { 'Content-Type': 'application/json' }
