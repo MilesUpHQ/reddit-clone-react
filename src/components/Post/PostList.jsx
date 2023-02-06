@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
-import { FaRegBookmark, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
+import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 import '../../css/post.css';
 import SavePosts from './SavePosts';
 
-const PostList = ({ account, posts, community }) => {
+const PostList = ({ account, posts, community, isSavedPosts }) => {
 
 if (!Array.isArray(posts)) {
     return null;
@@ -67,7 +67,7 @@ if (!Array.isArray(posts)) {
                     <Link to='' className="list-post-tab">
                       <FaShare /> Share
                     </Link>
-                    <SavePosts post={post}/>
+                    <SavePosts post={post} isSavedPosts={isSavedPosts} />
                     <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                       <FaRegFlag /> Report
                     </Link>

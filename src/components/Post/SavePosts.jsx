@@ -6,7 +6,7 @@ import '../../css/post.css';
 import { toast } from 'react-toastify';
 
 
-function SavePosts({ post }) {
+function SavePosts({ post, isSavedPosts }) {
     const [isSaved, setIsSaved] = useState(
         localStorage.getItem(`savedPost-${post.id}`) === 'true'
     );
@@ -44,7 +44,7 @@ function SavePosts({ post }) {
         <div>
             <Link to='' className={`list-post-tab ${isSaved ? 'saved' : ''}`}
                 onClick={() => handleSave(post.id)}>
-                {isSaved ? 
+                {isSaved || isSavedPosts ? 
                   <FaBookmark /> : 
                   <FaRegBookmark />}
                 Save
