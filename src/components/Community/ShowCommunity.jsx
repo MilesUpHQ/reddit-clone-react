@@ -149,7 +149,7 @@ const ShowCommunity = () => {
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
               <div className="member">
                 <p>
-                  MEMBERS : {community.members} count
+                  MEMBERS : {community.total_members} 0 count
                 </p>
               </div>
             </div>
