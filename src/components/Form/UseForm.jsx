@@ -4,9 +4,14 @@ import axios from 'axios';
 
 const Signup_Api_Url = "http://localhost:3000/api/v1/accounts/"
 const Signin_Api_Url = "http://localhost:3000/api/v1/accounts/sign_in/"
+const Edit_Api_Url = "http://localhost:3000/api/v1/accounts/edit/"
 
 function Signin_Api_data(account) {
   return axios.post(Signin_Api_Url, { account }).then((response) => response.data).catch((error) => console.log(error));
+}
+
+function Edit_Api_data(account) {
+  return axios.get(Edit_Api_Url, { account }).then((response) => response.data).catch((error) => console.log(error));
 }
 
 const UseForm = () => {
@@ -26,19 +31,19 @@ const UseForm = () => {
     email: '',
     password: ''
   });
- 
+
   const Signup_Api_data = async (account) => {
     let data = new FormData()
-    data.append('username',signupValues.username)
-    data.append('first_name',signupValues.first_name)
-    data.append('last_name',signupValues.last_name)
-    data.append('email',signupValues.email)
-    data.append('password',signupValues.password)
-    data.append('password_confirmation',signupValues.password_confirmation)
-    data.append('profile_image',signupValues.profile_image)
+    data.append('username', signupValues.username)
+    data.append('first_name', signupValues.first_name)
+    data.append('last_name', signupValues.last_name)
+    data.append('email', signupValues.email)
+    data.append('password', signupValues.password)
+    data.append('password_confirmation', signupValues.password_confirmation)
+    data.append('profile_image', signupValues.profile_image)
     console.log("data");
     console.log(data);
-    fetch(Signup_Api_Url,{
+    fetch(Signup_Api_Url, {
       method: 'POST',
       body: data,
     }).then((response) => {
@@ -49,6 +54,33 @@ const UseForm = () => {
       setError(error.response);
     });
   }
+
+  const Edit_Api_data = async (account) => {
+    let data = new FormData()
+    data.append('username', account.username)
+    data.append('first_name', account.first_name)
+    data.append('last_name', account.last_name)
+    data.append('email', account.email)
+    data.append('password', account.password)
+    data.append('password_confirmation', account.password_confirmation)
+    data.append('profile_image', account.profile_image)
+
+    await fetch(Edit_Api_Url, {
+      method: 'PATCH',
+      body: data,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
+      }
+    }).then((response) => {
+      if (response.ok) {
+        localStorage.setItem('account', JSON.stringify(response.data.account));
+        window.location.href = '/';
+      }
+    }).catch((error) => {
+      setError(error.response.data.error);
+    });
+  }
+
 
   const Signin_Api_data = async (account) => {
     await axios.post(Signin_Api_Url, { account }).then((response) => {
@@ -66,7 +98,7 @@ const UseForm = () => {
     const { name, value, files } = e.target;
     setLoginValues({
       ...loginValues,
-      [name]: files? files[0] : value 
+      [name]: files ? files[0] : value
     });
     console.log(loginValues)
   };
@@ -80,7 +112,7 @@ const UseForm = () => {
     const { name, value, files } = e.target;
     setSignupValues({
       ...signupValues,
-      [name] : files ? files[0] : value 
+      [name]: files ? files[0] : value
     });
     console.log(signupValues)
   };

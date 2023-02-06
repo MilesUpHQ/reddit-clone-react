@@ -62,7 +62,7 @@ const ShowCommunity = () => {
           label: 'Yes',
           onClick: () => {
             delete_community(community.id)
-            toast.success("Community Deleted! 🥺");
+            toast.success("Community Deleted!");
             navigate('/')
           }
         },
@@ -129,7 +129,6 @@ const ShowCommunity = () => {
           <div className="col-sm-4">
             <div className="card p-2 bg-primary">
               <p className="h6 pt-2 text-light">About this community</p>
-
             </div>
             <div className="card p-3">
               <div className="row-5">
