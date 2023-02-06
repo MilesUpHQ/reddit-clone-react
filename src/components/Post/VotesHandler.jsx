@@ -1,14 +1,21 @@
-import {React, useState } from 'react'
+import {React, useState, useEffect } from 'react'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 import axios from 'axios'
 
-
 const VotesHandler = ({ post, communityId, postId, voteCount }) => {
     const account = JSON.parse(localStorage.getItem('account'))
-    const postvote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : "";
     const [count, setCount] = useState(voteCount);
+    const postvote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : "";
     const [upvoteClass, setupvoteClass] = useState(postvote && postvote.value === 1 ? "voted" : "");
     const [downvoteClass, setdownvoteClass] = useState(postvote && postvote.value === -1 ? "voted" : "");
+
+    useEffect(() => {
+        const account = JSON.parse(localStorage.getItem('account'));
+        const postVote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : null;
+        setCount(voteCount);
+        setupvoteClass(postVote && postVote.value === 1 ? 'voted' : '');
+        setdownvoteClass(postVote && postVote.value === -1 ? 'voted' : '');
+    },[post]);
 
     const handleUpvote = async() => {
         await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)

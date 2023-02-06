@@ -4,7 +4,6 @@ import { useParams, Link, useLocation } from 'react-router-dom';
 import Reactions from './Reactions';
 import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import reddit_logo from '../../images/reddit-logo.png'
 import { Markup } from 'interweave';
 import '../../css/post.css'
