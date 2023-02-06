@@ -11,6 +11,7 @@ import '../../css/post.css'
 import Comments from './Comments';
 import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
+import VotesHandler from './VotesHandler';
 
 const PostShow = () => {
   const [post, setPost] = useState([]);
@@ -43,8 +44,12 @@ const PostShow = () => {
               <div className="card mb-3 ">
                 <div className="show-content mt-1">
                   <div className="col-0 ms-3 mt-2" >
-                    <div><FaArrowUp /></div>
-                    <div><FaArrowDown /></div>
+                  <VotesHandler 
+                    post={post}
+                    communityId={post.community_id}
+                    postId={post.id}
+                    voteCount={post.vote_count}
+                  />
                   </div>
                   <div className="post-head ms-3">
                     <div className="row">
