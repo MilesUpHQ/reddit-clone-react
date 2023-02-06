@@ -15,7 +15,7 @@ const Comments = () => {
   useEffect(() => {
     axios.get('http://localhost:3000/api/v1/navbar_search')
       .then(response => {
-        setComments(response.data.comments.options.filter(comment => comment.account_id === account.id));
+        setComments(response.data.comments.options.filter(comment => comment.account_id === account.id && comment.parent_id === null));
       })
       .catch(error => {
         console.error(error);
