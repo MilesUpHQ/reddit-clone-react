@@ -62,7 +62,7 @@ const ShowCommunity = () => {
           label: 'Yes',
           onClick: () => {
             delete_community(community.id)
-            toast.success("Community Deleted! 🥺");
+            toast.success("Community Deleted!");
             navigate('/')
           }
         },
@@ -92,7 +92,7 @@ const ShowCommunity = () => {
         <div className="col-10">
           <div className="d-flex">
             <span className="ml-4">
-              <h3>/r/{community.name} : Sports</h3>
+              <h3>/r/{community.name} : {community.category}</h3>
             </span>
             <div className="pl-2">
               <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed}/>
@@ -129,7 +129,6 @@ const ShowCommunity = () => {
           <div className="col-sm-4">
             <div className="card p-2 bg-primary">
               <p className="h6 pt-2 text-light">About this community</p>
-
             </div>
             <div className="card p-3">
               <div className="row-5">

@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
-import { FaRegBookmark, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
-import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
-
+import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import '../../css/post.css'
+import VotesHandler from './VotesHandler';
+import SavePosts from './SavePosts';
 
-const PostList = ({ account, posts, community }) => {
+const PostList = ({ account, posts, community, isSavedPosts }) => {
 
-  if (!Array.isArray(posts)) {
+if (!Array.isArray(posts)) {
     return null;
   }
   return (
@@ -20,13 +20,12 @@ const PostList = ({ account, posts, community }) => {
             <div className="row m-0">
               <div className="col-1 m-0 vote-col text-center">
                 <div id="vote-actions-1" className="d-block vote" data-id="1">
-                  <div className="upvote">
-                    <TbArrowBigTop />
-                  </div>
-                  <span className="font-weight-bold score">2</span>
-                  <div className="downvote">
-                    <TbArrowBigDown />
-                  </div>
+                  <VotesHandler 
+                    post={post}
+                    communityId={post.community_id}
+                    postId={post.id}
+                    voteCount={post.vote_count}
+                  />
                 </div>
               </div>
               <div className="col-11">
@@ -47,7 +46,7 @@ const PostList = ({ account, posts, community }) => {
                 </div>
                 <div className="row">
                   <div className="col-12 d-flex post-title">
-                    <h5><Link to={`/r/${post.community_id}/p/${post.id}`} className="text-muted text-decoration-none">{post.title}</Link></h5>
+                    <h5><Link to={`/r/${post.post ? post.post.community_id : post.community_id}/p/${post.id}`} className="text-muted text-decoration-none">{post.post ? post.post.title : post.title}</Link></h5>
                     <p className="flair-badge">Flair</p>
                     <p className="flair-badge bg-success">OC</p>
                     <p className="flair-badge bg-warning">Spoiler</p>
@@ -56,7 +55,7 @@ const PostList = ({ account, posts, community }) => {
                 </div>
                 <div className="row">
                   <div className="list-post-img">
-                    <p className="col-12 "><div dangerouslySetInnerHTML={{ __html: post.body }} /></p>
+                    <p className="col-12 "><div dangerouslySetInnerHTML={{ __html: post.post ? post.post.body : post.body }} /></p>
                   </div>
                 </div>
                 <div className="row mt-1 mb-1">
@@ -67,9 +66,7 @@ const PostList = ({ account, posts, community }) => {
                     <Link to='' className="list-post-tab">
                       <FaShare /> Share
                     </Link>
-                    <Link to='' className="list-post-tab saved">
-                      <FaRegBookmark /> Save
-                    </Link>
+                    <SavePosts post={post} isSavedPosts={isSavedPosts} />
                     <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                       <FaRegFlag /> Report
                     </Link>

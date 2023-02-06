@@ -4,20 +4,19 @@ import { useParams, Link, useLocation } from 'react-router-dom';
 import Reactions from './Reactions';
 import CommunityDetails from './CommunityDetails';
 import Form from '../Comment/Form';
-import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import reddit_logo from '../../images/reddit-logo.png'
 import { Markup } from 'interweave';
 import '../../css/post.css'
 import Comments from './Comments';
 import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
+import VotesHandler from './VotesHandler';
 
 const PostShow = () => {
   const [post, setPost] = useState([]);
   const [highlight, setHighlight] = useState("");
   const location = useLocation();
   let { id, community_id } = useParams();
-  const account = JSON.parse(localStorage.getItem('account'))
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
@@ -44,8 +43,12 @@ const PostShow = () => {
               <div className="card mb-3 ">
                 <div className="show-content mt-1">
                   <div className="col-0 ms-3 mt-2" >
-                    <div><FaArrowUp /></div>
-                    <div><FaArrowDown /></div>
+                  <VotesHandler 
+                    post={post}
+                    communityId={post.community_id}
+                    postId={post.id}
+                    voteCount={post.vote_count}
+                  />
                   </div>
                   <div className="post-head ms-3">
                     <div className="row">
@@ -55,7 +58,7 @@ const PostShow = () => {
                         ] : [
                           <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
                         ]}
-                        <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
+                        <strong><Link to={`/r/${community_id}`} className="text-dark">r/{post.community && post.community.name}</Link></strong>
                         <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
                       </p>
                     </div>
