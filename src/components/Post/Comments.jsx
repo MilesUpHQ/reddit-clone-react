@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import profile_image from '../../images/profile-img.jpeg'
 import axios from 'axios';
 import '../../css/post.css'
@@ -16,9 +16,6 @@ const Comments = ({ highlight }) => {
   let { id, community_id } = useParams();
   const account = JSON.parse(localStorage.getItem('account'));
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
-
-  const highlight_style = { backgroundColor: "lightgrey" };
-
   const commentRef = useRef(null);
 
   function get_post_comments(post_id) {
@@ -34,41 +31,32 @@ const Comments = ({ highlight }) => {
     return () => (mounted = false);
   }, []);
 
-  useEffect(() => {
-    if (highlight) {
-      const firstMatchedComment = comments.find(comment => comment.message.includes(highlight))
-      if (firstMatchedComment) {
-        const highlighted_element = document.querySelector(`.comment span[style="background-color: lightgrey;"]`);
-        if (highlighted_element) {
-          highlighted_element.scrollIntoView({ behavior: 'smooth' });
-        }
-
-      }
-    }
-  }, [highlight, comments]);
-
   const handleClick = (event, commentId) => {
     event.preventDefault();
     setSelectedComment(commentId);
   }
 
   const renderComment = (comment, comments) => {
+    if (highlight && !comment.message.includes(highlight) && (!comment.parent_id || !comments.find(c => c.id === comment.parent_id && c.message.includes(highlight)))) {
+      return null;
+    }
+  
     return (
-      <div ref={commentRef}>
-        <div className="comment" key={comment.id}>
+      
+      <div ref={commentRef}>      
+         <div className="comment" key={comment.id}>
           {account && account.profile_image && account.profile_image.url ? [
             <img src={`http://localhost:3000${account.profile_image.url}`} alt="" className="profile-img-navbar" />
           ] : [
             <img src={profile_image} alt="" className="profile-img-navbar" />
           ]}
-          <strong>{comment.account.first_name}</strong>
-          <div className='ms-4'>
+          <strong>{comment.account.first_name} <span className="text-muted ms-2">{moment(comment.created_at).fromNow()}</span></strong>
+
+          <div className='ms-4 ml-4'>
             <Markup content={comment.message} />
-            
           </div>
         </div>
         <div class="fl">
-          <p className="text-muted m-l-30">{moment(comment.created_at).fromNow()}</p>
           <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>
           {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
           <hr />
@@ -81,11 +69,21 @@ const Comments = ({ highlight }) => {
       </div>
     );
   };
-
+  
   return (
     <div>
-      {comments.filter(parent_comment => !parent_comment.parent_id).map(comment => renderComment(comment, comments))}
+      <div className="mb-4" key={highlight.id}>
+        {highlight &&
+          <Link to={`/r/${community_id}/p/${highlight.post_id}`}>View all comments</Link>
+        }
+      </div>  
+      {comments.map(comment => {
+        if (!comment.parent_id) {
+          return renderComment(comment, comments);
+        }
+      })}
     </div>
-  )
+  );
 }
+
 export default Comments;

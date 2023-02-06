@@ -16,10 +16,6 @@ import Create_Post from '../Home/Create_Post';
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
 
-function get_community_data(community_id) {
-  return axios.get(Community_URL + community_id).then((response) => response.data)
-}
-
 function delete_community(community_id) {
   return axios.delete(Community_URL + community_id).then((response) => response.data)
 }
@@ -32,6 +28,19 @@ const ShowCommunity = () => {
   const [isSubribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate()
   let { id } = useParams();
+
+  function get_community_data(community_id) {
+    return axios.get(Community_URL + community_id, {
+      params: {
+        account_id: my_account.id
+      }
+    }).then((response) => {
+      return response.data
+    }).catch((error) => {
+      console.log(error)
+      navigate('/')
+    })
+  }
 
   useEffect(() => {
     let mounted = true;

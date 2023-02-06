@@ -8,6 +8,7 @@ import SelectUsers from './SelectUsers'
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { options, handleInputChange } = SelectUsers()
+
   const [selectedUsername, setSelectedUsername] = useState(null)
   const [selectedReason, setSelectedReason] = useState(null)
   const current_account = JSON.parse(localStorage.getItem('account'))
@@ -20,7 +21,6 @@ const BannedUserModal = (props) => {
   ]
 
   const onChange = (event) => {
-    console.log(bannedUser)
     setBannedUser({
       ...bannedUser,
       [event.target.name]: event.target.value
@@ -28,17 +28,14 @@ const BannedUserModal = (props) => {
   }
 
   const onSelectUsername = (event) => {
-    console.log(event.value)
     setSelectedUsername(event)
     setBannedUser({
       ...bannedUser,
       'account_id': event.value
     });
-    console.log(bannedUser)
   }
 
   const onSelectReason = (event) => {
-    console.log(event.value)
     setSelectedReason(event)
     setBannedUser({
       ...bannedUser,
