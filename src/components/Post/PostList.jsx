@@ -2,55 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
-import { FaRegBookmark, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
-import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
-import axios from 'axios';
-import '../../css/post.css';
-import { toast } from 'react-toastify';
+import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
+import '../../css/post.css'
+import VotesHandler from './VotesHandler';
+import SavePosts from './SavePosts';
 
-const PostList = ({ account, posts, community }) => {
+const PostList = ({ account, posts, community, isSavedPosts }) => {
 
-  const [isSaved, setIsSaved] = useState(false);
-  const current_account = JSON.parse(localStorage.getItem('account'))
-
-
-  useEffect(() => {
-    const fetchSavedPosts = async () => {
-      // make an API call to fetch the saved posts
-      const response = await fetch(`http://localhost:3000/api/v1/accounts/${current_account.id}/saved_posts`);
-      const data = await response.json();
-      setIsSaved(data);
-    };
-
-    fetchSavedPosts();
-  }, []);
-
-  const handleSave = async (postId) => {
-    try {
-      if (isSaved) {
-        await axios.delete(`http://localhost:3000/api/v1/accounts/${current_account.id}/save_posts/${postId}`);
-        console.log("Delete");
-      } else {
-        const response = await fetch(`http://localhost:3000/api/v1/accounts/${current_account.id}/save_posts/`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-
-          body: JSON.stringify({ post_id: postId, account_id: current_account.id })
-        });
-        const data = await response.json();
-        if (response.status === 201) {
-          toast.success("Post Saved successfully!");
-        }
-      }
-      setIsSaved(!isSaved);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  if (!Array.isArray(posts)) {
+if (!Array.isArray(posts)) {
     return null;
   }
   return (
@@ -61,13 +20,12 @@ const PostList = ({ account, posts, community }) => {
             <div className="row m-0">
               <div className="col-1 m-0 vote-col text-center">
                 <div id="vote-actions-1" className="d-block vote" data-id="1">
-                  <div className="upvote">
-                    <TbArrowBigTop />
-                  </div>
-                  <span className="font-weight-bold score">2</span>
-                  <div className="downvote">
-                    <TbArrowBigDown />
-                  </div>
+                  <VotesHandler 
+                    post={post}
+                    communityId={post.community_id}
+                    postId={post.id}
+                    voteCount={post.vote_count}
+                  />
                 </div>
               </div>
               <div className="col-11">
@@ -108,15 +66,7 @@ const PostList = ({ account, posts, community }) => {
                     <Link to='' className="list-post-tab">
                       <FaShare /> Share
                     </Link>
-                    <Link to='' className={`list-post-tab ${isSaved ? 'saved' : ''}`}
-                      onClick={() => handleSave(post.id)}>
-                      {isSaved ? (
-                        <FaRegBookmark style={{ fill: 'grey' }} />
-                      ) : (
-                        <FaRegBookmark />
-                      )}
-                      Save
-                    </Link>
+                    <SavePosts post={post} isSavedPosts={isSavedPosts} />
                     <Link to={`/r/${post.community_id}/p/${post.id}`} className="list-post-tab">
                       <FaRegFlag /> Report
                     </Link>
