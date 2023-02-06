@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import profile_image from '../../images/profile-img.jpeg'
 import axios from 'axios';
 import '../../css/post.css'
