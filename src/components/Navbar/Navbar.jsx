@@ -39,7 +39,14 @@ const navbar = () => {
             <Dropdown.Menu>
               <Dropdown.Item href="/r">All Communities</Dropdown.Item>
               <Dropdown.Item href="/r/">Top Trending</Dropdown.Item>
-              <Dropdown.Item href="#/action-3"><img src={profile_image} alt="" className="profile-img" /> My Communities</Dropdown.Item>
+              <Dropdown.Item href="#/action-3"> 
+                {account && account.profile_image && account.profile_image.url ? [
+                  <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
+                  ] : [
+                    <img src={profile_image} alt="" className="profile-img-navbar" />
+                  ]} 
+                My Communities
+              </Dropdown.Item>
               <Dropdown.Item href="/r/new">Create a Community</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
@@ -69,6 +76,7 @@ const navbar = () => {
                   ] : [
                     <img src={profile_image} alt="" className="profile-img-navbar" />
                   ]}
+                  {account.username}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>
