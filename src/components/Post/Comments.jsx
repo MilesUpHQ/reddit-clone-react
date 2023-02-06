@@ -16,9 +16,6 @@ const Comments = ({ highlight }) => {
   let { id, community_id } = useParams();
   const account = JSON.parse(localStorage.getItem('account'));
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
-
-  const highlight_style = { backgroundColor: "lightgrey" };
-
   const commentRef = useRef(null);
 
   function get_post_comments(post_id) {
@@ -33,19 +30,6 @@ const Comments = ({ highlight }) => {
     });
     return () => (mounted = false);
   }, []);
-
-  useEffect(() => {
-    if (highlight) {
-      const firstMatchedComment = comments.find(comment => comment.message.includes(highlight))
-      if (firstMatchedComment) {
-        const highlighted_element = document.querySelector(`.comment span[style="background-color: lightgrey;"]`);
-        if (highlighted_element) {
-          highlighted_element.scrollIntoView({ behavior: 'smooth' });
-        }
-
-      }
-    }
-  }, [highlight, comments]);
 
   const handleClick = (event, commentId) => {
     event.preventDefault();
