@@ -62,7 +62,7 @@ const BannedUserModal = (props) => {
         <Modal.Body>
           <form onSubmit={onSubmit}>
             <div className="form-group">
-              <label for="username">Enter User Name</label>
+              <label>Enter User Name</label>
               <Select
                 options={options}
                 value={selectedUsername}
@@ -79,7 +79,7 @@ const BannedUserModal = (props) => {
               {bannedUserErrors && bannedUserErrors.account ? <p className='text-danger'>Username {bannedUserErrors.account}</p> : <br />}
             </div>
             <div className="form-group">
-              <label for="reason">Reason For Ban</label>
+              <label>Reason For Ban</label>
             </div>
             <div>
               {/* <Select options={reasons} name="reason" className={bannedUserErrors && bannedUserErrors.reason ? 'border-danger' : ''} /> */}
@@ -93,7 +93,7 @@ const BannedUserModal = (props) => {
               {bannedUserErrors && bannedUserErrors.reason ? <p className='text-danger'>Reason {bannedUserErrors.reason}</p> : <br />}
             </div>
             <div className="form-group">
-              <label for="explanation">Note to include in ban message</label>
+              <label>Note to include in ban message</label>
               <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
               {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
             </div><br />
