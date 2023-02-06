@@ -34,8 +34,8 @@ const Comments = () => {
                     {comment.post_title+ " "} </a><b>{moment(comment.created_at).fromNow()}</b>
               </div>
               <b>
-                <p className="m-1">Comment : <a style={{ textDecoration: 'none' }} href={`/r/1/p/${comment.post_id}?highlight=${comment.message}`}>
-                  <Markup content={truncateString(comment.message, 50)}></Markup></a></p>
+                <p className="m-1">Comment : <a style={{ textDecoration: 'none' }} href={`/r/1/p/${comment.post_id}?highlight=${comment.message.replace(/<[^>]+>/g, '')}`}>
+                  <Markup content={truncateString(comment.message.replace(/<[^>]+>/g, ''), 50)}></Markup></a></p>
               </b>
             </div>
           </div>
