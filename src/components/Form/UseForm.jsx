@@ -1,18 +1,15 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const Signup_Api_Url = "http://localhost:3000/api/v1/accounts/"
 const Signin_Api_Url = "http://localhost:3000/api/v1/accounts/sign_in/"
-const Edit_Api_Url = "http://localhost:3000/api/v1/accounts/edit/"
+
 
 function Signin_Api_data(account) {
   return axios.post(Signin_Api_Url, { account }).then((response) => response.data).catch((error) => console.log(error));
 }
 
-function Edit_Api_data(account) {
-  return axios.get(Edit_Api_Url, { account }).then((response) => response.data).catch((error) => console.log(error));
-}
 
 const UseForm = () => {
   const navigate = useNavigate();
@@ -53,36 +50,7 @@ const UseForm = () => {
     }).catch((error) => {
       setError(error.response);
     });
-  }
 
-  const Edit_Api_data = async (account) => {
-    let data = new FormData()
-    data.append('username', account.username)
-    data.append('first_name', account.first_name)
-    data.append('last_name', account.last_name)
-    data.append('email', account.email)
-    data.append('password', account.password)
-    data.append('password_confirmation', account.password_confirmation)
-    data.append('profile_image', account.profile_image)
-
-    await fetch(Edit_Api_Url, {
-      method: 'PATCH',
-      body: data,
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('jwt')}`
-      }
-    }).then((response) => {
-      if (response.ok) {
-        localStorage.setItem('account', JSON.stringify(response.data.account));
-        window.location.href = '/';
-      }
-    }).catch((error) => {
-      setError(error.response.data.error);
-    });
-  }
-
-
-  const Signin_Api_data = async (account) => {
     await axios.post(Signin_Api_Url, { account }).then((response) => {
       if (response.status == 201) {
         localStorage.setItem('jwt', response.data.jwt);
@@ -93,6 +61,8 @@ const UseForm = () => {
       setError(error.response.data.error);
     });
   }
+
+  
 
   const handleLoginChange = (e) => {
     const { name, value, files } = e.target;
