@@ -43,12 +43,7 @@ const Comments = ({ highlight }) => {
   
     return (
       
-      <div ref={commentRef}>    
-        <div className="comment" key={comment.id}>
-          {highlight &&
-            <Link to={`/r/${community_id}/p/${comment.post_id}`}>View all comments</Link>
-          }
-        </div>    
+      <div ref={commentRef}>      
          <div className="comment" key={comment.id}>
           {account && account.profile_image && account.profile_image.url ? [
             <img src={`http://localhost:3000${account.profile_image.url}`} alt="" className="profile-img-navbar" />
@@ -77,6 +72,11 @@ const Comments = ({ highlight }) => {
   
   return (
     <div>
+      <div className="mb-4" key={highlight.id}>
+        {highlight &&
+          <Link to={`/r/${community_id}/p/${highlight.post_id}`}>View all comments</Link>
+        }
+      </div>  
       {comments.map(comment => {
         if (!comment.parent_id) {
           return renderComment(comment, comments);
