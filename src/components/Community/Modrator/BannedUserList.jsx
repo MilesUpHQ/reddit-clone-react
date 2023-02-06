@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, ListGroup } from 'react-bootstrap'
 import BannedUserApi from './BannedUserApi'
-import ModratorApi from './ModratorApi'
 
 const BannedUserList = () => {
   const [bannedUsersList, setBannedUsersList] = useState('')
@@ -27,7 +26,7 @@ const BannedUserList = () => {
           <Card.Subtitle className="mb-2 text-muted">Banned Usernames :</Card.Subtitle>
           <ListGroup variant="numbered">
             {bannedUsersList && bannedUsersList.map((bannedUser) => {
-              return(
+              return (
                 <ListGroup.Item key={bannedUser.id}>{bannedUser.account.username}</ListGroup.Item>
               )
             })}
