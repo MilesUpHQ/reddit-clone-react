@@ -5,8 +5,7 @@ import reddit_logo from '../../images/reddit-logo.png'
 import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import '../../css/post.css'
 import VotesHandler from './VotesHandler';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import SavePosts from './SavePosts';
 
 const PostList = ({ account, posts, community, isSavedPosts }) => {
 
