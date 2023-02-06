@@ -61,7 +61,7 @@ const BannedUserModal = (props) => {
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={onSubmit}>
-            <div class="form-group">
+            <div className="form-group">
               <label for="username">Enter User Name</label>
               <Select
                 options={options}
@@ -78,7 +78,7 @@ const BannedUserModal = (props) => {
               />
               {bannedUserErrors && bannedUserErrors.account ? <p className='text-danger'>Username {bannedUserErrors.account}</p> : <br />}
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="reason">Reason For Ban</label>
             </div>
             <div>
@@ -92,14 +92,14 @@ const BannedUserModal = (props) => {
               </Form.Select>
               {bannedUserErrors && bannedUserErrors.reason ? <p className='text-danger'>Reason {bannedUserErrors.reason}</p> : <br />}
             </div>
-            <div class="form-group">
+            <div className="form-group">
               <label for="explanation">Note to include in ban message</label>
               <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
               {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
             </div><br />
-            <div class="form-group d-flex gap-3">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-              <input type="submit" value="Ban user" class="btn btn-primary" />
+            <div className="form-group d-flex gap-3">
+              <button type="button" className="btn btn-primary" data-dismiss="modal">Cancel</button>
+              <input type="submit" value="Ban user" className="btn btn-primary" />
             </div>
           </form>
         </Modal.Body>
