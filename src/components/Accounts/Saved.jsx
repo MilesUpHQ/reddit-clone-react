@@ -17,7 +17,7 @@ const Saved = () => {
   return (
     <div>
       {posts.length  ? (
-        <PostList posts={posts} />
+        <PostList posts={posts} isSavedPosts={true}/>
       ) : (
         <h4  className="card-title">No posts saved</h4>
       )}

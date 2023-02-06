@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const VotesHandler = ({ post, communityId, postId, voteCount }) => {
     const account = JSON.parse(localStorage.getItem('account'))
-    const postvote = account ? post.votes.find(vote => vote.account_id === account.id) : "";
+    const postvote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : "";
     const [count, setCount] = useState(voteCount);
     const [upvoteClass, setupvoteClass] = useState(postvote && postvote.value === 1 ? "voted" : "");
     const [downvoteClass, setdownvoteClass] = useState(postvote && postvote.value === -1 ? "voted" : "");
@@ -18,7 +18,6 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
                 axios
                     .delete(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes/${vote.id}`)
                     .then((response) => {
-                        console.log(voteCount)
                         setCount(postvote ? --voteCount : voteCount--);
                         setupvoteClass("")
                         setdownvoteClass("")
