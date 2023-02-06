@@ -108,17 +108,15 @@ const Reactions = () => {
 
   const ReportHandler = () => {
     const reportDetails = {
-      report_category_id: selectedCategoryId,
-      report_reason_id: selectedReasonId,
       report_reason_name: selectedReasonName,
       report_categories_name: selectedCategoryName,
       account_id: account.id,
       post_id: id
     };
     axios.post(Post_URL + 'reports', { report: reportDetails }).then((response) => {
-      if (response.status === 201) {
-        toast.success("Report submitted successfully!");
+      if (response.ok) {
         navigate(`/r/${community_id}/p` + id)
+        toast.success("Report submitted successfully!");
       }
     })
       .catch(error => {

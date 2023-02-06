@@ -10,7 +10,7 @@ const Modrator = () => {
   const { id } = useParams();
 
   return (
-    <div class='community_post'>
+    <div className='community_post'>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
           <Col sm={3}>
