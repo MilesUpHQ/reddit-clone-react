@@ -17,7 +17,6 @@ const PostShow = () => {
   const [highlight, setHighlight] = useState("");
   const location = useLocation();
   let { id, community_id } = useParams();
-  const account = JSON.parse(localStorage.getItem('account'))
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
@@ -55,7 +54,7 @@ const PostShow = () => {
                         ] : [
                           <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
                         ]}
-                        <strong><Link to={`/r/`} className="text-dark">r/</Link></strong>
+                        <strong><Link to={`/r/${community_id}`} className="text-dark">r/{post.community && post.community.name}</Link></strong>
                         <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
                       </p>
                     </div>
