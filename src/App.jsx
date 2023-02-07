@@ -1,4 +1,6 @@
 import './App.css';
+
+import AdminIndex from './components/Admin/AdminIndex'
 import Home from './components/Home/Home';
 import Form from './components/Form/Form';
 import Navbar from './components/Navbar/Navbar';
@@ -19,6 +21,7 @@ import EditPost from './components/Post/Form/EditPost';
 import Modrator from './components/Community/Modrator/Modrator';
 
 import NavbarSearch from './components/Post/NavbarSearch'
+import PostList from './components/Post/PostList';
 
 
 function App() {
@@ -45,6 +48,8 @@ function App() {
           <Route path="/settings" element={<Setting />} />
 
           <Route path="/navsearch" element={<NavbarSearch />} />
+          <Route path="/admin/*"  element={<AdminIndex />}   />
+         
         </Routes>
       </Router>
     </div>
