@@ -20,11 +20,13 @@ const BannedUserModal = (props) => {
     { value: 'Others', label: 'Others' }
   ]
 
-  const onChange = (event) => {
+  const onExplain = (event) => {
+    setexplanation(event.target.value)
     setBannedUser({
       ...bannedUser,
-      [event.target.name]: event.target.value
+      'explanation': event.target.value
     });
+    console.log(bannedUser.duration)
   }
 
   const onSelectUsername = (event) => {
@@ -104,7 +106,7 @@ const BannedUserModal = (props) => {
             </div>
             <div className="form-group">
               <label>Note to include in ban message</label>
-              <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
+              <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onExplain}></textarea>
               {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
             </div><br />
             <div className="form-group">
