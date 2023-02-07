@@ -191,13 +191,18 @@ const ShowCommunity = () => {
                     </div>
                     <div className=""></div>
                   </div>
+                { !isBanned ? ( 
+                 <> 
                   <hr className='mt-1 me-3 ms-3' />
-                  <Link to='/r/new' disabled = {isBanned} className='me-3 ms-3 join-btn create-post-btn text-white' style={{ pointerEvents: isBanned ? 'none' : 'auto' }}>Create Post</Link>
+                  <Link to='/r/new' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
                   <hr className='mt-3 me-3 ms-3' />
                   <div className="p-3">
                     <div className="row-5">
                     </div>
                   </div>
+                 </> 
+                ): null
+                } 
                 </div>
                 <div className="card mt-3">
                   <div className="rounded-top p-2 ps-3 bg-primary">
