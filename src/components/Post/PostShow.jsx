@@ -70,13 +70,12 @@ const PostShow = () => {
                             <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
                           </p>
                         </div>
-                        <strong><h2 className="ms-2">{post.title}</h2> </strong>
+                        <strong><h2>{post.title}</h2> </strong>
                       </div>
                     </div>
                     <div className="" key={post.id}>
-                      <div className='mt-4 ms-5'>
-                        {console.log(post.account_id)}
-                        <Markup content={post.body}></Markup>
+                      <div className='ms-5'>
+                        <div className='mb-3'><Markup content={post.body}></Markup></div>
                         {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                       </div>
                       {post.isClosed ? (
