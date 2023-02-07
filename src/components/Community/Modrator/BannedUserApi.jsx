@@ -14,7 +14,9 @@ const BannedUserApi = () => {
     subscription_id: '',
     username: '',
     reason: '',
-    explanation: ''
+    explanation: '',
+    duration: '',
+    permanent: ''
   });
 
   const get_banned_users_list_data = () => {
