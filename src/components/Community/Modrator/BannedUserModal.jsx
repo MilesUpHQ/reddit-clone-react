@@ -4,16 +4,18 @@ import Select from 'react-select'
 import { toast } from 'react-toastify'
 import BannedUserApi from './BannedUserApi'
 import SelectUsers from './SelectUsers'
+import '../../../css/Checkbox.css'
 
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { options, handleInputChange } = SelectUsers()
-  const [permanent, setpermanent] = useState(true)
-  const [duration, setduration] = useState(null)
-  const [explanation, setexplanation] = useState("")
-  const [durationError, setDurationError] = useState('');
+
   const [selectedUsername, setSelectedUsername] = useState(null)
   const [selectedReason, setSelectedReason] = useState(null)
+  const [permanent, setpermanent] = useState(true)
+  const [duration, setduration] = useState(null)
+  const [durationError, setDurationError] = useState('');
+  const [explanation, setexplanation] = useState("")
   const current_account = JSON.parse(localStorage.getItem('account'))
 
   const reasons = [
@@ -25,7 +27,7 @@ const BannedUserModal = (props) => {
 
   const onChange = (event) => {
     const value = parseInt(event.target.value, 10);
-    console.log(value)
+
     if (value <= 0) {
       setDurationError('Duration must be a positive number');
     } else {
@@ -34,10 +36,8 @@ const BannedUserModal = (props) => {
         ...bannedUser,
         'duration': event.target.value
       });
-      console.log(bannedUser.duration)
     }
   }
-
 
   const onExplain = (event) => {
     setexplanation(event.target.value)
@@ -45,9 +45,17 @@ const BannedUserModal = (props) => {
       ...bannedUser,
       'explanation': event.target.value
     });
-    console.log(bannedUser.duration)
   }
 
+  const permanentcheck = (event) => {
+    setpermanent(event.target.checked)
+    setBannedUser({
+      ...bannedUser,
+      'permanent': event.target.checked,
+      'duration': null
+    });
+    setduration(null)
+  }
   const onSelectUsername = (event) => {
     setSelectedUsername(event)
     setBannedUser({
@@ -72,16 +80,6 @@ const BannedUserModal = (props) => {
     else {
       setNewBannedUser(bannedUser)
     }
-  }
-
-  const permanentcheck = (event) => {
-    setpermanent(event.target.checked)
-    setBannedUser({
-      ...bannedUser,
-      'permanent': event.target.checked,
-      'duration': null
-    });
-    setduration(null)
   }
 
   return (
@@ -140,9 +138,9 @@ const BannedUserModal = (props) => {
             </div><br />
             <div className="form-group">
               <label>Ban Duration (in days)</label>
-              <input type="number" name="duration" placeholder="Ban Duration" disabled={permanent} className='form-control' onChange={onChange} />
+              <input type="number" name="duration" placeholder="Ban Duration" disabled={permanent} className={durationError ? 'form-control border-danger' : 'form-control'} onChange={onChange} />
               {bannedUserErrors && bannedUserErrors.duration ? <p className='text-danger'>Ban Duration {bannedUserErrors.duration}</p> : <br />}
-              {durationError && <p className="text-danger">{durationError}</p>}<br/>
+              {durationError && <p className="text-danger">{durationError}</p>}<br />
             </div>
             <div className="form-check">
               <label>Permanent Ban</label>
