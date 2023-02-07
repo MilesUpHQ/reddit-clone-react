@@ -43,7 +43,7 @@ function JoinButton({ subscribeId, setSubscribeId, isSubribed ,setIsSubscribed})
   }
 
   return (
-    <button className="create-post join-btn"
+    <button className="join-btn"
       onMouseEnter={() => setIsClicked(false)}
       onMouseLeave={() => setIsClicked(false)}
       onClick={ToggleSubscribe}
