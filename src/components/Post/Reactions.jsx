@@ -130,7 +130,7 @@ const Reactions = () => {
     <div className='col-10'>
       <div className="border-light" key={post.id}>
         <div className="d-flex gap-2">
-          {post.account_id === account.id && (
+          {account && post.account_id === account.id && (
             <>
               <Link to={`/r/${community_id}/p/${id}/edit`} className="btn btn-light"><FaEdit /> Edit</Link>
               <Link to="" onClick={deletePostHandler} className="btn btn-light"><FaTrash /> Destroy</Link>
