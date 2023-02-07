@@ -50,13 +50,13 @@ const Comments = ({ highlight }) => {
           ] : [
             <img src={profile_image} alt="" className="profile-img-navbar" />
           ]}
-          <strong>{comment.account.first_name} <span className="text-muted ms-2">{moment(comment.created_at).fromNow()}</span></strong>
-
+          <strong>{comment.account.first_name} <span className="text-muted ms-2">{moment(comment.created_at).fromNow()} </span></strong>
+          {comment.account_id === comment.post.account_id && <a className="text-primary">OC</a>}
           <div className='ms-4 ml-4'>
             <Markup content={comment.message} />
           </div>
         </div>
-        <div class="fl">
+        <div className="fl">
           <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>
           {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
           <hr />
