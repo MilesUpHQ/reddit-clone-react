@@ -8,7 +8,7 @@ import SelectUsers from './SelectUsers'
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { options, handleInputChange } = SelectUsers()
-
+  const [explanation, setexplanation] = useState("")
   const [selectedUsername, setSelectedUsername] = useState(null)
   const [selectedReason, setSelectedReason] = useState(null)
   const current_account = JSON.parse(localStorage.getItem('account'))
