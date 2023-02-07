@@ -70,7 +70,9 @@ const BannedUserModal = (props) => {
     setBannedUser({
       ...bannedUser,
       'permanent': event.target.checked,
+      'duration': null
     });
+    setduration(null)
   }
 
   return (
