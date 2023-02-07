@@ -30,9 +30,9 @@ const List = ({ communities }) => {
           <div className="card border-light mb-2" style={{ maxwidth: "57rem" }} key={community.id}>
             <div className="card-body mb-2">
               <Link to={`/r/${community.id}`} className="nav-link" >
-                <h5 className="card-title text-primary">{community.name}</h5>
+                <h5 className="card-title text-primary">Name : {community.name}</h5>
               </Link>
-              <p className="card-text">{community.rules}</p>
+              <p className="card-text">About Page : {community.summary}</p>
             </div>
           </div>
         ))

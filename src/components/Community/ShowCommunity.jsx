@@ -12,6 +12,7 @@ import moment from 'moment/moment';
 import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
+import Nocommunity from './Nocommunity';
 
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
@@ -38,7 +39,6 @@ const ShowCommunity = () => {
       return response.data
     }).catch((error) => {
       console.log(error)
-      navigate('/')
     })
   }
 
@@ -86,6 +86,8 @@ const ShowCommunity = () => {
   }
 
   return (
+  <>  
+   {community ? ( 
     <div>
       {community.cover_image && community.cover_image.url ? [
         <img src={`http://localhost:3000${community.cover_image.url}`} className="cover-image"></img>
@@ -149,7 +151,7 @@ const ShowCommunity = () => {
               <p className="text-muted"><i className='mr-2 '><FaBirthdayCake /></i> Created {moment(community.created_at).fromNow()}</p>
               <div className="member">
                 <p>
-                  MEMBERS : {community.members} count
+                  MEMBERS : {community.total_members} 0 count
                 </p>
               </div>
             </div>
@@ -163,8 +165,10 @@ const ShowCommunity = () => {
         </div>
       </div>
     </div>
-
-
+   ):(
+     <Nocommunity />
+   )}  
+  </> 
   )
 }
 export default ShowCommunity
