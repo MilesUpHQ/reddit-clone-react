@@ -107,6 +107,15 @@ const BannedUserModal = (props) => {
               <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
               {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
             </div><br />
+            <div className="form-group">
+              <label>Ban Duration (in days)</label>
+              <input type="number" name="duration" placeholder="Ban Duration" disabled={permanent} className='form-control' onChange={onChange} />
+              {bannedUserErrors && bannedUserErrors.duration ? <p className='text-danger'>Ban Duration {bannedUserErrors.duration}</p> : <br />}
+            </div>
+            <div className="form-check">
+              <label>Permanent Ban</label>
+              <input type="checkbox" name="permanent_ban" className="form-check-input" onChange={permanentcheck} checked={permanent} />
+            </div><br />
             <div className="form-group d-flex gap-3">
               <button type="button" onClick={props.onHide} className="btn btn-transparent" data-dismiss="modal">Cancel</button>
               <input type="submit" value="Ban user" className="btn btn-primary" />
