@@ -4,12 +4,15 @@ import axios from 'axios';
 const Signup_Api_Url = "http://localhost:3000/api/v1/accounts/"
 const Signin_Api_Url = "http://localhost:3000/api/v1/accounts/sign_in/"
 const Edit_Api_Url = "http://localhost:3000/api/v1/accounts/edit/"
+
 function Signin_Api_data(account) {
   return axios.post(Signin_Api_Url, { account }).then((response) => response.data).catch((error) => console.log(error));
 }
+
 function Edit_Api_data(account) {
   return axios.get(Edit_Api_Url, { account }).then((response) => response.data).catch((error) => console.log(error));
 }
+
 const UseForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -48,6 +51,7 @@ const UseForm = () => {
       setError(error.response);
     });
   }
+
   const Signin_Api_data = async (account) => {
     await axios.post(Signin_Api_Url, { account }).then((response) => {
       if (response.status == 201) {

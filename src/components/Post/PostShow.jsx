@@ -11,6 +11,7 @@ import Comments from './Comments';
 import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
 import VotesHandler from './VotesHandler';
+import Nopost from './Nopost';
 
 const PostShow = () => {
   const [post, setPost] = useState([]);
@@ -34,7 +35,9 @@ const PostShow = () => {
     });
     return () => (mounted = false);
   }, []);
-  return (
+  return ( 
+    <>
+    { post.title ? (
     <div>
       <div className="show_post">
         <div className="container mt-5">
@@ -86,7 +89,11 @@ const PostShow = () => {
         </div>
       </div>
     </div>
-
+    ):(
+      <Nopost />
+    )
+  }
+  </>
   )
 }
 export default PostShow
