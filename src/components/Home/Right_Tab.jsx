@@ -41,7 +41,7 @@ const Right_Tab = () => {
           <p className="front">Your personal Reddit frontpage. Come here to check in with your favorite communities.</p>
         </div>
         <Link to="/new" className="join-btn create-post-btn text-white">Create post</Link>
-        <Link to="r/new/" className="join-btn text-center mb-3">Create Community</Link>
+        <Link to={account ? "/r/new/" : "/signin"} className="join-btn text-center mb-3">Create Community</Link>
       </div>
     </div>
   )

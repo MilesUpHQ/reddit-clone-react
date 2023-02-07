@@ -7,7 +7,7 @@ const Posts = () => {
   useEffect(() => {
     axios.get('http://localhost:3000/api/v1/communities/1/posts')
       .then(response => {
-        setPosts(response.data.filter(post => post.account_id === account.id));
+        setPosts(response.data.posts.filter(post => post.account_id === account.id));
       })
       .catch(error => {
         console.error(error);
