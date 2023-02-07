@@ -11,6 +11,10 @@ const BannedUserModal = (props) => {
 
   const [selectedUsername, setSelectedUsername] = useState(null)
   const [selectedReason, setSelectedReason] = useState(null)
+  const [permanent, setpermanent] = useState(true)
+  const [duration, setduration] = useState(null)
+  const [durationError, setDurationError] = useState('');
+  const [explanation, setexplanation] = useState("")
   const current_account = JSON.parse(localStorage.getItem('account'))
 
   const reasons = [
@@ -19,14 +23,45 @@ const BannedUserModal = (props) => {
     { value: 'Threatening Harassing or inciting violence', label: 'Threatening Harassing or inciting violence' },
     { value: 'Others', label: 'Others' }
   ]
-
-  const onChange = (event) => {
+  useState(() => {
+    setpermanent(true)
     setBannedUser({
       ...bannedUser,
-      [event.target.name]: event.target.value
+      'permanent': true,
+      'duration': null
+    });
+  })
+  const onChange = (event) => {
+    const value = parseInt(event.target.value, 10);
+
+    if (value <= 0) {
+      setDurationError('Duration must be a positive number');
+    } else {
+      setduration(event.target.value)
+      setBannedUser({
+        ...bannedUser,
+        'duration': event.target.value
+      });
+    }
+  }
+
+  const onExplain = (event) => {
+    setexplanation(event.target.value)
+    setBannedUser({
+      ...bannedUser,
+      'explanation': event.target.value
     });
   }
 
+  const permanentcheck = (event) => {
+    setpermanent(event.target.checked)
+    setBannedUser({
+      ...bannedUser,
+      'permanent': event.target.checked,
+      'duration': null
+    });
+    setduration(null)
+  }
   const onSelectUsername = (event) => {
     setSelectedUsername(event)
     setBannedUser({
@@ -104,8 +139,18 @@ const BannedUserModal = (props) => {
             </div>
             <div className="form-group">
               <label>Note to include in ban message</label>
-              <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onChange}></textarea>
+              <textarea name="explanation" placeholder="Reason they were Banned" className={bannedUserErrors && bannedUserErrors.explanation ? 'form-control border-danger' : 'form-control'} onChange={onExplain}></textarea>
               {bannedUserErrors && bannedUserErrors.explanation ? <p className='text-danger'>Explanation {bannedUserErrors.explanation}</p> : <br />}
+            </div><br />
+            <div className="form-group">
+              <label>Ban Duration (in days)</label>
+              <input type="number" name="duration" placeholder="Ban Duration" disabled={permanent} className={durationError ? 'form-control border-danger' : 'form-control'} onChange={onChange} />
+              {bannedUserErrors && bannedUserErrors.duration ? <p className='text-danger'>Ban Duration {bannedUserErrors.duration}</p> : <br />}
+              {durationError && <p className="text-danger">{durationError}</p>}<br />
+            </div>
+            <div className="form-check">
+              <label>Permanent Ban</label>
+              <input type="checkbox" name="permanent_ban" className="form-check-input" onChange={permanentcheck} checked={permanent} />
             </div><br />
             <div className="form-group d-flex gap-3">
               <button type="button" onClick={props.onHide} className="btn btn-transparent" data-dismiss="modal">Cancel</button>
