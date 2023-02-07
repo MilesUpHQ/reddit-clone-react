@@ -29,6 +29,7 @@ const ShowCommunity = () => {
   const [account, setAccount] = useState([]);
   const [subscribeId, setSubscribeId] = useState(0);
   const [isSubribed, setIsSubscribed] = useState(false);
+  const [isBanned, setIsBanned] = useState(false);
   const navigate = useNavigate()
   let { id } = useParams();
 
@@ -48,6 +49,8 @@ const ShowCommunity = () => {
         setPosts(items.posts);
         setAccount(items.account);
         checkIsSubscribed(items.subscriptions);
+        console.log(items.banned_users);
+        checkIsBanned(items.banned_users);
       }
     });
     return () => (mounted = false);
@@ -60,6 +63,12 @@ const ShowCommunity = () => {
         sub.account_id == my_account.id && setIsSubscribed(true)
       ))
     }
+  }
+
+  const checkIsBanned = (banned_users) => {
+    banned_users.map((ban) => (
+      ban.account_id == my_account.id && setIsBanned(true) 
+    ))
   }
 
   const deleteCommunityHandler = () => {
@@ -87,6 +96,7 @@ const ShowCommunity = () => {
     <>
       {community ? (
         <div>
+          <div>{console.log(isBanned)}</div>
           <div className="cover-image">
             {community.cover_image && community.cover_image.url ? [
               <img src={`http://localhost:3000${community.cover_image.url}`}></img>
