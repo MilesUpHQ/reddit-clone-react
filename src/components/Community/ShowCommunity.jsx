@@ -16,7 +16,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 import Nocommunity from './Nocommunity';
-
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
 
@@ -34,11 +33,7 @@ const ShowCommunity = () => {
   let { id } = useParams();
 
   function get_community_data(community_id) {
-    return axios.get(Community_URL + community_id, {
-      params: {
-        account_id: my_account.id
-      }
-    }).then((response) => {
+    return axios.get(Community_URL + community_id).then((response) => {
       return response.data
     }).catch((error) => {
       console.log(error)
@@ -52,7 +47,7 @@ const ShowCommunity = () => {
         setCommunity(items);
         setPosts(items.posts);
         setAccount(items.account);
-        checkIsSubscribed(items.subscriptions)
+        checkIsSubscribed(items.subscriptions);
       }
     });
     return () => (mounted = false);
@@ -77,7 +72,7 @@ const ShowCommunity = () => {
           onClick: () => {
             delete_community(community.id)
             toast.success("Community Deleted!");
-            navigate('/')
+           navigate('/')
           }
         },
         {
@@ -130,7 +125,7 @@ const ShowCommunity = () => {
           <div className="community_post">
             <div className="row">
               <div className="col-sm-8">
-                <Create_Post />
+                { !isBanned? [ <Create_Post/> ]: [] }
                 <div className="tab-content">
                   <div id="post" className="tab-pane fade-in active">
                     <div>
