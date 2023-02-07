@@ -1,5 +1,6 @@
 import {React, useState, useEffect } from 'react'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
+import { GoArrowUp, GoArrowDown } from 'react-icons/go'
 import axios from 'axios'
 
 const VotesHandler = ({ post, communityId, postId, voteCount }) => {
@@ -43,7 +44,7 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
             }
         });
     };
-    
+
     const handleDownvote = async() => {
         await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
         .then(response => {
@@ -73,13 +74,21 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
         });
     };
     return (
-        <div>
-            <div className={`upvote ${upvoteClass}`}>
-                <TbArrowBigTop onClick={handleUpvote} />
+        <div className=''>
+            <div className={`vote-icon upvote ${upvoteClass}`}>
+            {upvoteClass ?
+              <GoArrowUp onClick={handleUpvote} />
+            :
+              <TbArrowBigTop onClick={handleUpvote} />
+            }
             </div>
-            <span className="font-weight-bold score">{count}</span>
-            <div className={`downvote ${downvoteClass}`}>
-                <TbArrowBigDown onClick={handleDownvote} />
+            <span className={`vote-score upvote_${upvoteClass} downvote_${downvoteClass}`}>{count}</span>
+            <div className={`vote-icon downvote ${downvoteClass}`}>
+						{downvoteClass ?
+              <GoArrowDown onClick={handleDownvote} />
+						:
+              <TbArrowBigDown onClick={handleDownvote} />
+						}
             </div>
         </div>
     )
