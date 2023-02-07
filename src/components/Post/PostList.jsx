@@ -6,10 +6,15 @@ import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import '../../css/post.css'
 import VotesHandler from './VotesHandler';
 import SavePosts from './SavePosts';
+import { Markup } from 'interweave';
 
 const PostList = ({ account, posts, community, isSavedPosts }) => {
 
   const { id } = useParams()
+
+  function truncateString(str, num) {
+    return str.length > num ? str.substring(0, num) + '...' : str;
+  }
 
   if (!Array.isArray(posts)) {
     return null;
@@ -41,8 +46,8 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                           </div>
                         ] : [
                           <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
-                        ]]
-                        [<strong><Link to={`/r/${post.community_id}`} className='text-decoration-none text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>]
+                        ],
+                        <strong><Link to={`/r/${post.community_id}`} className='text-decoration-none text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>]
                         }
                       <p className="ml-3 text-muted">Posted by
                         <Link to='/' className="text-decoration-none text-muted"> u/{account ? [account.username] : [post.account && post.account.username]} </Link>
@@ -62,7 +67,9 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                 <div className="row">
                   <div className="list-post-img">
                     {console.log(post.body)}
-                    <p className="col-12 "><div dangerouslySetInnerHTML={{ __html: post.post ? post.post.body : post.body }} /></p>
+                    <p className="col-12 ">
+                      <Markup content={truncateString(post.post ? post.post.body : post.body, 300)}></Markup>
+                    </p>
                   </div>
                 </div>
                 <div className="row mt-1 mb-1">
