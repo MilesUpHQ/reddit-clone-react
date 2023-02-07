@@ -38,7 +38,7 @@ const Reactions = () => {
   const [selectedReasonName, setSelectedReasonName] = useState(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  
   let { community_id, id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/`;
 
@@ -52,6 +52,7 @@ const Reactions = () => {
     await axios.patch(Post_URL, { post }).then((response) => {
       if (response.status === 201) {
         toast.success("Post Closed successfully!");
+        navigate(`/r/${community_id}/p` + id)
       }
     }).catch((error) => {
       console.log(error.response.data);
@@ -130,14 +131,9 @@ const Reactions = () => {
     <div className='col-10'>
       <div className="border-light" key={post.id}>
         <div className="d-flex gap-2">
-          {post.account_id === account.id && (
-            <>
-              <Link to={`/r/${community_id}/p/${id}/edit`} className="btn btn-light"><FaEdit /> Edit</Link>
-              <Link to="" onClick={deletePostHandler} className="btn btn-light"><FaTrash /> Destroy</Link>
-              <Link to="#" onClick={closePostHandler} className="btn btn-light"><FaTimes /> Close</Link>
-            </>
-          )
-          }
+          <Link to={`/r/${community_id}/p/${id}/edit`} className='btn btn-light' ><FaEdit />  Edit</Link>
+          <Link to='' onClick={deletePostHandler} className='btn btn-light' ><FaTrash /> Destroy</Link>
+          <Link to='#' onClick={closePostHandler} className='btn btn-light'><FaTimes /> Close</Link>
           <Link to='#' className='btn btn-light' ><FaComment /> Comments</Link>
           <Link to="#" className='btn btn-light' onClick={openModal}> <FaFlag /> Report</Link>
           <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
