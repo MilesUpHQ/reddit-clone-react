@@ -11,10 +11,11 @@ const BannedUserApi = () => {
   const [bannedUserErrors, setBannedUserErrors] = useState();
   const [bannedUser, setBannedUser] = useState({
     account_id: '',
-    subscription_id: '',
     username: '',
     reason: '',
-    explanation: ''
+    explanation: '',
+    duration: null,
+    permanent: '',
   });
 
   const get_banned_users_list_data = () => {

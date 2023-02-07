@@ -9,7 +9,7 @@ function DraftList() {
   useEffect(() => {
     axios.get('http://localhost:3000/api/v1/communities/1/posts/')
       .then(response => {
-        const draftedPosts = response.data.filter(post => post.is_drafted === true);
+        const draftedPosts = response.data.posts.filter(post => post.is_drafted === true);
         setDrafts(draftedPosts);
       })
       .catch(error => {
