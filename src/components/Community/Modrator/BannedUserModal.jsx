@@ -8,6 +8,7 @@ import SelectUsers from './SelectUsers'
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { options, handleInputChange } = SelectUsers()
+  const [duration, setduration] = useState(null)
   const [explanation, setexplanation] = useState("")
   const [selectedUsername, setSelectedUsername] = useState(null)
   const [selectedReason, setSelectedReason] = useState(null)
@@ -19,6 +20,14 @@ const BannedUserModal = (props) => {
     { value: 'Threatening Harassing or inciting violence', label: 'Threatening Harassing or inciting violence' },
     { value: 'Others', label: 'Others' }
   ]
+
+  const onChange = (event) => {
+    setduration(event.target.value)
+    setBannedUser({
+      ...bannedUser,
+      'duration': event.target.value
+    });
+  }
 
   const onExplain = (event) => {
     setexplanation(event.target.value)
