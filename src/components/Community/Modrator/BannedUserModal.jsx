@@ -11,6 +11,7 @@ const BannedUserModal = (props) => {
   const [permanent, setpermanent] = useState(true)
   const [duration, setduration] = useState(null)
   const [explanation, setexplanation] = useState("")
+  const [durationError, setDurationError] = useState('');
   const [selectedUsername, setSelectedUsername] = useState(null)
   const [selectedReason, setSelectedReason] = useState(null)
   const current_account = JSON.parse(localStorage.getItem('account'))
@@ -23,12 +24,20 @@ const BannedUserModal = (props) => {
   ]
 
   const onChange = (event) => {
-    setduration(event.target.value)
-    setBannedUser({
-      ...bannedUser,
-      'duration': event.target.value
-    });
+    const value = parseInt(event.target.value, 10);
+    console.log(value)
+    if (value <= 0) {
+      setDurationError('Duration must be a positive number');
+    } else {
+      setduration(event.target.value)
+      setBannedUser({
+        ...bannedUser,
+        'duration': event.target.value
+      });
+      console.log(bannedUser.duration)
+    }
   }
+
 
   const onExplain = (event) => {
     setexplanation(event.target.value)
@@ -133,6 +142,7 @@ const BannedUserModal = (props) => {
               <label>Ban Duration (in days)</label>
               <input type="number" name="duration" placeholder="Ban Duration" disabled={permanent} className='form-control' onChange={onChange} />
               {bannedUserErrors && bannedUserErrors.duration ? <p className='text-danger'>Ban Duration {bannedUserErrors.duration}</p> : <br />}
+              {durationError && <p className="text-danger">{durationError}</p>}<br/>
             </div>
             <div className="form-check">
               <label>Permanent Ban</label>
