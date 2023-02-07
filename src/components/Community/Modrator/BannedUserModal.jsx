@@ -4,7 +4,6 @@ import Select from 'react-select'
 import { toast } from 'react-toastify'
 import BannedUserApi from './BannedUserApi'
 import SelectUsers from './SelectUsers'
-import '../../../css/Checkbox.css'
 
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
