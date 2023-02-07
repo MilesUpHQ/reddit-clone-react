@@ -20,10 +20,14 @@ const Tab_List = ({ posts }) => {
               className="card d-flex flex-row mb-3"
               justify
             >
-              <Tab eventKey="best" title={<span>{<FaRocket />} Best</span>} tabClassName="post-tab-nav-link"> <Best posts={posts} /> </Tab>
-              <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="post-tab-nav-link"> <Hot posts={posts} /> </Tab>
-              <Tab eventKey="new" title={<span>{<FaTag />} New</span>} tabClassName="post-tab-nav-link"> <New posts={posts} /></Tab>
-              <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="post-tab-nav-link"> <Top posts={posts} /> </Tab>
+              {/*JUST DESC ORDER */}
+              {posts && posts.posts && <Tab eventKey="best" title={<span>{<FaRocket />} Best</span>} tabClassName="post-tab-nav-link"> <Best posts={posts.posts} /> </Tab>}
+               {/* ACCORDING TO UPVOTES  */}
+              {posts && posts.hot_posts && <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="post-tab-nav-link"> <Hot posts={posts.hot_posts} /> </Tab>}
+               {/* CREATION TIME  */}
+              {posts && posts.new_posts && <Tab eventKey="new" title={<span>{<FaTag />} New</span>} tabClassName="post-tab-nav-link"> <New posts={posts.new_posts} /></Tab>}
+              {/* VIEW COUNT */}
+              {posts && posts.top_posts && <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="post-tab-nav-link"> <Top posts={posts.top_posts} /> </Tab>}
             </Tabs>
           </div>
         </div>
