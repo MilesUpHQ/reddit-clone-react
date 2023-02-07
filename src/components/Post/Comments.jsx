@@ -58,7 +58,7 @@ const Comments = ({ highlight }) => {
           </div>
         </div>
         <div className="fl">
-          <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>
+        {comment.post.isclosed ? null : <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>}
           {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
           <hr />
           <div className='sub-comment'>
