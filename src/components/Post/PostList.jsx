@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import moment from 'moment';
 import reddit_logo from '../../images/reddit-logo.png'
 import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
@@ -9,7 +9,9 @@ import SavePosts from './SavePosts';
 
 const PostList = ({ account, posts, community, isSavedPosts }) => {
 
-if (!Array.isArray(posts)) {
+  const { id } = useParams()
+
+  if (!Array.isArray(posts)) {
     return null;
   }
   return (
@@ -20,7 +22,7 @@ if (!Array.isArray(posts)) {
             <div className="row m-0">
               <div className="col-1 m-0 vote-col text-center">
                 <div id="vote-actions-1" className="d-block vote" data-id="1">
-                  <VotesHandler 
+                  <VotesHandler
                     post={post}
                     communityId={post.community_id}
                     postId={post.id}
@@ -32,21 +34,25 @@ if (!Array.isArray(posts)) {
                 <div className="row bg-white">
                   <div className="col-10">
                     <div className="d-flex gap-1 post-list-head mt-2">
-                      {post.community && post.community.profile_image && post.community.profile_image.url ? [
-                        <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" className="post-list-profile-img mr-1" />
-                      ] : [
-                        <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
-                      ]}
-                      <strong><Link to={`/r/${post.community_id}`} className='text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>
+                      {post.community && post.community_id &&
+                        [post.community && post.community.profile_image && post.community.profile_image.url ? [
+                          <div className="post-list-profile-img">
+                            <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" />
+                          </div>
+                        ] : [
+                          <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
+                        ]]
+                        [<strong><Link to={`/r/${post.community_id}`} className='text-decoration-none text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>]
+                        }
                       <p className="ml-3 text-muted">Posted by
-                        <Link to='/' className="text-muted"> u/{account ? [account.username] : [post.account && post.account.username]} </Link>
+                        <Link to='/' className="text-decoration-none text-muted"> u/{account ? [account.username] : [post.account && post.account.username]} </Link>
                         {moment(post.created_at).fromNow()}</p>
                     </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-12 d-flex post-title">
-                    <h5><Link to={`/r/${post.post ? post.post.community_id : post.community_id}/p/${post.id}`} className="text-muted text-decoration-none">{post.post ? post.post.title : post.title}</Link></h5>
+                    <h5><Link to={`/r/${post.post ? post.post.community_id : post.community_id}/p/${post.id}`} className="text-dark text-decoration-none">{post.post ? post.post.title : post.title}</Link></h5>
                     <p className="flair-badge">Flair</p>
                     <p className="flair-badge bg-success">OC</p>
                     <p className="flair-badge bg-warning">Spoiler</p>
@@ -55,6 +61,7 @@ if (!Array.isArray(posts)) {
                 </div>
                 <div className="row">
                   <div className="list-post-img">
+                    {console.log(post.body)}
                     <p className="col-12 "><div dangerouslySetInnerHTML={{ __html: post.post ? post.post.body : post.body }} /></p>
                   </div>
                 </div>
