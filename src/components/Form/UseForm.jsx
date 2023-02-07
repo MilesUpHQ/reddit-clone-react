@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 const Signup_Api_Url = "http://localhost:3000/api/v1/accounts/"
 const Signin_Api_Url = "http://localhost:3000/api/v1/accounts/sign_in/"
 const Edit_Api_Url = "http://localhost:3000/api/v1/accounts/edit/"
@@ -26,12 +25,10 @@ const UseForm = () => {
     password_confirmation: '',
     profile_image: null
   });
-
   const [loginValues, setLoginValues] = useState({
     email: '',
     password: ''
   });
-
   const Signup_Api_data = async (account) => {
     let data = new FormData()
     data.append('username', signupValues.username)
@@ -66,7 +63,6 @@ const UseForm = () => {
       setError(error.response.data.error);
     });
   }
-
   const handleLoginChange = (e) => {
     const { name, value, files } = e.target;
     setLoginValues({
@@ -75,12 +71,10 @@ const UseForm = () => {
     });
     console.log(loginValues)
   };
-
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     Signin_Api_data(loginValues)
   }
-
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setSignupValues({
@@ -89,13 +83,10 @@ const UseForm = () => {
     });
     console.log(signupValues)
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     Signup_Api_data(signupValues);
   }
-
   return { error, handleChange, signupValues, handleSubmit, handleLoginChange, handleLoginSubmit, loginValues }
 }
-
 export default UseForm
