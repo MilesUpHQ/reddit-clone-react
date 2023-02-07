@@ -24,7 +24,14 @@ const BannedUserModal = (props) => {
     { value: 'Threatening Harassing or inciting violence', label: 'Threatening Harassing or inciting violence' },
     { value: 'Others', label: 'Others' }
   ]
-
+  useState(() => {
+    setpermanent(true)
+    setBannedUser({
+      ...bannedUser,
+      'permanent': true,
+      'duration': null
+    });
+  })
   const onChange = (event) => {
     const value = parseInt(event.target.value, 10);
 

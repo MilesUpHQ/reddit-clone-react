@@ -15,7 +15,7 @@ const BannedUserApi = () => {
     reason: '',
     explanation: '',
     duration: null,
-    permanent: false,
+    permanent: '',
   });
 
   const get_banned_users_list_data = () => {
