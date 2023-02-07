@@ -50,8 +50,9 @@ const Comments = ({ highlight }) => {
           ] : [
             <img src={profile_image} alt="" className="profile-img-navbar" />
           ]}
-          <strong>{comment.account.first_name} <span className="text-muted ms-2">{moment(comment.created_at).fromNow()} </span></strong>
-          {comment.account_id === comment.post.account_id && <b className="text-primary">OC</b>}
+          <strong>{comment.account.first_name}</strong>
+          {comment.account_id === comment.post.account_id && <b className="text-primary"> OC</b>}
+           <span className="text-muted ms-2">{moment(comment.created_at).fromNow()} </span>
           <div className='ms-4 ml-4'>
             <Markup content={comment.message} />
           </div>
