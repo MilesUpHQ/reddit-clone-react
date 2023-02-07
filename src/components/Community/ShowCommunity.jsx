@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -29,8 +30,8 @@ const ShowCommunity = () => {
   const [account, setAccount] = useState([]);
   const [subscribeId, setSubscribeId] = useState(0);
   const [isSubribed, setIsSubscribed] = useState(false);
-  const [isBanned, setIsBanned] = useState(false);
   const navigate = useNavigate()
+  const [isBanned, setIsBanned] = useState(false);
   let { id } = useParams();
 
   function get_community_data(community_id) {
@@ -49,8 +50,8 @@ const ShowCommunity = () => {
         setPosts(items.posts);
         setAccount(items.account);
         checkIsSubscribed(items.subscriptions);
-        console.log(items.banned_users);
-        checkIsBanned(items.banned_users);
+        console.log(items.banned_users)
+        checkIsBanned(items.banned_users)
       }
     });
     return () => (mounted = false);
