@@ -50,7 +50,6 @@ const ShowCommunity = () => {
         setPosts(items.posts);
         setAccount(items.account);
         checkIsSubscribed(items.subscriptions);
-        console.log(items.banned_users)
         checkIsBanned(items.banned_users)
       }
     });
@@ -68,7 +67,7 @@ const ShowCommunity = () => {
 
   const checkIsBanned = (banned_users) => {
     banned_users.map((ban) => (
-      ban.account_id == my_account.id && setIsBanned(true) 
+      ban.account_id == my_account.id && setIsBanned(true)
     ))
   }
 
@@ -82,7 +81,7 @@ const ShowCommunity = () => {
           onClick: () => {
             delete_community(community.id)
             toast.success("Community Deleted!");
-           navigate('/')
+            navigate('/')
           }
         },
         {
@@ -97,7 +96,6 @@ const ShowCommunity = () => {
     <>
       {community ? (
         <div>
-          <div>{console.log(isBanned)}</div>
           <div className="cover-image">
             {community.cover_image && community.cover_image.url ? [
               <img src={`http://localhost:3000${community.cover_image.url}`}></img>
@@ -136,7 +134,7 @@ const ShowCommunity = () => {
           <div className="community_post">
             <div className="row">
               <div className="col-sm-8">
-                { !isBanned? [ <Create_Post/> ]: [] }
+                {!isBanned ? [<Create_Post />] : []}
                 <div className="tab-content">
                   <div id="post" className="tab-pane fade-in active">
                     <div>
@@ -159,11 +157,11 @@ const ShowCommunity = () => {
                     <p className="about-community-title h6 pt-2 text-light d-flex">About Community
                       {community.account_id == my_account.id &&
                         <Link to={`/r/${id}/mod`} className='text-white text-decoration-none'>
-                      <div className="mod">
-                        <IoShieldOutline className='me-2' />
-                        Mod
-                      </div>
-                      </Link>
+                          <div className="mod">
+                            <IoShieldOutline className='me-2' />
+                            Mod
+                          </div>
+                        </Link>
                       }
                       <div className="about-community-dots me-2">
                         <BiDotsHorizontalRounded />
@@ -202,12 +200,12 @@ const ShowCommunity = () => {
                   </div>
                 </div>
                 <div className="card mt-3">
-                <div className="rounded-top p-2 ps-3 bg-primary">
-                  <p className="about-community-title h6 pt-2 text-light"> r/{community.name}'s Rules</p>
-                </div>
-                <div className=" p-3">
-                  <p className="card-text">1. {community.rules}</p>
-                </div>
+                  <div className="rounded-top p-2 ps-3 bg-primary">
+                    <p className="about-community-title h6 pt-2 text-light"> r/{community.name}'s Rules</p>
+                  </div>
+                  <div className=" p-3">
+                    <p className="card-text">1. {community.rules}</p>
+                  </div>
                 </div>
               </div>
             </div>
