@@ -8,6 +8,7 @@ import SelectUsers from './SelectUsers'
 const BannedUserModal = (props) => {
   const { bannedUser, bannedUserErrors, setBannedUser, setNewBannedUser } = BannedUserApi()
   const { options, handleInputChange } = SelectUsers()
+  const [permanent, setpermanent] = useState(true)
   const [duration, setduration] = useState(null)
   const [explanation, setexplanation] = useState("")
   const [selectedUsername, setSelectedUsername] = useState(null)
@@ -62,6 +63,14 @@ const BannedUserModal = (props) => {
     else {
       setNewBannedUser(bannedUser)
     }
+  }
+
+  const permanentcheck = (event) => {
+    setpermanent(event.target.checked)
+    setBannedUser({
+      ...bannedUser,
+      'permanent': event.target.checked,
+    });
   }
 
   return (
