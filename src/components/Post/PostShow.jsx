@@ -17,15 +17,19 @@ const PostShow = () => {
   const [post, setPost] = useState([]);
   const [highlight, setHighlight] = useState("");
   const location = useLocation();
+  const account = JSON.parse(localStorage.getItem('account'))
   let { id, community_id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
+
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
   }
+
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     setHighlight(queryParams.get("highlight") || "");
   }, [location.search]);
+
   useEffect(() => {
     let mounted = true;
     get_post_data(id).then((items) => {
@@ -35,7 +39,7 @@ const PostShow = () => {
     });
     return () => (mounted = false);
   }, []);
-  return (
+  return ( 
     <>
       {post.title ? (
         <div>
@@ -65,19 +69,34 @@ const PostShow = () => {
                             <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
                           </p>
                         </div>
-                        <strong><h2 className="ms-2">{post.title}</h2> </strong>
+                        <strong><h2>{post.title}</h2> </strong>
                       </div>
                     </div>
                     <div className="" key={post.id}>
-                      <div className="post-body">
-                        <Markup content={post.body}></Markup>
-                        <div className='mt-4 ms-5'>
-                        {post.isclosed ? null:<Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
-                        </div>
+                      <div className='ms-5'>
+                        <div className='mb-3'><Markup content={post.body}></Markup></div>
+                        {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                       </div>
-                      {post.isclosed ? <aside className="card-body" style={{ fontSize: '20px', color: 'red',textAlign: 'center' }}>
-                        Post Closed By Moderator due to Various reasons. For further Details Contact Admin</aside>
-                        : <Form parent={null} comment_id={null} />}
+                      {post.isClosed ? (
+                        <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
+                          Post Closed By Admin. For further Details Contact Admin
+                        </p>
+                      ) : (
+                        account ? (
+                          <Form parent={null} commentId={null} />
+                        ) : (
+                          <div className='col mx-5'>
+                            <div className='card mt-3'>
+                              <div className="p-2" style={{ display: 'flex' }}>
+                                <h6 className="pt-2 text-muted">Log in or sign up to leave a comment</h6>
+                                <Link to="/signin"><div className="join-btn ms-5">Log In</div></Link>
+                                <Link to="/signup"><div className="join-btn">Sign Up</div></Link>
+                              </div>
+                            </div>
+                          </div>
+                        )
+                      )}
+
                     </div>
                     <div className="commentssection">
                       <Comments post={post} parent={null} highlight={highlight} />

@@ -44,7 +44,7 @@ const Comments = ({ highlight }) => {
     return (
 
       <div ref={commentRef}>
-        <div className="comment" key={comment.id}>
+        <div className="comment ms-2" key={comment.id}>
           {account && account.profile_image && account.profile_image.url ? [
             <img src={`http://localhost:3000${account.profile_image.url}`} alt="" className="profile-img-navbar" />
           ] : [
