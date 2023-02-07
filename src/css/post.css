@@ -57,6 +57,14 @@
 .downvote_voted {
   color: blue;
 }
+
+.vote-block {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
 .new_post_head {
   display: flex;
   width: 100%;
