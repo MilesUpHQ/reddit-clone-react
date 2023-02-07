@@ -6,8 +6,29 @@ import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa'
 import '../../css/post.css'
 import VotesHandler from './VotesHandler';
 import SavePosts from './SavePosts';
+import UseInfiniteScroll from './UseInfiniteScroll';
 
 const PostList = ({ account, posts, community, isSavedPosts }) => {
+
+  const [listItems, setListItems] = useState(Array.from(Array(30).keys(), n => n + 1));
+  const [isFetching, setIsFetching] = UseInfiniteScroll(fetchMoreListItems);
+
+  function fetchMoreListItems() {
+    setTimeout(() => {
+      setListItems(prevState => ([...prevState, ...Array.from(Array(20).keys(), n => n + prevState.length + 1)]));
+      setIsFetching(false);
+    }, 1000);
+  }
+
+  useEffect(() => {
+    if (!isFetching) return;
+    fetchMoreListItems();
+  }, [isFetching]);
+
+  function handleScroll() {
+    if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+    setIsFetching(true);
+  }
 
 if (!Array.isArray(posts)) {
     return null;
@@ -20,7 +41,7 @@ if (!Array.isArray(posts)) {
             <div className="row m-0">
               <div className="col-1 m-0 vote-col text-center">
                 <div id="vote-actions-1" className="d-block vote" data-id="1">
-                  <VotesHandler 
+                  <VotesHandler
                     post={post}
                     communityId={post.community_id}
                     postId={post.id}
@@ -78,6 +99,13 @@ if (!Array.isArray(posts)) {
         )
       })
       }
+
+<ul className="list-group mb-2">
+        {listItems.map(listItem => <li className="list-group-item">List Item {listItem}</li>)}
+      </ul>
+
+      {isFetching && 'Fetching more list items...'}
+
     </div>
   )
 }
