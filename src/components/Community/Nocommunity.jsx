@@ -3,7 +3,7 @@ import no_community from '../../images/no_community.jpg';
 import { Link } from "react-router-dom";
 const Nocommunity = () => {
     return (
-        <div style={{ backgroundColor: "lightgray", display: "flex", alignItems: "center", justifyContent: "center", height: "100vh" }}>
+        <div style={{ backgroundColor: "lightgray", display: "flex", alignItems: "center", justifyContent: "center", height: "90vh" }}>
             <div className="text-center">
                 <img src={`${no_community}`} height="100px" width="100px" alt="error" style={{ borderRadius: "50%" }} />
                 <p className="fs-3">
