@@ -20,6 +20,7 @@ const PostShow = () => {
   const account = JSON.parse(localStorage.getItem('account'))
   let { id, community_id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
+  const Community_URL = `http://localhost:3000/api/v1/communities/${community_id}`;
 
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
@@ -32,6 +33,16 @@ const PostShow = () => {
       console.log(error)
     })
   }
+
+  useEffect(() => {
+    let mounted = true;
+    get_community_data(id).then((items) => {
+      if (mounted) {
+        checkIsBanned(items.banned_users)
+      }
+    });
+    return () => (mounted = false);
+  }, []);
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
