@@ -22,26 +22,29 @@ function Form({ parent, comment_id }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="m-5">
+        <div className="m-1">
           {!account ? (
             window.location.replace("/signin")
           ) : (
-            <small>
-              Comment as <Link to={`/u/${account.username}`}>{account.username}</Link>
-            </small>
+            <p className='comment_username'>
+              Comment as <Link to={`/u/${account.username}`} className='text-decoration-none'>{account.username}</Link>
+            </p>
           )}
           <div className="form-group mb-3">
             {!parent ? null :
               <input type="hidden" name="comment[parent_id]" value={parent} />
             }
-            <ReactQuill value={text} placeholder="Your Comment goes here" modules={{ clipboard: { matchVisual: false } }} style={{ height: '200px' }} onChange={(content, delta, source, editor) => {
-              currentText = content;
-            }}
-              id={`comment-${commentId}`} />
+            <ReactQuill
+              value={text}
+              placeholder="Your Comment goes here"
+              modules={{ clipboard: { matchVisual: false } }}
+              onChange={(content, delta, source, editor) => {
+                currentText = content;
+              }}
+              id={`comment-${commentId}`}
+            />
           </div>
-        </div>
-        <div className="m-3 btn btn-secondary">
-          <input type="submit" value="Submit comment" />
+          <input type="submit" className='join-btn' value="Comment" />
         </div>
       </form>
     </div>
