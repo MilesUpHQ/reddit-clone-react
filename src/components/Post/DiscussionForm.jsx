@@ -10,6 +10,7 @@ import axios from 'axios';
 import { post } from 'jquery';
 import { toast } from 'react-toastify';
 
+
 const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
 
 const DiscussionForm = () => {
@@ -70,9 +71,10 @@ const DiscussionForm = () => {
   }
 
   const handleChange = (content, delta, source, editor) => {
-    setPost({ ...post, body: content });
+    const strippedContent = content.replace(/<[^>]+>/g, '');
+    setPost({ ...post, body: strippedContent });
   }
-
+  
   const onSubmit = (event) => {
     event.preventDefault();
     if (!post.body) {
