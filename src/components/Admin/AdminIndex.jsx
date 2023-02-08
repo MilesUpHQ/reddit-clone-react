@@ -28,7 +28,7 @@ const AdminIndex = () => {
         return Promise.reject(error);
       }
     }}>
-      <Resource name='posts' list={PostList} />
+      <Resource name='posts' list={PostList} path="/posts" />
     </Admin>
   )
 };

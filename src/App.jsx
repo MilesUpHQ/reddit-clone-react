@@ -1,7 +1,7 @@
 import './App.css';
 
-import AdminIndex from './components/Admin/AdminIndex'
 import Home from './components/Home/Home';
+import AdminIndex from './components/Admin/AdminIndex'
 import Form from './components/Form/Form';
 import Navbar from './components/Navbar/Navbar';
 import JsonData from './data/data.json'
@@ -32,8 +32,6 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route exact path="/admin" element={<AdminIndex />} />
-          {/* <Route exact path="/admin" component={AdminIndex} /> */}
           <Route path="/signup" element={<Form data={JsonData.form.signup} />} />
           <Route path="/signin" element={<Form data={JsonData.form.signin} />} />
           <Route path="/new" element={<NewPost />} />
@@ -50,7 +48,7 @@ function App() {
           <Route path="/settings" element={<Setting />} />
 
           <Route path="/navsearch" element={<NavbarSearch />} />
-          <Route path="/admin/*"  element={<AdminIndex />}   />
+          <Route path="/*"  element={<AdminIndex />}   />
          
         </Routes>
       </Router>
