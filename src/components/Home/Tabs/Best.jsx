@@ -7,7 +7,7 @@ const Best = ({ posts }) => {
       {posts ? (
         <PostList key={'best'} posts={posts} />
       ) : (
-        <h4 key={'best'} className="card-title">Best posts will be displayed here</h4>
+        <h4 key={'best'} className="card-title" style={{ textAlign: "center", color: "black" }}>Best posts will be displayed here</h4>
       )}
     </div>
   )

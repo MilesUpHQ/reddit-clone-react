@@ -66,7 +66,6 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                 </div>
                 <div className="row">
                   <div className="list-post-img">
-                    {console.log(post.body)}
                     <p className="col-12 ">
                       <Markup content={truncateString(post.post ? post.post.body : post.body, 300)}></Markup>
                     </p>
