@@ -42,41 +42,113 @@ const PostShow = () => {
 
   return (
     <>
+      <div className="row post-show-header">
+        <div className="col-4">
+          <div className="community-img">
+            <div className="post-header-community-img">
+              <img src={reddit_logo} className="mr-1" />
+            </div>
+            <h5 className='mt-2 ms-1 text-center post-header-community'>r/rails</h5>
+          </div>
+        </div>
+      </div>
+      <div className="row post-show-nav-tab">
+        <ul className="nav">
+          <li className="post-show-nav-link m-0 active">
+            <a data-toggle="tab" className='text-decoration-none' href="#post">Posts</a></li>
+        </ul>
+      </div>
+      <div className="show_post">
+        <div className="row mt-5">
+          <div className="col-8">
+            <div className="card shadow mb-3">
+              <div className="row">
+                <div className="col-1 m-0 vote-col text-center">
+                  <div id="vote-actions-1" className="d-block vote" data-id="1">
+                    <VotesHandler
+                      post={post}
+                      communityId={post.community_id}
+                      postId={post.id}
+                      voteCount={post.vote_count}
+                    />
+                  </div>
+                </div>
+                <div className="col-11">
+                  <div className="ms-2">
+                    <div className="row w-100 d-flex justify-content-between">
+                      <p key={post.id} className='w-auto post-show-posted-by text-muted'>
+                        Posted by <Link to='/' className='text-muted text-decoration-none'>u/{post.account && post.account.username}</Link> {moment(post.created_at).fromNow()}
+                      </p>
+                    </div>
+                    <div className="row mt-1">
+                      <h5 className='m-0 p-0'>{post.title}</h5>
+                    </div>
+                    <div className="row mt-3">
+                      <div className="col-12 m-0 post-show-body">
+                        <Markup className='m-0 p-0 mr-3' content={post.body}></Markup>
+                      </div>
+                    </div>
+                  </div>
+                  <Reactions post={post} />
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-sm-4">
+            <CommunityDetails post={post} />
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
       {post.title ? (
         <div>
           <div className="show_post">
-            <div className="container mt-5">
+            <div className="mt-5">
               <div className="row">
                 <div className="col-sm-8">
-                  <div className="card mb-3 ">
+                  <div className="card shadow mb-3">
                     <div className="show-content mt-1">
-                      <div className="col-0 ms-3 mt-2" >
-                        <VotesHandler
-                          post={post}
-                          communityId={post.community_id}
-                          postId={post.id}
-                          voteCount={post.vote_count}
-                        />
-                      </div>
-                      <div className="post-head ms-3">
-                        <div className="row">
-                          <p key={post.id}>
-                            {post.community && post.community.profile_image && post.community.profile_image.url ? [
-                              <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" className="post-list-profile-img mr-1" />
-                            ] : [
-                              <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
-                            ]}
-                            <strong><Link to={`/r/${community_id}`} className="text-dark">r/{post.community && post.community.name}</Link></strong>
-                            <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
-                          </p>
+                      <div className="row">
+                        <div className="col-1 m-0 vote-col text-center">
+                          <div id="vote-actions-1" className="d-block vote" data-id="1">
+                            <VotesHandler
+                              post={post}
+                              communityId={post.community_id}
+                              postId={post.id}
+                              voteCount={post.vote_count}
+                            />
+                          </div>
                         </div>
-                        <strong><h2>{post.title}</h2> </strong>
+                      </div>
+                      <div className="col-11">
+
+
+                        <div className="post-head ms-3">
+                          <div className="row">
+                            <p key={post.id}>
+                              {post.community && post.community.profile_image && post.community.profile_image.url ? [
+                                <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" className="post-list-profile-img mr-1" />
+                              ] : [
+                                <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
+                              ]}
+                              <strong><Link to={`/r/${community_id}`} className="text-dark">r/{post.community && post.community.name}</Link></strong>
+                              <small> Posted by{' '}<Link to='/'> u/{post.account && post.account.username} </Link>{moment(post.created_at).fromNow()}</small>
+                            </p>
+                          </div>
+                          <strong><h2>{post.title}</h2> </strong>
+                        </div>
                       </div>
                     </div>
                     <div className="" key={post.id}>
                       <div className='ms-5'>
                         <div className='mb-3'><Markup content={post.body}></Markup></div>
-                        {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
+                        {post.isclosed ? null : <Reactions post={post} />}
                       </div>
                       {post.isClosed ? (
                         <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>

@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
-import { FaEdit, FaTrash, FaTimes, FaComment, FaFlag } from 'react-icons/fa';
-import EditPost from '../../components/Post/Form/EditPost';
+import { FaEdit, FaTrash, FaTimes, FaComment, FaFlag, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { HiDotsHorizontal } from 'react-icons/hi'
+import { SlPencil, SlTrash, SlLock } from 'react-icons/sl'
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 
 function delete_post(Post_URL) {
   return axios.delete(Post_URL).then((response) => response.data)
 }
 
-const Reactions = () => {
+const Reactions = ({ post }) => {
   const categories = [
     {
       id: 1,
@@ -31,7 +33,6 @@ const Reactions = () => {
       ]
     }
   ];
-  const [post, setPost] = useState([]);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [selectedReasonId, setSelectedReasonId] = useState(null);
@@ -128,8 +129,37 @@ const Reactions = () => {
 
   return (
     <div className='col-10'>
+      <div className="row mt-1 mb-1">
+        <div className="col-12 d-flex gap-3">
+          <Link to='' className="list-post-tab">
+            <FaRegCommentAlt /> 0 Comments
+          </Link>
+          <Link to='' className="list-post-tab">
+            <FaShare /> Share
+          </Link>
+          <Link to='' onClick={openModal} className="list-post-tab">
+            <FaRegFlag /> Report
+          </Link>
+          <NavDropdown
+            title={<HiDotsHorizontal />}
+            className="list-post-tab"
+          >
+            <NavDropdown.Item className='text-muted' href={`/r/${community_id}/p/${id}/edit`}>
+              <SlPencil className='me-2' />Edit
+            </NavDropdown.Item>
+            <NavDropdown.Item className='text-muted' onClick={deletePostHandler} href=''>
+              <SlTrash className='me-2' />Delete
+            </NavDropdown.Item>
+            <NavDropdown.Item className='text-muted' onClick={closePostHandler} href=''>
+              <SlLock className='me-2' />Close
+            </NavDropdown.Item>
+          </NavDropdown>
+
+        </div>
+      </div>
       <div className="border-light" key={post.id}>
         <div className="d-flex gap-2">
+          {console.log(post)}
           {account && post.account_id === account.id && (
             <>
               <Link to={`/r/${community_id}/p/${id}/edit`} className="btn btn-light"><FaEdit /> Edit</Link>
