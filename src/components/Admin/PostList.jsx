@@ -7,7 +7,6 @@ const PostList = (props) => {
        < TextField source='id' />
        < TextField source='title' />
        < TextField source='body' />
-       < DateField source='publishedAt' />
        < EditButton basePath='/posts' />
        <DeleteButton basePath='/posts'/>
     </Datagrid>
