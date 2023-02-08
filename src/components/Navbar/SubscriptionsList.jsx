@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import reddit_logo from '../../images/reddit-logo.png';
 import '../../css/post.css';
+import axios from 'axios';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 const SubscriptionsList = ({ accountId }) => {
+
   const [subscriptions, setSubscriptions] = useState([]);
+  const fetchData = async () => {
+    return await axios.get(`http://localhost:3000/api/v1/subscribers?account_id=${accountId}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.log(error)
+      })
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/api/v1/subscribers?account_id=${accountId}`);
-      const data = await response.json();
-      setSubscriptions(data);
-    };
-
-    fetchData();
-  }, [accountId]);
+    let mounted = true;
+    fetchData().then((items) => {
+      if (mounted) {
+        setSubscriptions(items)
+      }
+    });
+    return () => (mounted = false);
+  }, []);
 
   return (
     <div>
