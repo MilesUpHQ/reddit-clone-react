@@ -130,7 +130,7 @@ const PostShow = () => {
 
                     </div>
                     <div className="commentssection">
-                      <Comments post={post} parent={null} highlight={highlight} />
+                      <Comments post={post} parent={null} highlight={highlight} isBanned = {isBanned} />
                     </div>
                   </div>
                 </div>
