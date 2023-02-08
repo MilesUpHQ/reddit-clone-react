@@ -58,7 +58,7 @@ const Comments = ({ highlight, isBanned }) => {
           </div>
         </div>
         <div className="fl">
-          {!isBanned? (<a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>) : null }
+          {!isBanned ? (<a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>) : null}
           {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
           <hr />
           <div className='sub-comment'>

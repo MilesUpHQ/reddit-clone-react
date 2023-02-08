@@ -29,7 +29,6 @@ const PostShow = () => {
 
   function get_community_data(community_id) {
     return axios.get(Community_URL + community_id).then((response) => {
-      console.log(response.data)
       return response.data
     }).catch((error) => {
       console.log(error)
@@ -40,7 +39,6 @@ const PostShow = () => {
     let mounted = true;
     get_community_data(community_id).then((items) => {
       if (mounted) {
-        console.log(items.banned_users)
         checkIsBanned(items.banned_users)
       }
     });
@@ -48,7 +46,6 @@ const PostShow = () => {
   }, []);
 
   const checkIsBanned = (banned_users) => {
-    console.log(banned_users)
     banned_users.map((ban) => (
       ban.account_id == account.id && setIsBanned(true)
     ))
@@ -71,7 +68,6 @@ const PostShow = () => {
 
   return (
     <>
-     {console.log(isBanned)}
       {post.title ? (
         <div>
           <div className="show_post">
@@ -114,7 +110,7 @@ const PostShow = () => {
                         </p>
                       ) : (
                         account ? (
-                          !isBanned? (<Form parent={null} commentId={null} />) : null 
+                          !isBanned ? (<Form parent={null} commentId={null} />) : null
                         ) : (
                           <div className='col mx-5'>
                             <div className='card mt-3'>
@@ -127,10 +123,9 @@ const PostShow = () => {
                           </div>
                         )
                       )}
-
                     </div>
                     <div className="commentssection">
-                      <Comments post={post} parent={null} highlight={highlight} isBanned = {isBanned} />
+                      <Comments post={post} parent={null} highlight={highlight} isBanned={isBanned} />
                     </div>
                   </div>
                 </div>
