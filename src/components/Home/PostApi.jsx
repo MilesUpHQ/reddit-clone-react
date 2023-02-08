@@ -8,12 +8,18 @@ const PostApi = () => {
   const [text, setText] = useState('');
   let { id, community_id } = useParams();
   const Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts'
+  const Hot_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/hot_posts'
+  
+
+
   const Comments_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`
   const navigate = useNavigate()
 
   const get_all_posts = () => {
     return axios.get(Posts_URL).then((response) => response.data)
   }
+
+
 
   const set_comments = async (currentText, parent) => {
     if (!currentText) {
@@ -41,7 +47,7 @@ const PostApi = () => {
     setComments(response.data);
   };
 
-  return { get_all_posts, set_comments, text, setText, comments, setComments }
+  return { get_all_posts, get_best_posts, get_hot_posts, get_new_posts, get_top_posts, set_comments, text, setText, comments, setComments }
 }
 
 export default PostApi
