@@ -7,7 +7,7 @@ const New = ({ posts }) => {
       {posts ? (
         <PostList key={'new'} posts={posts} />
       ) : (
-        <h4 key={'new'} className="card-title">New posts will be displayed here</h4>
+        <h4 key={'new'} className="card-title" style={{ textAlign: "center", color: "black" }}>New posts will be displayed here</h4>
       )}
     </div>
   )
