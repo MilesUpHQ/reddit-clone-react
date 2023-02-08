@@ -25,7 +25,7 @@ const Right_Tab = () => {
         <Button className="w-100 premium-join text-center mb-3 text-white">Try Now</Button>
       </div>
       <div className="card mt-3">
-        <img src={reddit_cover} className="cover-img home-small-cover" alt="cover" />
+        <img src="https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png" className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
          <div className="ml-3 home-avatar">
           <img src={reddit_home_avatar} />    
