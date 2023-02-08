@@ -53,6 +53,7 @@ const Reactions = ({ post }) => {
     await axios.patch(Post_URL, { post }).then((response) => {
       if (response.status === 201) {
         toast.success("Post Closed successfully!");
+        navigate(`/r/${community_id}/p` + id)
       }
     }).catch((error) => {
       console.log(error.response.data);
@@ -180,48 +181,57 @@ const Reactions = ({ post }) => {
                   </button>
                 </div>
                 <div className="modal-body">
-                  <p>Following are the Reasons for Reporting</p>
-                  <form>
-                    {categories.map(category => (
-                      <div key={category.id} className="form-group">
-                        <div className="form-check">
-                          <input
-                            type="radio"
-                            className="form-check-input"
-                            checked={selectedCategoryId === category.id}
-                            onChange={() => {
-                              setSelectedCategoryId(category.id);
-                              setSelectedCategoryName(category.name);
-                            }}
-                          />
-                          <label className="form-check-label">{category.name}</label>
-                          <br />
-                        </div>
-                        {selectedCategoryId === category.id && (
-                          <div className="sub-comment">
-                            {category.report_reasons.map(reason => (
-                              <div key={reason.id} className="form-check">
-                                <input
-                                  type="radio"
-                                  className="form-check-input"
-                                  checked={selectedReasonId === reason.id}
-                                  onChange={() => {
-                                    setSelectedReasonId(reason.id);
-                                    setSelectedReasonName(reason.reason);
-                                  }}
-                                />
-                                <label className="form-check-label">{reason.reason}</label>
-                                <br />
+                  {account ? (
+                    <div>
+                      <p>Following are the Reasons for Reporting</p>
+                      <form>
+                        {categories.map(category => (
+                          <div key={category.id} className="form-group">
+                            <div className="form-check">
+                              <input
+                                type="radio"
+                                className="form-check-input"
+                                checked={selectedCategoryId === category.id}
+                                onChange={() => {
+                                  setSelectedCategoryId(category.id);
+                                  setSelectedCategoryName(category.name);
+                                }}
+                              />
+                              <label className="form-check-label">{category.name}</label>
+                              <br />
+                            </div>
+                            {selectedCategoryId === category.id && (
+                              <div className="sub-comment">
+                                {category.report_reasons.map(reason => (
+                                  <div key={reason.id} className="form-check">
+                                    <input
+                                      type="radio"
+                                      className="form-check-input"
+                                      checked={selectedReasonId === reason.id}
+                                      onChange={() => {
+                                        setSelectedReasonId(reason.id);
+                                        setSelectedReasonName(reason.reason);
+                                      }}
+                                    />
+                                    <label className="form-check-label">{reason.reason}</label>
+                                    <br />
+                                  </div>
+                                ))}
                               </div>
-                            ))}
+                            )}
                           </div>
-                        )}
-                      </div>
-                    ))}
-                    <div className="modal-footer">
-                      <button type="submit" className="btn btn-danger" onClick={ReportHandler}>Report</button>
+                        ))}
+                        <div className="modal-footer">
+                          <button type="submit" className="btn btn-danger" onClick={ReportHandler}>Report</button>
+                        </div>
+                      </form>
                     </div>
-                  </form>
+                  ) : (
+                    <div>
+                      <p> Log in to Report </p>
+                      <Link to="/signin"><div className="join-btn">Log In</div></Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,8 +1,6 @@
 .upvote {
   display: block;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
   color: #000;
 }
 .upvote.voted{
@@ -35,8 +33,6 @@
 .downvote {
   display: block;
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
   color: #000;
 }
 .downvote.active {
@@ -48,6 +44,18 @@
 .downvote:hover {
   color: blue;
   cursor: pointer;
+}
+.vote-score {
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+  font-weight: 700;
+}
+.upvote_voted {
+  color: #FF0000;
+}
+.downvote_voted {
+  color: blue;
 }
 .new_post_head {
   display: flex;

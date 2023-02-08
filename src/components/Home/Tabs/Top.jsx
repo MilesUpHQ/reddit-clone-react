@@ -7,7 +7,7 @@ const Top = ({ posts }) => {
       {posts ? (
         <PostList key={'top'} posts={posts} />
       ) : (
-        <h4 key={'top'} className="card-title">Top posts will be displayed here</h4>
+        <h4 key={'top'} className="card-title" style={{ textAlign: "center", color: "black" }}>Top posts will be displayed here</h4>
       )}
     </div>
   )

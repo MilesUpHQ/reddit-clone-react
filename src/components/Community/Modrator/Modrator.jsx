@@ -19,7 +19,7 @@ const Modrator = () => {
                 <Nav.Link disabled eventKey="" className='mod-nav-link text-center bg-secondary text-white'>User Management</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="first" className='mod-nav-link'>Ban User</Nav.Link>
+                <Nav.Link eventKey="first" className='mod-nav-link'>Banned Users</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="second" className='mod-nav-link'>Edit Community</Nav.Link>
