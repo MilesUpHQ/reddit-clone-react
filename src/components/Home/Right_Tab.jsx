@@ -27,13 +27,14 @@ const Right_Tab = () => {
       <div className="card mt-3">
         <img src={reddit_cover} className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
-        <div className="ml-3 home-avatar">
-        <img src={reddit_home_avatar} />    
-        </div>
-          <p className="mt-3 home"><b>Home</b></p>
+         <div className="ml-3 home-avatar">
+          <img src={reddit_home_avatar} />    
+         </div>
+          <p className="home">Home</p>
         </div>
         <div className="ml-3 mt-0">
           <p className="front">Your personal Reddit frontpage. Come here to check in with your favorite communities.</p>
+          <hr className='mt-3 me-3 ms-3' />
         </div>
         <Link to="/new" className="join-btn create-post-btn text-white">Create post</Link>
         <Link to={account ? "/r/new/" : "/signin"} className="join-btn text-center mb-3">Create Community</Link>

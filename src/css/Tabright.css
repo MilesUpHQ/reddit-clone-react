@@ -39,11 +39,11 @@
   .home-avatar img{
     position: relative;
     top: -30px;
-    width: 60px;
+    width: 70px;
     height: 100px;
     overflow: hidden;
   }
-  
+
   .home-small-profile img {
     position: relative;
     top: 0;
@@ -59,9 +59,19 @@
 
   .front{
     text-align: left;
+    margin-top: -20px;
     padding-left: 20px;
+    font-family: Noto Sans,Arial,sans-serif;
+    font-size: 17px;
+    line-height: 21px;
+    font-weight: 100;
+    word-wrap: break-word;
   }
 
   .home{
-    padding-left: 10px;
+    margin-top: 35px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    display: inline-block;
   }
