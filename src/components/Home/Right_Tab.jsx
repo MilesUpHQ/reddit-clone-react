@@ -38,6 +38,19 @@ const Right_Tab = () => {
         <Link to="/new" className="join-btn create-post-btn text-white">Create post</Link>
         <Link to={account ? "/r/new/" : "/signin"} className="join-btn text-center mb-3">Create Community</Link>
       </div>
+      <div className="card mt-3">
+        <div className="policy d-flex">
+          <div className="terms">
+            <p>User Agreement</p>
+            <p>Privacy Policy</p>
+          </div>
+          <div className="terms">
+             <p>Content Policy</p>
+             <p>Moderator code of conduct</p>
+          </div>
+        </div>   
+        <hr className='me-3 ms-3' />   
+      </div>
     </div>
   )
 }
