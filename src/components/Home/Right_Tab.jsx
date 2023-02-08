@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import {FaShieldAlt} from 'react-icons/fa'
 import '../../css/Tabright.css'
-import cover_image from '../../images/Cover-Image.jpg'
+import reddit_cover from '../../images/reddit_cover_half.jpg'
 import reddit_home_avatar from '../../images/reddit_home_avatar.png'
 
 const account = JSON.parse(localStorage.getItem('account'))
@@ -25,7 +25,7 @@ const Right_Tab = () => {
         <Button className="w-100 premium-join text-center mb-3 text-white">Try Now</Button>
       </div>
       <div className="card mt-3">
-        <img src={cover_image} className="cover-img home-small-cover" alt="cover" />
+        <img src={reddit_cover} className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
         <div className="ml-3 home-avatar">
         <img src={reddit_home_avatar} />    
