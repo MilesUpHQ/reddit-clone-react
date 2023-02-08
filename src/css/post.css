@@ -193,9 +193,6 @@
   text-decoration: none;
   background-color: rgba(157, 160, 161, 0.2);
 }
-.vote-col {
-  background-color: #F8F9FA;
-}
 .vote-icon  {
   color: #a6a9ab;
   font-size: 1.6em;
@@ -301,6 +298,7 @@
   font-size: 0.8em;
 }
 .post-show-body {
+  padding: 0;
   padding-right: 10px;
   font-size: 0.9em;
 }
@@ -314,7 +312,15 @@
   width: 25px;
   border-radius: 50px;
 }
-
+.ql-editor{
+  min-height:200px;
+}
 .sub-comment {
   padding-left: 20px;
+}
+.comment_username {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 0.8em;
 }
