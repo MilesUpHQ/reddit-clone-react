@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import {FaShieldAlt} from 'react-icons/fa'
 import '../../css/Tabright.css'
-import reddit_cover from '../../images/reddit_cover_half.jpg'
 import reddit_home_avatar from '../../images/reddit_home_avatar.png'
 
 const account = JSON.parse(localStorage.getItem('account'))
