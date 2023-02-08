@@ -16,11 +16,12 @@ import Nopost from './Nopost';
 const PostShow = () => {
   const [post, setPost] = useState([]);
   const [highlight, setHighlight] = useState("");
+  const [isBanned, setIsBanned] = useState(false);
   const location = useLocation();
   const account = JSON.parse(localStorage.getItem('account'))
   let { id, community_id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
-  const Community_URL = `http://localhost:3000/api/v1/communities/${community_id}`;
+  const Community_URL = `http://localhost:3000/api/v1/communities/`;
 
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
@@ -28,6 +29,7 @@ const PostShow = () => {
 
   function get_community_data(community_id) {
     return axios.get(Community_URL + community_id).then((response) => {
+      console.log(response.data)
       return response.data
     }).catch((error) => {
       console.log(error)
@@ -36,13 +38,21 @@ const PostShow = () => {
 
   useEffect(() => {
     let mounted = true;
-    get_community_data(id).then((items) => {
+    get_community_data(community_id).then((items) => {
       if (mounted) {
+        console.log(items.banned_users)
         checkIsBanned(items.banned_users)
       }
     });
     return () => (mounted = false);
   }, []);
+
+  const checkIsBanned = (banned_users) => {
+    console.log(banned_users)
+    banned_users.map((ban) => (
+      ban.account_id == account.id && setIsBanned(true)
+    ))
+  }
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -61,6 +71,7 @@ const PostShow = () => {
 
   return (
     <>
+     {console.log(isBanned)}
       {post.title ? (
         <div>
           <div className="show_post">
