@@ -41,24 +41,24 @@ const Right_Tab = () => {
       <div className="card mt-3">
         <div className="policy d-flex">
           <div className="terms">
-            <p>User Agreement</p>
-            <p>Privacy Policy</p>
+            User Agreement<br/>
+            Privacy Policy<br/>
           </div>
           <div className="terms">
-            <p>Content Policy</p>
-            <p>Moderator code of conduct</p>
+            Content Policy<br/>
+            Moderator code of conduct<br/>
           </div>
         </div>
         <div className="policy d-flex">
           <div className="terms">
-            <p>English</p>
-            <p>Français</p>
-            <p>Italiano</p>
+            English<br/>  
+            Français<br/>
+            Italiano<br/>
           </div>
           <div className="terms">
-            <p>Deutsch</p>
-            <p>Español</p>
-            <p>Português</p>
+            Deutsch<br/>
+            Español<br/>
+            Português<br/>
           </div>
         </div>
         <p className='rights'>Reddit Inc © 2023. All rights reserved</p>
