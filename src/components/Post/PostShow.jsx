@@ -114,7 +114,7 @@ const PostShow = () => {
                         </p>
                       ) : (
                         account ? (
-                          <Form parent={null} commentId={null} />
+                          !isBanned? (<Form parent={null} commentId={null} />) : null 
                         ) : (
                           <div className='col mx-5'>
                             <div className='card mt-3'>
