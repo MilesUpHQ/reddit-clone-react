@@ -29,7 +29,7 @@ const ShowCommunity = () => {
   const [posts, setPosts] = useState([]);
   const [account, setAccount] = useState([]);
   const [subscribeId, setSubscribeId] = useState(0);
-  const [isSubribed, setIsSubscribed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate()
   const [isBanned, setIsBanned] = useState(false);
   let { id } = useParams();
@@ -120,7 +120,7 @@ const ShowCommunity = () => {
                   <p className='text-muted small-community-title'>r/{community.name}</p>
                 </span>
                 <div className="pl-2">
-                  <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed} />
+                  <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubscribed={isSubscribed} setIsSubscribed={setIsSubscribed} />
                 </div>
               </div>
             </div>
@@ -194,7 +194,7 @@ const ShowCommunity = () => {
                 { !isBanned ? ( 
                  <> 
                   <hr className='mt-1 me-3 ms-3' />
-                  <Link to='/r/new' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
+                  <Link to='/new' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
                   <hr className='mt-3 me-3 ms-3' />
                   <div className="p-3">
                     <div className="row-5">

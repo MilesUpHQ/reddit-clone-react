@@ -7,7 +7,7 @@ const BannedUsers = () => {
 
   return (
     <div>
-      <Link to='' className="btn btn-primary w-100 rounded" onClick={() => setModalShow(true)}>Banned User</Link>
+      <Link to='' className="btn btn-primary w-100 rounded" onClick={() => setModalShow(true)}>Ban User</Link>
       <BannedUserModal
         show={modalShow}
         onHide={() => setModalShow(false)}

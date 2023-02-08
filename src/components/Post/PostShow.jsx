@@ -16,13 +16,39 @@ import Nopost from './Nopost';
 const PostShow = () => {
   const [post, setPost] = useState([]);
   const [highlight, setHighlight] = useState("");
+  const [isBanned, setIsBanned] = useState(false);
   const location = useLocation();
   const account = JSON.parse(localStorage.getItem('account'))
   let { id, community_id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
+  const Community_URL = `http://localhost:3000/api/v1/communities/`;
 
   function get_post_data(post_id) {
     return axios.get(Post_URL + post_id).then((response) => response.data)
+  }
+
+  function get_community_data(community_id) {
+    return axios.get(Community_URL + community_id).then((response) => {
+      return response.data
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
+  useEffect(() => {
+    let mounted = true;
+    get_community_data(community_id).then((items) => {
+      if (mounted) {
+        checkIsBanned(items.banned_users)
+      }
+    });
+    return () => (mounted = false);
+  }, []);
+
+  const checkIsBanned = (banned_users) => {
+    banned_users.map((ban) => (
+      ban.account_id == account.id && setIsBanned(true)
+    ))
   }
 
   useEffect(() => {
@@ -39,6 +65,7 @@ const PostShow = () => {
     });
     return () => (mounted = false);
   }, []);
+
   return (
     <>
       {post.title ? (
@@ -80,27 +107,23 @@ const PostShow = () => {
                       {post.isclosed ? <aside className="card-body" style={{ fontSize: '20px', color: 'red', textAlign: 'center' }}>
                         Post Closed By Moderator due to Various reasons. For further Details Contact Admin</aside>
                         : null}
-
-                      {post.isclosed ? null : <Form parent={null} commentId={null} />}
-
-                      {(account ? (
-                        null
-                      ) : (
-                        <div className='col mx-5'>
-                          <div className='card mt-3'>
-                            <div className="p-2" style={{ display: 'flex' }}>
-                              <h6 className="pt-2 text-muted">Log in or sign up to leave a comment</h6>
-                              <Link to="/signin"><div className="join-btn ms-5">Log In</div></Link>
-                              <Link to="/signup"><div className="join-btn">Sign Up</div></Link>
+                      {account ? (
+                          ( (!post.isclosed) && !isBanned) ? (<Form parent={null} commentId={null} />) : null
+                        ) : (
+                          <div className='col mx-5'>
+                            <div className='card mt-3'>
+                              <div className="p-2" style={{ display: 'flex' }}>
+                                <h6 className="pt-2 text-muted">Log in or sign up to leave a comment</h6>
+                                <Link to="/signin"><div className="join-btn ms-5">Log In</div></Link>
+                                <Link to="/signup"><div className="join-btn">Sign Up</div></Link>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      )
-                      )}
-
+                        )
+                      }
                     </div>
                     <div className="commentssection">
-                      <Comments post={post} parent={null} highlight={highlight} />
+                      <Comments post={post} parent={null} highlight={highlight} isBanned={isBanned} />
                     </div>
                   </div>
                 </div>
@@ -114,8 +137,8 @@ const PostShow = () => {
       ) : (
         <Nopost />
       )
-      }
-    </>
+    }
+  </>
   )
 }
 export default PostShow
