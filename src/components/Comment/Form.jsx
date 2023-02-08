@@ -22,7 +22,7 @@ function Form({ parent, comment_id }) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="m-1">
+        <div className="m-1 mb-2">
           {!account ? (
             window.location.replace("/signin")
           ) : (
