@@ -133,7 +133,11 @@ const PostShow = () => {
                       </div>
                     </div>
                   )}
+                  <hr className='mt-2' />
                 </div>
+              </div>
+              <div className="mt-1">
+                <Comments post={post} parent={null} highlight={highlight} isBanned={isBanned} />
               </div>
             </div>
           </div>
