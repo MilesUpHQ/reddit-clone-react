@@ -9,7 +9,7 @@ const PostApi = () => {
   let { id, community_id } = useParams();
   const Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts'
   const Hot_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/hot_posts'
-  
+  const New_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/new_posts'
 
 
   const Comments_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`
