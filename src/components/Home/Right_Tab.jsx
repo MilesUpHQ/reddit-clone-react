@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import {GiCheckedShield} from 'react-icons/gi'
+import { GiCheckedShield } from 'react-icons/gi'
 import '../../css/Tabright.css'
 import reddit_home_avatar from '../../images/reddit_home_avatar.png'
 
@@ -26,9 +26,9 @@ const Right_Tab = () => {
       <div className="card mt-3">
         <img src="https://www.redditstatic.com/desktop2x/img/id-cards/home-banner@2x.png" className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
-         <div className="ml-3 home-avatar">
-          <img src={reddit_home_avatar} />    
-         </div>
+          <div className="ml-3 home-avatar">
+            <img src={reddit_home_avatar} />
+          </div>
           <p className="home">Home</p>
         </div>
         <div className="ml-3 mt-0">
@@ -45,11 +45,23 @@ const Right_Tab = () => {
             <p>Privacy Policy</p>
           </div>
           <div className="terms">
-             <p>Content Policy</p>
-             <p>Moderator code of conduct</p>
+            <p>Content Policy</p>
+            <p>Moderator code of conduct</p>
           </div>
-        </div>   
-        <hr className='me-3 ms-3' />   
+        </div>
+        <div className="policy d-flex">
+          <div className="terms">
+            <p>English</p>
+            <p>Français</p>
+            <p>Italiano</p>
+          </div>
+          <div className="terms">
+            <p>Deutsch</p>
+            <p>Español</p>
+            <p>Português</p>
+          </div>
+        </div>
+        <p className='rights'>Reddit Inc © 2023. All rights reserved</p>
       </div>
     </div>
   )
