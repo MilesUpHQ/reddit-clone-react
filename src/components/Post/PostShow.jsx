@@ -25,6 +25,14 @@ const PostShow = () => {
     return axios.get(Post_URL + post_id).then((response) => response.data)
   }
 
+  function get_community_data(community_id) {
+    return axios.get(Community_URL + community_id).then((response) => {
+      return response.data
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
+
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     setHighlight(queryParams.get("highlight") || "");
