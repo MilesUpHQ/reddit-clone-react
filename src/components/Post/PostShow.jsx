@@ -89,38 +89,50 @@ const PostShow = () => {
         </ul>
       </div>
       <div className="show_post">
-        <div className="row mt-5">
-          <div className="col-8">
-            <div className="card rounded shadow mb-3">
-              <div className="row">
-                <div className="col-1 m-0 vote-col text-center">
-                  <div id="vote-actions-1" className="d-block vote" data-id="1">
-                    <VotesHandler
-                      post={post}
-                      communityId={post.community_id}
-                      postId={post.id}
-                      voteCount={post.vote_count}
-                    />
+        <div className="row mt-3">
+          <div className="col-8 card rounded shadow mb-3">
+            <div className="row">
+              <div className="col-1 m-0 text-center">
+                <div id="vote-actions-1" className="d-block vote" data-id="1">
+                  <VotesHandler
+                    post={post}
+                    communityId={post.community_id}
+                    postId={post.id}
+                    voteCount={post.vote_count}
+                  />
+                </div>
+              </div>
+              <div className="col-11">
+                <div className="ms-2">
+                  <div className="row w-100 d-flex justify-content-between">
+                    <p key={post.id} className='w-auto post-show-posted-by text-muted'>
+                      Posted by <Link to='/' className='text-muted text-decoration-none'>u/{post.account && post.account.username}</Link> {moment(post.created_at).fromNow()}
+                    </p>
+                  </div>
+                  <div className="row mt-1">
+                    <h5 className='m-0 p-0'>{post.title}</h5>
+                  </div>
+                  <div className="row mt-3">
+                    <div className="col-12 m-0 post-show-body">
+                      <Markup className='m-0 p-0 mr-3' content={post.body}></Markup>
+                    </div>
                   </div>
                 </div>
-                <div className="col-11">
-                  <div className="ms-2">
-                    <div className="row w-100 d-flex justify-content-between">
-                      <p key={post.id} className='w-auto post-show-posted-by text-muted'>
-                        Posted by <Link to='/' className='text-muted text-decoration-none'>u/{post.account && post.account.username}</Link> {moment(post.created_at).fromNow()}
-                      </p>
-                    </div>
-                    <div className="row mt-1">
-                      <h5 className='m-0 p-0'>{post.title}</h5>
-                    </div>
-                    <div className="row mt-3">
-                      <div className="col-12 m-0 post-show-body">
-                        <Markup className='m-0 p-0 mr-3' content={post.body}></Markup>
+                {post.isclosed ? null : <Reactions post={post} />}
+                <div className="row">
+                  {account ? (
+                    ((!post.isclosed) && !isBanned) ? (<Form parent={null} commentId={null} />) : null
+                  ) : (
+                    <div className='pe-5'>
+                      <div className='card mt-3 mb-3'>
+                        <div className="p-2 d-flex">
+                          <h6 className="pt-2 text-muted">Log in or sign up to leave a comment</h6>
+                          <Link to="/signin"><div className="join-btn ms-5">Log In</div></Link>
+                          <Link to="/signup"><div className="join-btn">Sign Up</div></Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  {post.isclosed ? null : <Reactions post={post} />}
-
+                  )}
                 </div>
               </div>
             </div>
@@ -145,7 +157,7 @@ const PostShow = () => {
                   <div className="card shadow mb-3">
                     <div className="show-content mt-1">
                       <div className="row">
-                        <div className="col-1 m-0 vote-col text-center">
+                        <div className="col-1 m-0 rounded-left vote-col text-center">
                           <div id="vote-actions-1" className="d-block vote" data-id="1">
                             <VotesHandler
                               post={post}
