@@ -65,6 +65,7 @@ const PostShow = () => {
     });
     return () => (mounted = false);
   }, []);
+
   return (
     <>
       {post.title ? (
@@ -106,14 +107,8 @@ const PostShow = () => {
                       {post.isclosed ? <aside className="card-body" style={{ fontSize: '20px', color: 'red', textAlign: 'center' }}>
                         Post Closed By Moderator due to Various reasons. For further Details Contact Admin</aside>
                         : null}
-
-                      {post.isclosed ? null : <Form parent={null} commentId={null} />}
-
-                      {(account ? (
-                        null
-                      ) : (
-                        account ? (
-                          !isBanned ? (<Form parent={null} commentId={null} />) : null
+                      {account ? (
+                          ( (!post.isclosed) && !isBanned) ? (<Form parent={null} commentId={null} />) : null
                         ) : (
                           <div className='col mx-5'>
                             <div className='card mt-3'>
@@ -125,7 +120,7 @@ const PostShow = () => {
                             </div>
                           </div>
                         )
-                      )}
+                      }
                     </div>
                     <div className="commentssection">
                       <Comments post={post} parent={null} highlight={highlight} isBanned={isBanned} />
@@ -142,8 +137,8 @@ const PostShow = () => {
       ) : (
         <Nopost />
       )
-      }
-    </>
+    }
+  </>
   )
 }
 export default PostShow
