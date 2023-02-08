@@ -18,8 +18,18 @@ const PostApi = () => {
   const get_all_posts = () => {
     return axios.get(Posts_URL).then((response) => response.data)
   }
-
-
+  const get_hot_posts = () => {
+    return axios.get(Hot_Posts_URL).then((response) => response.data)
+  }
+  const get_new_posts = () => {
+    return axios.get(New_Posts_URL).then((response) => response.data)
+  }
+  const get_best_posts = () => {
+    return axios.get(Best_Posts_URL).then((response) => response.data)
+  }
+  const get_top_posts = () => {
+    return axios.get(Top_Posts_URL).then((response) => response.data)
+  }
 
   const set_comments = async (currentText, parent) => {
     if (!currentText) {
