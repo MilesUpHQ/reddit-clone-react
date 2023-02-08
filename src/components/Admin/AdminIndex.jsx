@@ -10,6 +10,13 @@ const dataProvider = axios.create({
 const AdminIndex = () => {
   return (
     <Admin dataProvider={async (type, resource) => {
+      if (type === 'DELETE') {
+        console.log(params)
+        return dataProvider.delete(`posts/${params.id}`, {
+          data: params
+        });
+      }
+      
       try {
         const requestConfig = {
           method: 'GET',
@@ -17,7 +24,7 @@ const AdminIndex = () => {
           headers: { 'Content-Type': 'application/json' },
         };
         const response = await dataProvider(requestConfig);
-        let data = response.data.posts;
+        let data = response.data;
         if (!Array.isArray(data)) {
           data = [data];
         }
