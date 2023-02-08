@@ -6,15 +6,16 @@ import { toast } from 'react-toastify';
 const PostApi = () => {
   const [comments, setComments] = useState([]);
   const [text, setText] = useState('');
-  let { id, community_id } = useParams(); 
+  let { id, community_id } = useParams();
   const Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts'
   const Comments_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`
+  const navigate = useNavigate()
 
   const get_all_posts = () => {
     return axios.get(Posts_URL).then((response) => response.data)
   }
 
-  const set_comments = async(currentText, parent) => {
+  const set_comments = async (currentText, parent) => {
     if (!currentText) {
       toast.error("Comment cannot be empty!");
       return;
@@ -27,14 +28,20 @@ const PostApi = () => {
     }).then((response) => {
       if (response.status === 201) {
         setText('');
+        fetchComments();
         toast.success("Comment Created successfully!");
+        navigate(`/r/${community_id}`)
       }
     }).catch((error) => {
       console.error(error);
     });
   }
+  const fetchComments = async () => {
+    const response = await axios.get(Comments_URL);
+    setComments(response.data);
+  };
 
-  return { get_all_posts, set_comments, text, setText, comments, setComments}
+  return { get_all_posts, set_comments, text, setText, comments, setComments }
 }
 
 export default PostApi

@@ -38,7 +38,7 @@ const Reactions = () => {
   const [selectedReasonName, setSelectedReasonName] = useState(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  
   let { community_id, id } = useParams();
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/`;
 
@@ -52,6 +52,7 @@ const Reactions = () => {
     await axios.patch(Post_URL, { post }).then((response) => {
       if (response.status === 201) {
         toast.success("Post Closed successfully!");
+        navigate(`/r/${community_id}/p` + id)
       }
     }).catch((error) => {
       console.log(error.response.data);
