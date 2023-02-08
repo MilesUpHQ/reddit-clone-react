@@ -65,7 +65,6 @@ const PostShow = () => {
     });
     return () => (mounted = false);
   }, []);
-
   return (
     <>
       {post.title ? (
@@ -104,10 +103,14 @@ const PostShow = () => {
                         <div className='mb-3'><Markup content={post.body}></Markup></div>
                         {post.isclosed ? null : <Reactions Post_URL={Post_URL} get_post_data={get_post_data} />}
                       </div>
-                      {post.isClosed ? (
-                        <p className="card-body" style={{ fontSize: '20px', color: 'red' }}>
-                          Post Closed By Admin. For further Details Contact Admin
-                        </p>
+                      {post.isclosed ? <aside className="card-body" style={{ fontSize: '20px', color: 'red', textAlign: 'center' }}>
+                        Post Closed By Moderator due to Various reasons. For further Details Contact Admin</aside>
+                        : null}
+
+                      {post.isclosed ? null : <Form parent={null} commentId={null} />}
+
+                      {(account ? (
+                        null
                       ) : (
                         account ? (
                           !isBanned ? (<Form parent={null} commentId={null} />) : null
