@@ -10,7 +10,7 @@ import PostShow from './components/Post/PostShow';
 import create from './components/Community/create';
 import Profile from './components/Accounts/Profile';
 import Setting from './components/Accounts/Settings';
-import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router,	Routes, Route} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import Index from './components/Community/Index';
@@ -32,6 +32,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route exact path="/admin" element={<AdminIndex />} />
+          {/* <Route exact path="/admin" component={AdminIndex} /> */}
           <Route path="/signup" element={<Form data={JsonData.form.signup} />} />
           <Route path="/signin" element={<Form data={JsonData.form.signin} />} />
           <Route path="/new" element={<NewPost />} />
