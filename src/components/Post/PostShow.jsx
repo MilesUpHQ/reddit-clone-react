@@ -72,9 +72,13 @@ const PostShow = () => {
         <div className="col-4">
           <div className="community-img">
             <div className="post-header-community-img">
-              <img src={reddit_logo} className="mr-1" />
+              {post.community && post.community.profile_image && post.community.profile_image.url ? [
+                <img src={`http://localhost:3000${post.community.profile_image.url}`} alt="" />
+              ] : [
+                <img src={reddit_logo} alt="" />
+              ]}
             </div>
-            <h5 className='mt-2 ms-1 text-center post-header-community'>r/rails</h5>
+            <h5 className='mt-2 ms-2 text-center post-header-community'>r/{post.community && post.community.name}</h5>
           </div>
         </div>
       </div>
@@ -87,7 +91,7 @@ const PostShow = () => {
       <div className="show_post">
         <div className="row mt-5">
           <div className="col-8">
-            <div className="card shadow mb-3">
+            <div className="card rounded shadow mb-3">
               <div className="row">
                 <div className="col-1 m-0 vote-col text-center">
                   <div id="vote-actions-1" className="d-block vote" data-id="1">
@@ -115,7 +119,7 @@ const PostShow = () => {
                       </div>
                     </div>
                   </div>
-                  <Reactions post={post} />
+                  {post.isclosed ? null : <Reactions post={post} />}
 
                 </div>
               </div>
@@ -180,18 +184,18 @@ const PostShow = () => {
                         Post Closed By Moderator due to Various reasons. For further Details Contact Admin</aside>
                         : null}
                       {account ? (
-                          ( (!post.isclosed) && !isBanned) ? (<Form parent={null} commentId={null} />) : null
-                        ) : (
-                          <div className='col mx-5'>
-                            <div className='card mt-3'>
-                              <div className="p-2" style={{ display: 'flex' }}>
-                                <h6 className="pt-2 text-muted">Log in or sign up to leave a comment</h6>
-                                <Link to="/signin"><div className="join-btn ms-5">Log In</div></Link>
-                                <Link to="/signup"><div className="join-btn">Sign Up</div></Link>
-                              </div>
+                        ((!post.isclosed) && !isBanned) ? (<Form parent={null} commentId={null} />) : null
+                      ) : (
+                        <div className='col mx-5'>
+                          <div className='card mt-3'>
+                            <div className="p-2" style={{ display: 'flex' }}>
+                              <h6 className="pt-2 text-muted">Log in or sign up to leave a comment</h6>
+                              <Link to="/signin"><div className="join-btn ms-5">Log In</div></Link>
+                              <Link to="/signup"><div className="join-btn">Sign Up</div></Link>
                             </div>
                           </div>
-                        )
+                        </div>
+                      )
                       }
                     </div>
                     <div className="commentssection">
@@ -209,8 +213,8 @@ const PostShow = () => {
       ) : (
         <Nopost />
       )
-    }
-  </>
+      }
+    </>
   )
 }
 export default PostShow
