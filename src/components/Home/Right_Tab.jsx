@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import {FaShieldAlt} from 'react-icons/fa'
 import '../../css/Tabright.css'
 import cover_image from '../../images/Cover-Image.jpg'
-import profile_image from '../../images/profile-img.jpeg'
+import reddit_home_avatar from '../../images/reddit_home_avatar.png'
 
 const account = JSON.parse(localStorage.getItem('account'))
 const account_url = "http://localhost:3000"
@@ -27,13 +27,8 @@ const Right_Tab = () => {
       <div className="card mt-3">
         <img src={cover_image} className="cover-img home-small-cover" alt="cover" />
         <div className="d-flex">
-        <div className="ml-3 home-small-profile">
-          {account && account.profile_image && account.profile_image.url ? [
-            <img src={`${account_url}${account.profile_image.url}`} alt="" className="home-small-profile" />
-          ] : [
-            <img src={profile_image} alt="" className="" />
-          ]}
-          
+        <div className="ml-3 home-avatar">
+        <img src={reddit_home_avatar} />    
         </div>
           <p className="mt-3 home"><b>Home</b></p>
         </div>

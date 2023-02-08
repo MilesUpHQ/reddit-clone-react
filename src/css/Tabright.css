@@ -36,6 +36,14 @@
     border: 1px solid #fff;
   }
 
+  .home-avatar img{
+    position: relative;
+    top: -30px;
+    width: 60px;
+    height: 100px;
+    overflow: hidden;
+  }
+  
   .home-small-profile img {
     position: relative;
     top: 0;
