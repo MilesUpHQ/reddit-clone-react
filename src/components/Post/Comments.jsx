@@ -81,7 +81,10 @@ const Comments = ({ highlight, isBanned }) => {
               <div className="col-12 d-flex gap-3">
               <div id="vote-actions-1" className="d-block vote" data-id="1">
                   <CommentVotesHandler
-                    
+                    comment={comment}
+                    // communityId={post.community_id}
+                    commentId={comment.id}
+                    voteCount={comment.vote_count}
                   />
                 </div>
                 {(comment.post.isclosed || isBanned) ? null : (
