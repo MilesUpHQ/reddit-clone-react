@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
-import { FaEdit, FaTrash, FaTimes, FaComment, FaFlag } from 'react-icons/fa';
-import EditPost from '../../components/Post/Form/EditPost';
+import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import { HiDotsHorizontal } from 'react-icons/hi'
+import { SlPencil, SlTrash, SlLock } from 'react-icons/sl'
+import { NavDropdown } from 'react-bootstrap';
 
 function delete_post(Post_URL) {
   return axios.delete(Post_URL).then((response) => response.data)
 }
 
-const Reactions = () => {
+const Reactions = ({ post }) => {
   const categories = [
     {
       id: 1,
@@ -31,7 +33,6 @@ const Reactions = () => {
       ]
     }
   ];
-  const [post, setPost] = useState([]);
 
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [selectedReasonId, setSelectedReasonId] = useState(null);
@@ -59,12 +60,6 @@ const Reactions = () => {
       toast.error("An error occured while Closing the Post");
     })
   }
-
-  useEffect(() => {
-    let mounted = true;
-
-    return () => (mounted = false);
-  }, []);
 
   const deletePostHandler = () => {
     confirmAlert({
@@ -129,81 +124,97 @@ const Reactions = () => {
 
   return (
     <div className='col-10'>
-      <div className="border-light" key={post.id}>
-        <div className="d-flex gap-2">
+      <div className="row mt-1 mb-1" key={post.id}>
+        <div className="col-12 d-flex gap-3">
+          <Link to='' className="list-post-tab">
+            <FaRegCommentAlt /> 0 Comments
+          </Link>
+          <Link to='' className="list-post-tab">
+            <FaShare /> Share
+          </Link>
+          <Link to='' onClick={openModal} className="list-post-tab">
+            <FaRegFlag /> Report
+          </Link>
           {account && post.account_id === account.id && (
-            <>
-              <Link to={`/r/${community_id}/p/${id}/edit`} className="btn btn-light"><FaEdit /> Edit</Link>
-              <Link to="" onClick={deletePostHandler} className="btn btn-light"><FaTrash /> Destroy</Link>
-              <Link to="#" onClick={closePostHandler} className="btn btn-light"><FaTimes /> Close</Link>
-            </>
-          )
-          }
-          <Link to='#' className='btn btn-light' ><FaComment /> Comments</Link>
-          <Link to="#" className='btn btn-light' onClick={openModal}> <FaFlag /> Report</Link>
-          <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
-            <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title">Reports</h4>
-                  <button type="button" className="close" onClick={closeModal} aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div className="modal-body">
-                  {account ? (
-                    <div>
-                      <p>Following are the Reasons for Reporting</p>
-                      <form>
-                        {categories.map(category => (
-                          <div key={category.id} className="form-group">
-                            <div className="form-check">
-                              <input
-                                type="radio"
-                                className="form-check-input"
-                                checked={selectedCategoryId === category.id}
-                                onChange={() => {
-                                  setSelectedCategoryId(category.id);
-                                  setSelectedCategoryName(category.name);
-                                }}
-                              />
-                              <label className="form-check-label">{category.name}</label>
-                              <br />
-                            </div>
-                            {selectedCategoryId === category.id && (
-                              <div className="sub-comment">
-                                {category.report_reasons.map(reason => (
-                                  <div key={reason.id} className="form-check">
-                                    <input
-                                      type="radio"
-                                      className="form-check-input"
-                                      checked={selectedReasonId === reason.id}
-                                      onChange={() => {
-                                        setSelectedReasonId(reason.id);
-                                        setSelectedReasonName(reason.reason);
-                                      }}
-                                    />
-                                    <label className="form-check-label">{reason.reason}</label>
-                                    <br />
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
-                        ))}
-                        <div className="modal-footer">
-                          <button type="submit" className="btn btn-danger" onClick={ReportHandler}>Report</button>
+            <NavDropdown
+              title={<HiDotsHorizontal />}
+              className="list-post-tab"
+            >
+              <NavDropdown.Item className='text-muted' href={`/r/${community_id}/p/${id}/edit`}>
+                <SlPencil className='me-2' />Edit
+              </NavDropdown.Item>
+              <NavDropdown.Item className='text-muted' onClick={deletePostHandler} href=''>
+                <SlTrash className='me-2' />Delete
+              </NavDropdown.Item>
+              <NavDropdown.Item className='text-muted' onClick={closePostHandler} href=''>
+                <SlLock className='me-2' />Close
+              </NavDropdown.Item>
+            </NavDropdown>
+          )}
+        </div>
+      </div>
+
+      <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h4 className="modal-title">Reports</h4>
+              <button type="button" className="close" onClick={closeModal} aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              {account ? (
+                <div>
+                  <p>Following are the Reasons for Reporting</p>
+                  <form>
+                    {categories.map(category => (
+                      <div key={category.id} className="form-group">
+                        <div className="form-check">
+                          <input
+                            type="radio"
+                            className="form-check-input"
+                            checked={selectedCategoryId === category.id}
+                            onChange={() => {
+                              setSelectedCategoryId(category.id);
+                              setSelectedCategoryName(category.name);
+                            }}
+                          />
+                          <label className="form-check-label">{category.name}</label>
+                          <br />
                         </div>
-                      </form>
+                        {selectedCategoryId === category.id && (
+                          <div className="sub-comment">
+                            {category.report_reasons.map(reason => (
+                              <div key={reason.id} className="form-check">
+                                <input
+                                  type="radio"
+                                  className="form-check-input"
+                                  checked={selectedReasonId === reason.id}
+                                  onChange={() => {
+                                    setSelectedReasonId(reason.id);
+                                    setSelectedReasonName(reason.reason);
+                                  }}
+                                />
+                                <label className="form-check-label">{reason.reason}</label>
+                                <br />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                    <div className="modal-footer">
+                      <button type="submit" className="btn btn-danger" onClick={ReportHandler}>Report</button>
                     </div>
-                  ) : (
-                    <div>
-                      <p> Log in to Report </p>
-                      <Link to="/signin"><div className="join-btn">Log In</div></Link>
-                    </div>
-                  )}
+                  </form>
                 </div>
-              </div>
+              ) : (
+                <div>
+                  <p> Log in to Report </p>
+                  <Link to="/signin"><div className="join-btn">Log In</div></Link>
+                </div>
+              )}
             </div>
           </div>
         </div>
