@@ -7,7 +7,7 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const limit = 15;
+  const [limit, setLimit] = useState(100);
   const account = JSON.parse(localStorage.getItem('account'));
 
   useEffect(() => {

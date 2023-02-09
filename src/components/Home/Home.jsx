@@ -24,7 +24,7 @@ const Home = () => {
   let { id, community_id } = useParams();
   const [hasMore, setHasMore] = useState(true);
   const [activeTab, setActiveTab] = useState("best");
-  const limit = 15
+  const [limit, setLimit] = useState(100)
   useEffect(() => {
     switch (activeTab) {
       case "best":
