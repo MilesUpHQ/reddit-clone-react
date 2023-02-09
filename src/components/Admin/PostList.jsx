@@ -1,6 +1,6 @@
 import React from 'react'
-import {List, Datagrid, TextField, DateField, EditButton, DeleteButton} from 'react-admin'
-import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput} from 'react-admin'
+import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext} from 'react-admin'
+import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, ReferenceInput} from 'react-admin'
 const PostList = (props) => {
   const handleDelete = async (id) => {
     try {
@@ -22,14 +22,19 @@ const PostList = (props) => {
   </List>
 };
 
+const PostTitle = () => {
+  const record = useRecordContext();
+  return <span>Edit {record ? `"${record.title}"` : ''} </span>;
+  };
+
 export const PostEdit = () => (
-  <Edit>
+  <Edit title={<PostTitle />}>
       <SimpleForm>
           <TextInput source="id" />
           <NumberInput source="community.id" />
           <NumberInput source="account.id" />
           <TextInput source="title" />
-          <TextInput source="body" />
+          <TextInput source="body" multiline rows={3}/>
           <BooleanInput source="isclosed" />
           <BooleanInput source="is_drafted" />
           <NumberInput source="vote_count" />
