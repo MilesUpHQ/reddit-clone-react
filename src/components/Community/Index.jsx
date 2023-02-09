@@ -21,7 +21,7 @@ const Index = () => {
     axios.get(`http://localhost:3000/api/v1/communities?page=${page}`)
       .then(response => {
         setCommunities([...communities, ...response.data.communities]);
-        setHasMore(response.data.total_pages >= page);
+        setHasMore(response.data.total_pages > page);
       })
       .catch(error => {
         console.error(error);

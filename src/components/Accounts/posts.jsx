@@ -7,14 +7,14 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [limit, setLimit] = useState(100);
+  const limit = 15;
   const account = JSON.parse(localStorage.getItem('account'));
 
   useEffect(() => {
     axios.get(`http://localhost:3000/api/v1/communities/1/posts?page=${page}&limit=${limit}`)
       .then(response => {
         setPosts([...posts, ...response.data.posts]);
-        setHasMore(response.data.total_pages > page);
+        setHasMore(response.data.total_posts > page);
       })
       .catch(error => {
         console.error(error);
@@ -29,7 +29,8 @@ const Posts = () => {
     return () => {
       window.onscroll = null;
     };
-  }, [hasMore, page]);
+  }, [hasMore, page, limit]);
+
 
   return (
     <div>
