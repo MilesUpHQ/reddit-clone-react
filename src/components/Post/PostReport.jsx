@@ -79,6 +79,11 @@ const PostReport = () => {
     })
       .catch(error => {
         console.log(error.response.data);
+        if(error.response.data.post_id){
+          setAllDefault()
+          toast.warning("You have Already Reported this post!");
+          return
+        }
         toast.error("An error occured while submitting the report");
       });
     console.log("reported")
