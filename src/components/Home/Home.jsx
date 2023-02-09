@@ -118,28 +118,28 @@ const Home = () => {
                       <Tab eventKey="best" title={<span>
                         <span style={{ fontSize: '20px' }}><IoMdRocket /></span> Best
                       </span>} tabClassName="tab-nav-link">
-                        <Best posts={posts.best_posts} />
+                        <Best posts={bestposts} />
                       </Tab>
                     )}
                     {posts && (
                       <Tab eventKey="hot" title={<span>
                         <span style={{ fontSize: '20px' }}><FaFire /></span> Hot
                       </span>} tabClassName="tab-nav-link">
-                        <Hot posts={posts.hot_posts} />
+                        <Hot posts={hotposts} />
                       </Tab>
                     )}
                     {posts && (
                       <Tab eventKey="new" title={<span>
                         <span style={{ fontSize: '20px' }}><FaSun /></span> New
                       </span>} tabClassName="tab-nav-link">
-                        <New posts={posts.new_posts} />
+                        <New posts={newposts} />
                       </Tab>
                     )}
                     {posts && (
                       <Tab eventKey="top" title={<span>
                       <span style={{ fontSize: '20px' }}><FaPoll /></span> Top
                     </span>} tabClassName="tab-nav-link">
-                        <Top posts={posts.top_posts} />
+                        <Top posts={topposts} />
                       </Tab>
                     )}
                     {posts && (
