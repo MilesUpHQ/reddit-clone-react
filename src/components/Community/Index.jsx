@@ -11,16 +11,21 @@ const Index = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [mounted, setMounted] = useState(false);
-
+  const limit = 10;
   useEffect(() => {
     if (!mounted) {
       setMounted(true);
       return;
     }
 
-    axios.get(`http://localhost:3000/api/v1/communities?page=${page}`)
+    axios.get(`http://localhost:3000/api/v1/communities?page=${page}&limit=${limit}`)
       .then(response => {
-        setCommunities([...communities, ...response.data.communities]);
+        if (page === 1) {
+          setCommunities(response.data.communities);
+        } else {
+          setCommunities(prevCommunities => [...prevCommunities, ...response.data.communities]);
+        }
+
         setHasMore(response.data.total_pages > page);
       })
       .catch(error => {

@@ -35,7 +35,7 @@ const Posts = () => {
   return (
     <div>
       {posts.length ? (
-        <PostList posts={posts.filter(post => post.account_id === account.id).reverse()} />
+        <PostList posts={posts.filter(post => post.account_id === account.id)} />
       ) : (
         <h4 className="card-title">No Profile posts created</h4>
       )}
