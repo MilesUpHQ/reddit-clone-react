@@ -1,6 +1,5 @@
 import React,{useState,useEffect}from 'react'
 import { toast } from 'react-toastify';
-const CATEGORIES = ["Sports", "Gaming", "Technology", "News", "TV", "Music", "Crypto", "Fashion", "Food", "Health", "Science", "Finance"];
 
 const Form = ({ community, onChange, onSubmit, errorJson }) => {
   const account = JSON.parse(localStorage.getItem('account'))
