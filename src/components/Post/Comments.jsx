@@ -8,6 +8,7 @@ import Form from '../Comment/Form';
 import PostApi from '../Home/PostApi';
 import { Markup } from 'interweave';
 import { FaRegCommentAlt } from 'react-icons/fa';
+import CommentVotesHandler from './CommentVotesHandler';
 
 const Comments = ({ highlight, isBanned }) => {
   const { comments, setComments } = PostApi();
@@ -78,6 +79,11 @@ const Comments = ({ highlight, isBanned }) => {
             </p>
             <div className="row mt-1 mb-1">
               <div className="col-12 d-flex gap-3">
+              <div id="vote-actions-1" className="d-block vote" data-id="1">
+                  <CommentVotesHandler
+                    
+                  />
+                </div>
                 {(comment.post.isclosed || isBanned) ? null : (
                   <Link to='' className="list-post-tab" onClick={(event) => handleClick(event, comment.id)}>
                     <FaRegCommentAlt /> Reply
