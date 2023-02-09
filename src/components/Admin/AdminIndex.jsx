@@ -1,5 +1,7 @@
 import React from 'react'
 import { Admin, Resource} from 'react-admin'
+import PostIcon from "@mui/icons-material/Book";
+
 import axios from 'axios'
 import PostList,{PostEdit} from './PostList';
 
@@ -50,7 +52,7 @@ const AdminIndex = () => {
         return Promise.reject(error);
       }
     }}>
-      <Resource name='posts' list={PostList} edit={PostEdit} path="/posts"  />
+      <Resource name='posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
     </Admin>
   )
 };
