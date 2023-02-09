@@ -1,32 +1,3 @@
-.tab-nav-link {
-  background-color: #fff;
-  padding: 5px 20px;
-  display: inline-block;
-  border-radius: 25px;
-}
-
-.tab-nav-link.active {
-  background: #f6f7f8;
-  color: #007BFF;
-}
-
-.tab-nav-link.active a {
-  color: #007BFF;
-}
-
-.tab-nav-link a {
-  color: #636c72;
-  font-size: 1em;
-  font-weight: 700;
-  text-align: center;
-  text-decoration: none;
-}
-
-.tab-nav-link a:hover {
-  text-decoration: none;
-  color: #007BFF;
-}
-
 .premium-join {
   background-color: #ff4500;
   padding: 3px 30px;
