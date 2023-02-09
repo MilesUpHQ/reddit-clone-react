@@ -4,7 +4,7 @@ import { GoArrowUp, GoArrowDown } from 'react-icons/go'
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
-const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
+const CommentVotesHandler = ({ comment, post, commentId, voteCount }) => {
   const account = JSON.parse(localStorage.getItem('account'))
   const [count, setCount] = useState();
   let { id, community_id } = useParams();
@@ -16,9 +16,9 @@ const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
     setCount(voteCount);
     setupvoteClass(commentVote && commentVote.value === 1 ? 'voted' : '');
     setdownvoteClass(commentVote && commentVote.value === -1 ? 'voted' : '');
-  }, [comment]);
+  }, [post]);
 
-  const handleUpvote = async () => {
+  const handleVote = async (value) => {
     await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`)
       .then(response => {
         let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id)
@@ -34,50 +34,29 @@ const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
           axios
             .post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes `, {
               comment_vote: {
-                value: 1,
+                value: value,
                 account_id: account.id
               },
             })
             .then((response) => {
               setCount(response.data);
+              if (value === 1) {
               setupvoteClass("voted")
               setdownvoteClass("")
-            });
-        }
-      });
-  };
-
-  const handleDownvote = async () => {
-    await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`)
-      .then(response => {
-        let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id)
-        if (comment_vote) {
-          axios
-            .delete(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes/${comment_vote.id}`)
-            .then((response) => {
-              setCount(commentVote ? --voteCount : voteCount--);
-              setupvoteClass("")
-              setdownvoteClass("")
-            });
-        } else {
-          axios
-            .post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes `, {
-              comment_vote: {
-                value: -1,
-                account_id: account.id
-              },
-            })
-            .then((response) => {
-              setCount(response.data);
+            } else {
               setdownvoteClass("voted")
               setupvoteClass("")
+            }
             });
         }
       });
   };
 
+  const handleUpvote = () => handleVote(1);
+  const handleDownvote = () => handleVote(-1);
+
   return (
-    <div style={{ display: "flex" }} className='mt-0'>
+    <div style={{ display: "flex" }} className='mb-3'>
       <div className={`vote-icon upvote ${upvoteClass}`}>
         {upvoteClass ?
           <GoArrowUp onClick={handleUpvote} />
