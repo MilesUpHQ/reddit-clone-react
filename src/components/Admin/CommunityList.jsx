@@ -1,6 +1,6 @@
 import React from 'react'
 import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext} from 'react-admin'
-import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required} from 'react-admin'
+import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required, regex} from 'react-admin'
 const CommunityList = (props) => {
   const handleDelete = async (id) => {
     try {
@@ -30,16 +30,17 @@ const CommunityTitle = () => {
   };
 
 
-const validateNull = [required()];
+const validateNull = (sourceName) => [required(`${sourceName} is required`)];
+const validateUrl = regex(/^(http|https):\/\//, 'Must be a valid URL');
 
 export const CommunityEdit = () => (
   <Edit title={<CommunityTitle />}>
       <SimpleForm>
           <TextInput source="id" />
           <NumberInput source="account.id" />
-          <TextInput source="name" validate={validateNull}/>
-          <TextInput source="url"  />
-          <TextInput source="rules" />
+          <TextInput source="name" validate={validateNull('Name')} />
+          <TextInput source="url"  validatr={validateUrl()}/>
+          <TextInput source="rules" validate={validateNull('Rule')}/>
       </SimpleForm>
   </Edit>
 );
