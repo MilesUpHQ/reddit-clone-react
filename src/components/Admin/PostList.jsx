@@ -1,5 +1,5 @@
 import React from 'react'
-import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext} from 'react-admin'
+import {List, Datagrid, TextField, NumberField, EditButton, DeleteButton, useRecordContext} from 'react-admin'
 import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, ReferenceInput, required} from 'react-admin'
 const PostList = (props) => {
   const handleDelete = async (id) => {
@@ -10,10 +10,10 @@ const PostList = (props) => {
       console.error(error);
     }
   };
-
+  
   return <List {...props}>
     <Datagrid>
-      <TextField source='id' />
+      <NumberField source='id' />
       <TextField source='title' />
       <TextField source='body' />
       <EditButton basePath='/posts' />
