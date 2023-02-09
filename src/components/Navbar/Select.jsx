@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Select from 'react-select'
+import {BiSearch} from "react-icons/bi"
 
 function Autocomplete() {
     const [options, setOptions] = useState([])
@@ -110,11 +111,14 @@ function Autocomplete() {
      onInputChange={handleInputChange}
      onChange={setSelectedOption}
      onKeyDown={handleKeyDown}
-     placeholder = "Search Reddit"
+     placeholder = {<span><BiSearch /> Search Reddit</span>} 
      styles={{
        control: (base, state) => ({
        ...base,
-       width: "300px",
+       width: "350px",
+       height: "45px",
+       marginTop: "3px",
+       backgroundColor: "#edeff1",
        borderRadius: "20px",
        borderColor: state.isFocused ? "#3f51b5" : "#ccc",
        "&:hover": {
