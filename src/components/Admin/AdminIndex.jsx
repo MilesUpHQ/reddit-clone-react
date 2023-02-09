@@ -22,10 +22,16 @@ const AdminIndex = () => {
         });
       }
       if (type === 'CREATE'){
-        return dataProvider.create(`${resource}/${params.id}`,{
-          data: params
-        })
+        try {
+          const response = await dataProvider.post(`${resource}`, params.data);
+          console.log(response);
+          return { data: response.data };
+        } catch (error) {
+          console.error(error);
+          return Promise.reject(error);
+        }
       }
+
 
       if (type === 'GET_ONE') {
         try {
