@@ -18,14 +18,43 @@ const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
     setdownvoteClass(commentVote && commentVote.value === -1 ? 'voted' : '');
   }, [comment]);
 
-  
+  const handleUpvote = async () => {
+    await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`)
+      .then(response => {
+        let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id)
+        if (comment_vote) {
+          axios
+            .delete(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes/${comment_vote.id}`)
+            .then((response) => {
+              setCount(commentVote ? --voteCount : voteCount--);
+              setupvoteClass("")
+              setdownvoteClass("")
+            });
+        } else {
+          axios
+            .post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes `, {
+              comment_vote: {
+                value: 1,
+                account_id: account.id
+              },
+            })
+            .then((response) => {
+              setCount(response.data);
+              setupvoteClass("voted")
+              setdownvoteClass("")
+            });
+        }
+      });
+  };
+
+
   return (
     <div style={{ display: "flex" }} className='mt-0'>
       <div className={`vote-icon upvote ${upvoteClass}`}>
         {upvoteClass ?
-          <GoArrowUp />
+          <GoArrowUp onClick={handleUpvote} />
           :
-          <TbArrowBigTop />
+          <TbArrowBigTop onClick={handleUpvote} />
         }
       </div>
       <span className={`vote-score upvote_${upvoteClass} downvote_${downvoteClass}`}>{count}</span>
