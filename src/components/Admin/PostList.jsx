@@ -4,7 +4,7 @@ import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, Referen
 const PostList = (props) => {
   const handleDelete = async (id) => {
     try {
-      await props.dataProvider('DELETE', 'post/${id}');
+      await props.dataProvider('DELETE', 'communities/1/post/${id}');
       props.refresh();
     } catch (error) {
       console.error(error);

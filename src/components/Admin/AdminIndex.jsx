@@ -8,20 +8,20 @@ import CommunityList,{CommunityEdit} from './CommunityList';
 import { Dashboard } from './Dashboard';
 
 const dataProvider = axios.create({
-  baseURL: 'http://localhost:3001/api/v1/communities/1/',
+  baseURL: 'http://localhost:3001/api/v1/',
 });
 
 const AdminIndex = () => {
   return (
     <Admin dataProvider={async (type, resource, params) => {
       if (type === 'DELETE') {
-        return dataProvider.delete(`posts/${params.id}`, {
+        return dataProvider.delete(`communities/1/posts/${params.id}`, {
           data: params
         });
       }
       if (type === 'GET_ONE') {
         try {
-          const response = await dataProvider.get(`posts/${params.id}`);
+          const response = await dataProvider.get(`communities/1/posts/${params.id}`);
           return { data: response.data };
         } catch (error) {
           return Promise.reject(error);
@@ -30,7 +30,7 @@ const AdminIndex = () => {
 
       if (type === 'UPDATE') {
         try {
-          const response = await dataProvider.put(`posts/${params.id}`, params.data);
+          const response = await dataProvider.put(`communities/1/posts/${params.id}`, params.data);
           return { data: response.data };
         } catch (error) {
           return Promise.reject(error);
@@ -40,7 +40,7 @@ const AdminIndex = () => {
       try {
         const requestConfig = {
           method: 'GET',
-          url: resource,
+          url: 'communities/1/posts',
           headers: { 'Content-Type': 'application/json' },
         };
         const response = await dataProvider(requestConfig);
