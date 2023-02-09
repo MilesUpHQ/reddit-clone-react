@@ -1,12 +1,11 @@
-import moment from 'moment'
 import React from 'react'
+import moment from 'moment'
+import { Link, useParams } from 'react-router-dom'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
 import { GiCakeSlice } from 'react-icons/gi'
 import { GoPrimitiveDot } from 'react-icons/go'
 import { IoShieldOutline } from 'react-icons/io5'
-import { Link, useParams } from 'react-router-dom'
 import reddit_logo from '../../images/reddit-logo.png'
-import JoinButton from './joinButton'
 
 const AboutCommunity = ({ community, isBanned, postShow }) => {
   const { id } = useParams()
@@ -31,16 +30,16 @@ const AboutCommunity = ({ community, isBanned, postShow }) => {
           </p>
         </div>
         {postShow &&
-        <div className="d-flex mt-3">
-          <div className="ms-3 post-header-community-img">
-          {community && community.profile_image && community.profile_image.url ? [
-            <img src={`http://localhost:3000${community.profile_image.url}`} alt="" />
-          ] : [
-            <img src={reddit_logo} alt="" />
-          ]}
+          <div className="d-flex mt-3">
+            <div className="ms-3 post-header-community-img">
+              {community && community.profile_image && community.profile_image.url ? [
+                <img src={`http://localhost:3000${community.profile_image.url}`} alt="" />
+              ] : [
+                <img src={reddit_logo} alt="" />
+              ]}
+            </div>
+            <p className='mt-2 ms-2'>r/{community.name}</p>
           </div>
-          <p className='mt-2 ms-2'>r/{community.name}</p>
-        </div>
         }
         <div className="about-community-summary p-2 ps-3">
           <p className='mb-3'>{community.summary}</p>

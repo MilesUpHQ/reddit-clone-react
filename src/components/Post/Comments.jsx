@@ -7,7 +7,7 @@ import moment from 'moment';
 import Form from '../Comment/Form';
 import PostApi from '../Home/PostApi';
 import { Markup } from 'interweave';
-import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa';
+import { FaRegCommentAlt } from 'react-icons/fa';
 
 const Comments = ({ highlight, isBanned }) => {
   const { comments, setComments } = PostApi();
@@ -18,9 +18,10 @@ const Comments = ({ highlight, isBanned }) => {
   const Post_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/`;
   const commentRef = useRef(null);
 
-  function get_post_comments(post_id) {
+  const get_post_comments = (post_id) => {
     return axios.get(Post_URL + post_id + '/comments').then((response) => response.data)
   }
+
   useEffect(() => {
     let mounted = true;
     get_post_comments(id).then((items) => {
@@ -89,7 +90,7 @@ const Comments = ({ highlight, isBanned }) => {
               {comments
                 .filter(sub_comment => sub_comment.parent_id === comment.id)
                 .map(reply => renderComment(reply, comments))}
-            </div>  
+            </div>
           </div>
         </div>
       </div>
@@ -100,7 +101,8 @@ const Comments = ({ highlight, isBanned }) => {
     <div>
       <div className="mb-4" key={highlight.id}>
         {highlight &&
-          <Link to={`/r/${community_id}/p/${highlight.post_id}`}>View all comments</Link>
+          <Link to={`/r/${community_id}/p/${highlight.post_id}`} className='text-decoration-none fw-bold'>
+            View all comments</Link>
         }
       </div>
       {comments.map(comment => {

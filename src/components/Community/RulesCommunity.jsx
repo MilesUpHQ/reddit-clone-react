@@ -1,5 +1,5 @@
-import { Markup } from 'interweave'
 import React from 'react'
+import { Markup } from 'interweave'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
 
 const RulesCommunity = ({ community }) => {

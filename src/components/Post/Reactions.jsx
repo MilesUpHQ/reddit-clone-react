@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
-import { FaEdit, FaTrash, FaTimes, FaComment, FaFlag, FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa';
+import { FaRegCommentAlt, FaRegFlag, FaShare } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { SlPencil, SlTrash, SlLock } from 'react-icons/sl'
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { NavDropdown } from 'react-bootstrap';
 
 function delete_post(Post_URL) {
   return axios.delete(Post_URL).then((response) => response.data)
@@ -60,12 +60,6 @@ const Reactions = ({ post }) => {
       toast.error("An error occured while Closing the Post");
     })
   }
-
-  useEffect(() => {
-    let mounted = true;
-
-    return () => (mounted = false);
-  }, []);
 
   const deletePostHandler = () => {
     confirmAlert({
