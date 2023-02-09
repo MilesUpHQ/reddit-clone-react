@@ -22,11 +22,11 @@ const navbar = () => {
 
   return (
     <div className=''>
-      <div className="p-1 bg-light mr-auto">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="bg-white mr-auto">
+        <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="navbar-nav">
             <img src={reddit_logo} alt="" className="navbar-brand" width="35" height="45" />
-            <a href="/" className="navbar-brand">Reddit Clone</a>
+            <a href="/" className="navbar-brand-name">reddit</a>
           </div>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
