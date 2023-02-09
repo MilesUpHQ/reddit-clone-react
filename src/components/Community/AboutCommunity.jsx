@@ -68,7 +68,7 @@ const AboutCommunity = ({ community, isBanned, postShow }) => {
         {!isBanned ? (
           <>
             <hr className='mt-1 me-3 ms-3' />
-            {postShow && <Link to={`/r/${community.id}/`} className='me-3 ms-3 join-btn'>Joined</Link>}
+            {postShow && <Link to={`/r/${community.id}/`} className='me-3 ms-3 join-btn'>View Community</Link>}
             <Link to='/new' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
             <hr className='mt-3 me-3 ms-3' />
             <div className="p-3">
