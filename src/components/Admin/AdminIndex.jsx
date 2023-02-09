@@ -1,9 +1,9 @@
 import React from 'react'
 import { Admin, Resource} from 'react-admin'
 import PostIcon from "@mui/icons-material/Book";
-
 import axios from 'axios'
 import PostList,{PostEdit} from './PostList';
+import { Dashboard } from './Dashboard';
 
 const dataProvider = axios.create({
   baseURL: 'http://localhost:3001/api/v1/communities/1/',
@@ -51,7 +51,7 @@ const AdminIndex = () => {
       } catch (error) {
         return Promise.reject(error);
       }
-    }}>
+    }}  dashboard={Dashboard}>
       <Resource name='posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
     </Admin>
   )
