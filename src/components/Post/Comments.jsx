@@ -79,9 +79,10 @@ const Comments = ({ highlight, isBanned }) => {
             </p>
             <div className="row mt-1 mb-1">
               <div className="col-12 d-flex gap-3">
-              <div id="vote-actions-1" className="d-block vote" data-id="1">
+                <div id="vote-actions-1" className="d-block vote mb-3" data-id="1">
                   <CommentVotesHandler
                     comment={comment}
+                    post={comment.post}
                     commentId={comment.id}
                     voteCount={comment.vote_count}
                   />
