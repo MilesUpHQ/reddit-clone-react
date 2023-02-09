@@ -144,7 +144,7 @@ const PostShow = () => {
                 </div>
               </div>
               <div className="col-sm-4">
-                <CommunityDetails post={post} />
+                <CommunityDetails post={post} isBanned={isBanned} />
               </div>
             </div>
           </div>
