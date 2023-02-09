@@ -24,6 +24,24 @@ const CommunityList = (props) => {
   </List>
 };
 
+const CommunityTitle = () => {
+  const record = useRecordContext();
+  return <span>Edit {record ? `"${record.name}"` : ''} </span>;
+  };
 
+
+const validateNull = [required()];
+
+export const CommunityEdit = () => (
+  <Edit title={<CommunityTitle />}>
+      <SimpleForm>
+          <TextInput source="id" />
+          <NumberInput source="account.id" />
+          <TextInput source="name" validate={validateNull}/>
+          <TextInput source="url"  />
+          <TextInput source="rules" />
+      </SimpleForm>
+  </Edit>
+);
 
 export default CommunityList;
