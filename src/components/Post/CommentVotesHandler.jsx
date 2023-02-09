@@ -47,6 +47,34 @@ const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
       });
   };
 
+  const handleDownvote = async () => {
+    await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`)
+      .then(response => {
+        let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id)
+        if (comment_vote) {
+          axios
+            .delete(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes/${comment_vote.id}`)
+            .then((response) => {
+              setCount(commentVote ? --voteCount : voteCount--);
+              setupvoteClass("")
+              setdownvoteClass("")
+            });
+        } else {
+          axios
+            .post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes `, {
+              comment_vote: {
+                value: -1,
+                account_id: account.id
+              },
+            })
+            .then((response) => {
+              setCount(response.data);
+              setdownvoteClass("voted")
+              setupvoteClass("")
+            });
+        }
+      });
+  };
 
   return (
     <div style={{ display: "flex" }} className='mt-0'>
@@ -57,12 +85,12 @@ const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
           <TbArrowBigTop onClick={handleUpvote} />
         }
       </div>
-      <span className={`vote-score upvote_${upvoteClass} downvote_${downvoteClass}`}>{count}</span>
+      <span className={`vote-score upvote_${upvoteClass} downvote_${downvoteClass} mt-3 mx-2`}>{count}</span>
       <div className={`vote-icon downvote ${downvoteClass}`}>
         {downvoteClass ?
-          <GoArrowDown />
+          <GoArrowDown onClick={handleDownvote} />
           :
-          <TbArrowBigDown />
+          <TbArrowBigDown onClick={handleDownvote} />
         }
       </div>
     </div>
