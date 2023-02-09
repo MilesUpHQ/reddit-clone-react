@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Create_Post from './Create_Post';
 import Right_Tab from './Right_Tab';
-import { FaFire, FaPoll } from 'react-icons/fa'
-import {IoMdRocket} from 'react-icons/io'
-import {CiSun} from 'react-icons/ci'
-import '../../css/Tab.css'
+import { FaFire, FaPoll, FaSun } from 'react-icons/fa'
+import { IoMdRocket } from 'react-icons/io'
+import { CiSun } from 'react-icons/ci'
 import Best from './Tabs/Best';
 import Hot from './Tabs/Hot';
 import New from './Tabs/New';
@@ -13,6 +12,9 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../css/Community.css'
 import PostApi from './PostApi';
+import { Dropdown, DropdownButton } from "react-bootstrap";
+import { HiDotsHorizontal, HiTrendingUp } from 'react-icons/hi';
+import { RiLayoutRowLine } from 'react-icons/ri'
 
 const Home = () => {
   const { get_all_posts, get_best_posts, get_hot_posts, get_new_posts, get_top_posts } = PostApi();
@@ -62,23 +64,43 @@ const Home = () => {
                     className="card categories p-2 d-flex flex-row mb-3"
                   >
                     {posts && (
-                      <Tab eventKey="best" title={<span>{<IoMdRocket />} Best</span>} tabClassName="tab-nav-link">
+                      <Tab eventKey="best" title={<span>
+                        <span style={{ fontSize: '20px' }}><IoMdRocket /></span> Best
+                      </span>} tabClassName="tab-nav-link">
                         <Best posts={posts.best_posts} />
                       </Tab>
                     )}
                     {posts && (
-                      <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="tab-nav-link">
+                      <Tab eventKey="hot" title={<span>
+                        <span style={{ fontSize: '20px' }}><FaFire /></span> Hot
+                      </span>} tabClassName="tab-nav-link">
                         <Hot posts={posts.hot_posts} />
                       </Tab>
                     )}
                     {posts && (
-                      <Tab eventKey="new" title={<span>{<CiSun />} New</span>} tabClassName="tab-nav-link">
+                      <Tab eventKey="new" title={<span>
+                        <span style={{ fontSize: '20px' }}><FaSun /></span> New
+                      </span>} tabClassName="tab-nav-link">
                         <New posts={posts.new_posts} />
                       </Tab>
                     )}
                     {posts && (
-                      <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="tab-nav-link">
+                      <Tab eventKey="top" title={<span>
+                      <span style={{ fontSize: '20px' }}><FaPoll /></span> Top
+                    </span>} tabClassName="tab-nav-link">
                         <Top posts={posts.top_posts} />
+                      </Tab>
+                    )}
+                    {posts && (
+                      <Tab title={<span>
+                      <span style={{ fontSize: '20px' }}>{<HiDotsHorizontal />}</span> 
+                    </span>} tabClassName="tab-nav-link">
+                      </Tab>
+                    )}
+                    {posts && (
+                      <Tab title={<span>
+                      <span style={{ fontSize: '25px' }}>{<RiLayoutRowLine />}</span> 
+                    </span>} tabClassName="grid">
                       </Tab>
                     )}
                   </Tabs>
