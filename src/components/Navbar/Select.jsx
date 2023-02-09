@@ -115,7 +115,7 @@ function Autocomplete() {
      styles={{
        control: (base, state) => ({
        ...base,
-       width: "350px",
+       width: "390px",
        height: "45px",
        marginTop: "3px",
        backgroundColor: "#edeff1",

@@ -16,8 +16,9 @@ import { TbMessageCircle } from 'react-icons/tb'
 import avatar_drop from '../../images/avatar-drop.png';
 import { GiStarFormation, GiCheckedShield } from "react-icons/gi";
 import { IoShirtOutline } from "react-icons/io5";
-import { GrEmptyCircle } from "react-icons/gr";
+import { GrAnnounce, GrEmptyCircle } from "react-icons/gr";
 import { SlGlobeAlt } from "react-icons/sl";
+import { BiComment, BiShield } from 'react-icons/bi';
 
 const navbar = () => {
   const data = [
@@ -85,8 +86,17 @@ const navbar = () => {
                 </form>
               </li>
             </ul>
+            <li className='d-flex p-3 navicons gap-4'>
+                <BsArrowUpRightCircle />
+                <BsCoin />
+                <TbMessageCircle />
+                <BiShield />
+                <BiComment />
+                <BsBell />
+                <BsPlusLg />
+                <GrAnnounce />
+              </li>
           </div>
-
           {account ? [
             <div className="d-flex gap-2">
               <div className="karma">

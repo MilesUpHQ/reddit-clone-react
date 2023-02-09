@@ -146,3 +146,23 @@ button {
 .star{
   color: orangered;
 }
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+.navicons {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+
+
