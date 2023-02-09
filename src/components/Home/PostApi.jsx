@@ -5,31 +5,38 @@ import { toast } from 'react-toastify';
 
 const PostApi = () => {
   const [comments, setComments] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(3);
   const [text, setText] = useState('');
   let { id, community_id } = useParams();
-  const Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts'
-  const Hot_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/hot_posts'
-  const New_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/new_posts'
-  const Best_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/best_posts'
-  const Top_Posts_URL = 'http://localhost:3000/api/v1/communities/1/posts/1/top_posts'
+  const Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts?page=${page}&limit=${limit}`
+  const Hot_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/hot_posts?page=${page}&limit=${limit}`
+  const New_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/new_posts?page=${page}&limit=${limit}`
+  const Best_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/best_posts?page=${page}&limit=${limit}`
+  const Top_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/top_posts?page=${page}&limit=${limit}`
   const Comments_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`
   const navigate = useNavigate()
 
-  const get_all_posts = () => {
-    return axios.get(Posts_URL).then((response) => response.data)
+  const get_all_posts = (page = 1, limit = 2) => {
+    return axios.get(`${Posts_URL}?page=${page}&limit=${limit}`).then((response) => response.data)
   }
-  const get_hot_posts = () => {
-    return axios.get(Hot_Posts_URL).then((response) => response.data)
+
+  const get_hot_posts = (page = 1, limit = 2) => {
+    return axios.get(`${Hot_Posts_URL}?page=${page}&limit=${limit}`).then((response) => response.data)
   }
-  const get_new_posts = () => {
-    return axios.get(New_Posts_URL).then((response) => response.data)
+
+  const get_new_posts = (page = 1, limit = 2) => {
+    return axios.get(`${New_Posts_URL}?page=${page}&limit=${limit}`).then((response) => response.data)
   }
-  const get_best_posts = () => {
-    return axios.get(Best_Posts_URL).then((response) => response.data)
+
+  const get_best_posts = (page = 1, limit = 2) => {
+    return axios.get(`${Best_Posts_URL}?page=${page}&limit=${limit}`).then((response) => response.data)
   }
-  const get_top_posts = () => {
-    return axios.get(Top_Posts_URL).then((response) => response.data)
+
+  const get_top_posts = (page = 1, limit = 2) => {
+    return axios.get(`${Top_Posts_URL}?page=${page}&limit=${limit}`).then((response) => response.data)
   }
+
 
   const set_comments = async (currentText, parent) => {
     if (!currentText) {
