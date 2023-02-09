@@ -28,7 +28,7 @@ const PostTitle = () => {
   };
 
 
-const validateNull = [required()];
+  const validateNull = (sourceName) => [required(`${sourceName} is required`)];
 
 export const PostEdit = () => (
   <Edit title={<PostTitle />}>
@@ -36,8 +36,8 @@ export const PostEdit = () => (
           <TextInput source="id" />
           <NumberInput source="community.id" />
           <NumberInput source="account.id" />
-          <TextInput source="title" validate={validateNull}/>
-          <TextInput source="body" multiline rows={3} validate={validateNull}/>
+          <TextInput source="title" validate={validateNull('Title')}/>
+          <TextInput source="body" multiline rows={3} validate={validateNull('Body')}/>
           <BooleanInput source="isclosed" />
           <BooleanInput source="is_drafted" />
           <NumberInput source="vote_count" />
