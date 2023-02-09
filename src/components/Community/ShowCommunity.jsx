@@ -17,6 +17,8 @@ import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 import Nocommunity from './Nocommunity';
+import AboutCommunity from './AboutCommunity';
+import RulesCommunity from './RulesCommunity';
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
 
@@ -152,66 +154,8 @@ const ShowCommunity = () => {
                 </div>
               </div>
               <div className="col-sm-4">
-                <div className="card">
-                  <div className="rounded-top p-1 ps-3 bg-primary">
-                    <p className="about-community-title h6 pt-2 text-light d-flex">About Community
-                      {community.account_id == my_account.id &&
-                        <Link to={`/r/${id}/mod`} className='text-white text-decoration-none'>
-                          <div className="mod">
-                            <IoShieldOutline className='me-2' />
-                            Mod
-                          </div>
-                        </Link>
-                      }
-                      <div className="about-community-dots me-2">
-                        <BiDotsHorizontalRounded />
-                      </div>
-                    </p>
-                  </div>
-                  <div className="about-community-summary p-2 ps-3">
-                    <p className='mb-3'>{community.summary}</p>
-                    <div className="community-created-at">
-                      <GiCakeSlice />
-                      <p className='text-muted'>Created {moment(community.created_at).fromNow()}</p>
-                    </div>
-                  </div>
-                  <hr className='mt-1 me-3 ms-3 mb-2' />
-                  <div className="ms-3 member">
-                    <div className="total">
-                      {community.total_members} 22.7m
-                      <p className='text-muted'>Members</p>
-                    </div>
-                    <div className="online">
-                      <GoPrimitiveDot className='online-dot' /> 1
-                      <p className='text-muted'>Online</p>
-                    </div>
-                    <div className="rank">
-                      #{community.id}
-                      <p className='text-muted'>Ranked by Size</p>
-                    </div>
-                    <div className=""></div>
-                  </div>
-                { !isBanned ? ( 
-                 <> 
-                  <hr className='mt-1 me-3 ms-3' />
-                  <Link to='/new' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
-                  <hr className='mt-3 me-3 ms-3' />
-                  <div className="p-3">
-                    <div className="row-5">
-                    </div>
-                  </div>
-                 </> 
-                ): null
-                } 
-                </div>
-                <div className="card mt-3">
-                  <div className="rounded-top p-2 ps-3 bg-primary">
-                    <p className="about-community-title h6 pt-2 text-light"> r/{community.name}'s Rules</p>
-                  </div>
-                  <div className=" p-3">
-                    <p className="card-text">1. {community.rules}</p>
-                  </div>
-                </div>
+                <AboutCommunity community={community} isBanned={isBanned} />
+                <RulesCommunity community={community} />
               </div>
             </div>
           </div>
