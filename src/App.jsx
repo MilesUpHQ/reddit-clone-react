@@ -1,5 +1,7 @@
 import './App.css';
+
 import Home from './components/Home/Home';
+import AdminIndex from './components/Admin/AdminIndex'
 import Form from './components/Form/Form';
 import Navbar from './components/Navbar/Navbar';
 import JsonData from './data/data.json'
@@ -8,7 +10,7 @@ import PostShow from './components/Post/PostShow';
 import create from './components/Community/create';
 import Profile from './components/Accounts/Profile';
 import Setting from './components/Accounts/Settings';
-import { BrowserRouter as Router,	Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router,	Routes, Route} from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import Index from './components/Community/Index';
@@ -19,6 +21,7 @@ import EditPost from './components/Post/Form/EditPost';
 import Modrator from './components/Community/Modrator/Modrator';
 
 import NavbarSearch from './components/Post/NavbarSearch'
+import PostList from './components/Post/PostList';
 
 
 function App() {
@@ -45,6 +48,8 @@ function App() {
           <Route path="/settings" element={<Setting />} />
 
           <Route path="/navsearch" element={<NavbarSearch />} />
+          <Route path="/*"  element={<AdminIndex />}   />
+         
         </Routes>
       </Router>
     </div>
