@@ -27,7 +27,6 @@ const SubscriptionsList = ({ accountId }) => {
 
   return (
     <div>
-      <ul>
         {subscriptions.map((subscription) => (
           <div key={subscription.id}>
             <Dropdown.Item href={`http://localhost:3001/r/${subscription.community_id}`} className="text-dark">
@@ -40,7 +39,6 @@ const SubscriptionsList = ({ accountId }) => {
             </Dropdown.Item>
           </div>
         ))}
-      </ul>
     </div>
   );
 };

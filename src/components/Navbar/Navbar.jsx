@@ -8,9 +8,11 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import SubscriptionsList from './SubscriptionsList';
 import {AiFillHome} from "react-icons/ai";
 import {RiArrowDropDownLine} from "react-icons/ri";
-import {BsShieldCheck} from "react-icons/bs";
+import {BsShieldCheck, BsArrowUpRightCircle} from "react-icons/bs";
 import {FiMail} from "react-icons/fi"
 import { BsPlusLg } from 'react-icons/bs';
+import { CiCircleList } from 'react-icons/ci'
+import { TbMessageCircle } from 'react-icons/tb'
 
 const navbar = () => {
   const data = [
@@ -48,7 +50,12 @@ const navbar = () => {
               <Dropdown.Item href=""><span className='mod-icon'><BsShieldCheck/></span>r/Mod</Dropdown.Item>
               <div className="mt-2 ms-2 mb-2 text-muted drophead"> YOUR COMMUNITIES </div>
               <Dropdown.Item href={account ? "/r/new/" : "/signin"}><span className='mod-icon'><BsPlusLg/></span>Create Community</Dropdown.Item>
-            {account && <SubscriptionsList accountId={account.id} />}
+              {account && <SubscriptionsList accountId={account.id} />}
+              <div className="mt-2 ms-2 mb-2 text-muted drophead"> FEEDS </div>
+              <Dropdown.Item href="/"><span className='mod-icon'><AiFillHome/></span>Home</Dropdown.Item>
+              <Dropdown.Item href="/"><span className='mod-icon'><BsArrowUpRightCircle/></span>Popular</Dropdown.Item>
+              <Dropdown.Item href="/"><span className='mod-icon'><CiCircleList/></span>All</Dropdown.Item>
+              <Dropdown.Item href="/"><span className='mod-icon'><TbMessageCircle/></span>Happening Now</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
