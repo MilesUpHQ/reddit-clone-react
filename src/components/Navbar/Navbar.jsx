@@ -8,6 +8,8 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import SubscriptionsList from './SubscriptionsList';
 import {AiFillHome} from "react-icons/ai";
 import {RiArrowDropDownLine} from "react-icons/ri";
+import {BsShieldCheck} from "react-icons/bs";
+import {FiMail} from "react-icons/fi"
 
 const navbar = () => {
   const data = [
@@ -39,9 +41,11 @@ const navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item href="/r">All Communities</Dropdown.Item>
-              <Dropdown.Item href="/r/">Top Trending</Dropdown.Item>
-              <div className="mt-2 ms-2 mb-2 text-muted"> My Communities</div>
+              <div className="mt-2 ms-2 mb-2 text-muted"> Moderating </div>
+              <Dropdown.Item href=""><span className='mod-icon'><BsShieldCheck/></span>Mod Queue</Dropdown.Item>
+              <Dropdown.Item href=""><span className='mod-icon'><FiMail/></span>Modmail</Dropdown.Item>
+              <Dropdown.Item href=""><span className='mod-icon'><BsShieldCheck/></span>r/Mod</Dropdown.Item>
+              <div className="mt-2 ms-2 mb-2 text-muted"> Your Communities</div>
               <Dropdown.Item href={account ? "/r/new/" : "/signin"}>Create Community</Dropdown.Item>
             {account && <SubscriptionsList accountId={account.id} />}
           </Dropdown.Menu>
