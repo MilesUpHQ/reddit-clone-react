@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function JoinButton({ subscribeId, setSubscribeId, isSubribed ,setIsSubscribed}) {
+function JoinButton({ subscribeId, setSubscribeId, isSubscribed ,setIsSubscribed}) {
   const { id } = useParams();
   const account = JSON.parse(localStorage.getItem('account'))
   const Community_Subscribe_URL = `http://localhost:3000/api/v1/communities/${id}/subscriptions/`
@@ -39,16 +39,16 @@ function JoinButton({ subscribeId, setSubscribeId, isSubribed ,setIsSubscribed})
   }
 
   const ToggleSubscribe = () => {
-    isSubribed ? UnSubscribe() : Subscribe()
+    isSubscribed ? UnSubscribe() : Subscribe()
   }
 
   return (
-    <button className="create-post join-btn"
+    <button className="join-btn"
       onMouseEnter={() => setIsClicked(false)}
       onMouseLeave={() => setIsClicked(false)}
       onClick={ToggleSubscribe}
     >
-      {isSubribed ? "Leave" : "Join"}
+      {isSubscribed ? "Leave" : "Join"}
     </button>
   );
 }

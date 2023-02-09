@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -16,7 +17,6 @@ import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 import Nocommunity from './Nocommunity';
-
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
 
@@ -29,16 +29,13 @@ const ShowCommunity = () => {
   const [posts, setPosts] = useState([]);
   const [account, setAccount] = useState([]);
   const [subscribeId, setSubscribeId] = useState(0);
-  const [isSubribed, setIsSubscribed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const navigate = useNavigate()
+  const [isBanned, setIsBanned] = useState(false);
   let { id } = useParams();
 
   function get_community_data(community_id) {
-    return axios.get(Community_URL + community_id, {
-      params: {
-        account_id: my_account.id
-      }
-    }).then((response) => {
+    return axios.get(Community_URL + community_id).then((response) => {
       return response.data
     }).catch((error) => {
       console.log(error)
@@ -52,7 +49,8 @@ const ShowCommunity = () => {
         setCommunity(items);
         setPosts(items.posts);
         setAccount(items.account);
-        checkIsSubscribed(items.subscriptions)
+        checkIsSubscribed(items.subscriptions);
+        checkIsBanned(items.banned_users)
       }
     });
     return () => (mounted = false);
@@ -65,6 +63,12 @@ const ShowCommunity = () => {
         sub.account_id == my_account.id && setIsSubscribed(true)
       ))
     }
+  }
+
+  const checkIsBanned = (banned_users) => {
+    banned_users.map((ban) => (
+      ban.account_id == my_account.id && setIsBanned(true)
+    ))
   }
 
   const deleteCommunityHandler = () => {
@@ -116,7 +120,7 @@ const ShowCommunity = () => {
                   <p className='text-muted small-community-title'>r/{community.name}</p>
                 </span>
                 <div className="pl-2">
-                  <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubribed={isSubribed} setIsSubscribed={setIsSubscribed} />
+                  <JoinButton subscribeId={subscribeId} setSubscribeId={setSubscribeId} isSubscribed={isSubscribed} setIsSubscribed={setIsSubscribed} />
                 </div>
               </div>
             </div>
@@ -130,7 +134,7 @@ const ShowCommunity = () => {
           <div className="community_post">
             <div className="row">
               <div className="col-sm-8">
-                <Create_Post />
+                {!isBanned ? [<Create_Post />] : []}
                 <div className="tab-content">
                   <div id="post" className="tab-pane fade-in active">
                     <div>
@@ -153,11 +157,11 @@ const ShowCommunity = () => {
                     <p className="about-community-title h6 pt-2 text-light d-flex">About Community
                       {community.account_id == my_account.id &&
                         <Link to={`/r/${id}/mod`} className='text-white text-decoration-none'>
-                      <div className="mod">
-                        <IoShieldOutline className='me-2' />
-                        Mod
-                      </div>
-                      </Link>
+                          <div className="mod">
+                            <IoShieldOutline className='me-2' />
+                            Mod
+                          </div>
+                        </Link>
                       }
                       <div className="about-community-dots me-2">
                         <BiDotsHorizontalRounded />
@@ -187,21 +191,26 @@ const ShowCommunity = () => {
                     </div>
                     <div className=""></div>
                   </div>
+                { !isBanned ? ( 
+                 <> 
                   <hr className='mt-1 me-3 ms-3' />
-                  <Link to='' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
+                  <Link to='/new' className='me-3 ms-3 join-btn create-post-btn text-white'>Create Post</Link>
                   <hr className='mt-3 me-3 ms-3' />
                   <div className="p-3">
                     <div className="row-5">
                     </div>
                   </div>
+                 </> 
+                ): null
+                } 
                 </div>
                 <div className="card mt-3">
-                <div className="rounded-top p-2 ps-3 bg-primary">
-                  <p className="about-community-title h6 pt-2 text-light"> r/{community.name}'s Rules</p>
-                </div>
-                <div className=" p-3">
-                  <p className="card-text">1. {community.rules}</p>
-                </div>
+                  <div className="rounded-top p-2 ps-3 bg-primary">
+                    <p className="about-community-title h6 pt-2 text-light"> r/{community.name}'s Rules</p>
+                  </div>
+                  <div className=" p-3">
+                    <p className="card-text">1. {community.rules}</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ import PostApi from '../Home/PostApi';
 import { Markup } from 'interweave';
 
 
-const Comments = ({ highlight }) => {
+const Comments = ({ highlight, isBanned }) => {
   const { comments, setComments } = PostApi();
   const [selectedComment, setSelectedComment] = useState(null);
 
@@ -44,21 +44,21 @@ const Comments = ({ highlight }) => {
     return (
 
       <div ref={commentRef}>
-        <div className="comment" key={comment.id}>
+        <div className="comment ms-2" key={comment.id}>
           {account && account.profile_image && account.profile_image.url ? [
             <img src={`http://localhost:3000${account.profile_image.url}`} alt="" className="profile-img-navbar" />
           ] : [
             <img src={profile_image} alt="" className="profile-img-navbar" />
           ]}
           <strong>{comment.account.first_name}</strong>
-          {comment.account_id === comment.post.account_id && <b className="text-primary"> OC</b>}
-           <span className="text-muted ms-2">{moment(comment.created_at).fromNow()} </span>
+          {comment.account_id === comment.post.account_id && <b className="text-primary"> OP</b>}
+          <span className="text-muted ms-2">{moment(comment.created_at).fromNow()} </span>
           <div className='ms-4 ml-4'>
             <Markup content={comment.message} />
           </div>
         </div>
         <div className="fl">
-          <a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>
+        {(comment.post.isclosed || isBanned) ? null : (<a href="#" onClick={(event) => handleClick(event, comment.id)}>Reply</a>)}
           {selectedComment === comment.id && <Form parent={comment.id} comment_id={comment.id} />}
           <hr />
           <div className='sub-comment'>
