@@ -1,8 +1,10 @@
 import React from 'react'
 import { Admin, Resource} from 'react-admin'
 import PostIcon from "@mui/icons-material/Book";
+import CommunityIcon from "@mui/icons-material/Group";
 import axios from 'axios'
 import PostList,{PostEdit} from './PostList';
+import CommunityList,{CommunityEdit} from './CommunityList';
 import { Dashboard } from './Dashboard';
 
 const dataProvider = axios.create({
@@ -53,6 +55,7 @@ const AdminIndex = () => {
       }
     }}  dashboard={Dashboard}>
       <Resource name='posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
+      <Resource name='communities' list={CommunityList} edit={CommunityEdit} path="/communities" icon={CommunityIcon}/>
     </Admin>
   )
 };
