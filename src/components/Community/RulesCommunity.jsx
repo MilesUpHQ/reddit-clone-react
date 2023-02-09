@@ -1,3 +1,4 @@
+import { Markup } from 'interweave'
 import React from 'react'
 import { BiDotsHorizontalRounded } from 'react-icons/bi'
 
@@ -13,7 +14,9 @@ const RulesCommunity = ({ community }) => {
           </p>
         </div>
         <div className="about-community-summary p-2 ps-3">
-          <p className='mb-3 community_rules'>{community.rules}</p>
+          <p className='mb-3 community_rules'>
+            <Markup content={community.rules}></Markup>
+          </p>
         </div>
       </div>
     </div>
