@@ -6,7 +6,8 @@ import { FaStar } from "react-icons/fa";
 import Autocomplete from './Select';
 import Dropdown from 'react-bootstrap/Dropdown';
 import SubscriptionsList from './SubscriptionsList';
-
+import {AiFillHome} from "react-icons/ai";
+import {RiArrowDropDownLine} from "react-icons/ri";
 
 const navbar = () => {
   const data = [
@@ -33,8 +34,8 @@ const navbar = () => {
           </button>
 
           <Dropdown>
-            <Dropdown.Toggle variant="transparent" id="dropdown-basic">
-              Home
+            <Dropdown.Toggle className= "navhome" variant="transparent" id="dropdown-basic">
+              <span className='homedrop'><span className='homeicon'><AiFillHome /></span>Home</span><span className='customdrop'><RiArrowDropDownLine /></span>
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
