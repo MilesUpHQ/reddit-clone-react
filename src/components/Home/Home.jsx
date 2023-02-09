@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Create_Post from './Create_Post';
 import Right_Tab from './Right_Tab';
-import { FaRocket, FaFire, FaTag, FaPoll } from 'react-icons/fa'
+import { FaFire, FaPoll } from 'react-icons/fa'
+import {IoMdRocket} from 'react-icons/io'
+import {CiSun} from 'react-icons/ci'
 import '../../css/Tab.css'
 import Best from './Tabs/Best';
 import Hot from './Tabs/Hot';
@@ -57,27 +59,25 @@ const Home = () => {
                   <Tabs
                     activeKey={activeTab}
                     onSelect={(key) => setActiveTab(key)}
-                    id="justify-tab-example"
-                    className="card d-flex flex-row mb-3"
-                    justify
+                    className="card categories p-2 d-flex flex-row mb-3"
                   >
                     {posts && (
-                      <Tab eventKey="best" title={<span>{<FaRocket />} Best</span>} tabClassName="post-tab-nav-link">
+                      <Tab eventKey="best" title={<span>{<IoMdRocket />} Best</span>} tabClassName="tab-nav-link">
                         <Best posts={posts.best_posts} />
                       </Tab>
                     )}
                     {posts && (
-                      <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="post-tab-nav-link">
+                      <Tab eventKey="hot" title={<span>{<FaFire />} Hot</span>} tabClassName="tab-nav-link">
                         <Hot posts={posts.hot_posts} />
                       </Tab>
                     )}
                     {posts && (
-                      <Tab eventKey="new" title={<span>{<FaTag />} New</span>} tabClassName="post-tab-nav-link">
+                      <Tab eventKey="new" title={<span>{<CiSun />} New</span>} tabClassName="tab-nav-link">
                         <New posts={posts.new_posts} />
                       </Tab>
                     )}
                     {posts && (
-                      <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="post-tab-nav-link">
+                      <Tab eventKey="top" title={<span>{<FaPoll />} Top</span>} tabClassName="tab-nav-link">
                         <Top posts={posts.top_posts} />
                       </Tab>
                     )}
