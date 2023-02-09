@@ -62,14 +62,12 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
             <div className="create-post m-3">
               <div className="form-group">
                 <label htmlFor="category"> Category </label>
-                <select onChange={handleChange} value={selectedCategory}>
-                <option value="">Select a category</option>
-                  {categories.map((category) => (
-                   <option key={category.id} value={category.name}>
-                   {category.name}
-                </option>
-        ))}
-      </select>
+                <select id="category" name="category" className='form-select search-input-navbar community_select' onChange={onChange} value={community.category}>
+                <option value="" disabled>Select a category</option>
+                  {categories.map((category) => 
+                   <option key={category.id} value={category.name}>{category.name}</option>)}
+                   <input type="text" id="category" className="form-control" placeholder='' name='Category' onChange={onChange} />
+               </select>
                 {/* {errors.category && <p className="text-danger">{errors.category}</p>} */}
               </div>
             </div>
