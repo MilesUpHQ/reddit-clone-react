@@ -48,7 +48,7 @@ const DiscussionForm = () => {
   const accountId = account.id
   const [subscriptions, setSubscriptions] = useState([]);
   const fetchData = async () => {
-    return await axios.get(`http://localhost:3000/api/v1/subscribers?account_id=${accountId}`)
+    return await axios.get(`http://localhost:3000/api/v1/banned_users?account_id=${accountId}`)
       .then((response) => response.data)
       .catch((error) => {
         console.log(error)
@@ -91,12 +91,9 @@ const DiscussionForm = () => {
           <div className="col-sm-12">
             <div className="card rounded mb-3">
               <div className="form-group">
-                {console.log(subscriptions)}
                 <select id="community_id" className="form-select search-input-navbar community_select" placeholder='Choose a community' name="community_id" value={post.community_id} onChange={onChange}>
                   {subscriptions && subscriptions.map((subscription) => (
-                    console.log(subscription.community_id),
-                    console.log(subscription.community.name),
-                    <option key={subscription.community_id} value={subscription.community_id}>{subscription.community.name}</option>
+                    <option key={subscription.id} value={subscription.id}>{subscription.name}</option>
                   ))}
                 </select>
               </div>

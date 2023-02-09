@@ -8,7 +8,7 @@ const SubscriptionsList = ({ accountId }) => {
 
   const [subscriptions, setSubscriptions] = useState([]);
   const fetchData = async () => {
-    return await axios.get(`http://localhost:3000/api/v1/subscribers?account_id=${accountId}`)
+    return await axios.get(`http://localhost:3000/api/v1/subscriptions?account_id=${accountId}`)
       .then((response) => response.data)
       .catch((error) => {
         console.log(error)
