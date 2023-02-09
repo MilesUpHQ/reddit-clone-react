@@ -1,7 +1,8 @@
 import React from 'react'
-import { Admin, Resource } from 'react-admin'
+import { Admin, Resource} from 'react-admin'
 import axios from 'axios'
 import PostList from './PostList'
+import {PostEdit} from './PostList';
 
 const dataProvider = axios.create({
   baseURL: 'http://localhost:3001/api/v1/communities/1/',
@@ -9,14 +10,21 @@ const dataProvider = axios.create({
 
 const AdminIndex = () => {
   return (
-    <Admin dataProvider={async (type, resource) => {
+    <Admin dataProvider={async (type, resource, params) => {
       if (type === 'DELETE') {
-        console.log(params)
         return dataProvider.delete(`posts/${params.id}`, {
           data: params
         });
       }
-      
+      if (type === 'GET_ONE') {
+        try {
+          const response = await dataProvider.get(`posts/${params.id}`);
+          return { data: response.data };
+        } catch (error) {
+          return Promise.reject(error);
+        }
+      }
+
       try {
         const requestConfig = {
           method: 'GET',
@@ -29,13 +37,12 @@ const AdminIndex = () => {
           data = [data];
         }
         const newData = data.map((item, index) => ({ id: index, ...item }));
-        console.log(newData);
         return { data: newData, total: newData.length };
       } catch (error) {
         return Promise.reject(error);
       }
     }}>
-      <Resource name='posts' list={PostList} path="/posts" />
+      <Resource name='posts' list={PostList} edit={PostEdit} path="/posts" />
     </Admin>
   )
 };
