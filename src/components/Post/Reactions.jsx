@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 import { HiDotsHorizontal } from 'react-icons/hi'
 import { SlPencil, SlTrash, SlLock } from 'react-icons/sl'
 import { NavDropdown } from 'react-bootstrap';
-import ReportPost from './ReportPost';
 import PostReport from './PostReport';
 
 const Reactions = ({ post }) => {
