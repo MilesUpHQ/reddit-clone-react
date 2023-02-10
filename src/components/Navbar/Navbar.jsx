@@ -21,7 +21,7 @@ const navbar = () => {
   }
 
   return (
-    <div className=''>
+    <div className='sticky-top'>
       <div className="bg-white mr-auto">
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
           <div className="navbar-nav">

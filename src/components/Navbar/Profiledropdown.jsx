@@ -16,6 +16,12 @@ import { TiDocumentText } from 'react-icons/ti'
 import { BiLogOut } from 'react-icons/bi';
 
 const Profiledropdown = () => {
+    const account = JSON.parse(localStorage.getItem('account'))
+    const account_url = "http://localhost:3000"
+    const Signout = () => {
+        localStorage.clear();
+        window.location.reload();
+      }
     return (
         <div>
             <Dropdown>
