@@ -8,7 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import SubscriptionsList from './SubscriptionsList';
 import { AiFillHome } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { BsShieldCheck, BsArrowUpRightCircle, BsChatLeftDots, BsChat, BsShield } from "react-icons/bs";
+import { BsShieldCheck, BsArrowUpRightCircle, BsChatLeftDots, BsChat, BsShield, BsDot } from "react-icons/bs";
 import { FiMail } from "react-icons/fi"
 import { BsPlusLg, BsBell, BsCoin } from 'react-icons/bs';
 import { CiCircleList } from 'react-icons/ci'
@@ -18,7 +18,7 @@ import { GiStarFormation, GiCheckedShield } from "react-icons/gi";
 import { IoShirtOutline } from "react-icons/io5";
 import { GrAnnounce, GrEmptyCircle } from "react-icons/gr";
 import { SlGlobeAlt } from "react-icons/sl";
-import { BiComment, BiShield } from 'react-icons/bi';
+import { IoIosSettings } from 'react-icons/io';
 
 const navbar = () => {
   const data = [
@@ -87,30 +87,27 @@ const navbar = () => {
               </li>
             </ul>
             <li className='d-flex p-3 navicons gap-4'>
-                <BsArrowUpRightCircle />
-                <BsCoin />
-                <BsChatLeftDots />
-                <BsShield style={{ marginTop: "-2px" }}/>
-                <BsChat style={{ marginTop: "-2px" }}/>
-                <BsBell  style={{ marginTop: "-2px" }}/>
-                <BsPlusLg />
-                <GrAnnounce style={{ marginTop: "-2px" }}/>
-              </li>
+              <BsArrowUpRightCircle />
+              <BsCoin />
+              <BsChatLeftDots />
+              <BsShield style={{ marginTop: "-2px" }} />
+              <BsChat style={{ marginTop: "-2px" }} />
+              <BsBell style={{ marginTop: "-2px" }} />
+              <BsPlusLg />
+              <GrAnnounce style={{ marginTop: "-2px" }} />
+            </li>
           </div>
           {account ? [
             <div className="d-flex gap-2">
-              <div className="karma">
-                2
-                <FaStar className='  text-warning' />
-              </div>
               <Dropdown>
-                <Dropdown.Toggle variant="transparent nav-link text-muted" id="dropdown-basic">
-                  {account && account.profile_image && account.profile_image.url ? [
-                    <img src={`${account_url}${account.profile_image.url}`} alt="" className="profile-img-navbar" />
-                  ] : [
-                    <img src={profile_image} alt="" className="profile-img-navbar" />
-                  ]}
-                  {account.username}
+                <Dropdown.Toggle className='navprofile' variant="transparent text-muted" id="dropdown-basic">
+                  <div className='d-flex'>
+                    <img src={avatar_drop} alt="" className="profile-img-navbar mr-2" />
+                    <div className='profileinfo inline'>
+                      <div className='profilename'>{account.username}</div>
+                      <span className='karma'><IoIosSettings className='star'/>1 Karma</span>
+                    </div>
+                  </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   <Dropdown.Item href="/profile">Profile</Dropdown.Item>

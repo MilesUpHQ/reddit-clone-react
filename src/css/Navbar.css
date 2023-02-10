@@ -41,13 +41,15 @@ button {
 .profile-img-navbar{
   position: relative;
   width: 25px;
-  height: 25px;
+  height: 35px;
+  transform: scaleX(-1);
   border-radius: 50%;
   overflow: hidden;
   right: 10px;
 }
 
 .profile-img-navbar img {
+  transform: scaleX(-1);
   position: relative;
   top: 0;
   left: 0;
@@ -109,6 +111,10 @@ button {
 
 .karma{
   padding-right: 15px;
+  font: inherit;
+  font-size:x-small;
+  margin-top: -3px;
+  margin-top: 0px;
 }
 
 .navhome{
@@ -162,4 +168,21 @@ button {
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.navprofile{
+  width: 200px;
+  padding-top: 0px;
+  padding-left: 1px;
+  padding-bottom: 1px;
+  padding-right: 1px;
+  margin-left: 30px;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 500;
+  margin-right: 15px;
+}
+
+.profileinfo{
+  line-height: 1;
 }
