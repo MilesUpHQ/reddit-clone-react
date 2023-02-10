@@ -1,25 +1,27 @@
 import React from 'react'
 import { Admin, Resource} from 'react-admin'
 import PostIcon from "@mui/icons-material/Book";
+import CommunityIcon from "@mui/icons-material/Group";
 import axios from 'axios'
 import PostList,{PostEdit} from './PostList';
+import CommunityList,{CommunityEdit} from './CommunityList';
 import { Dashboard } from './Dashboard';
 
 const dataProvider = axios.create({
-  baseURL: 'http://localhost:3001/api/v1/communities/1/',
+  baseURL: 'http://localhost:3001/api/v1/',
 });
 
 const AdminIndex = () => {
   return (
     <Admin dataProvider={async (type, resource, params) => {
       if (type === 'DELETE') {
-        return dataProvider.delete(`posts/${params.id}`, {
+        return dataProvider.delete(`${resource}/${params.id}`, {
           data: params
         });
       }
       if (type === 'GET_ONE') {
         try {
-          const response = await dataProvider.get(`posts/${params.id}`);
+          const response = await dataProvider.get(`${resource}/${params.id}`);
           return { data: response.data };
         } catch (error) {
           return Promise.reject(error);
@@ -28,7 +30,7 @@ const AdminIndex = () => {
 
       if (type === 'UPDATE') {
         try {
-          const response = await dataProvider.put(`posts/${params.id}`, params.data);
+          const response = await dataProvider.put(`${resource}/${params.id}`, params.data);
           return { data: response.data };
         } catch (error) {
           return Promise.reject(error);
@@ -52,7 +54,8 @@ const AdminIndex = () => {
         return Promise.reject(error);
       }
     }}  dashboard={Dashboard}>
-      <Resource name='posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
+      <Resource name='communities/1/posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
+      <Resource name='communities' list={CommunityList} edit={CommunityEdit} path="/communities" icon={CommunityIcon}/>
     </Admin>
   )
 };
