@@ -27,7 +27,12 @@ const CommunityList = (props) => (
 export const CommunityCreate = (props) => (
   <Create {...props}>
       <SimpleForm>
+          <TextInput source="account_id" defaultValue={0} type="hidden" /> 
           <TextInput source="name" />
+          <TextInput source="url" />
+          <TextInput source="summary" />
+          <TextInput source="category" />
+          <TextInput source="rules" />
       </SimpleForm>
   </Create>
 );
