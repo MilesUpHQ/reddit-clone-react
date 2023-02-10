@@ -95,7 +95,7 @@ const navbar = () => {
               <BsShield style={{ marginTop: "-2px" }} />
               <BsChat style={{ marginTop: "-2px" }} />
               <BsBell style={{ marginTop: "-2px" }} />
-              <BsPlusLg />
+              <a className = "text-dark" href = "/new" ><BsPlusLg /></a>
               <GrAnnounce style={{ marginTop: "-2px" }} />
             </li>
           </div>
