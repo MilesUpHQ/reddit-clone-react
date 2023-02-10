@@ -5,74 +5,74 @@ import axios from 'axios'
 
 const VotesHandler = ({ post, communityId, postId, voteCount }) => {
   const account = JSON.parse(localStorage.getItem('account'))
-  const [count, setCount] = useState();
-  const [upvoteClass, setupvoteClass] = useState("");
-  const [downvoteClass, setdownvoteClass] = useState("");
-  const postvote = account && post.votes ? post.votes.find(vote => vote.account_id === account.id) : null;
+  const [count, setCount] = useState(voteCount);
+  const [upvoteClass, setUpvoteClass] = useState("");
+  const [downvoteClass, setDownvoteClass] = useState("");
+  const url = `http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`;
 
   useEffect(() => {
-    setCount(voteCount);
-    setupvoteClass(postvote && postvote.value === 1 ? 'voted' : '');
-    setdownvoteClass(postvote && postvote.value === -1 ? 'voted' : '');
-  }, [post]);
+    const fetchVotes = async () => {
+      const response = await axios.get(url);
+      setCount(response.data.reduce((sum, vote) => sum + vote.value, 0));
+      setUpvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === 1) ? 'voted' : '');
+      setDownvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === -1) ? 'voted' : '');
+    };
 
-  const handleUpvote = async () => {
-    await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
-      .then(response => {
-        let vote = response.data.find(vote => vote.post_id === postId && vote.account_id === account.id)
-        if (vote) {
-          axios
-            .delete(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes/${vote.id}`)
-            .then((response) => {
-              setCount(postvote ? --voteCount : voteCount--);
-              setupvoteClass("")
-              setdownvoteClass("")
-            });
+    if (account) {
+      fetchVotes();
+    } else {
+      setCount(voteCount);
+    }
+  }, [account, communityId, postId]);
+
+  const handleVote = async (value) => {
+    if (!account) {
+      return;
+    }
+    const response = await axios.get(url);
+    let vote = response.data.find(vote => vote.post_id === postId && vote.account_id === account.id);
+
+    if (vote) {
+      if (vote.value === value) {
+        await axios.delete(`${url}/${vote.id}`);
+        setCount(count - value);
+        if (value === 1) {
+          setUpvoteClass("");
         } else {
-          axios
-            .post(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`, {
-              vote: {
-                value: 1,
-                account_id: account.id
-              },
-            })
-            .then((response) => {
-              setCount(response.data);
-              setupvoteClass("voted")
-              setdownvoteClass("")
-            });
+          setDownvoteClass("");
+        }
+      } else {
+        await axios.patch(`${url}/${vote.id}`, {
+          vote: { value }
+        });
+        setCount(count + 2 * value);
+        if (value === 1) {
+          setUpvoteClass("voted");
+          setDownvoteClass("");
+        } else {
+          setDownvoteClass("voted");
+          setUpvoteClass("");
+        }
+      }
+    } else {
+      await axios.post(url, {
+        vote: {
+          value,
+          account_id: account.id
         }
       });
+      setCount(count + value);
+      if (value === 1) {
+        setUpvoteClass("voted");
+      } else {
+        setDownvoteClass("voted");
+      }
+    }
   };
 
-  const handleDownvote = async () => {
-    await axios.get(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`)
-      .then(response => {
-        let vote = response.data.find(vote => vote.post_id === postId && vote.account_id === account.id)
-        if (vote) {
-          axios
-            .delete(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes/${vote.id}`)
-            .then((response) => {
-              setCount(postvote ? --voteCount : voteCount--);
-              setupvoteClass("")
-              setdownvoteClass("")
-            });
-        } else {
-          axios
-            .post(`http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`, {
-              vote: {
-                value: -1,
-                account_id: account.id
-              },
-            })
-            .then((response) => {
-              setCount(response.data);
-              setdownvoteClass("voted")
-              setupvoteClass("")
-            });
-        }
-      });
-  };
+  const handleUpvote = () => handleVote(1);
+  const handleDownvote = () => handleVote(-1);
+
   return (
     <div className=''>
       <div className={`vote-icon upvote ${upvoteClass}`}>
