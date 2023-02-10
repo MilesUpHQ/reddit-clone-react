@@ -39,7 +39,7 @@ const PostReport = () => {
   const Report_URL = 'http://localhost:3000/api/v1/'
 
   const GetReportCategories = () => {
-    return axios.get(Report_URL+'report_categories/').then((response)=>response.data)
+    return axios.get(Report_URL + 'report_categories/').then((response) => response.data)
   }
 
   useEffect(() => {
@@ -79,7 +79,7 @@ const PostReport = () => {
     })
       .catch(error => {
         console.log(error.response.data);
-        if(error.response.data.post_id){
+        if (error.response.data.post_id) {
           setAllDefault()
           toast.warning("You have Already Reported this post!");
           return
@@ -100,7 +100,7 @@ const PostReport = () => {
         setShow={setToggleOneModal}
         tabIndex='-1'
       >
-        <MDBModalDialog centered>
+        <MDBModalDialog className="report_modal_one" centered>
           <MDBModalContent>
             <MDBModalHeader>
               <MDBModalTitle>
@@ -122,29 +122,36 @@ const PostReport = () => {
                   <label key={category.id} className={`report-reason-btn ${selectedCategoryId === category.id && activeReason && 'active'}`}>
                     <div className="">
 
-                    <input
-                      type="radio"
-                      className="d-none form-check-input"
-                      checked={selectedCategoryId === category.id}
-                      onChange={() => {
-                        setSelectedCategoryId(category.id);
-                        setSelectedCategoryName(category.name);
-                        setActiveReason(true)
-                      }}
+                      <input
+                        type="radio"
+                        className="d-none form-check-input"
+                        checked={selectedCategoryId === category.id}
+                        onChange={() => {
+                          setSelectedCategoryId(category.id);
+                          setSelectedCategoryName(category.name);
+                          setActiveReason(true)
+                        }}
                       />
                       {category.name}
                     </div>
-                    </label>
+                  </label>
                 ))}
               </div>
             </MDBModalBody>
             <MDBModalFooter>
-              <Button className='join-btn create-post-btn text-white' onClick={() => {
-                setToggleOneModal(!toggleOneModal);
-                setTimeout(() => {
-                  setToggleTwoModal(!toggleTwoModal);
-                }, 400);
-              }}>Next</Button>
+              {reportCategories.map(category => (
+                selectedCategoryId === category.id && (
+                  (category.report_reasons.length ? [
+                    <Button className='join-btn create-post-btn text-white' onClick={() => {
+                      setToggleOneModal(!toggleOneModal);
+                      setTimeout(() => {
+                        setToggleTwoModal(!toggleTwoModal);
+                      }, 400);
+                    }}>Next</Button>
+                  ] : [
+                    <Link to='' className='join-btn create-post-btn text-white' onClick={ReportHandler}>Submit</Link>
+                  ])
+                )))}
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
