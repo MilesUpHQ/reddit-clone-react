@@ -86,15 +86,22 @@
 .draft-right {
   right: 0;
 }
+.draft-badge {
+  background-color: #878a8c;
+  color: #fff;
+  padding: 0px 5px;
+  border-radius: 2px;
+  font-weight: 400;
+}
 
 .draft-btn {
   background-color: transparent;
   border: none;
   margin: 5px;
-  padding: 3px 30px;
+  padding: 3px 25px;
   display: inline-block;
   border-radius: 25px;
-  font-size: 1em;
+  font-size: 0.9em;
   font-weight: 700;
   color: #0079D3;
   text-align: center;
