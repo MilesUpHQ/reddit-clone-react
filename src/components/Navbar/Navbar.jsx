@@ -1,29 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import reddit_logo from '../../images/reddit-logo.png'
-import profile_image from '../../images/profile-img.jpeg'
 import '../../css/Navbar.css';
-import { FaStar } from "react-icons/fa";
 import Autocomplete from './Select';
-import Dropdown from 'react-bootstrap/Dropdown';
-import SubscriptionsList from './SubscriptionsList';
-import { AiFillHome, AiOutlineExclamation, AiOutlineQuestionCircle } from "react-icons/ai";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { BsShieldCheck, BsArrowUpRightCircle, BsChatLeftDots, BsChat, BsShield, BsDot, BsToggleOn, BsToggleOff } from "react-icons/bs";
-import { FiEye, FiMail } from "react-icons/fi"
+import { BsArrowUpRightCircle, BsChatLeftDots, BsChat, BsShield } from "react-icons/bs";
 import { BsPlusLg, BsBell, BsCoin } from 'react-icons/bs';
-import { CiCircleList } from 'react-icons/ci'
-import { TbMessageCircle } from 'react-icons/tb'
-import avatar_drop from '../../images/avatar-drop.png';
-import { GiStarFormation, GiCheckedShield } from "react-icons/gi";
-import { IoShirtOutline, IoTelescopeOutline } from "react-icons/io5";
-import { GrAnnounce, GrEmptyCircle } from "react-icons/gr";
-import { SlGlobeAlt } from "react-icons/sl";
-import { IoIosSettings } from 'react-icons/io';
-import { RxAvatar } from 'react-icons/rx'
-import { TiDocumentText } from 'react-icons/ti'
-import { BiLogOut } from 'react-icons/bi';
+import { GrAnnounce} from "react-icons/gr";
 import Homedropdown from './Homedropdown';
 import Profiledropdown from './Profiledropdown';
+
 const navbar = () => {
   const data = [
     { Title: "First", id: 1 },
