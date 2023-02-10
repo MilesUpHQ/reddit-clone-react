@@ -11,12 +11,7 @@ const handleDelete = async (id) => {
   }
 };
 
-
-
-const CommunityList = (props) => {
-  
-  return (
-   
+const CommunityList = (props) => (
       <List {...props}>
         <Datagrid>
           <TextField source='id' />
@@ -27,8 +22,15 @@ const CommunityList = (props) => {
           <DeleteButton basePath='/communities' onClick={(id) => {handleDelete(id)}} />
         </Datagrid>
       </List>
-  );
-};
+);
+
+export const CommunityCreate = (props) => (
+  <Create {...props}>
+      <SimpleForm>
+          <TextInput source="name" />
+      </SimpleForm>
+  </Create>
+);
 
 const CommunityTitle = () => {
   const record = useRecordContext();
@@ -38,6 +40,8 @@ const CommunityTitle = () => {
 
 const validateNull = (sourceName) => [required(`${sourceName} is required`)];
 const validateUrl = regex(/^(http|https):\/\//, 'Must be a valid URL');
+
+
 
 export const CommunityEdit = () => (
   <Edit title={<CommunityTitle />}>
