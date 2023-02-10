@@ -4,17 +4,17 @@ import { GoArrowUp, GoArrowDown } from 'react-icons/go'
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
-const CommentVotesHandler = ({ comment, post, commentId, voteCount }) => {
+const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
   const account = JSON.parse(localStorage.getItem('account'))
-  const [count, setCount] = useState();
+  const [count, setCount] = useState(voteCount);
   let { id, community_id } = useParams();
   const [upvoteClass, setUpvoteClass] = useState("");
   const [downvoteClass, setDownvoteClass] = useState("");
-  const commentVote = account && comment.votes ? comment.votes.find(comment_vote => comment_vote.account_id === account.id) : null;
+  const url = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`;
 
   useEffect(() => {
     const fetchCommentVotes = async () => {
-      const response = await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`);
+      const response = await axios.get(url);
       setCount(response.data.reduce((sum, vote) => sum + vote.value, 0));
       setUpvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === 1) ? 'voted' : '');
       setDownvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === -1) ? 'voted' : '');
@@ -22,14 +22,17 @@ const CommentVotesHandler = ({ comment, post, commentId, voteCount }) => {
 
     if (account) {
       fetchCommentVotes();
+    } else {
+      setCount(voteCount);
     }
   }, [account, community_id, id, commentId]);
 
 
   const handleVote = async (value) => {
-    const url = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`;
+    if (!account) {
+      return;
+    }
     const response = await axios.get(url);
-    
     let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id);
     
     if (comment_vote) {
@@ -68,7 +71,7 @@ const CommentVotesHandler = ({ comment, post, commentId, voteCount }) => {
             setDownvoteClass("voted");
         }
     }
-    };
+  };
         
   const handleUpvote = () => handleVote(1);
   const handleDownvote = () => handleVote(-1);
