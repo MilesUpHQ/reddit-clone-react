@@ -17,6 +17,7 @@ const CommunityList = (props) => (
           <TextField source='id' />
           <TextField source='name' />
           <TextField source='url' />
+          <TextField source='category' />
           <TextField source='rules' />
           <EditButton basePath='/communities' />
           <DeleteButton basePath='/communities' onClick={(id) => {handleDelete(id)}} />
@@ -27,7 +28,7 @@ const CommunityList = (props) => (
 export const CommunityCreate = (props) => (
   <Create {...props}>
       <SimpleForm>
-          <TextInput source="account_id" defaultValue={0} type="hidden" /> 
+          <TextInput source="account_id" defaultValue={1} type="hidden" /> 
           <TextInput source="name" />
           <TextInput source="url" />
           <TextInput source="summary" />
@@ -46,8 +47,6 @@ const CommunityTitle = () => {
 const validateNull = (sourceName) => [required(`${sourceName} is required`)];
 const validateUrl = regex(/^(http|https):\/\//, 'Must be a valid URL');
 
-
-
 export const CommunityEdit = () => (
   <Edit title={<CommunityTitle />}>
       <SimpleForm>
@@ -55,6 +54,7 @@ export const CommunityEdit = () => (
           <NumberInput source="account.id" />
           <TextInput source="name" validate={validateNull('Name')} />
           <TextInput source="url"  validatr={validateUrl()}/>
+          <TextInput source="category" />
           <TextInput source="rules" validate={validateNull('Rule')}/>
       </SimpleForm>
   </Edit>

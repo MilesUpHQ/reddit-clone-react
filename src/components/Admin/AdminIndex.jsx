@@ -6,7 +6,7 @@ import CategoryIcon from "@mui/icons-material/Folder";
 import axios from 'axios'
 import PostList,{PostEdit} from './PostList';
 import CommunityList,{CommunityCreate,  CommunityEdit } from './CommunityList';
-import CategoryList, { CategoryCreate } from './CategoryList';
+import CategoryList, { CategoryCreate, CategoryEdit } from './CategoryList';
 import { Dashboard } from './Dashboard';
 
 const dataProvider = axios.create({
@@ -70,7 +70,7 @@ const AdminIndex = () => {
     }}  dashboard={Dashboard}>
       <Resource name='communities/1/posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
       <Resource name='communities' list={CommunityList}  create={CommunityCreate} edit={CommunityEdit} path="/communities" icon={CommunityIcon}/>
-      <Resource name='categories' list={CategoryList} create={CategoryCreate} path="/categories" icon={CategoryIcon}/>
+      <Resource name='categories' list={CategoryList} create={CategoryCreate} edit={CategoryEdit} path="/categories" icon={CategoryIcon}/>
     </Admin>
   )
 };
