@@ -463,3 +463,21 @@
     max-width: 550px;
   }
 }
+
+.post-new-rules-head {
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #1c1c1c;
+}
+.post-new-hr-line {
+  color:  rgba(99, 108, 114, 0.593);
+}
+.post-new-rules-list {
+  font-size: 1em;
+  font-weight: 400;
+}
+.content-policy {
+  margin-top: 15px;
+  font-size: 0.8em;
+  font-weight: 600;
+}
