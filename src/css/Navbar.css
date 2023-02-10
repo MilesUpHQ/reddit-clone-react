@@ -11,6 +11,10 @@ button {
   cursor: pointer;
 }
 
+.navbar{
+  margin-top: -7px;
+}
+
 .navbar-brand{
   margin-left: 20px;
 }
@@ -147,22 +151,15 @@ button {
   color: orangered;
 }
 
-.d-flex {
-  display: flex;
-  align-items: center;
-  font-size: 25px;
-}
-
 .p-3 {
   padding: 1rem;
 }
 
 .navicons {
+  margin-left: 20px;
+  font-size: 22px;
   list-style: none;
   display: flex;
   align-items: center;
   width: 100%;
 }
-
-
-

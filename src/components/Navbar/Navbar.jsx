@@ -8,7 +8,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import SubscriptionsList from './SubscriptionsList';
 import { AiFillHome } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { BsShieldCheck, BsArrowUpRightCircle } from "react-icons/bs";
+import { BsShieldCheck, BsArrowUpRightCircle, BsChatLeftDots, BsChat, BsShield } from "react-icons/bs";
 import { FiMail } from "react-icons/fi"
 import { BsPlusLg, BsBell, BsCoin } from 'react-icons/bs';
 import { CiCircleList } from 'react-icons/ci'
@@ -89,12 +89,12 @@ const navbar = () => {
             <li className='d-flex p-3 navicons gap-4'>
                 <BsArrowUpRightCircle />
                 <BsCoin />
-                <TbMessageCircle />
-                <BiShield />
-                <BiComment />
-                <BsBell />
+                <BsChatLeftDots />
+                <BsShield style={{ marginTop: "-2px" }}/>
+                <BsChat style={{ marginTop: "-2px" }}/>
+                <BsBell  style={{ marginTop: "-2px" }}/>
                 <BsPlusLg />
-                <GrAnnounce />
+                <GrAnnounce style={{ marginTop: "-2px" }}/>
               </li>
           </div>
           {account ? [
