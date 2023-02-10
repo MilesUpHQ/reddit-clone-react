@@ -9,7 +9,9 @@ const Draft = (props) => {
 
   return (
     <>
-      <button type="button" className="draft-btn" onClick={openModal}>Drafts</button>
+      <button type="button" className="draft-btn d-flex gap-2" onClick={openModal}>DRAFTS
+        <span className='draft-badge'>0</span>
+      </button>
       <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
@@ -24,7 +26,7 @@ const Draft = (props) => {
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" onClick={closeModal}>Close</button>
-            </div>  
+            </div>
           </div>
         </div>
       </div>
