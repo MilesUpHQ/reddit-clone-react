@@ -8,50 +8,60 @@ const CommentVotesHandler = ({ comment, post, commentId, voteCount }) => {
   const account = JSON.parse(localStorage.getItem('account'))
   const [count, setCount] = useState();
   let { id, community_id } = useParams();
-  const [upvoteClass, setupvoteClass] = useState("");
-  const [downvoteClass, setdownvoteClass] = useState("");
+  const [upvoteClass, setUpvoteClass] = useState("");
+  const [downvoteClass, setDownvoteClass] = useState("");
   const commentVote = account && comment.votes ? comment.votes.find(comment_vote => comment_vote.account_id === account.id) : null;
 
   useEffect(() => {
     setCount(voteCount);
-    setupvoteClass(commentVote && commentVote.value === 1 ? 'voted' : '');
-    setdownvoteClass(commentVote && commentVote.value === -1 ? 'voted' : '');
-  }, [post]);
+    setUpvoteClass(commentVote && commentVote.value === 1 ? 'voted' : '');
+    setDownvoteClass(commentVote && commentVote.value === -1 ? 'voted' : '');
+  }, [comment]);
 
   const handleVote = async (value) => {
-    await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`)
-      .then(response => {
-        let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id)
-        if (comment_vote) {
-          axios
-            .delete(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes/${comment_vote.id}`)
-            .then((response) => {
-              setCount(commentVote ? --voteCount : voteCount--);
-              setupvoteClass("")
-              setdownvoteClass("")
-            });
-        } else {
-          axios
-            .post(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes `, {
-              comment_vote: {
-                value: value,
-                account_id: account.id
-              },
-            })
-            .then((response) => {
-              setCount(response.data);
-              if (value === 1) {
-              setupvoteClass("voted")
-              setdownvoteClass("")
+    const url = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`;
+    const response = await axios.get(url);
+    
+    let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id);
+    
+    if (comment_vote) {
+        if (comment_vote.value === value) {
+            await axios.delete(`${url}/${comment_vote.id}`);
+            setCount(count - value);
+            if (value === 1) {
+                setUpvoteClass("");
             } else {
-              setdownvoteClass("voted")
-              setupvoteClass("")
+                setDownvoteClass("");
             }
+        } else {
+            await axios.patch(`${url}/${comment_vote.id}`, {
+                comment_vote: { value }
             });
+            setCount(count + 2 * value);
+            if (value === 1) {
+                setUpvoteClass("voted");
+                setDownvoteClass("");
+            } else {
+                setDownvoteClass("voted");
+                setUpvoteClass("");
+            }
         }
-      });
-  };
-
+    } else {
+        await axios.post(url, {
+            comment_vote: {
+                value,
+                account_id: account.id
+            }
+        });
+        setCount(count + value);
+        if (value === 1) {
+            setUpvoteClass("voted");
+        } else {
+            setDownvoteClass("voted");
+        }
+    }
+    };
+        
   const handleUpvote = () => handleVote(1);
   const handleDownvote = () => handleVote(-1);
 
