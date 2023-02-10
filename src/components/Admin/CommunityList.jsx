@@ -1,6 +1,8 @@
 import React from 'react'
-import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext} from 'react-admin'
-import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required, regex} from 'react-admin'
+import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext, Create} from 'react-admin'
+import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required, regex, Button} from 'react-admin'
+import { Link } from 'react-router-dom'
+
 const CommunityList = (props) => {
   const handleDelete = async (id) => {
     try {
@@ -11,17 +13,27 @@ const CommunityList = (props) => {
     }
   };
 
-  return <List {...props}>
-    <Datagrid>
-      <TextField source='id' />
-      <TextField source='name' />
-      <TextField source='url' />
-      <TextField source='rules' />
-      <TextField source='category' />
-      <EditButton basePath='/communities' />
-      <DeleteButton basePath='/communities' onClick={handleDelete} />
-    </Datagrid>
-  </List>
+  return (
+    <>
+      <Create {...props}>
+        <SimpleForm>
+          <TextInput source="name" validate={validateNull('Name')} />
+          <TextInput source="url" validate={validateUrl()} />
+          <TextInput source="rules" validate={validateNull('Rule')} />
+        </SimpleForm>
+      </Create>
+      <List {...props}>
+        <Datagrid>
+          <TextField source='id' />
+          <TextField source='name' />
+          <TextField source='url' />
+          <TextField source='rules' />
+          <EditButton basePath='/communities' />
+          <DeleteButton basePath='/communities' onClick={handleDelete} />
+        </Datagrid>
+      </List>
+    </>
+  );
 };
 
 const CommunityTitle = () => {
