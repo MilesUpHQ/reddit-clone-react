@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const PostApi = () => {
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(2);
+  const limit = 15;
   const [text, setText] = useState('');
   let { id, community_id } = useParams();
   const Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts?page=${page}&limit=${limit}`
