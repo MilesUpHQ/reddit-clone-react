@@ -1,4 +1,19 @@
-import React from 'react'
+import React from 'react';
+import '../../css/Navbar.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { AiOutlineExclamation, AiOutlineQuestionCircle } from "react-icons/ai";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { BsToggleOn, BsToggleOff } from "react-icons/bs";
+import { FiEye } from "react-icons/fi"
+import { BsPlusLg, BsCoin } from 'react-icons/bs';
+import avatar_drop from '../../images/avatar-drop.png';
+import { GiCheckedShield } from "react-icons/gi";
+import { IoTelescopeOutline } from "react-icons/io5";
+import { GrEmptyCircle } from "react-icons/gr";
+import { IoIosSettings } from 'react-icons/io';
+import { RxAvatar } from 'react-icons/rx'
+import { TiDocumentText } from 'react-icons/ti'
+import { BiLogOut } from 'react-icons/bi';
 
 const Profiledropdown = () => {
     return (
