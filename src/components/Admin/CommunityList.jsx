@@ -1,6 +1,7 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext, Create} from 'react-admin'
-import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required, regex, Button} from 'react-admin'
+import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required, regex, SelectInput} from 'react-admin'
+import { useParams } from 'react-router-dom';
 
 const handleDelete = async (id) => {
   try {
@@ -25,18 +26,31 @@ const CommunityList = (props) => (
       </List>
 );
 
-export const CommunityCreate = (props) => (
+export const CommunityCreate = (props) => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/v1/categories')
+      .then(response => response.json())
+      .then(data => setCategories(data));
+  }, []);
+
+  return(
   <Create {...props}>
       <SimpleForm>
           <TextInput source="account_id" defaultValue={1} type="hidden" /> 
           <TextInput source="name" />
           <TextInput source="url" />
           <TextInput source="summary" />
-          <TextInput source="category" />
+          <SelectInput
+          source='category'
+          choices={categories.map(category => ({ id: category.id, name: category.name }))}
+          />
           <TextInput source="rules" />
       </SimpleForm>
   </Create>
-);
+  );
+};
 
 const CommunityTitle = () => {
   const record = useRecordContext();
@@ -47,17 +61,38 @@ const CommunityTitle = () => {
 const validateNull = (sourceName) => [required(`${sourceName} is required`)];
 const validateUrl = regex(/^(http|https):\/\//, 'Must be a valid URL');
 
-export const CommunityEdit = () => (
+export const CommunityEdit = () => {
+  const [categories, setCategories] = useState([]);
+  const { record } = useParams();
+
+  useEffect(() => {
+    fetch('http://localhost:3000/api/v1/categories')
+      .then(response => response.json())
+      .then(data => setCategories(data));
+  }, []);
+
+  
+  let defaultValue = '';
+  if (record && categories.some(category => category.name === record.category)) {
+    defaultValue = record.category;
+  }
+
+  return(
   <Edit title={<CommunityTitle />}>
       <SimpleForm>
           <TextInput source="id" />
           <NumberInput source="account.id" />
           <TextInput source="name" validate={validateNull('Name')} />
           <TextInput source="url"  validatr={validateUrl()}/>
-          <TextInput source="category" />
+          <SelectInput
+            source='category'
+            choices={categories.map(category => ({ id: category.name, name: category.name }))}
+            defaultValue={defaultValue}
+          />
           <TextInput source="rules" validate={validateNull('Rule')}/>
       </SimpleForm>
   </Edit>
-);
+  );
+};
 
 export default CommunityList;
