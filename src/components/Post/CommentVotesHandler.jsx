@@ -13,10 +13,18 @@ const CommentVotesHandler = ({ comment, post, commentId, voteCount }) => {
   const commentVote = account && comment.votes ? comment.votes.find(comment_vote => comment_vote.account_id === account.id) : null;
 
   useEffect(() => {
-    setCount(voteCount);
-    setUpvoteClass(commentVote && commentVote.value === 1 ? 'voted' : '');
-    setDownvoteClass(commentVote && commentVote.value === -1 ? 'voted' : '');
-  }, [comment]);
+    const fetchCommentVotes = async () => {
+      const response = await axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`);
+      setCount(response.data.reduce((sum, vote) => sum + vote.value, 0));
+      setUpvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === 1) ? 'voted' : '');
+      setDownvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === -1) ? 'voted' : '');
+    };
+
+    if (account) {
+      fetchCommentVotes();
+    }
+  }, [account, community_id, id, commentId]);
+
 
   const handleVote = async (value) => {
     const url = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`;
