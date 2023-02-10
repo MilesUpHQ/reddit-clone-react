@@ -5,7 +5,7 @@ import SubscriptionsList from './SubscriptionsList';
 import { AiFillHome } from "react-icons/ai";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { BsShieldCheck, BsArrowUpRightCircle} from "react-icons/bs";
-import { FiEye, FiMail } from "react-icons/fi"
+import { FiMail } from "react-icons/fi"
 import { BsPlusLg, BsBell, BsCoin } from 'react-icons/bs';
 import { CiCircleList } from 'react-icons/ci'
 import { TbMessageCircle } from 'react-icons/tb'
