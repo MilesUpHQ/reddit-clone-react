@@ -192,3 +192,32 @@ button {
   margin-left: 80px;
   font-weight: 100;
 }
+
+.profiledrophead{
+  font-size: large;
+  margin-left: 2px;
+}
+
+.on{
+  margin-left: 130px;
+  color: blue;
+  font-size: 20px;
+}
+
+.off{
+  margin-left: 143px;
+  color: rgb(59, 59, 63);
+  font-size: 20px;
+}
+
+.on2{
+  margin-left: 143px;
+  color: blue;
+  font-size: 20px;
+}
+
+.agreement{
+  margin-left: 40px !important;
+  font-weight: 100;
+  font-size: small;
+}
