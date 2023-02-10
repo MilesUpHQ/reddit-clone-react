@@ -7,11 +7,8 @@ import CommunityTitle from './CommunityTitle'
 import '../../css/post.css'
 import '../../css/warning.css'
 import axios from 'axios';
-import { post } from 'jquery';
 import { toast } from 'react-toastify';
-
-
-const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
+import PostApi from '../Home/PostApi';
 
 const DiscussionForm = () => {
   const [communities, setCommunities] = useState([])
@@ -26,24 +23,7 @@ const DiscussionForm = () => {
   const account = JSON.parse(localStorage.getItem('account'))
 
   const navigate = useNavigate();
-  const [post, setPost] = useState({
-    account_id: account.id,
-    community_id: '' || 1,
-    title: '',
-    body: ''
-  });
-
-  const set_new_post = async (post) => {
-    await axios.post(Post_URL, { post }).then((response) => {
-      if (response.status === 201) {
-        toast.success("Post Created successfully!");
-        navigate('/')
-      }
-    }).catch((error) => {
-      console.log(error.response.data);
-      toast.error("An error occured while submitting the Post");
-    })
-  }
+  const { post, setPost, set_new_post } = PostApi()
 
   const accountId = account.id
   const [subscriptions, setSubscriptions] = useState([]);
@@ -74,7 +54,7 @@ const DiscussionForm = () => {
     const strippedContent = content.replace(/<[^>]+>/g, '');
     setPost({ ...post, body: strippedContent });
   }
-  
+
   const onSubmit = (event) => {
     event.preventDefault();
     if (!post.body) {
@@ -87,20 +67,6 @@ const DiscussionForm = () => {
   return (
     <div>
       <form action="">
-        <div className="row mt-3">
-          <div className="col-sm-12">
-            <div className="card rounded mb-3">
-              <div className="form-group">
-                <select id="community_id" className="form-select search-input-navbar community_select" placeholder='Choose a community' name="community_id" value={post.community_id} onChange={onChange}>
-                  {subscriptions && subscriptions.map((subscription) => (
-                    <option key={subscription.id} value={subscription.id}>{subscription.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group mb-3">
