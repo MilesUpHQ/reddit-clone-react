@@ -3,7 +3,6 @@ import Postform from './Postform'
 import Draft from './Draft'
 import '../../css/post.css'
 import post_new_avatar from '../../images/reddit_avatar.png'
-import { BiDotsHorizontalRounded } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 
 const NewPost = () => {
@@ -14,7 +13,7 @@ const NewPost = () => {
           <div className="col-8">
             <div className="row new_post_head pb-1">
               <div className="col-10 p-0">
-                <h5 className="">Create Post</h5>
+                <h5 className="">Create a post</h5>
               </div>
               <div className="col-2 p-0">
                 <Draft />
