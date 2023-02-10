@@ -27,20 +27,18 @@ const SubscriptionsList = ({ accountId }) => {
 
   return (
     <div>
-      <ul>
         {subscriptions.map((subscription) => (
           <div key={subscription.id}>
             <Dropdown.Item href={`http://localhost:3001/r/${subscription.community_id}`} className="text-dark">
               {subscription.community.profile_image && subscription.community.profile_image.url ? [
-                <img src={`http://localhost:3000${subscription.community.profile_image.url}`} className='community-icon' alt="" />
+                <img src={`http://localhost:3000${subscription.community.profile_image.url}`} className='community-icon mod-icon' alt="" />
               ] : [
-                <img src={reddit_logo} className='community-icon' alt="" />
+                <img src={reddit_logo} className='community-icon mod-icon' alt="" />
               ]}
               r/{subscription.community && subscription.community.name}
             </Dropdown.Item>
           </div>
         ))}
-      </ul>
     </div>
   );
 };

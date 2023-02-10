@@ -16,7 +16,7 @@ const LinkForm = () => {
     useEffect(() => {
       fetch(Community_URL)
         .then(response => response.json())
-        .then(data => setCommunities(data))
+        .then(data => setCommunities(data.communities))
     }, [])
 
     
