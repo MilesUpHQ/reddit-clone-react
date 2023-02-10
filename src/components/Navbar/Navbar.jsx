@@ -102,11 +102,12 @@ const navbar = () => {
               <Dropdown>
                 <Dropdown.Toggle className='navprofile' variant="transparent text-muted" id="dropdown-basic">
                   <div className='d-flex'>
-                    <img src={avatar_drop} alt="" className="profile-img-navbar mr-2" />
-                    <div className='profileinfo inline'>
+                    <img src={avatar_drop} alt="" className="profile-img-navbar mt-1" />
+                    <div className='profileinfo inline mt-2'>
                       <div className='profilename'>{account.username}</div>
                       <span className='karma'><IoIosSettings className='star'/>1 Karma</span>
                     </div>
+                    <span className='customdropdown'><RiArrowDropDownLine /></span>
                   </div>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
