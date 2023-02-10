@@ -12,7 +12,7 @@ import Top from './Tabs/Top';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../css/Community.css'
-
+import Bactotop from './Tabs/Bactotop';
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [bestposts, setbestPosts] = useState([]);
@@ -140,6 +140,7 @@ const Home = () => {
         </div>
         <div className='col-4 mr-auto'> <Right_Tab /> </div>
       </div>
+      <Bactotop/>
     </div>
   )
 }
