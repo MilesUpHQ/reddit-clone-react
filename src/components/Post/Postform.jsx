@@ -97,7 +97,7 @@ const Postform = () => {
                   <Tabs
                     defaultActiveKey="post"
                     id="justify-tab-example"
-                    className="mb-3"
+                    className="post-new-tab mb-3"
                     justify
                   >
                     <Tab eventKey="post" title={<span>{<CgNotes />} Post</span>} tabClassName="post-tab-nav-link">
