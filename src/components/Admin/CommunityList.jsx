@@ -38,6 +38,7 @@ export const CommunityCreate = (props) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const name = query.get('name');
+
   return(
   <Create {...props}>
       <SimpleForm>
@@ -47,7 +48,8 @@ export const CommunityCreate = (props) => {
           <TextInput source="summary" />
           <SelectInput
           source='category'
-          choices={categories.map(category => ({ id: category.id, name: category.name }))}
+          choices={categories.map(category => ({ id: category.name, name: category.name }))}
+          defaultValue={name}
           />
           <TextInput source="rules" />
       </SimpleForm>
