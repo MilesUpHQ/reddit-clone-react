@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import {List, Datagrid, TextField, DateField, EditButton, DeleteButton, useRecordContext, Create} from 'react-admin'
 import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, required, regex, SelectInput} from 'react-admin'
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 const handleDelete = async (id) => {
   try {
@@ -35,6 +35,9 @@ export const CommunityCreate = (props) => {
       .then(data => setCategories(data));
   }, []);
 
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const name = query.get('name');
   return(
   <Create {...props}>
       <SimpleForm>
