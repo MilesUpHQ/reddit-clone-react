@@ -17,6 +17,7 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import { HiDotsHorizontal, HiTrendingUp } from 'react-icons/hi';
 import { RiLayoutRowLine } from 'react-icons/ri'
 
+import Bactotop from './Tabs/Bactotop';
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [bestposts, setbestPosts] = useState([]);
@@ -28,7 +29,7 @@ const Home = () => {
   let { id, community_id } = useParams();
   const [hasMore, setHasMore] = useState(true);
   const [activeTab, setActiveTab] = useState("best");
-  const limit = 15
+  const limit = 15;
   useEffect(() => {
     switch (activeTab) {
       case "best":
@@ -162,6 +163,7 @@ const Home = () => {
         </div>
         <div className='col-4 mr-auto'> <Right_Tab /> </div>
       </div>
+      <Bactotop/>
     </div>
   )
 }

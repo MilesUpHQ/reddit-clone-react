@@ -3,26 +3,41 @@ import List from './List'
 import MyComponent from './Categorylist'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
-//import Mybutton from './joinButton'
+import { ListGroup } from 'react-bootstrap';
 
-const Community_URL = 'http://localhost:3000/api/v1/communities/'
-
-function get_communities_data() {
-  return axios.get(Community_URL).then((response) => response.data)
-}
 
 const Index = () => {
   const [communities, setCommunities] = useState([]);
-
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const limit = 10;
   useEffect(() => {
-    let mounted = true;
-    get_communities_data().then((items) => {
-      if (mounted) {
-        setCommunities(items);
+    if (!mounted) {
+      setMounted(true);
+      return;
+    }
+
+    axios.get(`http://localhost:3000/api/v1/communities?page=${page}&limit=${limit}`)
+      .then(response => {
+        if (page === 1) {
+          setCommunities(response.data.communities);
+        } else {
+          setCommunities(prevCommunities => [...prevCommunities, ...response.data.communities]);
+        }
+
+        setHasMore(response.data.total_pages > page);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+    window.onscroll = () => {
+      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight && hasMore) {
+        setPage(prevPage => prevPage + 1);
       }
-    });
-    return () => (mounted = false);
-  }, []);
+    };
+  }, [hasMore, page, mounted]);
 
   return (
     <div className='community_post'>

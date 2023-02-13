@@ -150,7 +150,7 @@ const PostShow = () => {
           </div>
         </div>
       ] : [
-        <Nopost />
+        null
       ]}
     </>
   )

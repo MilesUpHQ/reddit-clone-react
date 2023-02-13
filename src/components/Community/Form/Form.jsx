@@ -41,7 +41,7 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
             <div className="create-post m-3">
               <div className="form-group">
                 <label htmlFor="name"> Name </label>
-                <input type="text" name="name" onChange={onChange} className={`form-control ${errorJson.name && 'border-danger'}`} maxLength="16" minLength="3" value={community.name} />
+                <input type="text" name="name" onChange={onChange} className={`form-control ${errorJson.name && 'border-danger'}`} maxLength="25" minLength="3" value={community.name} />
                 {errorJson.name && <p className="text-danger">{errorJson.name}</p>}
               </div>
             </div>
