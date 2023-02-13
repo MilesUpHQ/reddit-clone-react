@@ -62,7 +62,7 @@ const navbar = () => {
               <div className="mt-2 ms-2 mb-2 text-muted drophead"> FEEDS </div>
               <Dropdown.Item href="/"><span className='mod-icon'><AiFillHome /></span>Home</Dropdown.Item>
               <Dropdown.Item href="/"><span className='mod-icon'><BsArrowUpRightCircle /></span>Popular</Dropdown.Item>
-              <Dropdown.Item href="/"><span className='mod-icon'><CiCircleList /></span>All</Dropdown.Item>
+              <Dropdown.Item href="/r"><span className='mod-icon'><CiCircleList /></span>All</Dropdown.Item>
               <Dropdown.Item href="/"><span className='mod-icon'><TbMessageCircle /></span>Happening Now</Dropdown.Item>
               <div className="mt-2 ms-2 mb-2 text-muted drophead"> OTHERS </div>
               <Dropdown.Item href="/"><img src={avatar_drop} className='community-icon mod-icon' alt="" />User Settings</Dropdown.Item>
