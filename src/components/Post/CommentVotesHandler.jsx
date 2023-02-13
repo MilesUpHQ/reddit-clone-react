@@ -1,17 +1,19 @@
 import { React, useState, useEffect } from 'react'
 import { TbArrowBigTop, TbArrowBigDown } from 'react-icons/tb'
 import { GoArrowUp, GoArrowDown } from 'react-icons/go'
+import { useParams } from 'react-router-dom';
 import axios from 'axios'
 
-const VotesHandler = ({ post, communityId, postId, voteCount }) => {
+const CommentVotesHandler = ({ comment, commentId, voteCount }) => {
   const account = JSON.parse(localStorage.getItem('account'))
   const [count, setCount] = useState(voteCount);
+  let { id, community_id } = useParams();
   const [upvoteClass, setUpvoteClass] = useState("");
   const [downvoteClass, setDownvoteClass] = useState("");
-  const url = `http://localhost:3000/api/v1/communities/${communityId}/posts/${postId}/votes`;
+  const url = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments/${commentId}/comment_votes`;
 
   useEffect(() => {
-    const fetchVotes = async () => {
+    const fetchCommentVotes = async () => {
       const response = await axios.get(url);
       setCount(response.data.reduce((sum, vote) => sum + vote.value, 0));
       setUpvoteClass(response.data.find(vote => vote.account_id === account.id && vote.value === 1) ? 'voted' : '');
@@ -19,22 +21,22 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
     };
 
     if (account) {
-      fetchVotes();
+      fetchCommentVotes();
     } else {
       setCount(voteCount);
     }
-  }, [account, communityId, postId]);
+  }, [account, community_id, id, commentId]);
 
   const handleVote = async (value) => {
     if (!account) {
       return;
     }
     const response = await axios.get(url);
-    let vote = response.data.find(vote => vote.post_id === postId && vote.account_id === account.id);
+    let comment_vote = response.data.find(comment_vote => comment_vote.comment_id === commentId && comment_vote.account_id === account.id);
 
-    if (vote) {
-      if (vote.value === value) {
-        await axios.delete(`${url}/${vote.id}`);
+    if (comment_vote) {
+      if (comment_vote.value === value) {
+        await axios.delete(`${url}/${comment_vote.id}`);
         setCount(count - value);
         if (value === 1) {
           setUpvoteClass("");
@@ -42,8 +44,8 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
           setDownvoteClass("");
         }
       } else {
-        await axios.patch(`${url}/${vote.id}`, {
-          vote: { value }
+        await axios.patch(`${url}/${comment_vote.id}`, {
+          comment_vote: { value }
         });
         setCount(count + 2 * value);
         if (value === 1) {
@@ -56,7 +58,7 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
       }
     } else {
       await axios.post(url, {
-        vote: {
+        comment_vote: {
           value,
           account_id: account.id
         }
@@ -74,7 +76,7 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
   const handleDownvote = () => handleVote(-1);
 
   return (
-    <div className=''>
+    <div style={{ display: "flex" }} className='mb-3'>
       <div className={`vote-icon upvote ${upvoteClass}`}>
         {upvoteClass ?
           <GoArrowUp onClick={handleUpvote} />
@@ -82,7 +84,7 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
           <TbArrowBigTop onClick={handleUpvote} />
         }
       </div>
-      <span className={`vote-score upvote_${upvoteClass} downvote_${downvoteClass}`}>{count}</span>
+      <span className={`vote-score upvote_${upvoteClass} downvote_${downvoteClass} mt-3 mx-2`}>{count}</span>
       <div className={`vote-icon downvote ${downvoteClass}`}>
         {downvoteClass ?
           <GoArrowDown onClick={handleDownvote} />
@@ -92,6 +94,7 @@ const VotesHandler = ({ post, communityId, postId, voteCount }) => {
       </div>
     </div>
   )
+
 }
 
-export default VotesHandler
+export default CommentVotesHandler
