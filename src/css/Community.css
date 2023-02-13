@@ -107,9 +107,6 @@
 .community_post {
   min-height: 100vh;
   background: #dae0e6;
-  padding-top: 20px;
-  padding-left: 185px;
-  padding-right: 185px;
 }
 
 .community-icon{
@@ -265,4 +262,40 @@
   padding: 15px 10px;
 
   justify-content: center;
+}
+
+.side-nav {
+  height: 100%;
+  width: 320px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 60px;
+}
+
+.side-nav ul {
+  list-style-type: none;
+  overflow: auto;
+  height: 100%;
+}
+
+.side-nav li {
+  color: black;
+  font-size: large;
+  padding: 8px 25px;
+  display: block;
+}
+
+.side-nav a {
+  text-decoration: none;
+}
+.side-nav .nav-item:hover {
+  background-color: #ebe7e7;
+}
+
+.mod-nav {
+  font-size: small;
+  font-weight: 200;
 }
