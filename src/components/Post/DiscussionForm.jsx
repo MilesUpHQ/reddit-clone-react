@@ -9,6 +9,7 @@ import '../../css/warning.css'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import PostApi from '../Home/PostApi';
+import SubmitPost from './SubmitPost';
 
 const DiscussionForm = () => {
   const [communities, setCommunities] = useState([])
@@ -74,21 +75,7 @@ const DiscussionForm = () => {
           </div>
         </div>
         <ContentWarning />
-        <div>
-          <div className="float-right">
-            <div className="join-btn  create-post-btn mb-4">
-              <input type="submit" value="Save as draft" className="text-white"
-                onClick={() => {
-                  set_new_post({ ...post, is_drafted: true });
-                }
-                }
-              />
-            </div>
-            <div className="join-btn create-post-btn mb-4">
-              <input type="submit" value="Publish" className="text-white" onClick={onSubmit} />
-            </div>
-          </div>
-        </div>
+        <SubmitPost onSubmit={onSubmit} />
       </form >
     </div >
   )
