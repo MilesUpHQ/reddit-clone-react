@@ -30,7 +30,7 @@ const Profiledropdown = () => {
                         <img src={avatar_drop} alt="" className="profile-img-navbar mt-1" />
                         <div className='profileinfo inline mt-2'>
                             <div className='profilename'>{account.username}</div>
-                            <span className='karma'><IoIosSettings className='star' />1 Karma</span>
+                            <span className='karma'><IoIosSettings className='star' />{account.karma} Karma</span>
                         </div>
                         <span className='customdropdown'><RiArrowDropDownLine /></span>
                     </div>
