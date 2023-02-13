@@ -2,9 +2,11 @@ import React from 'react'
 import { Admin, Resource} from 'react-admin'
 import PostIcon from "@mui/icons-material/Book";
 import CommunityIcon from "@mui/icons-material/Group";
+import CategoryIcon from "@mui/icons-material/Folder";
 import axios from 'axios'
-import PostList,{PostEdit} from './PostList';
-import CommunityList,{CommunityEdit} from './CommunityList';
+import PostList,{PostCreate,PostEdit} from './PostList';
+import CommunityList,{CommunityCreate,  CommunityEdit } from './CommunityList';
+import CategoryList, { CategoryCreate, CategoryEdit } from './CategoryList';
 import { Dashboard } from './Dashboard';
 
 const dataProvider = axios.create({
@@ -19,6 +21,18 @@ const AdminIndex = () => {
           data: params
         });
       }
+      if (type === 'CREATE'){
+        try {
+          const response = await dataProvider.post(`${resource}`, params.data);
+          console.log(response);
+          return { data: response.data };
+        } catch (error) {
+          console.error(error);
+          return Promise.reject(error);
+        }
+      }
+
+
       if (type === 'GET_ONE') {
         try {
           const response = await dataProvider.get(`${resource}/${params.id}`);
@@ -44,7 +58,7 @@ const AdminIndex = () => {
           headers: { 'Content-Type': 'application/json' },
         };
         const response = await dataProvider(requestConfig);
-        let data = response.data;
+        let data = (resource=== 'communities/1/posts') ? response.data.posts : ((resource=== 'communities') ? response.data.communities: response.data);
         if (!Array.isArray(data)) {
           data = [data];
         }
@@ -54,8 +68,9 @@ const AdminIndex = () => {
         return Promise.reject(error);
       }
     }}  dashboard={Dashboard}>
-      <Resource name='communities/1/posts' list={PostList} edit={PostEdit} path="/posts" icon={PostIcon}/>
-      <Resource name='communities' list={CommunityList} edit={CommunityEdit} path="/communities" icon={CommunityIcon}/>
+      <Resource name='communities/1/posts' list={PostList} create={PostCreate} edit={PostEdit} path="/posts" icon={PostIcon}/>
+      <Resource name='communities' list={CommunityList}  create={CommunityCreate} edit={CommunityEdit} path="/communities" icon={CommunityIcon}/>
+      <Resource name='categories' list={CategoryList} create={CategoryCreate} edit={CategoryEdit} path="/categories" icon={CategoryIcon}/>
     </Admin>
   )
 };
