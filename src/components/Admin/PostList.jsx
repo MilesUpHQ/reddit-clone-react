@@ -1,6 +1,6 @@
 import React from 'react'
 import {List, Datagrid, TextField, NumberField, EditButton, DeleteButton, useRecordContext} from 'react-admin'
-import {Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, ReferenceInput, required} from 'react-admin'
+import {Create,Edit, SimpleForm,TextInput,NumberInput, BooleanInput, DateInput, ReferenceInput, required} from 'react-admin'
 const PostList = (props) => {
   const handleDelete = async (id) => {
     try {
@@ -21,6 +21,22 @@ const PostList = (props) => {
     </Datagrid>
   </List>
 };
+
+export const PostCreate = (props) => {
+
+  return(
+  <Create {...props}>
+      <SimpleForm>
+          <TextInput source="account_id" defaultValue={1} type="hidden" /> 
+          <NumberInput source="community_id" />
+          <TextInput source="title" />
+          <TextInput source="body" />
+          <BooleanInput source="is_drafted" />
+      </SimpleForm>
+  </Create>
+  );
+};
+
 
 const PostTitle = () => {
   const record = useRecordContext();
