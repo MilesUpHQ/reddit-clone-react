@@ -1,8 +1,9 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const CATEGORIES = ["Sports", "Gaming", "Technology", "News", "TV", "Music", "Crypto", "Fashion", "Food", "Health", "Science", "Finance"];
 
-const Form = ({ community, onChange, onSubmit, errorJson }) => {
+const Form = ({ community, onChange, onCancel, onSubmit, errorJson }) => {
   const account = JSON.parse(localStorage.getItem('account'))
   return (
     <div className="">
@@ -65,7 +66,7 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
         </div>
         <div className="create-post m-3 d-flex gap-2 float-right">
           <div className="join-btn create-post-btn float-right">
-            <input type="submit" className='text-white' value="Cancel" onClick={onSubmit} />
+            <input type="submit" className='text-white' value="Cancel" onClick={onCancel} />
           </div>
           <div className="join-btn create-post-btn float-right">
             <input type="submit" className='text-white' value="Create Community" onClick={onSubmit} />
