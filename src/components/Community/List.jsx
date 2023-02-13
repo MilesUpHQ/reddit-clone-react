@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from "react-router-dom";
+import BackToTop from '../Home/Tabs/Bactotop';
 
 const List = ({ communities }) => {
   const location = useLocation();
@@ -37,7 +38,7 @@ const List = ({ communities }) => {
           </div>
         ))
       }
-
+      <BackToTop />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import '../../css/post.css'
 import VotesHandler from './VotesHandler';
 import SavePosts from './SavePosts';
 import { Markup } from 'interweave';
+import BackToTop from '../Home/Tabs/Bactotop';
 
 const PostList = ({ account, posts, community, isSavedPosts }) => {
 
@@ -87,6 +88,7 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                 </div>
               </div>
             </div>
+            <BackToTop/>
           </div>
         )
       })

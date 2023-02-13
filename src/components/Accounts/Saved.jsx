@@ -5,29 +5,36 @@ import PostList from '../Post/PostList';
 const Saved = () => {
   const [posts, setPosts] = useState([]);
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-
+  const [isLoading, setIsLoading] = useState(false);
   const limit = 15
   const account = JSON.parse(localStorage.getItem('account'))
+
   useEffect(() => {
+    loadSaved();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop
+      === document.documentElement.offsetHeight
+    ) {
+      loadSaved();
+    }
+  };
+
+  const loadSaved = () => {
     axios.get(`http://localhost:3000/api/v1/accounts/${account.id}/save_posts?page=${page}&limit=${limit}`)
       .then(response => {
         setPosts([...posts, ...response.data.saved]);
-        setHasMore(response.data.total_posts > page);
+        setPage(page + 1);
+        setIsLoading(false);
       })
       .catch(error => {
         console.error(error);
       });
-    window.onscroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight && hasMore) {
-        setPage(prevPage => prevPage + 1);
-      }
-    };
-
-    return () => {
-      window.onscroll = null;
-    };
-  }, [hasMore, page, limit]);
+  };
 
   return (
     <div>
