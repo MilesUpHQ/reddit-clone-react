@@ -5,11 +5,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const PostApi = () => {
+  const account = JSON.parse(localStorage.getItem('account'))
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
   const limit = 15;
   const [text, setText] = useState('');
   let { id, community_id } = useParams();
+  const [post, setPost] = useState({
+    account_id: account.id,
+    community_id: '',
+    title: '',
+    body: ''
+  });
+  const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
   const Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts?page=${page}&limit=${limit}`
   const Hot_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/hot_posts?page=${page}&limit=${limit}`
   const New_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/new_posts?page=${page}&limit=${limit}`
@@ -17,6 +25,19 @@ const PostApi = () => {
   const Top_Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/top_posts?page=${page}&limit=${limit}`
   const Comments_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/comments`
   const navigate = useNavigate()
+
+
+  const set_new_post = async (post) => {
+    await axios.post(Post_URL, { post }).then((response) => {
+      if (response.status === 201) {
+        toast.success("Post Created successfully!");
+        navigate('/')
+      }
+    }).catch((error) => {
+      console.log(error.response.data);
+      toast.error("An error occured while submitting the Post");
+    })
+  }
 
   const get_all_posts = (page = 1, limit = 15) => {
     return axios.get(`${Posts_URL}?page=${page}&limit=${limit}`).then((response) => response.data)
@@ -65,7 +86,21 @@ const PostApi = () => {
     setComments(response.data);
   };
 
-  return { get_all_posts, get_best_posts, get_hot_posts, get_new_posts, get_top_posts, set_comments, text, setText, comments, setComments }
+  return {
+    post,
+    setPost,
+    set_new_post,
+    get_all_posts,
+    get_best_posts,
+    get_hot_posts,
+    get_new_posts,
+    get_top_posts,
+    set_comments,
+    text,
+    setText,
+    comments,
+    setComments
+  }
 }
 
 export default PostApi
