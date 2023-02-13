@@ -35,9 +35,10 @@ const ShowCommunity = () => {
   const navigate = useNavigate()
   const [isBanned, setIsBanned] = useState(false);
   let { id } = useParams();
+  const [page, setPage] = useState(1)
 
   function get_community_data(community_id) {
-    return axios.get(Community_URL + community_id).then((response) => {
+    return axios.get(`${Community_URL}${community_id}?page=${page}`).then((response) => {
       return response.data
     }).catch((error) => {
       console.log(error)
@@ -46,17 +47,40 @@ const ShowCommunity = () => {
 
   useEffect(() => {
     let mounted = true;
+    window.addEventListener('scroll', handleScroll);
     get_community_data(id).then((items) => {
       if (mounted) {
-        setCommunity(items);
-        setPosts(items.posts);
+        setCommunity(items.community);
+        if(items.posts.length===0){
+          window.removeEventListener('scroll', handleScroll);
+        }
+        setPosts(posts.concat(items.posts));
         setAccount(items.account);
         checkIsSubscribed(items.subscriptions);
         checkIsBanned(items.banned_users)
       }
     });
-    return () => (mounted = false);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      mounted = false
+    };
+  }, [page]);
+
+  const handleScroll = () => {
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      setPage(page + 1)
+      console.log(page)
+      // get_community_data(id).then((items) => {
+      //   setPosts(posts.concat(items.posts));
+      // });
+    }
+  }
+  const nextPost = () => {
+    setPage(page + 1)
+    get_community_data(id).then((items) => {
+      setPosts(posts.concat(items.posts));
+    });
+  }
 
   const checkIsSubscribed = (subscriptions) => {
     setSubscribeId(subscriptions[0].id)
@@ -157,6 +181,7 @@ const ShowCommunity = () => {
                 <AboutCommunity community={community} isBanned={isBanned} />
                 <RulesCommunity community={community} />
               </div>
+            <Link to='' onClick={nextPost} className=''>See More</Link>
             </div>
           </div>
         </div>
