@@ -58,7 +58,7 @@ const AdminIndex = () => {
           headers: { 'Content-Type': 'application/json' },
         };
         const response = await dataProvider(requestConfig);
-        let data = (resource=== 'communities/1/posts') ? response.data.posts : response.data;
+        let data = (resource=== 'communities/1/posts') ? response.data.posts : ((resource=== 'communities') ? response.data.communities: response.data);
         if (!Array.isArray(data)) {
           data = [data];
         }
