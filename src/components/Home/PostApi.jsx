@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const PostApi = () => {
+  const [errorJson, setErrorJson] = useState('')
   const account = JSON.parse(localStorage.getItem('account'))
   const [comments, setComments] = useState([]);
   const [page, setPage] = useState(1);
@@ -15,7 +16,8 @@ const PostApi = () => {
     account_id: account.id,
     community_id: '',
     title: '',
-    body: ''
+    body: '',
+    link: ''
   });
   const Post_URL = `http://localhost:3000/api/v1/communities/${post.community_id}/posts/`;
   const Posts_URL = `http://localhost:3000/api/v1/communities/${community_id}/posts?page=${page}&limit=${limit}`
@@ -35,6 +37,7 @@ const PostApi = () => {
       }
     }).catch((error) => {
       console.log(error.response.data);
+      setErrorJson(error.response.data)
       toast.error("An error occured while submitting the Post");
     })
   }
@@ -99,7 +102,8 @@ const PostApi = () => {
     text,
     setText,
     comments,
-    setComments
+    setComments,
+    setErrorJson
   }
 }
 
