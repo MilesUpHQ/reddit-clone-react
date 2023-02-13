@@ -2,8 +2,11 @@ import React from 'react';
 import '../../../css/Community.css';
 import Form from './Form';
 import CommunityApi from '../CommunityApi';
+import {useNavigation} from "@react-navigation/native"
 
 const NewCommunity = () => {
+  
+  const navigation = useNavigation();
 
   const { set_new_community, community, setCommunity, errorJson } = CommunityApi();
 
@@ -20,7 +23,9 @@ const NewCommunity = () => {
   }
 
   const onCancel = () => {
+    console.log("cancel")
     set_new_community()
+    navigation.navigate("/");
   };
 
   return (
