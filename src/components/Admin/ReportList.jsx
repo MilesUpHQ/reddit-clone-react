@@ -22,7 +22,6 @@ const ReportList = (props) => {
     return <List {...props}>
     <Datagrid>
       <NumberField source='id' />
-      {/* <NumberField source='post_id' /> */}
       <LinkField source='post_id' target="_blank" to={`http://localhost:3001/communities/1/posts`} />
       <NumberField source='account_id' />
       <NumberField source='report_categories_id' />
