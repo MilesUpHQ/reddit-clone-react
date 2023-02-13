@@ -11,10 +11,19 @@ const ReportList = (props) => {
           console.error(error);
         }
       };
+
+      
+      const LinkField = ({ source,target,to }) => {
+        const post = useRecordContext();
+        return <a href={`${to}/${post.post_id}`} target={target}> {<NumberField source='post_id' />}</a>;
+      };
+
+
     return <List {...props}>
     <Datagrid>
       <NumberField source='id' />
-      <NumberField source='post_id' />
+      {/* <NumberField source='post_id' /> */}
+      <LinkField source='post_id' target="_blank" to={`http://localhost:3001/communities/1/posts`} />
       <NumberField source='account_id' />
       <NumberField source='report_categories_id' />
       <TextField source='report_categories_name' />
