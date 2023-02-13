@@ -36,14 +36,16 @@ const ShowCommunity = () => {
     window.addEventListener('scroll', handleScroll);
     get_community_data(id).then((items) => {
       if (mounted) {
-        setCommunity(items.community);
         if (items.posts.length === 0) {
           window.removeEventListener('scroll', handleScroll);
         }
+        if(page===1){
+          setCommunity(items.community);
+          setAccount(items.account);
+          checkIsSubscribed(items.subscriptions);
+          checkIsBanned(items.banned_users)
+        }
         setPosts(posts.concat(items.posts));
-        setAccount(items.account);
-        checkIsSubscribed(items.subscriptions);
-        checkIsBanned(items.banned_users)
       }
     });
     return () => {
