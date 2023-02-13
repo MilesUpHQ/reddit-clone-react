@@ -2,8 +2,11 @@ import React, { useEffect } from 'react';
 import '../../../css/Community.css';
 import Form from './Form';
 import CommunityApi from '../CommunityApi';
+import {useNavigate} from "react-router-dom"
 
 const EditCommunity = () => {
+
+  const navigate = useNavigate()
 
   const { get_community, edit_community, community ,setCommunity, errorJson } = CommunityApi();
 
@@ -16,6 +19,12 @@ const EditCommunity = () => {
     });
     return () => (mounted = false);
   }, []);
+
+  const onCancel = () => {
+    console.log("cancel")
+    navigate('/')
+  };
+
 
   const onChange = (event) => {
     setCommunity({
@@ -30,17 +39,15 @@ const EditCommunity = () => {
   }
 
   return (
-    <div className="community_post pb-10">
-      <div className="row">
-        <div className="col-10">
-          <div className="row new_post_head pb-1">
-            <div className="col-10 p-0">
-              <h5 className="">Edit Community</h5>
-            </div>
-          </div>
-          <div className="row mt-3">
-            <div className="col-12 p-0">
-              <Form community={community} onChange={onChange} onSubmit={onSubmit} errorJson={errorJson} />
+    <div className="community_post pb-5">
+    <div className="row d-flex justify-content-center align-items-center">
+      <div className="col-12 col-md-8">
+        <div className="card text-dark rounded">
+          <div className="card-body p-5">
+            <div className="text-left">
+              <h5 className="fw-bold mb-2 text-center">Edit Community</h5>
+              <Form community={community} onCancel={onCancel} onChange={onChange} onSubmit={onSubmit} errorJson={errorJson} />
+              </div>
             </div>
           </div>
         </div>

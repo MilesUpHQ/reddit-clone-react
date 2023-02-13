@@ -1,7 +1,8 @@
 import React,{useState,useEffect}from 'react'
+import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const Form = ({ community, onChange, onSubmit, errorJson }) => {
+const Form = ({ community, onChange, onCancel, onSubmit, errorJson }) => {
   const account = JSON.parse(localStorage.getItem('account'))
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -20,10 +21,9 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
   };
 
   return (
-    <div>
-      <div className="card rounded mb-3">
-        <div className="row">
-          <div className="col-sm-12">
+    <div className="">
+        <div className="">
+          <div className="">
             <div className="create-post m-3">
               <div className="form-group">
                 <label htmlFor="profile_picture"> Profile Picture </label>
@@ -80,13 +80,16 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
             </div>
           </div>
         </div>
-        <div className="create-post m-3">
-          <div className="join-btn create-post-btn mb-3 float-right">
-            <input type="submit" className='text-white' value="Submit" onClick={onSubmit} />
+        <div className="create-post m-3 d-flex gap-2 float-right">
+          <div className="join-btn create-post-btn float-right">
+            <input type="submit" className='text-white' value="Cancel" onClick={onCancel} />
+          </div>
+          <div className="join-btn create-post-btn float-right">
+            <input type="submit" className='text-white' value="Create Community" onClick={onSubmit} />
           </div>
         </div>
       </div>
-    </div>
+    
   )
 }
 
