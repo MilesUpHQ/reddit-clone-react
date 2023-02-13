@@ -16,7 +16,7 @@ const CommunityTitle = ({ postTitle, onChange }) => {
           <div className="form-group">
             <input type="text" id="title" className="form-control" placeholder='Title' name='title' maxLength="300" onChange={handleChange} defaultValue={postTitle} />
           </div>
-          <div className="row" className="char-count">{charCount}/300</div>
+          <div className="char-count">{charCount}/300</div>
         </div>
       </div>
     </div>
