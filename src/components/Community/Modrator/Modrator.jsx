@@ -10,10 +10,58 @@ const Modrator = () => {
   const { id } = useParams();
 
   return (
-    <div className='community_post'>
+    <div>
+      <div className=''></div>
+      <nav id="sidebar" className="bg-light sidebar side-nav mt-5 mb-2">
+        <div className="sidebar-sticky">
+          <ul className="nav flex-column">
+            <div className=" ms-3 text-muted mod-nav">QUEUES</div>
+            <a href="#"><li className="nav-item">Mod queue</li></a>
+            <a href="#"><li className="nav-item">Reports</li></a>
+            <a href="#"><li className="nav-item">Spam</li></a>
+            <a href="#"><li className="nav-item">Edited</li></a>
+            <a href="#"><li className="nav-item">Unmoderated</li></a>
+
+            <a href="#"><li className="nav-item">Banned</li></a>
+            <a href="#"><li className="nav-item">Muted</li></a>
+            <a href="#"><li className="nav-item">Approved</li></a>
+            <a href="#"><li className="nav-item">Talk hosts</li></a>
+            <a href="#"><li className="nav-item">Moderators</li></a>
+
+            <a href="#"><li className="nav-item">Grant user flair</li></a>
+            <a href="#"><li className="nav-item">Emojis</li></a>
+            <a href="#"><li className="nav-item">User flair</li></a>
+            <a href="#"><li className="nav-item">Post flair</li></a>
+
+            <a href="#"><li className="nav-item">Rules</li></a>
+            <a href="#"><li className="nav-item">Removal reasons</li></a>
+            <a href="#"><li className="nav-item">Content controls</li></a>
+            <a href="#"><li className="nav-item">Automod</li></a>
+
+            <a href="#"><li className="nav-item">Scheduled posts</li></a>
+
+            <a href="#"><li className="nav-item">Awards</li></a>
+            <a href="#"><li className="nav-item">Wiki pages</li></a>
+            <a href="#"><li className="nav-item">Community settings</li></a>
+            <a href="#"><li className="nav-item">Community appearance</li></a>
+
+            <a href="#"><li className="nav-item">Awards</li></a>
+
+            <a href="#"><li className="nav-item">Traffic stats</li></a>
+            <a href="#"><li className="nav-item">Mod log</li></a>
+            
+            <a href="#"><li className="nav-item">Mod help center</li></a>
+            <a href="#"><li className="nav-item">Moderator code of conduct</li></a>
+            <a href="#"><li className="nav-item">r/ModSupport</li></a>
+            <a href="#"><li className="nav-item">r/ModHelp</li></a>
+            <a href="#"><li className="nav-item">Contact Reddit</li></a>
+          </ul>
+        </div>
+      </nav>
+
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>
-          <Col sm={3}>
+          {/* <Col sm={3}>
             <Nav variant="pills" className="card p-0 flex-column">
               <Nav.Item>
                 <Nav.Link disabled eventKey="" className='mod-nav-link text-center bg-secondary text-white'>User Management</Nav.Link>
@@ -31,7 +79,7 @@ const Modrator = () => {
                 <Nav.Link eventKey="third" className='mod-nav-link'>Help Center</Nav.Link>
               </Nav.Item>
             </Nav>
-          </Col>
+          </Col> */}
           <Col sm={8}>
             <Tab.Content>
               <Tab.Pane eventKey="first">
@@ -86,6 +134,7 @@ const Modrator = () => {
         </Row>
       </Tab.Container>
     </div>
+
   )
 }
 
