@@ -62,19 +62,6 @@ const LinkForm = () => {
   return (
     <div>
       <form>
-        <div className="row mt-3">
-          <div className="col-sm-12">
-            <div className="card rounded mb-3">
-              <div className="form-group">
-                <select id="community_id" className="form-select search-input-navbar community_select" placeholder='Choose a community' name="community_id" value={post.community_id} onChange={onChange}>
-                  {communities.map(community => (
-                    <option key={community.id} value={community.id}>{community.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
         <CommunityTitle onChange={onChange} />
         <div className="create-post m-3">
           <div className="form-group">
