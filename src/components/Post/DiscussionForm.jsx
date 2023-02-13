@@ -71,8 +71,7 @@ const DiscussionForm = () => {
   }
 
   const handleChange = (content, delta, source, editor) => {
-    const strippedContent = content.replace(/<[^>]+>/g, '');
-    setPost({ ...post, body: strippedContent });
+    setPost({ ...post, body: content });
   }
   
   const onSubmit = (event) => {
