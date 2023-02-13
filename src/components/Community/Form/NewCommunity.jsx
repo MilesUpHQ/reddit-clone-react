@@ -5,7 +5,7 @@ import CommunityApi from '../CommunityApi';
 
 const NewCommunity = () => {
 
-  const { set_new_community, community ,setCommunity, errorJson } = CommunityApi();
+  const { set_new_community, community, setCommunity, errorJson } = CommunityApi();
 
   const onChange = (event) => {
     setCommunity({
@@ -20,22 +20,21 @@ const NewCommunity = () => {
   }
 
   return (
-    <div className="community_post pb-10">
-      <div className="row">
-        <div className="col-10">
-          <div className="row new_post_head pb-1">
-            <div className="col-10 p-0">
-              <h5 className="">Create Community</h5>
-            </div>
-          </div>
-          <div className="row mt-3">
-            <div className="col-12 p-0">
-              <Form community={community} onChange={onChange} onSubmit={onSubmit} errorJson={errorJson} />
+    <div className="community_post pb-5">
+      <div className="row d-flex justify-content-center align-items-center">
+        <div className="col-12 col-md-8">
+          <div className="card text-dark rounded">
+            <div className="card-body p-5">
+              <div className="text-left">
+                <h5 className="fw-bold mb-2 text-center">Create a Community</h5>
+                <Form community={community} onChange={onChange} onSubmit={onSubmit} errorJson={errorJson} />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   );
 }
 
