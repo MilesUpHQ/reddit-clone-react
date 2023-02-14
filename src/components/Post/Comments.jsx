@@ -12,6 +12,7 @@ import CommentVotesHandler from './CommentVotesHandler';
 
 const Comments = ({ highlight, isBanned }) => {
   const { comments, setComments } = PostApi();
+  const [page, setPage] = useState(1)
   const [selectedComment, setSelectedComment] = useState(null);
 
   let { id, community_id } = useParams();
@@ -25,13 +26,24 @@ const Comments = ({ highlight, isBanned }) => {
 
   useEffect(() => {
     let mounted = true;
+    window.addEventListener('scroll', handleScroll);
     get_post_comments(id).then((items) => {
       if (mounted) {
-        setComments(items);
+        setComments(comments.concat(items));
       }
     });
-    return () => (mounted = false);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      mounted = false
+    };
+  }, [page]);
+
+  const handleScroll = () => {
+    if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight) {
+      console.log('Infinity Scroll');
+      setPage(page + 1);
+    }
+  }
 
   const handleClick = (event, commentId) => {
     event.preventDefault();
