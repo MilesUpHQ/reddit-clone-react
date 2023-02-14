@@ -26,7 +26,7 @@ const Index = () => {
               <Comments />
             </Tab>
             <Tab eventKey="history" title="HISTORY">
-              <Posts />
+              <Saved />
             </Tab>
             <Tab eventKey="saved" title="SAVED">
               <Saved />
