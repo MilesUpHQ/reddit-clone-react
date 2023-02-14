@@ -9,7 +9,19 @@ import PostList,{PostCreate,PostEdit} from './PostList';
 import CommunityList,{CommunityCreate,  CommunityEdit } from './CommunityList';
 import CategoryList, { CategoryCreate, CategoryEdit } from './CategoryList';
 import ReportList, {ReportCreate} from './ReportList'
+import AuthProvider from './AuthProvider';
+import { createBrowserHistory as createHistory } from 'history';
+import { createTheme } from '@material-ui/core/styles'
+import LoginPage from './LoginPage';
 import { Dashboard } from './Dashboard';
+
+const history = createHistory();
+
+const theme = createTheme({
+  palette: {
+    type: 'light', 
+  },
+});
 
 const dataProvider = axios.create({
   baseURL: 'http://localhost:3001/api/v1/',
@@ -69,7 +81,8 @@ const AdminIndex = () => {
       } catch (error) {
         return Promise.reject(error);
       }
-    }}  dashboard={Dashboard}>
+    }}   theme={theme}  loginPage={LoginPage} authProvider={AuthProvider} dashboard={Dashboard}>
+
       <Resource name='communities/1/posts' list={PostList} create={PostCreate} edit={PostEdit} path="/posts" icon={PostIcon}/>
       <Resource name='communities' list={CommunityList}  create={CommunityCreate} edit={CommunityEdit} path="/communities" icon={CommunityIcon}/>
       <Resource name='categories' list={CategoryList} create={CategoryCreate} edit={CategoryEdit} path="/categories" icon={CategoryIcon}/>
