@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert';
 
 const CommunityApi = () => {
   const [errorJson, setErrorJson] = useState('')
@@ -71,6 +72,27 @@ const CommunityApi = () => {
       setErrorJson(error.response.data)
       toast.error("An error occured while submitting the form");
     })
+  }
+
+  const deleteCommunityHandler = () => {
+    confirmAlert({
+      title: 'Confirm',
+      message: 'Are you sure you want to delete this item?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            delete_community(community.id)
+            toast.success("Community Deleted!");
+            navigate('/')
+          }
+        },
+        {
+          label: 'No'
+        }
+      ]
+    });
+    console.log("Delete")
   }
 
   return { community, setCommunity, edit_community, set_new_community, get_community, errorJson }
