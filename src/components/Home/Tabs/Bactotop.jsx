@@ -20,7 +20,7 @@ function BackToTop() {
   return (
     <>
       {showButton && (
-          <button className="btn-primary join-btn" style={{ position: 'fixed', width: '200px', bottom: '20px', right: '200px' }} onClick={handleClick}>
+          <button className="btn-backtotop" style={{ position: 'fixed', width: '180px', bottom: '20px', right: '240px' }} onClick={handleClick}>
           Back to Top
         </button>
       )}
