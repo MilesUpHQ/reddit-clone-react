@@ -22,6 +22,7 @@ const ShowCommunity = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isBanned, setIsBanned] = useState(false);
   const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(false)
   let { id } = useParams();
 
   const get_community_data = (community_id) => {
@@ -38,6 +39,7 @@ const ShowCommunity = () => {
     get_community_data(id).then((items) => {
       if (mounted) {
         if (items.posts.length === 0) {
+          setLastPage(true)
           window.removeEventListener('scroll', handleScroll);
         }
         if (page === 1) {
@@ -123,7 +125,7 @@ const ShowCommunity = () => {
                   <div id="post" className="tab-pane fade-in active">
                     <div>
                       <PostList account={account} community={community} posts={posts} />
-                      <PostLoader />
+                      { !lastPage && <PostLoader /> }
                     </div>
                   </div>
                   <div id="menu1" className="tab-pane fade">
