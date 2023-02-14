@@ -23,9 +23,10 @@ const Draft = (props) => {
 
   return (
     <>
-      <Button variant="secondary" onClick={openModal}>
-        Drafts
+      <Button variant="secondary" style={{ backgroundColor: 'transparent', color: '#007bff', border: 'none', borderRadius: '25px' }} onClick={openModal}>
+        Drafts 
       </Button>
+
       <Modal show={isOpen} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton>
           <Modal.Title>Drafts</Modal.Title>
