@@ -14,7 +14,7 @@ const Comments = () => {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const account = JSON.parse(localStorage.getItem('account'))
-  const limit = 15  
+  const limit = 15
   useEffect(() => {
     loadComments();
     window.addEventListener('scroll', handleScroll);
@@ -48,27 +48,29 @@ const Comments = () => {
 
   return (
     <>
-      {comments.length ? (
-        comments.map(comment => (
-          <div style={{ height: '70px' }} className="card post-card mb-3 shadow">
-            <div className="row m-0 bg-white">
-              <div className="ml-3">
-                <img src={reddit_logo} alt="" className="post-list-profile-img" />
-                <a href={`/profile`}><b> u/{comment.username + " "}</b></a>
-                commented on  <a href={`/r/1/p/${comment.post_id}`}>
-                  {comment.post_title + " "} </a><b>{moment(comment.created_at).fromNow()}</b>
+      <div className='community_post-profile'>
+        {comments.length ? (
+          comments.map(comment => (
+            <div style={{ height: '90px' }} className="card post-card mb-3 shadow">
+              <div className="row m-0 bg-white">
+                <div className="ml-3">
+                  <img src={reddit_logo} alt="" className="post-list-profile-img" />
+                  <a href={`/profile`}><b> u/{comment.username + " "}</b></a>
+                  commented on  <a href={`/r/1/p/${comment.post_id}`}>
+                    {comment.post_title + " "} </a><b>{moment(comment.created_at).fromNow()}</b>
+                </div>
+                <b>
+                  <p className="m-1">Comment : <a style={{ textDecoration: 'none' }} href={`/r/1/p/${comment.post_id}?highlight=${comment.message.replace(/<[^>]+>/g, '')}`}>
+                    <Markup content={truncateString(comment.message, 50)}></Markup></a></p>
+                </b>
               </div>
-              <b>
-                <p className="m-1">Comment : <a style={{ textDecoration: 'none' }} href={`/r/1/p/${comment.post_id}?highlight=${comment.message.replace(/<[^>]+>/g, '')}`}>
-                  <Markup content={truncateString(comment.message.replace(/<[^>]+>/g, ''), 50)}></Markup></a></p>
-              </b>
             </div>
-          </div>
-        ))
-      ) : (
-        <h4 className="card-title">No Comments posted till now</h4>
-      )}
-      {isLoading && <div>Loading...</div>}
+          ))
+        ) : (
+          <h4 className="card-title">No Comments posted till now</h4>
+        )}
+        {isLoading && <div>Loading...</div>}
+      </div>
     </>
   )
 };
