@@ -23,9 +23,9 @@ const Draft = (props) => {
 
   return (
     <>
-      <Button variant="secondary" style={{ backgroundColor: 'transparent', color: '#007bff', border: 'none', borderRadius: '25px' }} onClick={openModal}>
-        Drafts 
-      </Button>
+      <button type="button" className="draft-btn d-flex gap-2" onClick={openModal}>DRAFTS
+        <span className='draft-badge'>0</span>
+      </button>
 
       <Modal show={isOpen} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered>
         <Modal.Header closeButton>
