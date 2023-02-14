@@ -38,12 +38,16 @@ const Saved = () => {
 
   return (
     <div>
+      <div className="community_post-profile">
       {posts.length ? (
         <PostList posts={posts.filter(post => post.account_id === account.id)} isSavedPosts={true} />
       ) : (
         <h4 className="card-title">No posts saved</h4>
       )}
     </div>
+    </div>
+
+
   )
 }
 
