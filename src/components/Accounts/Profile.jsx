@@ -6,13 +6,11 @@ import Index from './Index';
 const Profile = () => {
   return (
     <div>
-
-<Index/>
-
-<BackToTop/>
+      <Index />
+      <BackToTop />
 
     </div>
-);
+  );
 }
 
 export default Profile;
