@@ -1,14 +1,29 @@
-import React from 'react'
+import React,{useState,useEffect}from 'react'
+import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-const CATEGORIES = ["Sports", "Gaming", "Technology", "News", "TV", "Music", "Crypto", "Fashion", "Food", "Health", "Science", "Finance"];
 
-const Form = ({ community, onChange, onSubmit, errorJson }) => {
+const Form = ({ community, onChange, onCancel, onSubmit, errorJson }) => {
   const account = JSON.parse(localStorage.getItem('account'))
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch("http://localhost:3000/api/v1/categories");
+      const data = await res.json();
+      setCategories(data);
+    }
+    fetchData();
+  }, []);
+
+  const handleChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
   return (
-    <div>
-      <div className="card rounded mb-3">
-        <div className="row">
-          <div className="col-sm-12">
+    <div className="">
+        <div className="">
+          <div className="">
             <div className="create-post m-3">
               <div className="form-group">
                 <label htmlFor="profile_picture"> Profile Picture </label>
@@ -47,11 +62,12 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
             <div className="create-post m-3">
               <div className="form-group">
                 <label htmlFor="category"> Category </label>
-                <select id="category" name="category" className='form-select search-input-navbar community_select' value={community.category} onChange={onChange}>
-                  <option value="" disabled>Select Category</option>
-                  {CATEGORIES.map((category, index) => <option key={index} value={category}>{category}</option>)}
-                  <input type="text" id="category" className="form-control" placeholder='' name='Category' onChange={onChange} />
-                </select>
+                <select id="category" name="category" className='form-select search-input-navbar community_select' onChange={onChange} value={community.category}>
+                <option value="" disabled>Select a category</option>
+                  {categories.map((category) => 
+                   <option key={category.id} value={category.name}>{category.name}</option>)}
+                   <input type="text" id="category" className="form-control" placeholder='' name='Category' onChange={onChange} />
+               </select>
                 {/* {errors.category && <p className="text-danger">{errors.category}</p>} */}
               </div>
             </div>
@@ -64,13 +80,16 @@ const Form = ({ community, onChange, onSubmit, errorJson }) => {
             </div>
           </div>
         </div>
-        <div className="create-post m-3">
-          <div className="join-btn create-post-btn mb-3 float-right">
-            <input type="submit" className='text-white' value="Submit" onClick={onSubmit} />
+        <div className="create-post m-3 d-flex gap-2 float-right">
+          <div className="join-btn create-post-btn float-right">
+            <input type="submit" className='text-white' value="Cancel" onClick={onCancel} />
+          </div>
+          <div className="join-btn create-post-btn float-right">
+            <input type="submit" className='text-white' value="Create Community" onClick={onSubmit} />
           </div>
         </div>
       </div>
-    </div>
+    
   )
 }
 
