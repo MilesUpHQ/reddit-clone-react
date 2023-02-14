@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import DraftList from './DraftList';
+import { Button, Form, Modal } from 'react-bootstrap';
 
 const Draft = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,31 +8,41 @@ const Draft = (props) => {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [closeModal]);
+
   return (
     <>
-      <button type="button" className="draft-btn d-flex gap-2" onClick={openModal}>DRAFTS
-        <span className='draft-badge'>0</span>
-      </button>
-      <div className={`modal ${isOpen ? 'show' : ''}`} tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Drafts</h4>
-              <button type="button" className="close" onClick={closeModal} aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <DraftList drafts={props.drafts} />
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-primary" onClick={closeModal}>Close</button>
-            </div>
+      <Button variant="secondary" onClick={openModal}>
+        Drafts
+      </Button>
+      <Modal show={isOpen} onHide={closeModal} aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Drafts</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div >
+            <DraftList drafts={props.drafts} />
           </div>
-        </div>
-      </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
-}
+};
 
 export default Draft;
