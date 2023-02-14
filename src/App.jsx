@@ -28,9 +28,9 @@ function App() {
   return (
     <div>
       <ToastContainer />
-      <Navbar />
       <Router>
         <Routes>
+          <Route path="/(signup|signin|new|r/new|r|r/:id|r/:id/mod|r/:id/edit|r/:community_id/p/:id|r/:community_id/p/:id/edit|r/create|profile|settings|navsearch)" element={<Navbar />} />
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Form data={JsonData.form.signup} />} />
           <Route path="/signin" element={<Form data={JsonData.form.signin} />} />
