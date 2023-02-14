@@ -13,10 +13,15 @@ button {
 
 .navbar{
   margin-top: -9px;
+  border-bottom: 2px solid #eff1f3;
 }
 
 .navbar-brand{
   margin-left: 20px;
+}
+
+.profile-brand{
+  margin-right: 20px;
 }
 
 .navbar-brand-name{

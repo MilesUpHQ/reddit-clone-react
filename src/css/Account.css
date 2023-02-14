@@ -55,3 +55,47 @@
 .home-small-cover {
   height: 50px;
 }
+
+.right-profile-nav{
+  margin-top: 5px;
+  border-color: #fff;
+}
+
+.right-profile-tab {
+  margin-top: 50px;
+  margin-right: 75px;
+  width: 310px;
+}
+
+.right-profile-nav .nav-tabs .nav-link {
+  border-bottom: none;
+  border-radius: 0;
+  color: black;
+  font-weight: 600;
+}
+
+.right-profile-nav .nav-tabs .nav-link.active {
+  color: blue;
+}
+
+ .right-profile-nav .nav-tabs .nav-link.active {
+  color: rgb(26,135,215) !important;
+  border-bottom: 3px solid rgb(26,135,215) !important;
+  border-radius: 0px 0px 0 0 !important;
+}
+
+
+.right-profile-nav .nav-tabs .nav-link:hover {
+  color: white;
+  border-bottom: none;
+  border-color: rgb(255, 255, 255);
+  color: rgb(26,135,215);
+  border-radius: 0px 0px 0 0 !important;
+
+}
+
+.Right-element {
+  background-color:#dae0e6;
+  padding-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+}
