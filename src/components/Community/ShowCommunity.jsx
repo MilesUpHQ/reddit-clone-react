@@ -10,6 +10,7 @@ import Create_Post from '../Home/Create_Post';
 import Nocommunity from './Nocommunity';
 import AboutCommunity from './AboutCommunity';
 import RulesCommunity from './RulesCommunity';
+import PostLoader from './PostLoader';
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
 
@@ -39,7 +40,7 @@ const ShowCommunity = () => {
         if (items.posts.length === 0) {
           window.removeEventListener('scroll', handleScroll);
         }
-        if(page===1){
+        if (page === 1) {
           setCommunity(items.community);
           setAccount(items.account);
           checkIsSubscribed(items.subscriptions);
@@ -122,6 +123,7 @@ const ShowCommunity = () => {
                   <div id="post" className="tab-pane fade-in active">
                     <div>
                       <PostList account={account} community={community} posts={posts} />
+                      <PostLoader />
                     </div>
                   </div>
                   <div id="menu1" className="tab-pane fade">
