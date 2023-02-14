@@ -39,10 +39,10 @@ const Index = () => {
             </Tab>
           </Tabs>
         </div>
-        <div className="col-4 right-profile-tab">
-          <Right_Profile_Tab />
-        </div>
-        <BackToTop profile={true} />
+          <div className="col-4 right-profile-tab">
+            <Right_Profile_Tab />
+          </div>
+<BackToTop/>
       </div>
     </div>
   );
