@@ -7,9 +7,8 @@ import '../../css/post.css'
 import VotesHandler from './VotesHandler';
 import SavePosts from './SavePosts';
 import { Markup } from 'interweave';
-import BackToTop from '../Home/Tabs/Bactotop';
 
-const PostList = ({ account, posts, community, isSavedPosts }) => {
+const PostList = ({ account, posts, community, isSavedPosts, profilePage }) => {
 
   const { id } = useParams()
 
@@ -49,7 +48,7 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                           <img src={reddit_logo} alt="" className="post-list-profile-img mr-1" />
                         ],
                         <strong><Link to={`/r/${post.community_id}`} className='text-decoration-none text-dark' >r/{community ? [community.name] : [post.community && post.community.name]}</Link></strong>]
-                        }
+                      }
                       <p className="ml-3 text-muted">Posted by
                         <Link to='/' className="text-decoration-none text-muted"> u/{account ? [account.username] : [post.account && post.account.username]} </Link>
                         {moment(post.created_at).fromNow()}</p>
@@ -59,10 +58,13 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                 <div className="row">
                   <div className="col-12 d-flex post-title">
                     <h5><Link to={`/r/${post.post ? post.post.community_id : post.community_id}/p/${post.id}`} className="text-dark text-decoration-none">{post.post ? post.post.title : post.title}</Link></h5>
-                    <p className="flair-badge">Flair</p>
-                    <p className="flair-badge bg-success">OC</p>
-                    <p className="flair-badge bg-warning">Spoiler</p>
-                    <p className="flair-badge bg-danger">NSFW</p>
+                    {!profilePage && [
+                      <p className="flair-badge">Flair</p>,
+                      <p className="flair-badge bg-success">OC</p>,
+                      <p className="flair-badge bg-warning">Spoiler</p>,
+                      <p className="flair-badge bg-danger">NSFW</p>
+                    ]}
+
                   </div>
                 </div>
                 <div className="row">
@@ -88,7 +90,6 @@ const PostList = ({ account, posts, community, isSavedPosts }) => {
                 </div>
               </div>
             </div>
-            <BackToTop/>
           </div>
         )
       })
