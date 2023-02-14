@@ -1,30 +1,18 @@
-
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { BiDotsHorizontalRounded } from 'react-icons/bi'
-import { IoShieldOutline } from 'react-icons/io5'
-import { GoPrimitiveDot } from 'react-icons/go'
-import { GiCakeSlice } from 'react-icons/gi'
-import { Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
+import { useParams } from 'react-router-dom';
 import '../../css/Community.css'
 import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg';
 import reddit_logo from '../../images/reddit-logo.png'
-import moment from 'moment/moment';
-import { confirmAlert } from 'react-confirm-alert';
 import PostList from '../Post/PostList';
 import Create_Post from '../Home/Create_Post';
 import Nocommunity from './Nocommunity';
 import AboutCommunity from './AboutCommunity';
 import RulesCommunity from './RulesCommunity';
+import PostLoader from './PostLoader';
 const Community_URL = 'http://localhost:3000/api/v1/communities/'
 const my_account = JSON.parse(localStorage.getItem('account'))
-
-function delete_community(community_id) {
-  return axios.delete(Community_URL + community_id).then((response) => response.data)
-}
 
 const ShowCommunity = () => {
   const [community, setCommunity] = useState([]);
@@ -32,31 +20,48 @@ const ShowCommunity = () => {
   const [account, setAccount] = useState([]);
   const [subscribeId, setSubscribeId] = useState(0);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const navigate = useNavigate()
   const [isBanned, setIsBanned] = useState(false);
+  const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(false)
   let { id } = useParams();
 
-  function get_community_data(community_id) {
-    return axios.get(Community_URL + community_id).then((response) => {
-      return response.data
-    }).catch((error) => {
+  const get_community_data = (community_id) => {
+    return axios.get(`${Community_URL}${community_id}?page=${page}`).then((response) =>
+      response.data
+    ).catch((error) => {
       console.log(error)
     })
   }
 
   useEffect(() => {
     let mounted = true;
+    window.addEventListener('scroll', handleScroll);
     get_community_data(id).then((items) => {
       if (mounted) {
-        setCommunity(items);
-        setPosts(items.posts);
-        setAccount(items.account);
-        checkIsSubscribed(items.subscriptions);
-        checkIsBanned(items.banned_users)
+        if (items.posts.length === 0) {
+          setLastPage(true)
+          window.removeEventListener('scroll', handleScroll);
+        }
+        if (page === 1) {
+          setCommunity(items.community);
+          setAccount(items.account);
+          checkIsSubscribed(items.subscriptions);
+          checkIsBanned(items.banned_users)
+        }
+        setPosts(posts.concat(items.posts));
       }
     });
-    return () => (mounted = false);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      mounted = false
+    };
+  }, [page]);
+
+  const handleScroll = () => {
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      setPage(page + 1)
+    }
+  }
 
   const checkIsSubscribed = (subscriptions) => {
     setSubscribeId(subscriptions[0].id)
@@ -71,27 +76,6 @@ const ShowCommunity = () => {
     banned_users.map((ban) => (
       ban.account_id == my_account.id && setIsBanned(true)
     ))
-  }
-
-  const deleteCommunityHandler = () => {
-    confirmAlert({
-      title: 'Confirm',
-      message: 'Are you sure you want to delete this item?',
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => {
-            delete_community(community.id)
-            toast.success("Community Deleted!");
-            navigate('/')
-          }
-        },
-        {
-          label: 'No'
-        }
-      ]
-    });
-    console.log("Delete")
   }
 
   return (
@@ -136,11 +120,12 @@ const ShowCommunity = () => {
           <div className="community_post">
             <div className="row">
               <div className="col-sm-8">
-                {!isBanned ? [<Create_Post />] : []}
+                {!isBanned && [<Create_Post />]}
                 <div className="tab-content">
                   <div id="post" className="tab-pane fade-in active">
                     <div>
                       <PostList account={account} community={community} posts={posts} />
+                      { !lastPage && <PostLoader /> }
                     </div>
                   </div>
                   <div id="menu1" className="tab-pane fade">
