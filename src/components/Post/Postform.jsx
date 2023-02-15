@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import JsonData from '../../data/data.json'
 import DiscussionForm from './DiscussionForm'
 import ImageForm from './ImageForm'
 import LinkForm from './LinkForm'
@@ -10,22 +9,14 @@ import { CgNotes, CgImage, CgLink } from 'react-icons/cg'
 import { BiPoll } from 'react-icons/bi'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Signup from '../Form/Signup'
-import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import axios from 'axios'
+import axios from 'axios';
 import PostApi from '../Home/PostApi'
-import { Dropdown, Form, FormCheck } from 'react-bootstrap'
-import { AiFillHome } from 'react-icons/ai'
-import { RiArrowDropDownLine } from 'react-icons/ri'
-import { MDBSelect } from 'mdb-react-ui-kit';
-import { TbCircleDotted } from 'react-icons/tb'
 import Select from 'react-select'
 
 const Postform = () => {
-  const { post, setPost } = PostApi()
+  const { post, setPost, set_new_post } = PostApi()
 
-  const navigate = useNavigate();
   const account = JSON.parse(localStorage.getItem('account'))
   const [subscriptions, setSubscriptions] = useState([]);
   const fetchData = async () => {
@@ -59,6 +50,24 @@ const Postform = () => {
       ...post,
       'community_id': event.value
     });
+  }
+
+  const onChange = (event) => {
+    setPost({ ...post, [event.target.name]: event.target.value });
+    console.log(event.target.value)
+  }
+
+  const handleChange = (content, delta, source, editor) => {
+    setPost({ ...post, body: content });
+  }
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (!post.body) {
+      toast.error("Post body can't be blank");
+      return;
+    }
+    set_new_post(post);
   }
 
   return (
@@ -101,7 +110,7 @@ const Postform = () => {
                     justify
                   >
                     <Tab eventKey="post" title={<span>{<CgNotes />} Post</span>} tabClassName="post-tab-nav-link">
-                      <DiscussionForm />
+                      <DiscussionForm onChange={onChange} handleChange={handleChange} onSubmit={onSubmit} />
                     </Tab>
                     <Tab eventKey="image" title={<span>{<CgImage />} Images</span>} tabClassName="post-tab-nav-link">
                       <ImageForm />

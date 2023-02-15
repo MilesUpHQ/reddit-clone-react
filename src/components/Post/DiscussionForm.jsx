@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import PostApi from '../Home/PostApi';
 import SubmitPost from './SubmitPost';
 
-const DiscussionForm = () => {
+const DiscussionForm = ({ onChange, handleChange, onSubmit }) => {
   const [communities, setCommunities] = useState([])
 
   const Community_URL = 'http://localhost:3000/api/v1/communities/'
@@ -45,24 +45,6 @@ const DiscussionForm = () => {
     });
     return () => (mounted = false);
   }, []);
-
-  const onChange = (event) => {
-    setPost({ ...post, [event.target.name]: event.target.value });
-    console.log(event.target.value)
-  }
-
-  const handleChange = (content, delta, source, editor) => {
-    setPost({ ...post, body: content });
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (!post.body) {
-      toast.error("Post body can't be blank");
-      return;
-    }
-    set_new_post(post);
-  }
 
   return (
     <div>
