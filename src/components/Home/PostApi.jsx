@@ -86,6 +86,14 @@ const PostApi = () => {
     setComments(response.data);
   };
 
+  const fetchJoinedCommunity = async () => {
+    return await axios.get(`http://localhost:3000/api/v1/banned_users?account_id=${account.id}`)
+      .then((response) => response.data)
+      .catch((error) => {
+        console.log(error)
+      })
+  };
+
   return {
     post,
     setPost,
@@ -99,7 +107,8 @@ const PostApi = () => {
     text,
     setText,
     comments,
-    setComments
+    setComments,
+    fetchJoinedCommunity
   }
 }
 
