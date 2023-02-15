@@ -10,71 +10,39 @@ import { BiPoll } from 'react-icons/bi'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import { toast } from 'react-toastify';
-import axios from 'axios';
 import PostApi from '../Home/PostApi'
 import Select from 'react-select'
+import HandlePostForm from './HandlePostForm'
 
 const Postform = () => {
-  const { post, setPost, set_new_post } = PostApi()
+  const { fetchJoinedCommunity } = PostApi()
+  const { onSelectCommunity,
+          onChange,
+          handleChange,
+          onSubmit,
+          selectedCommunity,
+        } = HandlePostForm()
 
   const account = JSON.parse(localStorage.getItem('account'))
-  const [subscriptions, setSubscriptions] = useState([]);
-  const fetchData = async () => {
-    return await axios.get(`http://localhost:3000/api/v1/banned_users?account_id=${account.id}`)
-      .then((response) => response.data)
-      .catch((error) => {
-        console.log(error)
-      })
-  };
+  const [communityOptions, setCommunityOptions] = useState([])
 
   useEffect(() => {
     let mounted = true;
-    fetchData().then((items) => {
+    fetchJoinedCommunity().then((items) => {
       if (mounted) {
         let options = []
         options = options.concat(items.map(option =>
           ({ value: option.id, label: `r/${option.name}` })))
         setCommunityOptions(options)
-        setSubscriptions(items)
       }
     });
     return () => (mounted = false);
   }, []);
 
-  const [communityOptions, setCommunityOptions] = useState([])
-  const [selectedCommunity, setSelectedCommunity] = useState([])
-
-  const onSelectCommunity = (event) => {
-    setSelectedCommunity(event)
-    setPost({
-      ...post,
-      'community_id': event.value
-    });
-  }
-
-  const onChange = (event) => {
-    setPost({ ...post, [event.target.name]: event.target.value });
-    console.log(event.target.value)
-  }
-
-  const handleChange = (content, delta, source, editor) => {
-    setPost({ ...post, body: content });
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (!post.body) {
-      toast.error("Post body can't be blank");
-      return;
-    }
-    set_new_post(post);
-  }
-
   return (
 
     <div>
       {account ? [
-        console.log(subscriptions),
         <div className="">
           <div className="row mt-3">
             <div className="col-sm-5">
