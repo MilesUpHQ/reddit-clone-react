@@ -1,51 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ContentWarning from './ContentWarning'
 import CommunityTitle from './CommunityTitle'
 import '../../css/post.css'
 import '../../css/warning.css'
-import axios from 'axios';
-import { toast } from 'react-toastify';
-import PostApi from '../Home/PostApi';
 import SubmitPost from './SubmitPost';
 
 const DiscussionForm = ({ onChange, handleChange, onSubmit }) => {
-  const [communities, setCommunities] = useState([])
-
-  const Community_URL = 'http://localhost:3000/api/v1/communities/'
-  useEffect(() => {
-    fetch(Community_URL)
-      .then(response => response.json())
-      .then(data => setCommunities(data))
-  }, [])
-
-  const account = JSON.parse(localStorage.getItem('account'))
-
-  const navigate = useNavigate();
-  const { post, setPost, set_new_post } = PostApi()
-
-  const accountId = account.id
-  const [subscriptions, setSubscriptions] = useState([]);
-  const fetchData = async () => {
-    return await axios.get(`http://localhost:3000/api/v1/banned_users?account_id=${accountId}`)
-      .then((response) => response.data)
-      .catch((error) => {
-        console.log(error)
-      })
-  };
-
-  useEffect(() => {
-    let mounted = true;
-    fetchData().then((items) => {
-      if (mounted) {
-        setSubscriptions(items)
-      }
-    });
-    return () => (mounted = false);
-  }, []);
-
   return (
     <div>
       <form action="">
