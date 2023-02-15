@@ -1,11 +1,9 @@
 import React from 'react'
 import ContentWarning from './ContentWarning'
 import CommunityTitle from './CommunityTitle'
-import '../../css/post.css'
-import '../../css/warning.css'
 import SubmitPost from './SubmitPost'
 
-const ImageForm = () => {
+const ImageForm = ({ onChange }) => {
     const onSubmit = () => {
         console.log('submit')
     }
@@ -13,7 +11,7 @@ const ImageForm = () => {
     return (
         <div>
             <form>
-                <CommunityTitle />
+                <CommunityTitle onChange={onChange} />
                 <div className="create-post m-3">
                     <div className="form-group mb-3">
                         <label htmlFor="images" className="form-label"></label>

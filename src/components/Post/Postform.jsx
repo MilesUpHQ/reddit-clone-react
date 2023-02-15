@@ -3,6 +3,7 @@ import DiscussionForm from './DiscussionForm'
 import ImageForm from './ImageForm'
 import LinkForm from './LinkForm'
 import PollForm from './PollForm'
+import '../../css/warning.css'
 import '../../css/post.css'
 import '../../css/tab.css'
 import { CgNotes, CgImage, CgLink } from 'react-icons/cg'
@@ -81,13 +82,13 @@ const Postform = () => {
                       <DiscussionForm onChange={onChange} handleChange={handleChange} onSubmit={onSubmit} />
                     </Tab>
                     <Tab eventKey="image" title={<span>{<CgImage />} Images</span>} tabClassName="post-tab-nav-link">
-                      <ImageForm />
+                      <ImageForm onChange={onChange} />
                     </Tab>
                     <Tab eventKey="link" title={<span>{<CgLink />} Link</span>} tabClassName="post-tab-nav-link">
-                      <LinkForm />
+                      <LinkForm onChange={onChange} onSubmit={onSubmit} />
                     </Tab>
                     <Tab eventKey="poll" title={<span>{<BiPoll />} Poll</span>} tabClassName="post-tab-nav-link">
-                      <PollForm />
+                      <PollForm onChange={onChange} onSubmit={onSubmit} />
                     </Tab>
                   </Tabs>
                 </div>

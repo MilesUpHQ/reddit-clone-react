@@ -3,8 +3,6 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ContentWarning from './ContentWarning'
 import CommunityTitle from './CommunityTitle'
-import '../../css/post.css'
-import '../../css/warning.css'
 import SubmitPost from './SubmitPost';
 
 const DiscussionForm = ({ onChange, handleChange, onSubmit }) => {
