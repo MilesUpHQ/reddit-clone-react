@@ -28,28 +28,26 @@ function App() {
   return (
     <div>
       <ToastContainer />
-      <Navbar />
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Form data={JsonData.form.signup} />} />
-          <Route path="/signin" element={<Form data={JsonData.form.signin} />} />
-          <Route path="/new" element={<NewPost />} />
-          <Route path="/r/new" element={<NewCommunity />} />
-          <Route path="/r" element={<Index />} />
-          <Route path="/r/:id" element={<ShowCommunity />} />
-          <Route path="/r/:id/mod" element={<Modrator />} />
-          <Route path="/r/:id/edit" element={<EditCommunity />} />
-          <Route path="/r/:community_id/p/:id" element={<PostShow />} />
-          <Route path="/r/:community_id/p/:id/edit" element={<EditPost />} />
+          <Route path="/" element={<div><Navbar /><Home /></div>} />
+          <Route path="/signup" element={<div><Navbar /><Form data={JsonData.form.signup} /></div>} />
+          <Route path="/signin" element={<div><Navbar /><Form data={JsonData.form.signin} /></div>} />
+          <Route path="/new" element={<div><Navbar /><NewPost /></div>} />
+          <Route path="/r/new" element={<div><Navbar /><NewCommunity /></div>} />
+          <Route path="/r" element={<div><Navbar /><Index /></div>} />
+          <Route path="/r/:id" element={<div><Navbar /><ShowCommunity /></div>} />
+          <Route path="/r/:id/mod" element={<div><Navbar /><Modrator /></div>} />
+          <Route path="/r/:id/edit" element={<div><Navbar /><EditCommunity /></div>} />
+          <Route path="/r/:community_id/p/:id" element={<div><Navbar /><PostShow /></div>} />
+          <Route path="/r/:community_id/p/:id/edit" element={<div><Navbar /><EditPost /></div>} />
 
-          <Route path="/r/create" element={<create />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Setting />} />
+          <Route path="/r/create" element={<div><Navbar /><create /></div>} />
+          <Route path="/profile" element={<div><Navbar /><Profile /></div>} />
+          <Route path="/settings" element={<div><Navbar /><Setting /></div>} />
 
-          <Route path="/navsearch" element={<NavbarSearch />} />
-          <Route path="/*"  element={<AdminIndex />}   />
-         
+          <Route path="/navsearch" element={<div><Navbar /><NavbarSearch /></div>} />
+          <Route path="/*" element={<AdminIndex />} />
         </Routes>
       </Router>
     </div>
