@@ -8,6 +8,7 @@ import Downvotes from './DownVotes';
 import Right_Profile_Tab from './ProfileRightTab';
 import '../../css/Account.css';
 import BackToTop from '../Home/Tabs/Bactotop';
+import History from './History';
 
 const Index = () => {
 
@@ -26,7 +27,7 @@ const Index = () => {
               <Comments />
             </Tab>
             <Tab eventKey="history" title="HISTORY">
-              <Saved />
+              <History/>
             </Tab>
             <Tab eventKey="saved" title="SAVED">
               <Saved />
@@ -39,10 +40,10 @@ const Index = () => {
             </Tab>
           </Tabs>
         </div>
-          <div className="col-4 right-profile-tab">
-            <Right_Profile_Tab />
-          </div>
-<BackToTop/>
+        <div className="col-4 right-profile-tab">
+          <Right_Profile_Tab />
+        </div>
+        <BackToTop />
       </div>
     </div>
   );

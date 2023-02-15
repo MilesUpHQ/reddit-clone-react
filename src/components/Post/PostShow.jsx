@@ -12,9 +12,11 @@ import moment from 'moment';
 import 'react-quill/dist/quill.snow.css';
 import VotesHandler from './VotesHandler';
 import Nopost from './Nopost';
+import HistoryApi from '../Accounts/HistoryApi';
 
 const PostShow = () => {
   const [post, setPost] = useState([]);
+  const { get_post_views, set_post_views } = HistoryApi()
   const [highlight, setHighlight] = useState("");
   const [isBanned, setIsBanned] = useState(false);
   const location = useLocation();
@@ -37,11 +39,12 @@ const PostShow = () => {
 
   useEffect(() => {
     let mounted = true;
-    get_community_data(community_id).then((items) => {
-      if (mounted) {
+    if (mounted) {
+      set_post_views()
+      get_community_data(community_id).then((items) => {
         checkIsBanned(items.banned_users)
-      }
-    });
+      });
+    }
     return () => (mounted = false);
   }, []);
 
@@ -58,6 +61,7 @@ const PostShow = () => {
 
   useEffect(() => {
     let mounted = true;
+
     get_post_data(id).then((items) => {
       if (mounted) {
         setPost(items);
