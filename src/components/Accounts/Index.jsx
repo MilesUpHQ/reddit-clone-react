@@ -7,7 +7,7 @@ import Upvotes from './Upvotes';
 import Downvotes from './DownVotes';
 import Right_Profile_Tab from './ProfileRightTab';
 import '../../css/Account.css';
-import BackToTop from '../Home/Tabs/Bactotop';
+import BackToTop from '../Home/Tabs/BackToTop';
 import History from './History';
 
 const Index = () => {

@@ -15,7 +15,7 @@ import '../../css/Community.css'
 import { HiDotsHorizontal } from 'react-icons/hi';
 import { RiLayoutRowLine } from 'react-icons/ri'
 
-import Bactotop from './Tabs/Bactotop';
+import BackToTop from './Tabs/BackToTop';
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [bestposts, setbestPosts] = useState([]);
@@ -118,7 +118,7 @@ const Home = () => {
         </div>
         <div className='col-4 mr-auto'> <RightTab /> </div>
       </div>
-      <Bactotop />
+      <BackToTop />
     </div>
   )
 }
