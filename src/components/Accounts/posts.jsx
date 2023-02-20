@@ -10,7 +10,6 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../css/Community.css'
 
-
 const Posts = () => {
   const account = JSON.parse(localStorage.getItem('account'));
   const [posts, setPosts] = useState([]);
