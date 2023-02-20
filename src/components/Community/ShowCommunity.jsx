@@ -6,7 +6,7 @@ import JoinButton from './joinButton';
 import cover_image from '../../images/Cover-Image.jpg';
 import reddit_logo from '../../images/reddit-logo.png'
 import PostList from '../Post/PostList';
-import Create_Post from '../Home/Create_Post';
+import CreatePost from '../Home/CreatePost';
 import Nocommunity from './Nocommunity';
 import AboutCommunity from './AboutCommunity';
 import RulesCommunity from './RulesCommunity';
@@ -120,7 +120,7 @@ const ShowCommunity = () => {
           <div className="community_post">
             <div className="row">
               <div className="col-sm-8">
-                {!isBanned && [<Create_Post />]}
+                {!isBanned && [<CreatePost />]}
                 <div className="tab-content">
                   <div id="post" className="tab-pane fade-in active">
                     <div>

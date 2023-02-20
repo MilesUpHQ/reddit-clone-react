@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import profile_image from '../../images/profile-img.jpeg'
 import { CiImageOn } from 'react-icons/ci'
 import { HiOutlineLink } from 'react-icons/hi'
-import '../../css/Create_Post.css'
+import '../../css/CreatePost.css'
 
 const account = JSON.parse(localStorage.getItem('account'))
 const account_url = "http://localhost:3000"
-const Create_Post = () => {
+const CreatePost = () => {
   return (
     <div className="card p-1 pl-3 pr-3 mb-3">
       <div className="row">
@@ -36,4 +36,4 @@ const Create_Post = () => {
   )
 }
 
-export default Create_Post
+export default CreatePost

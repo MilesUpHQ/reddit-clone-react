@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Create_Post from './Create_Post';
-import Right_Tab from './Right_Tab';
+import CreatePost from './CreatePost';
+import RightTab from './RightTab';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { FaFire, FaPoll, FaSun } from 'react-icons/fa'
 import { IoMdRocket } from 'react-icons/io'
-import { CiSun } from 'react-icons/ci'
 import Best from './Tabs/Best';
 import Hot from './Tabs/Hot';
 import New from './Tabs/New';
@@ -13,8 +12,7 @@ import Top from './Tabs/Top';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import '../../css/Community.css'
-import { Dropdown, DropdownButton } from "react-bootstrap";
-import { HiDotsHorizontal, HiTrendingUp } from 'react-icons/hi';
+import { HiDotsHorizontal } from 'react-icons/hi';
 import { RiLayoutRowLine } from 'react-icons/ri'
 
 import Bactotop from './Tabs/Bactotop';
@@ -47,7 +45,7 @@ const Home = () => {
             setPage(prevPage => prevPage + 1);
           }
         };
-
+        break;
       case "hot":
         axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/hot_posts?page=${page}&limit=${limit}`)
           .then(response => {
@@ -63,7 +61,6 @@ const Home = () => {
             setPage(prevPage => prevPage + 1);
           }
         };
-
         break;
       case "new":
         axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/new_posts?page=${page}&limit=${limit}`)
@@ -96,6 +93,7 @@ const Home = () => {
             setPage(prevPage => prevPage + 1);
           }
         };
+        break;
       default:
         break;
     }
@@ -105,7 +103,7 @@ const Home = () => {
     <div className="community_post">
       <div className="row">
         <div className="col-8 mr-auto">
-          < Create_Post />
+          < CreatePost />
           <div>
             <div className="pl-3 pr-3 mb-3">
               <div className="row">
@@ -138,21 +136,21 @@ const Home = () => {
                     )}
                     {posts && (
                       <Tab eventKey="top" title={<span>
-                      <span style={{ fontSize: '20px' }}><FaPoll /></span> Top
-                    </span>} tabClassName="tab-nav-link">
+                        <span style={{ fontSize: '20px' }}><FaPoll /></span> Top
+                      </span>} tabClassName="tab-nav-link">
                         <Top posts={topposts} />
                       </Tab>
                     )}
                     {posts && (
                       <Tab title={<span>
-                      <span style={{ fontSize: '20px' }}>{<HiDotsHorizontal />}</span> 
-                    </span>} tabClassName="tab-nav-link">
+                        <span style={{ fontSize: '20px' }}>{<HiDotsHorizontal />}</span>
+                      </span>} tabClassName="tab-nav-link">
                       </Tab>
                     )}
                     {posts && (
                       <Tab title={<span>
-                      <span style={{ fontSize: '25px' }}>{<RiLayoutRowLine />}</span> 
-                    </span>} tabClassName="grid">
+                        <span style={{ fontSize: '25px' }}>{<RiLayoutRowLine />}</span>
+                      </span>} tabClassName="grid">
                       </Tab>
                     )}
                   </Tabs>
@@ -161,9 +159,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className='col-4 mr-auto'> <Right_Tab /> </div>
+        <div className='col-4 mr-auto'> <RightTab /> </div>
       </div>
-      <Bactotop/>
+      <Bactotop />
     </div>
   )
 }

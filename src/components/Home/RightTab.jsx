@@ -8,7 +8,7 @@ import reddit_home_avatar from '../../images/reddit_home_avatar.png'
 const account = JSON.parse(localStorage.getItem('account'))
 const account_url = "http://localhost:3000"
 
-const Right_Tab = () => {
+const RightTab = () => {
   return (
     <div className="">
       <div className="card p-1">
@@ -67,4 +67,4 @@ const Right_Tab = () => {
   )
 }
 
-export default Right_Tab;
+export default RightTab;
