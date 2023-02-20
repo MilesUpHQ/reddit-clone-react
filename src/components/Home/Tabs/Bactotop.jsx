@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../../css/Community.css'
 
-function BackToTop() {
+function BackToTop({profile}) {
   const [showButton, setShowButton] = useState(false);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function BackToTop() {
   return (
     <>
       {showButton && (
-          <button className="btn-backtotop" style={{ position: 'fixed', width: '180px', bottom: '20px', right: '240px' }} onClick={handleClick}>
+        <button className={`btn-backtotop ${profile&&'new'}`} onClick={handleClick}>
           Back to Top
         </button>
       )}
