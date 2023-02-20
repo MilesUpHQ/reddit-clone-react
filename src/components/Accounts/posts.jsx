@@ -22,59 +22,64 @@ const Posts = () => {
   const [activeTab, setActiveTab] = useState("hot");
   const limit = 15;
   useEffect(() => {
+    const fetchPosts = (endpoint, setPosts) => {
+      axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/${endpoint}_posts?page=${page}&limit=${limit}`)
+        .then(response => {
+          console.log(response.data[`${endpoint}_posts`])
+          setPosts(prevPosts => [...prevPosts, ...response.data[`${endpoint}_posts`]]);
+          setHasMore(response.data.total_pages > page);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+
+      window.onscroll = () => {
+        if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight && hasMore) {
+          setPage(prevPage => prevPage + 1);
+        }
+      };
+    };
+
     switch (activeTab) {
       case "hot":
-        axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/hot_posts?page=${page}&limit=${limit}`)
-          .then(response => {
-            console.log(response.data.hot_posts)
-            sethotPosts([...hotposts, ...response.data.hot_posts]);
-            setHasMore(response.data.total_pages > page);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-        window.onscroll = () => {
-          if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight && hasMore) {
-            setPage(prevPage => prevPage + 1);
-          }
-        };
-
+        fetchPosts('hot', sethotPosts);
         break;
       case "new":
-        axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/new_posts?page=${page}&limit=${limit}`)
-          .then(response => {
-            console.log(response.data.new_posts)
-            setnewPosts([...newposts, ...response.data.new_posts]);
-            setHasMore(response.data.total_pages > page);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-        window.onscroll = () => {
-          if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight && hasMore) {
-            setPage(prevPage => prevPage + 1);
-          }
-        };
+        fetchPosts('new', setnewPosts);
         break;
       case "top":
-        axios.get(`http://localhost:3000/api/v1/communities/${community_id}/posts/${id}/top_posts?page=${page}&limit=${limit}`)
-          .then(response => {
-            console.log(response.data.top_posts)
-            settopPosts([...topposts, ...response.data.top_posts]);
-            setHasMore(response.data.total_pages > page);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-        window.onscroll = () => {
-          if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight && hasMore) {
-            setPage(prevPage => prevPage + 1);
-          }
-        };
+        fetchPosts('top', settopPosts);
+        break;
       default:
         break;
     }
-  }, [hasMore, page, activeTab]);
+  }, [hasMore, page, activeTab, community_id, id])
+
+  function createTab(eventKey, icon, title, component) {
+    const iconStyle = {
+      fontSize: '20px',
+    };
+
+    const titleStyle = {
+      display: 'flex',
+      alignItems: 'center',
+    };
+
+    return (
+      <Tab
+        key={eventKey}
+        eventKey={eventKey}
+        title={
+          <span style={titleStyle}>
+            <span style={iconStyle}>{icon}</span> {title}
+          </span>
+        }
+        tabClassName="tab-nav-link"
+      >
+        {component}
+      </Tab>
+    );
+  }
 
   return (
     <div className="community_post-profile-posts">
@@ -89,27 +94,9 @@ const Posts = () => {
                     onSelect={(key) => setActiveTab(key)}
                     className="card categories p-2 d-flex flex-row mb-3"
                   >
-                    {posts && (
-                      <Tab eventKey="hot" title={<span>
-                        <span style={{ fontSize: '20px' }}><FaFire /></span> Hot
-                      </span>} tabClassName="tab-nav-link">
-                        <Hot posts={hotposts.filter(hotpost => hotpost.account_id === account.id)} profilePage={true} />
-                      </Tab>
-                    )}
-                    {posts && (
-                      <Tab eventKey="new" title={<span>
-                        <span style={{ fontSize: '20px' }}><FaSun /></span> New
-                      </span>} tabClassName="tab-nav-link">
-                        <New posts={newposts.filter(newpost => newpost.account_id === account.id)} profilePage={true} />
-                      </Tab>
-                    )}
-                    {posts && (
-                      <Tab eventKey="top" title={<span>
-                        <span style={{ fontSize: '20px' }}><FaPoll /></span> Top
-                      </span>} tabClassName="tab-nav-link">
-                        <Top posts={topposts.filter(toppost => toppost.account_id === account.id)} profilePage={true} />
-                      </Tab>
-                    )}
+                    {posts && createTab('hot', <FaFire />, 'Hot', <Hot posts={hotposts.filter(hotpost => hotpost.account_id === account.id)} profilePage={true} />)}
+                    {posts && createTab('new', <FaSun />, 'New', <New posts={newposts.filter(newpost => newpost.account_id === account.id)} profilePage={true} />)}
+                    {posts && createTab('top', <FaPoll />, 'Top', <Top posts={topposts.filter(toppost => toppost.account_id === account.id)} profilePage={true} />)}
                   </Tabs>
                 </div>
               </div>
@@ -117,7 +104,7 @@ const Posts = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
