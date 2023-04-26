@@ -26,6 +26,10 @@
 ```
   $ npm install     # install dependenties
 ```
+3. Check if the below line is available inside scripts in package.json
+```
+  "start": "PORT=3001 react-scripts start"
+```
 4. Start server 
 ```
   $ npm start
