@@ -7,22 +7,10 @@ import Upvotes from './Upvotes';
 import Downvotes from './DownVotes';
 import Right_Profile_Tab from './ProfileRightTab';
 import '../../css/Account.css';
+import BackToTop from '../Home/Tabs/Bactotop';
+import History from './History';
 
 const Index = () => {
-  const [showButton, setShowButton] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener("scroll", () => {
-      setShowButton(window.scrollY > 200);
-    });
-  }, []);
-
-  const handleClick = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  };
 
   return (
     <div className=''>
@@ -39,7 +27,7 @@ const Index = () => {
               <Comments />
             </Tab>
             <Tab eventKey="history" title="HISTORY">
-              <Posts />
+              <History/>
             </Tab>
             <Tab eventKey="saved" title="SAVED">
               <Saved />
@@ -52,14 +40,10 @@ const Index = () => {
             </Tab>
           </Tabs>
         </div>
-        <div className="col-3 right-profile-tab">
+        <div className="col-4 right-profile-tab">
           <Right_Profile_Tab />
         </div>
-        {showButton && (
-          <button className="btn-backtotop" style={{ position: 'fixed', width: '160px', bottom: '20px', right: '20px', left: '1200px' }} onClick={handleClick}>
-            Back to Top
-          </button>
-        )}
+        <BackToTop />
       </div>
     </div>
   );
